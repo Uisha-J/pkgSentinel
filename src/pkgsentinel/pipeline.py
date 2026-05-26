@@ -440,13 +440,14 @@ def run_pipeline(
     #   - agentic + MALICIOUS / HIGH_RISK / SUSPICIOUS / AGENTIC → 본 stage 결과로 단축
     agentic_result: StageAgenticResult | None = None
     try:
-        # 1B 단계의 ctx.description / declared deps
+        # 1B 단계의 description / declared deps
+        # B-1 fix: 구버전은 info.get("ctx.description") 로 변수명을 그대로 dict
+        # 키 문자열로 넣어 PyPI 메타의 'description' 키를 못 읽고 영원히 빈 값이었음.
+        # 또 [:300] 슬라이스가 fallback 에만 걸려 summary 가 길면 안 잘렸음.
         _description = ""
         if reg.raw_metadata:
             info = reg.raw_metadata.get("info", {}) or {}
-            _description = info.get("summary", "") or (
-                info.get("ctx.description") or ""
-            )[:300]
+            _description = (info.get("summary") or info.get("description") or "")[:300]
         try:
             from .stages.stage_dependency import extract_dependencies
             _dep_ext = extract_dependencies(ctx.ext.source_files, ecosystem)
@@ -736,7 +737,8 @@ def run_pipeline(
         author = ""
         if reg.raw_metadata:
             info = reg.raw_metadata.get("info", {}) or {}
-            ctx.description = info.get("summary", "") or info.get("ctx.description", "")[:200]
+            # B-1 fix: 'ctx.description' 키 오타 + fallback-only 슬라이스 교정.
+            ctx.description = (info.get("summary") or info.get("description") or "")[:200]
             author = info.get("author") or info.get("author_email") or ""
         findings = detect_anomalies(package, ctx.description, ctx.behavior.files)
         for f in findings:

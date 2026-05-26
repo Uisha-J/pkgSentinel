@@ -262,11 +262,33 @@ def ingest_osv(
                 }
 
     # zip 파싱 -> rows
+    # B-2: zip-bomb 방어. 외부(원격) zip 을 압축해제하므로 (1) 개별 엔트리
+    # 압축해제 크기 상한, (2) 누적 압축해제 크기 상한, (3) 압축비 상한을 둔다.
+    # OSV advisory json 은 보통 수십 KB — 넉넉히 잡아도 정상 분포를 벗어나지 않음.
+    _MAX_ENTRY_BYTES = 16 * 1024 * 1024          # 엔트리 1개 최대 16 MiB
+    _MAX_TOTAL_BYTES = 2 * 1024 * 1024 * 1024     # 누적 최대 2 GiB
+    _MAX_RATIO = 200                              # 압축비 상한 (해제/압축)
+
     rows: list[dict] = []
     parsed_advisories = 0
+    total_uncompressed = 0
     with zipfile.ZipFile(io.BytesIO(body)) as zf:
         names = [n for n in zf.namelist() if n.endswith(".json")]
         for n in names:
+            info = zf.getinfo(n)
+            # 선언된 압축해제 크기 / 압축비 사전 차단
+            if info.file_size > _MAX_ENTRY_BYTES:
+                print(f"[OSV] skip oversized entry {n} ({info.file_size} bytes)")
+                continue
+            if info.compress_size > 0 and info.file_size / info.compress_size > _MAX_RATIO:
+                print(f"[OSV] skip suspicious ratio entry {n} "
+                      f"({info.file_size}/{info.compress_size})")
+                continue
+            total_uncompressed += info.file_size
+            if total_uncompressed > _MAX_TOTAL_BYTES:
+                print(f"[OSV] aborting unzip — total uncompressed exceeded "
+                      f"{_MAX_TOTAL_BYTES} bytes (possible zip bomb)")
+                break
             try:
                 raw = json.loads(zf.read(n))
             except Exception:
