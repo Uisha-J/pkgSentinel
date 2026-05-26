@@ -2,7 +2,22 @@
 
 **Status:** Draft
 **Scope:** npm (`package.json`), PyPI (`pyproject.toml`)
-**Purpose:** agentic 패키지가 자신의 capability 경계와 보안 가정을 정직하게 선언하도록 강제하는 표준.
+**Purpose:** agentic 패키지가 자신의 capability 경계와 보안 가정을 선언하도록 하는 **투명성 표준**.
+
+> ⚠️ **위협 모델 한계 (반드시 읽을 것).** manifest 는 *패키지 작성자가 직접
+> 작성*한다. 그런데 슬롭스쿼팅·악성 패키지 시나리오에서는 manifest 를 쓰는
+> 사람이 곧 공격자다. 따라서 본 표준은 **투명성 도구이지 단독 보안 통제가
+> 아니다**:
+> - declared/detected diff 는 *누락에 의한 거짓*(under-declaration)만 잡는다.
+>   공격자가 모든 capability 를 선언하면 이 검사는 무력화된다.
+> - 자기선언 완화 필드(`session_isolation`, `design_patterns`)는 **코드
+>   시그니처로 검증될 때만** 심각도를 낮춘다 (§5). 미검증 선언은 기록만 되고
+>   면책 효과가 없다 (구현: `agentic/rules.py`, `agentic/rule_of_two.py`).
+> - 적응적 공격자에 대한 실질 보호는 하부 behavioral 룰(R1-R4) + 비-agentic
+>   경로의 49-entry indicator 에서 나온다. manifest 자체는 "정직한 작성자의
+>   실수/누락" 을 드러내는 투명성 계층이다.
+> - 진짜 무결성은 **서명된 manifest(Sigstore) + 외부 attestation** 같은 구조적
+>   변경을 요구하며 v0.1 범위 밖이다.
 
 ---
 
@@ -67,7 +82,8 @@ tool_signature_verification = false
     "agentic": true,
     "specVersion": "0.1",
     "capabilities": [
-      "filesystem",
+      "filesystem-read",
+      "filesystem-write",
       "shell",
       "network"
     ],

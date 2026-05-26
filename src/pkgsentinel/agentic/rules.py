@@ -77,6 +77,57 @@ DANGEROUS_UNDECLARED = {
     Capability.CREDENTIAL_PATHS,
 }
 
+
+# ─────────────── design pattern 구현 검증 (스펙 §5) ───────────────
+# 선언된 design pattern 이 실제 코드 시그니처로 뒷받침될 때만 면책 인정.
+# 미검증 선언은 excused_by 에 'DECLARED-BUT-UNVERIFIED' 로 기록만 하고
+# 심각도는 낮추지 않는다. (manifest 자기선언 면책 악용 차단)
+_DESIGN_PATTERN_SIGNATURES: dict[str, list[re.Pattern]] = {
+    "dual-llm": [
+        re.compile(r"\b(?:quarantine|privileged|trusted|untrusted)_?llm\b", re.I),
+        re.compile(r"\b(?:q_llm|p_llm)\b"),
+    ],
+    "llm-map-reduce": [
+        re.compile(r"\bmap_reduce\b|\bmapreduce\b", re.I),
+        re.compile(r"\.map\s*\([\s\S]{0,200}\.reduce\s*\(", re.I),
+    ],
+    "plan-then-execute": [
+        re.compile(r"\b(?:make_plan|create_plan|plan_step|planner)\b", re.I),
+        re.compile(r"\bplan\b[\s\S]{0,120}\bexecute\b", re.I),
+    ],
+    "context-minimization": [
+        re.compile(r"\b(?:minimi[sz]e|strip|prune)_context\b", re.I),
+        re.compile(r"\bcontext\s*=\s*context\s*\[", re.I),  # 슬라이싱 축소
+    ],
+    "action-selector": [
+        re.compile(r"\b(?:ALLOWED|WHITELIST|PERMITTED)_(?:ACTIONS|TOOLS)\b"),
+        re.compile(r"\bif\s+\w+\s+(?:not\s+)?in\s+(?:allowed|whitelist)", re.I),
+    ],
+    "code-then-execute": [
+        re.compile(r"\bsandbox\b[\s\S]{0,120}\b(?:exec|run)\b", re.I),
+        re.compile(r"\b(?:docker|nsjail|firejail|seccomp)\b", re.I),
+    ],
+}
+
+
+def verify_design_patterns(
+    declared: list[str] | None,
+    sources: dict[str, str],
+) -> tuple[set[str], set[str]]:
+    """선언된 design pattern 을 (검증됨, 미검증) 으로 분리.
+
+    Returns:
+      (verified, unverified) — verified 만 면책 효과를 갖는다.
+    """
+    declared_set = set(declared or [])
+    verified: set[str] = set()
+    blob = "\n".join(sources.values())
+    for p in declared_set:
+        sigs = _DESIGN_PATTERN_SIGNATURES.get(p)
+        if sigs and any(s.search(blob) for s in sigs):
+            verified.add(p)
+    return verified, declared_set - verified
+
 MEDIUM_UNDECLARED = {
     Capability.NETWORK,
     Capability.FS_WRITE,
@@ -168,8 +219,17 @@ _R1_4_PATTERNS = [
     ),
     # globals()[tool_name](...) 패턴
     re.compile(r"globals\(\)\s*\[\s*\w+\s*\]\s*\(", re.IGNORECASE),
-    # getattr(module, tool_name)(...) 동적 디스패치
-    re.compile(r"getattr\s*\([^,]+,\s*\w+\s*\)\s*\(", re.IGNORECASE),
+    # getattr(module, <LLM/도구 파생 변수>)(...) 동적 디스패치.
+    # Q-1: 구버전은 모든 getattr(obj, attr)() 를 flag 해 정상 플러그인
+    # 프레임워크에서 FP 폭증했음. 두 번째 인자가 LLM/도구 선택 결과로 보이는
+    # 이름일 때만 매칭하도록 좁힘.
+    re.compile(
+        r"getattr\s*\([^,]+,\s*"
+        r"(?:tool_name|toolname|tool|action_name|action|fn_name|func_name|"
+        r"method_name|cmd|command|llm_output|generated|tool_call|call_name|"
+        r"selected_tool|chosen_tool)\s*\)\s*\(",
+        re.IGNORECASE,
+    ),
 ]
 
 
@@ -179,7 +239,13 @@ def R1_check(
     design_patterns_applied: list[str] | None = None,
 ) -> list[RuleHit]:
     hits: list[RuleHit] = []
-    dp = set(design_patterns_applied or [])
+    # 선언된 패턴 중 코드로 검증된 것만 면책에 사용 (스펙 §5). 미검증 선언은
+    # 면책 효과 없이 excused_by 에 기록만 한다.
+    dp, dp_unverified = verify_design_patterns(design_patterns_applied, sources)
+    _unverified_note = (
+        [f"DECLARED-BUT-UNVERIFIED: {sorted(dp_unverified)} (no exemption)"]
+        if dp_unverified else []
+    )
 
     for path, src in sources.items():
         # R1-1
@@ -194,7 +260,7 @@ def R1_check(
                     RuleSeverity.SUSPICIOUS if excused else RuleSeverity.HIGH_RISK,
                     file_path=path, snippet=m.group(0),
                     reason="untrusted input mixed with privileged prompt",
-                    excused_by=excused,
+                    excused_by=excused + _unverified_note,
                 ))
                 break
 
@@ -222,7 +288,7 @@ def R1_check(
                     file_path=path, snippet=m.group(0),
                     reason="external fetch result injected to LLM context "
                            "without sanitization",
-                    excused_by=excused,
+                    excused_by=excused + _unverified_note,
                 ))
                 break
 
@@ -240,7 +306,7 @@ def R1_check(
                     RuleSeverity.SUSPICIOUS if excused else RuleSeverity.HIGH_RISK,
                     file_path=path, snippet=m.group(0),
                     reason="free-form code/tool execution as default",
-                    excused_by=excused,
+                    excused_by=excused + _unverified_note,
                 ))
                 break
 
@@ -287,15 +353,23 @@ def R2_check(
     detected_capabilities: set[str],
     has_hitl: bool,
     declared_session_isolation: bool,
+    language: str = "python",
 ) -> list[RuleHit]:
-    from .rule_of_two import has_lethal_trifecta
+    from .rule_of_two import has_lethal_trifecta, verify_session_isolation
     hits: list[RuleHit] = []
+
+    # 선언된 session_isolation 이 코드로 뒷받침되는지 검증 (스펙 §5).
+    siso_verified = (
+        verify_session_isolation(sources, language=language)
+        if declared_session_isolation else False
+    )
 
     # R2-1: Lethal Trifecta
     chk = has_lethal_trifecta(
         detected_capabilities,
         has_hitl=has_hitl,
         declared_session_isolation=declared_session_isolation,
+        session_isolation_verified=siso_verified,
     )
     if chk.has_trifecta:
         if chk.is_violation:
@@ -303,7 +377,8 @@ def R2_check(
                 "R2-1", RuleSeverity.HIGH_RISK,
                 file_path="<capability-set>",
                 snippet=f"ABC = {sorted(chk.abc_present)}",
-                reason="Lethal Trifecta (A+B+C) without HITL or session_isolation",
+                reason="Lethal Trifecta (A+B+C) without HITL or "
+                       "verified session_isolation",
             ))
         else:
             hits.append(_make_hit(
@@ -314,7 +389,11 @@ def R2_check(
                 excused_by=(
                     ["human-in-the-loop"] if has_hitl else []
                 ) + (
-                    ["session_isolation declared"] if declared_session_isolation else []
+                    ["session_isolation declared+verified"]
+                    if chk.session_isolation_effective else []
+                ) + (
+                    ["DECLARED-BUT-UNVERIFIED: session_isolation (no mitigation)"]
+                    if declared_session_isolation and not siso_verified else []
                 ),
             ))
 
@@ -373,12 +452,30 @@ def R3_check(
 
     if undeclared & DANGEROUS_UNDECLARED:
         bad = sorted(undeclared & DANGEROUS_UNDECLARED)
-        hits.append(_make_hit(
-            "R3-dangerous", RuleSeverity.MALICIOUS,
-            file_path="<capability-set>",
-            snippet=f"undeclared dangerous: {bad}",
-            reason=f"undeclared dangerous capabilities {bad}",
-        ))
+        if manifest_present:
+            # 매니페스트가 있는데 위험 capability 를 누락 = 과소선언(거짓) → MALICIOUS
+            hits.append(_make_hit(
+                "R3-dangerous", RuleSeverity.MALICIOUS,
+                file_path="<capability-set>",
+                snippet=f"undeclared dangerous: {bad}",
+                reason=f"undeclared dangerous capabilities {bad} "
+                       "(manifest present - under-declaration)",
+            ))
+        else:
+            # Q-6 (1.5.4): 매니페스트 부재(표준 미채택)는 '누락에 의한 거짓'이
+            # 아님. 현실 패키지 ~100% 가 manifest 가 없어 declared=∅ → 위험
+            # capability 사용만으로 즉시 MALICIOUS 가 되던 FP 폭탄을 제거.
+            # 위험 capability 자체의 악성 여부는 behavioral 룰(R1/R2/R4) 및
+            # 비-agentic 경로의 49-indicator 가 판단하고, 여기서는 opt-in
+            # 경고 수준(SUSPICIOUS)만 남긴다.
+            hits.append(_make_hit(
+                "R3-dangerous-no-manifest", RuleSeverity.SUSPICIOUS,
+                file_path="<capability-set>",
+                snippet=f"dangerous caps without manifest: {bad}",
+                reason=f"dangerous capabilities {bad} used without AISLOPSQ "
+                       "manifest (no under-declaration claim; behavioral rules "
+                       "decide maliciousness)",
+            ))
 
     medium = (undeclared - DANGEROUS_UNDECLARED) & MEDIUM_UNDECLARED
     if medium:
@@ -399,6 +496,59 @@ def R3_check(
             file_path="<capability-set>",
             snippet=f"manifest absent; minor caps: {sorted(minor)}",
             reason="manifest missing; capabilities used implicitly",
+        ))
+
+    return hits
+
+
+# ─────────── R3-RoT. Rule of Two 선언 일관성 (스펙 §4, §7 step 4) ───────────
+
+def R3_rule_of_two_consistency(
+    *,
+    detected: set[str],
+    declared_satisfies: list[str],
+    manifest_present: bool,
+) -> list[RuleHit]:
+    """declared satisfies(ABC) 와 detected→ABC 사상 결과의 일관성 검사.
+
+    구버전은 manifest.rule_of_two.satisfies 를 파싱·저장만 하고 어떤 판정에도
+    비교하지 않는 죽은 코드였음 (스펙 §7 step 4 미구현). 본 룰이 그 약속을 구현.
+
+    - manifest 부재면 검사 안 함 (satisfies 가 없음).
+    - declared == {A,B,C}: 스펙 §4 금지 → HIGH_RISK.
+    - detected ABC ⊄ declared: 위험 자세를 과소 선언 → SUSPICIOUS.
+    """
+    from .capability_detector import map_to_abc
+
+    if not manifest_present:
+        return []
+
+    declared = {s.strip().upper() for s in declared_satisfies
+                if s.strip().upper() in {"A", "B", "C"}}
+    abc_actual = map_to_abc(detected)
+    hits: list[RuleHit] = []
+
+    # 스펙 §4: 세 속성 모두 선언은 금지 (자율 작동 불가, HITL 필수)
+    if declared == {"A", "B", "C"}:
+        hits.append(_make_hit(
+            "R3-rot-forbidden", RuleSeverity.HIGH_RISK,
+            file_path="<rule-of-two>",
+            snippet="satisfies = [A, B, C]",
+            reason="rule_of_two.satisfies declares all three properties "
+                   "(forbidden by spec §4 - human-in-the-loop required)",
+        ))
+        return hits
+
+    # detected 가 declared 를 초과 → 위험 자세 과소 선언
+    extra = abc_actual - declared
+    if declared and extra:
+        hits.append(_make_hit(
+            "R3-rot-mismatch", RuleSeverity.SUSPICIOUS,
+            file_path="<rule-of-two>",
+            snippet=f"declared satisfies={sorted(declared)}, "
+                    f"detected ABC={sorted(abc_actual)}",
+            reason="detected capability posture exceeds declared rule_of_two "
+                   f"satisfies; undeclared properties {sorted(extra)}",
         ))
 
     return hits
@@ -443,6 +593,27 @@ _R4_5_DANGEROUS_BODY = re.compile(
     r"requests\.(?:post|put|patch)\s*\([\"']https?://(?!localhost|127\.|0\.0\.0\.0))",
     re.IGNORECASE,
 )
+
+
+def _matches_benign_verb(fn_name: str) -> bool:
+    """함수명이 benign 동사로 시작하거나 그 동사를 '토큰'으로 포함하는지.
+
+    Q-3: 구버전은 `v in fn_name` substring 매칭이라 동사 'get' 이
+    widget/target/budget 을 오분류했음. snake_case 토큰 단위 + 접두사 매칭으로
+    교정.
+    """
+    name = fn_name.lower()
+    tokens = name.split("_")
+    for v in _R4_5_BENIGN_VERBS:
+        if v.endswith("_"):              # "is_", "has_" 류 접두사
+            if name.startswith(v):
+                return True
+            continue
+        if name.startswith(v):           # "validate...", "format..."
+            return True
+        if v in tokens:                  # "..._get_..." 같은 온전한 토큰
+            return True
+    return False
 
 
 def _r4_1_check(src: str, path: str) -> list[RuleHit]:
@@ -495,7 +666,7 @@ def _r4_5_check(src: str, path: str) -> list[RuleHit]:
     )
     for m in func_pat.finditer(src):
         fn_name = (m.group(1) or "").lower()
-        if not any(fn_name.startswith(v) or v in fn_name for v in _R4_5_BENIGN_VERBS):
+        if not _matches_benign_verb(fn_name):
             continue
         # 함수 본문 (다음 def 까지)
         start = m.end()
@@ -513,6 +684,15 @@ def _r4_5_check(src: str, path: str) -> list[RuleHit]:
             ))
     return hits
 
+
+# R4-3: provenance/audit 시그니처 (word-boundary). 이것 중 하나라도 있으면
+# 영속 메모리에 출처 기록이 있다고 보아 R4-3 미발화.
+_R4_3_PROVENANCE_RE = re.compile(
+    r"\b(?:logger|logging|getLogger|structlog|loguru|"
+    r"audit_log|audit_trail|provenance|opentelemetry|otel|"
+    r"telemetry|sentry_sdk|trace_id|span|metadata)\b",
+    re.IGNORECASE,
+)
 
 # R4-2: memory poisoning 경로
 _R4_2_PATTERNS = [
@@ -582,12 +762,14 @@ def R4_check(
                 ))
                 break
 
-    # R4-3: provenance 부재 — 휴리스틱 (memory_persist 사용 + logging 호출 부재)
+    # R4-3: provenance 부재 — 휴리스틱 (memory_persist 사용 + provenance 부재)
+    # Q-2: 구버전은 좁은 logger/log substring 만 봐서 정상 벡터스토어 생태계가
+    # 전부 SUSPICIOUS 로 걸렸음. structlog/loguru/opentelemetry/sentry 등
+    # 표준 provenance 시그니처를 word-boundary 로 확대해 FP 완화.
     has_memory = Capability.MEMORY_PERSIST in detected_capabilities
     if has_memory:
         any_logging = any(
-            re.search(r"(?:logger|logging\.|log\.|audit_log)", src)
-            for src in sources.values()
+            _R4_3_PROVENANCE_RE.search(src) for src in sources.values()
         )
         if not any_logging:
             hits.append(_make_hit(
@@ -611,6 +793,8 @@ def run_all_rules(
     has_hitl: bool,
     declared_session_isolation: bool,
     design_patterns_applied: list[str] | None = None,
+    declared_satisfies: list[str] | None = None,
+    language: str = "python",
 ) -> RuleReport:
     rep = RuleReport()
 
@@ -623,11 +807,19 @@ def run_all_rules(
         detected_capabilities=detected,
         has_hitl=has_hitl,
         declared_session_isolation=declared_session_isolation,
+        language=language,
     ):
         rep.add(h)
 
     for h in R3_check(
         declared=declared, detected=detected,
+        manifest_present=manifest_present,
+    ):
+        rep.add(h)
+
+    for h in R3_rule_of_two_consistency(
+        detected=detected,
+        declared_satisfies=declared_satisfies or [],
         manifest_present=manifest_present,
     ):
         rep.add(h)

@@ -128,8 +128,11 @@ def classify(
     cls.detected = detected
     cls.undeclared = undeclared
 
-    # 빠른 short-circuit: dangerous undeclared
-    if undeclared & DANGEROUS_UNDECLARED:
+    # 빠른 short-circuit: dangerous undeclared.
+    # Q-6 (1.5.4): manifest 가 있을 때만 즉시-MALICIOUS. manifest 부재는
+    # 과소선언(거짓)이 아니므로 단축하지 않고 Step 3/4 룰 경로로 넘겨
+    # behavioral 평가를 받게 한다 (FP 폭탄 제거).
+    if manifest is not None and (undeclared & DANGEROUS_UNDECLARED):
         cls.verdict = Verdict.MALICIOUS
         cls.reason = (
             f"Step 2: undeclared dangerous capabilities "
@@ -145,6 +148,8 @@ def classify(
                 if manifest else False,
             design_patterns_applied=manifest.design_patterns.applied
                 if manifest else None,
+            declared_satisfies=manifest.rule_of_two.satisfies if manifest else None,
+            language=language,
         )
         return cls
 
@@ -169,6 +174,8 @@ def classify(
         has_hitl=cls.has_human_in_the_loop,
         declared_session_isolation=declared_session_isolation,
         design_patterns_applied=design_patterns_applied,
+        declared_satisfies=manifest.rule_of_two.satisfies if manifest else None,
+        language=language,
     )
     cls.rule_report = rep
 

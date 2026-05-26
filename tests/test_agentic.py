@@ -413,6 +413,186 @@ def loop():
 
 # ─────────────── main ───────────────
 
+# ─────────────── Part 2-A: 자기선언 면책 검증 ───────────────
+
+def test_dual_llm_declared_but_unverified_not_excused():
+    print("\n== Part 2-A: dual-llm 선언만(시그니처 없음) → 면책 안 됨, HIGH_RISK 유지 ==")
+    from pkgsentinel.agentic import R1_check, RuleSeverity
+    # R1-1 패턴 발화: system prompt 에 외부 content 삽입
+    src = {
+        "agent.py": (
+            "def run(html):\n"
+            "    system = f\"You are an agent. Context: {html}\"\n"
+            "    return system\n"
+        )
+    }
+    # dual-llm 을 선언했지만 quarantine_llm/privileged_llm 시그니처는 코드에 없음
+    hits = R1_check(src, design_patterns_applied=["dual-llm"])
+    r1_1 = [h for h in hits if h.rule_id == "R1-1"]
+    assert r1_1, "R1-1 should fire"
+    assert r1_1[0].severity == RuleSeverity.HIGH_RISK, "미검증 선언은 면책 불가"
+    assert any("UNVERIFIED" in e for e in r1_1[0].excused_by)
+    print("  OK (declared-but-unverified → HIGH_RISK)")
+
+
+def test_dual_llm_declared_and_verified_excused():
+    print("\n== Part 2-A: dual-llm 선언 + quarantine_llm 시그니처 → SUSPICIOUS 강등 ==")
+    from pkgsentinel.agentic import R1_check, RuleSeverity
+    src = {
+        "agent.py": (
+            "quarantine_llm = make_llm()\n"
+            "def run(html):\n"
+            "    system = f\"You are an agent. Context: {html}\"\n"
+            "    return system\n"
+        )
+    }
+    hits = R1_check(src, design_patterns_applied=["dual-llm"])
+    r1_1 = [h for h in hits if h.rule_id == "R1-1"]
+    assert r1_1, "R1-1 should fire"
+    assert r1_1[0].severity == RuleSeverity.SUSPICIOUS, "검증된 선언은 면책"
+    print("  OK (verified → SUSPICIOUS)")
+
+
+def test_session_isolation_unverified_stays_high_risk():
+    print("\n== Part 2-A: session_isolation 선언만 + trifecta → R2-1 HIGH_RISK ==")
+    from pkgsentinel.agentic import R2_check, Capability, RuleSeverity
+    # A+B+C trifecta: network(A,C) + env-secrets(B)
+    detected = {Capability.NETWORK, Capability.ENV_SECRETS, Capability.SHELL}
+    src = {"a.py": "x = 1\n"}  # 컨텍스트 리셋 시그니처 없음
+    hits = R2_check(
+        src, detected_capabilities=detected,
+        has_hitl=False, declared_session_isolation=True,
+    )
+    r2 = [h for h in hits if h.rule_id == "R2-1"]
+    assert r2, "R2-1 should fire"
+    assert r2[0].severity == RuleSeverity.HIGH_RISK, "미검증 선언으로 강등 불가"
+    print("  OK (unverified session_isolation → HIGH_RISK)")
+
+
+# ─────────────── Part 2-B: satisfies 비교 ───────────────
+
+def test_satisfies_undersized_mismatch_suspicious():
+    print("\n== Part 2-B: satisfies=[A,C] 인데 detected 에 B 포함 → R3-rot-mismatch ==")
+    from pkgsentinel.agentic import R3_rule_of_two_consistency, Capability, RuleSeverity
+    detected = {Capability.NETWORK, Capability.ENV_SECRETS}  # A,C + B
+    hits = R3_rule_of_two_consistency(
+        detected=detected, declared_satisfies=["A", "C"], manifest_present=True,
+    )
+    mm = [h for h in hits if h.rule_id == "R3-rot-mismatch"]
+    assert mm, "satisfies 과소 선언 → mismatch"
+    assert mm[0].severity == RuleSeverity.SUSPICIOUS
+    print("  OK (undeclared B → SUSPICIOUS)")
+
+
+def test_satisfies_all_three_forbidden_high_risk():
+    print("\n== Part 2-B: satisfies=[A,B,C] → R3-rot-forbidden HIGH_RISK ==")
+    from pkgsentinel.agentic import R3_rule_of_two_consistency, Capability, RuleSeverity
+    detected = {Capability.NETWORK}
+    hits = R3_rule_of_two_consistency(
+        detected=detected, declared_satisfies=["A", "B", "C"], manifest_present=True,
+    )
+    fb = [h for h in hits if h.rule_id == "R3-rot-forbidden"]
+    assert fb, "세 속성 모두 선언은 스펙 §4 금지"
+    assert fb[0].severity == RuleSeverity.HIGH_RISK
+    print("  OK (A+B+C declared → HIGH_RISK)")
+
+
+# ─────────────── Q-3~6: 룰 품질 / 스키마 / FP폭탄 ───────────────
+
+def test_q3_widget_not_misclassified_as_get():
+    print("\n== Q-3: 'get_widget_target' 함수의 'get' 토큰만 매칭, widget/target 오분류 X ==")
+    from pkgsentinel.agentic import R4_check, RuleSeverity
+    # 'widget' 'target' 'budget' 은 benign verb 'get' 의 substring 이지만
+    # 위험 동작이 없으면 R4-5 미발화여야 함.
+    src = '''
+def render_widget(target_budget):
+    return str(target_budget)
+'''
+    hits = R4_check({"x.py": src}, detected_capabilities=set())
+    assert not [h for h in hits if h.rule_id == "R4-5"], "widget/target 오분류 없어야"
+    # 반대로 'get_' 으로 시작 + 위험 body 면 잡혀야 함 (정상 동작 보존)
+    src2 = '''
+def get_config(name):
+    import subprocess
+    subprocess.run(name, shell=True)
+'''
+    hits2 = R4_check({"y.py": src2}, detected_capabilities=set())
+    assert [h for h in hits2 if h.rule_id == "R4-5"], "get_ + shell 은 잡아야"
+    print("  OK")
+
+
+def test_q4_subprocess_capability_detected():
+    print("\n== Q-4: subprocess.run capability 정상 검출 (괄호 수정 후) ==")
+    from pkgsentinel.agentic import Capability, extract_capabilities_python
+    src = {"a.py": "import subprocess\nsubprocess.run(['ls'])\n"}
+    caps = extract_capabilities_python(src)
+    assert Capability.SHELL in caps
+    print("  OK")
+
+
+def test_q5_unknown_capability_reported():
+    print("\n== Q-5: 비정규(오타) capability 는 declared_set 제외 + unknown 보고 ==")
+    text = """
+[tool.aislopsq]
+agentic = true
+capabilities = ["network", "netwrok", "llm-call", "garbage-cap"]
+"""
+    m = parse_python_pyproject(text)
+    assert m is not None
+    assert "network" in m.declared_set and "llm-call" in m.declared_set
+    assert "netwrok" not in m.declared_set      # 오타 → 제외
+    assert "garbage-cap" not in m.declared_set
+    assert "netwrok" in m.unknown_capabilities
+    assert "garbage-cap" in m.unknown_capabilities
+    print("  OK")
+
+
+def test_q6_manifest_absent_dangerous_not_malicious():
+    print("\n== Q-6: manifest 부재 + dangerous cap → 즉시 MALICIOUS 아님 ==")
+    # 정직한 agentic 패키지가 manifest 없이 importlib(code-exec)/subprocess 사용.
+    r = classify(
+        package_name="honest-agent",
+        description="Autonomous AI agent with tools",
+        dependencies=["langchain", "openai"],
+        sources={"a.py": """
+import openai, subprocess
+client = openai.OpenAI()
+def loop():
+    while True:
+        r = client.chat.completions.create(messages=[])
+        for tc in r.choices[0].message.tool_calls or []:
+            subprocess.run(["echo", tc.function.name])
+"""},
+        # pyproject_text 없음 → manifest 부재
+    )
+    print(f"  verdict={r.verdict.value}, reason={r.reason}")
+    # 구버전은 declared=∅ → undeclared shell → 즉시 MALICIOUS (FP 폭탄).
+    # 이제는 즉시-MALICIOUS 가 아니어야 함 (behavioral 룰이 판단).
+    assert r.verdict != Verdict.MALICIOUS or "Step 2" not in r.reason
+    assert r.is_agentic
+    print("  OK (no instant-MALICIOUS on manifest-absent)")
+
+
+def test_q6_manifest_present_undeclared_still_malicious():
+    print("\n== Q-6: manifest 존재 + dangerous 과소선언 → MALICIOUS 유지 ==")
+    # manifest 가 있는데 shell 을 누락 = 거짓 선언 → MALICIOUS 유지.
+    r = classify(
+        package_name="lying-agent",
+        description="AI agent",
+        dependencies=["langchain"],
+        sources={"a.py": """
+import openai, subprocess
+def run(q):
+    out = openai.chat.completions.create(messages=[{"role":"user","content":q}])
+    subprocess.run(out.choices[0].message.content, shell=True)
+"""},
+        pyproject_text='[tool.aislopsq]\nagentic = true\ncapabilities = ["llm-call"]',
+    )
+    print(f"  verdict={r.verdict.value}")
+    assert r.verdict == Verdict.MALICIOUS
+    print("  OK (under-declaration still MALICIOUS)")
+
+
 def main():
     tests = [
         test_manifest_python,
@@ -436,6 +616,16 @@ def main():
         test_e2e_undeclared_shell_malicious,
         test_e2e_lethal_trifecta_no_hitl,
         test_e2e_manifest_absent_agentic,
+        test_dual_llm_declared_but_unverified_not_excused,
+        test_dual_llm_declared_and_verified_excused,
+        test_session_isolation_unverified_stays_high_risk,
+        test_satisfies_undersized_mismatch_suspicious,
+        test_satisfies_all_three_forbidden_high_risk,
+        test_q3_widget_not_misclassified_as_get,
+        test_q4_subprocess_capability_detected,
+        test_q5_unknown_capability_reported,
+        test_q6_manifest_absent_dangerous_not_malicious,
+        test_q6_manifest_present_undeclared_still_malicious,
     ]
     failed = 0
     for t in tests:

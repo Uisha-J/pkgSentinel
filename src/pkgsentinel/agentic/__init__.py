@@ -37,16 +37,19 @@ from .rule_of_two import (
     LethalTrifectaCheck,
     detect_human_in_the_loop,
     has_lethal_trifecta,
+    verify_session_isolation,
 )
 from .rules import (
     R1_check,
     R2_check,
     R3_check,
+    R3_rule_of_two_consistency,
     R4_check,
     RuleHit,
     RuleReport,
     RuleSeverity,
     run_all_rules,
+    verify_design_patterns,
 )
 from .signals import (
     AGENTIC_THRESHOLD,
@@ -68,9 +71,11 @@ __all__ = [
     "detect_agentic_python", "detect_agentic_js",
     # rule of two
     "LethalTrifectaCheck", "has_lethal_trifecta", "detect_human_in_the_loop",
+    "verify_session_isolation",
     # rules
     "RuleHit", "RuleReport", "RuleSeverity",
-    "R1_check", "R2_check", "R3_check", "R4_check", "run_all_rules",
+    "R1_check", "R2_check", "R3_check", "R3_rule_of_two_consistency",
+    "R4_check", "run_all_rules", "verify_design_patterns",
     # classifier
     "AgenticClassification", "classify",
 ]
