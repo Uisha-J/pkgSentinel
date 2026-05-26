@@ -14,7 +14,10 @@ LLM 처리 정책:
 
 판정 규칙 테이블 (설계 문서 3장과 일치)
 
-    MALICIOUS    : high-severity TTP ≥ 1 AND LLM malicious AND avg confidence ≥ 0.85
+    MALICIOUS    : high-severity TTP ≥ 1 AND LLM malicious AND
+                   max(malicious evidence confidence) ≥ 0.85
+                   (H-6: 전체 평균이 아닌 가장 강한 악성 신호 기준 — 저신뢰
+                    잡음 지표가 섞여도 강한 단일 증거로 MALICIOUS 유지)
     HIGH_RISK    : (TTP match ≥ 1 OR version_diff critical)
                        AND LLM in {suspicious, malicious}
     SUSPICIOUS   : weak TTP match (LLM ≠ BENIGN) OR version_diff any
@@ -144,6 +147,18 @@ def _avg_confidence(evidence: Iterable[Evidence]) -> float:
     return sum(e.confidence for e in items) / len(items)
 
 
+def _max_malicious_confidence(evidence: Iterable[Evidence]) -> float:
+    """LLM 이 malicious 로 본 evidence 중 최대 confidence.
+
+    H-6 fix: MALICIOUS 게이트가 전체 evidence 평균을 쓰면, 진짜 exfil 체인에
+    저신뢰 지표 하나만 섞여도 평균이 깎여 MALICIOUS→HIGH_RISK 로 조용히 강등됐음.
+    평균이 아니라 '가장 강한 악성 신호'(max) 기준으로 판단한다.
+    """
+    vals = [e.confidence for e in evidence
+            if e.llm_verdict == LLMVerdict.MALICIOUS]
+    return max(vals) if vals else 0.0
+
+
 # ─────────────────────── 메인 결정 함수 ───────────────────────
 
 def decide_verdict(
@@ -177,10 +192,12 @@ def decide_verdict(
     # 4. Evidence 있음 → 규칙 적용
 
     # MALICIOUS: 가장 엄격
+    # H-6: confidence 기준을 전체 평균 → 악성 evidence 의 max 로 변경.
+    # 강한 단일 악성 증거는 저신뢰 잡음 지표가 섞여도 MALICIOUS 를 유지한다.
     if (
         _has_high_severity_ttp(evidence)
         and _any_llm_malicious(evidence)
-        and _avg_confidence(evidence) >= MALICIOUS_CONFIDENCE_THRESHOLD
+        and _max_malicious_confidence(evidence) >= MALICIOUS_CONFIDENCE_THRESHOLD
     ):
         return Verdict.MALICIOUS
 

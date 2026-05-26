@@ -87,6 +87,18 @@ class MockSandbox(BaseSandbox):
 DOCKER_IMAGE_PY = "python:3.11-slim"
 DOCKER_IMAGE_NODE = "node:20-alpine"
 
+# B-3: 컨테이너 격리 하드닝. 구버전은 --network none/--read-only 만 있고
+# capability/pid/memory/cpu 제한이 없어, 악성 install 스크립트가 fork bomb·
+# 메모리 고갈·권한 상승을 시도할 여지가 있었음. 모든 docker run 에 공통 적용.
+DOCKER_HARDENING = [
+    "--cap-drop", "ALL",                    # 모든 리눅스 capability 제거
+    "--security-opt", "no-new-privileges",  # setuid 권한 상승 차단
+    "--pids-limit", "256",                  # fork bomb 차단
+    "--memory", "512m",                     # 메모리 고갈 차단
+    "--memory-swap", "512m",                # swap 으로 우회 차단
+    "--cpus", "1.0",                        # CPU 고갈 차단
+]
+
 
 class DockerSandbox(BaseSandbox):
     """
@@ -130,6 +142,7 @@ class DockerSandbox(BaseSandbox):
         target = f"{package}=={version}" if version and version != "unknown" else package
         cmd = [
             "docker", "run", "--rm",
+            *DOCKER_HARDENING,
             "--network", "none",       # 일단 네트워크 차단 — 설치 스크립트가 네트워크 시도하는지 관찰
             "--read-only",
             "--tmpfs", "/tmp",
@@ -177,6 +190,7 @@ class DockerSandbox(BaseSandbox):
         target = f"{package}@{version}" if version and version != "unknown" else package
         cmd = [
             "docker", "run", "--rm",
+            *DOCKER_HARDENING,
             "--network", "none",
             "--tmpfs", "/workdir:rw",
             "-w", "/workdir",
@@ -297,6 +311,9 @@ class StraceDockerSandbox(DockerSandbox):
         )
         cmd = [
             "docker", "run", "--rm",
+            *DOCKER_HARDENING,
+            # strace 는 ptrace 가 필요 — 전체 drop 후 SYS_PTRACE 만 되돌린다.
+            "--cap-add", "SYS_PTRACE",
             "--network", "none",
             "--tmpfs", "/tmp:rw,size=64m",
             STRACE_IMAGE_PY,

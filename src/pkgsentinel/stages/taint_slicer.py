@@ -286,12 +286,50 @@ class _PyTaintAnalyzer(ast.NodeVisitor):
                             info["transforms"] = info["transforms"] + [callee]
                             self.tainted[target] = info
                             break
+                else:
+                    # H-2: tainted receiver 의 메서드 호출 결과도 tainted.
+                    # 예: data = f.read()  (f 는 `with open(...) as f` 로 seed)
+                    func = node.value.func
+                    if (
+                        isinstance(func, ast.Attribute)
+                        and isinstance(func.value, ast.Name)
+                        and func.value.id in self.tainted
+                    ):
+                        info = dict(self.tainted[func.value.id])
+                        info["transforms"] = info["transforms"] + [f".{func.attr}"]
+                        self.tainted[target] = info
 
             # 단순 변수 할당 var2 = var1
             elif isinstance(node.value, ast.Name) and node.value.id in self.tainted:
                 self.tainted[target] = self.tainted[node.value.id]
 
         self.generic_visit(node)
+
+    def visit_With(self, node: ast.With):
+        """`with open(...) as f:` / `with requests.get(...) as r:` 의 as-변수 seed.
+
+        H-2 fix: 구버전은 visit_Assign 만 source 를 seed 해서, 파이썬의 기본
+        관용구인 with-as 로 연 파일/응답이 taint 로 잡히지 않았음 (taint_slicer
+        docstring 에서도 인정한 gap). withitem.context_expr 가 TAINT_SOURCE 호출이면
+        optional_vars(as 이름)를 tainted 로 등록한다.
+        """
+        for item in node.items:
+            ctx = item.context_expr
+            if (
+                isinstance(ctx, ast.Call)
+                and isinstance(item.optional_vars, ast.Name)
+            ):
+                callee = self._resolve_call_name(ctx.func)
+                if callee in TAINT_SOURCES:
+                    self.tainted[item.optional_vars.id] = {
+                        "source": callee,
+                        "line": getattr(node, "lineno", 0),
+                        "transforms": [],
+                    }
+        self.generic_visit(node)
+
+    # async with 도 동일 처리
+    visit_AsyncWith = visit_With  # type: ignore[assignment]
 
     def visit_Call(self, node: ast.Call):
         callee = self._resolve_call_name(node.func)

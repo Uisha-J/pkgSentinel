@@ -174,7 +174,7 @@ def test_malicious_when_high_severity_and_llm_malicious_and_high_confidence():
 
 
 def test_not_malicious_when_confidence_below_threshold():
-    """high-severity + LLM MALICIOUS 라도 평균 confidence < 0.85 면 HIGH_RISK 로 강등."""
+    """high-severity + LLM MALICIOUS 라도 악성 evidence confidence < 0.85 면 강등."""
     e = _make_evidence(
         similarity=0.93,
         severity=Severity.HIGH,
@@ -184,6 +184,27 @@ def test_not_malicious_when_confidence_below_threshold():
     v = decide_verdict([e], _all_passed_stages())
     assert v != Verdict.MALICIOUS
     assert v in (Verdict.HIGH_RISK, Verdict.SUSPICIOUS)
+
+
+def test_h6_strong_malicious_not_demoted_by_low_conf_noise():
+    """H-6 회귀: 강한 악성 evidence(conf 0.92) + 저신뢰 잡음 지표(conf 0.20).
+
+    구버전은 평균((0.92+0.20)/2=0.56) < 0.85 라서 MALICIOUS→강등됐음.
+    이제 악성 evidence 의 max(0.92) ≥ 0.85 → MALICIOUS 유지.
+    """
+    strong = _make_evidence(
+        similarity=0.95, severity=Severity.HIGH,
+        llm_verdict=LLMVerdict.MALICIOUS, confidence=0.92,
+        ttp_id="T1041", ttp_name="Exfiltration Over C2 Channel",
+        file_path="exfil.py",
+    )
+    noise = _make_evidence(
+        similarity=0.40, severity=Severity.LOW,
+        llm_verdict=LLMVerdict.BENIGN, confidence=0.20,
+        ttp_id="T1082", ttp_name="System Information Discovery",
+        file_path="util.py",
+    )
+    assert decide_verdict([strong, noise], _all_passed_stages()) == Verdict.MALICIOUS
 
 
 # ─────────────── 7. 경계 / 회귀 ───────────────

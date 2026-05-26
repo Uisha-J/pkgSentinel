@@ -12,6 +12,12 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 
+from .capability_detector import CAPABILITIES
+
+# canonical capability 어휘 (15종). 선언된 capability 중 이 집합에 없는 항목은
+# 오타/쓰레기로 간주 — declared_set 에서 제외하고 unknown 으로 보고한다 (Q-5).
+_CANONICAL_CAPS: frozenset[str] = frozenset(CAPABILITIES)
+
 # ─────────────── Schema ───────────────
 
 @dataclass
@@ -46,7 +52,17 @@ class AISLOPSQManifest:
 
     @property
     def declared_set(self) -> set[str]:
-        return set(self.capabilities)
+        """canonical 어휘로 검증된 declared capability set.
+
+        Q-5 (스펙 §7 step 1): 오타/비정규 문자열은 detected 와 영원히 불일치하므로
+        canonical 15종만 비교에 사용한다. 비정규 항목은 unknown_capabilities 로 보고.
+        """
+        return {c for c in self.capabilities if c in _CANONICAL_CAPS}
+
+    @property
+    def unknown_capabilities(self) -> list[str]:
+        """canonical 어휘에 없는 선언 capability (오타/쓰레기 후보)."""
+        return sorted(c for c in self.capabilities if c not in _CANONICAL_CAPS)
 
     def to_dict(self) -> dict:
         return {

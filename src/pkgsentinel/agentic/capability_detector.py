@@ -247,8 +247,11 @@ class _PyCapVisitor(ast.NodeVisitor):
         name = _resolve_dotted(node.func)
         if name:
             for sig, cap in _PY_CAPABILITY_MAP:
-                if name == sig or name.endswith("." + sig.split(".")[-1]) and name.startswith(
-                    sig.rsplit(".", 1)[0]
+                # Q-4: 연산자 우선순위 명시. 정확 일치 OR (끝 + 시작 모두 일치).
+                # 괄호 없으면 `A or (B and C)` 로 묶여 의도가 모호했음.
+                if name == sig or (
+                    name.endswith("." + sig.split(".")[-1])
+                    and name.startswith(sig.rsplit(".", 1)[0])
                 ):
                     self.found.add(cap)
             # open() 의 mode kwarg 검사
