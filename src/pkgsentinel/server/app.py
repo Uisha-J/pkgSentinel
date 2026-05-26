@@ -11,9 +11,11 @@
   - GET  /metrics       — 단순 카운터 (Prometheus 형식; 의존성 0)
 
 환경 변수:
-  PKGSENTINEL_HMAC_SECRET — HMAC 검증용. 미설정 시 검증 skip (dev 모드).
+  PKGSENTINEL_HMAC_SECRET — HMAC 검증용. 미설정 + dev opt-in 없음 → 보호
+                            endpoint 503 (fail-closed).
+  PKGSENTINEL_DEV_NO_AUTH — "1" 이면 secret 없이 인증 skip (dev 전용, insecure).
   PKGSENTINEL_PORT        — 기본 8787
-  PKGSENTINEL_BIND        — 기본 0.0.0.0
+  PKGSENTINEL_BIND        — 기본 127.0.0.1 (loopback). 외부 노출은 명시적 변경 필요.
   AISLOP_DB_KEY           — SQLCipher 키 (필수, prod)
 
 사용:
@@ -63,6 +65,31 @@ def _get_secret() -> str | None:
     return s or None
 
 
+def _dev_no_auth() -> bool:
+    """명시적 dev opt-in 여부. 이 플래그가 없으면 secret 미설정 = fail-closed."""
+    return os.environ.get("PKGSENTINEL_DEV_NO_AUTH", "").strip().lower() in (
+        "1", "true", "yes", "on",
+    )
+
+
+def _auth_posture(hmac_secret: str | None) -> tuple[str | None, tuple[dict, int] | None]:
+    """인증 자세 결정 (fail-closed).
+
+    - secret 있으면 → (secret, None): HMAC 검증 진행.
+    - secret 없고 PKGSENTINEL_DEV_NO_AUTH 설정 → (None, None): 명시적 dev, 검증 skip.
+    - secret 없고 dev opt-in 없음 → (None, 503): 요청 거부. (구버전은 무인증 통과했음)
+    """
+    secret = hmac_secret or _get_secret()
+    if secret is None and not _dev_no_auth():
+        return None, (
+            {"error": "server misconfigured: HMAC secret required. "
+                      "Set PKGSENTINEL_HMAC_SECRET (prod) or "
+                      "PKGSENTINEL_DEV_NO_AUTH=1 (dev, insecure)."},
+            503,
+        )
+    return secret, None
+
+
 def _get_signature_headers() -> tuple[str | None, int | None]:
     """X-AISLOPSQ-Signature / Timestamp 헤더 추출."""
     sig = request.headers.get("X-AISLOPSQ-Signature")
@@ -106,9 +133,11 @@ def create_app(*, hmac_secret: str | None = None) -> Flask:
     @app.post("/api/v1/analyze")
     def _analyze() -> tuple[Response, int]:
         _bump("pkgsentinel_analyze_total")
+        secret, posture_err = _auth_posture(hmac_secret)
+        if posture_err is not None:
+            return jsonify(posture_err[0]), posture_err[1]
         body, raw = _json_body()
         sig, ts = _get_signature_headers()
-        secret = hmac_secret or _get_secret()
         resp, code = handle_analyze(
             body,
             signature_header=sig,
@@ -128,9 +157,11 @@ def create_app(*, hmac_secret: str | None = None) -> Flask:
     @app.post("/api/v1/runtime-alert")
     def _runtime_alert() -> tuple[Response, int]:
         _bump("pkgsentinel_runtime_alert_total")
+        secret, posture_err = _auth_posture(hmac_secret)
+        if posture_err is not None:
+            return jsonify(posture_err[0]), posture_err[1]
         body, raw = _json_body()
         sig, ts = _get_signature_headers()
-        secret = hmac_secret or _get_secret()
         resp, code = handle_runtime_alert(
             body,
             signature_header=sig,
@@ -146,20 +177,25 @@ def create_app(*, hmac_secret: str | None = None) -> Flask:
     @app.route("/api/v1/iocs/export", methods=["GET", "POST"])
     def _iocs_export() -> tuple[Response, int]:
         _bump("pkgsentinel_iocs_export_total")
+        # C-2 fix: GET 도 동일하게 인증한다. (구버전은 GET 시 인증을 전면
+        # 우회해 학습된 위협 인텔이 무인증 유출됐음.) GET 은 body 가 없으므로
+        # 원본 query string bytes 를 서명 대상으로 삼는다 — 클라이언트는
+        # 동일 바이트열에 HMAC 서명.
+        secret, posture_err = _auth_posture(hmac_secret)
+        if posture_err is not None:
+            return jsonify(posture_err[0]), posture_err[1]
         if request.method == "GET":
-            # query string → dict
             body = {k: v for k, v in request.args.items()}
-            raw = b""
+            raw = request.query_string or b""
         else:
             body, raw = _json_body()
         sig, ts = _get_signature_headers()
-        secret = hmac_secret or _get_secret()
         resp, code = handle_iocs_export(
             body,
-            signature_header=sig if request.method == "POST" else None,
-            timestamp_ms=ts if request.method == "POST" else None,
-            raw_body=raw if request.method == "POST" else None,
-            shared_secret=secret if request.method == "POST" else None,
+            signature_header=sig,
+            timestamp_ms=ts,
+            raw_body=raw,
+            shared_secret=secret,
         )
         if code == 401:
             _bump("pkgsentinel_hmac_failures_total")

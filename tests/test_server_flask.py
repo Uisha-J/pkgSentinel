@@ -36,13 +36,17 @@ def _teardown_db(td):
 def client():
     td = _setup_db()
     try:
-        # secret 없이 — dev 모드 (HMAC skip)
+        # secret 없이 — 명시적 dev opt-in (fail-closed 우회). 구버전은 secret
+        # 미설정만으로 무인증 통과했으나, 이제 PKGSENTINEL_DEV_NO_AUTH 가 있어야
+        # 보호 endpoint 가 통과한다.
         os.environ.pop("PKGSENTINEL_HMAC_SECRET", None)
+        os.environ["PKGSENTINEL_DEV_NO_AUTH"] = "1"
         from pkgsentinel.server.app import create_app
         app = create_app()
         app.config["TESTING"] = True
         yield app.test_client()
     finally:
+        os.environ.pop("PKGSENTINEL_DEV_NO_AUTH", None)
         _teardown_db(td)
 
 
@@ -51,12 +55,28 @@ def client_with_secret():
     td = _setup_db()
     try:
         os.environ["PKGSENTINEL_HMAC_SECRET"] = "test-secret"
+        os.environ.pop("PKGSENTINEL_DEV_NO_AUTH", None)
         from pkgsentinel.server.app import create_app
         app = create_app()
         app.config["TESTING"] = True
         yield app.test_client()
     finally:
         os.environ.pop("PKGSENTINEL_HMAC_SECRET", None)
+        _teardown_db(td)
+
+
+@pytest.fixture
+def client_failclosed():
+    """secret 도 dev opt-in 도 없음 — 보호 endpoint 는 503 (fail-closed)."""
+    td = _setup_db()
+    try:
+        os.environ.pop("PKGSENTINEL_HMAC_SECRET", None)
+        os.environ.pop("PKGSENTINEL_DEV_NO_AUTH", None)
+        from pkgsentinel.server.app import create_app
+        app = create_app()
+        app.config["TESTING"] = True
+        yield app.test_client()
+    finally:
         _teardown_db(td)
 
 
@@ -217,6 +237,57 @@ def test_iocs_export_post_unknown_status(client):
     r = client.post("/api/v1/iocs/export", json={"status": "weird"})
     assert r.status_code == 400
     print("  OK")
+
+
+# ─────────────── C-1/C-2 fail-closed + GET 인증 회귀 ───────────────
+
+def test_failclosed_analyze_503(client_failclosed):
+    print("\n== C-1: secret/dev 둘 다 없음 → analyze 503 ==")
+    r = client_failclosed.post("/api/v1/analyze",
+                               json={"package": "x", "ecosystem": "npm"})
+    assert r.status_code == 503
+    print("  OK (fail-closed)")
+
+
+def test_failclosed_iocs_get_503(client_failclosed):
+    print("\n== C-1: secret/dev 둘 다 없음 → iocs GET 503 ==")
+    r = client_failclosed.get("/api/v1/iocs/export")
+    assert r.status_code == 503
+    print("  OK (fail-closed)")
+
+
+def test_failclosed_runtime_alert_503(client_failclosed):
+    print("\n== C-1: secret/dev 둘 다 없음 → runtime-alert 503 ==")
+    r = client_failclosed.post("/api/v1/runtime-alert", json={})
+    assert r.status_code == 503
+    print("  OK (fail-closed)")
+
+
+def test_iocs_export_get_requires_auth_when_secret_set(client_with_secret):
+    print("\n== C-2: secret 설정 시 GET 도 서명 없으면 거부 ==")
+    # 구버전은 GET 이면 무조건 인증 우회 → 위협 인텔 유출. 이제 GET 도 검증.
+    r = client_with_secret.get("/api/v1/iocs/export?status=approved&limit=10000")
+    assert r.status_code in (400, 401)
+    print(f"  OK (code={r.status_code}, no longer bypassed)")
+
+
+def test_iocs_export_get_signed_passes(client_with_secret):
+    print("\n== C-2: secret 설정 + 서명된 GET → 통과 ==")
+    from pkgsentinel.api.auth import _reset_nonce_cache
+    from pkgsentinel.realtime.sinks.webhook_sink import hmac_sign
+    _reset_nonce_cache()
+    qs = b"ioc_type=ip&min_confidence=0.0"
+    ts = int(time.time() * 1000)
+    sig = hmac_sign("test-secret", ts, qs)
+    r = client_with_secret.get(
+        "/api/v1/iocs/export?" + qs.decode(),
+        headers={
+            "X-AISLOPSQ-Signature": f"sha256={sig}",
+            "X-AISLOPSQ-Timestamp": str(ts),
+        },
+    )
+    assert r.status_code == 200
+    print("  OK (signed GET accepted)")
 
 
 # ─────────────── runtime-alert smoke ───────────────
