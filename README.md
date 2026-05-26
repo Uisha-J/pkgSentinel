@@ -1,8 +1,8 @@
 # pkgsentinel
 
-> Supply-chain attack detection engine for PyPI / npm.
-> Detects AI-hallucinated (slopsquatting) and traditionally malicious packages
-> through static analysis + multi-agent LLM verification + real-time monitoring.
+> Supply-chain analysis tool for PyPI / npm packages.
+> Flags AI-hallucinated (slopsquatting) and traditionally malicious packages
+> through static analysis, multi-agent LLM review, and real-time monitoring.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.11+-green.svg)
@@ -12,18 +12,18 @@
 
 ## What it does
 
-`pkgsentinel` analyzes a package on PyPI / npm **without installing it**, using
-multiple defense layers that span the supply-chain attack surface:
+`pkgsentinel` analyzes a package on PyPI / npm **without installing it**, in
+layered stages across the supply-chain attack surface:
 
 | Layer | Role |
 |---|---|
-| **Layer 0** — registry / threat-intel | Encrypted DB lookup against 220k+ known-malicious advisories (OSV/GHSA) |
+| **Layer 0** — registry / threat-intel | Encrypted DB lookup against 220k+ OSV/GHSA advisories + the OSSF malicious-packages list |
 | **Layer 1** — source extraction + agentic gate | Memory-streamed archive analysis + AISLOPSQ classification for AI-agent packages |
-| **Layer 2** — behavior sequence | Cerebro 4-dimension API call extraction (Python AST + tree-sitter JS) |
+| **Layer 2** — behavior sequence | 4-dimension API call extraction (Python AST + tree-sitter JS) |
 | **Layer 3** — pattern matching | 49-entry malicious-indicator taxonomy (7 categories; 36 with active matchers) + sequence pattern mining + taint slicing + MITRE ATT&CK embedding match |
 | **Layer 4** — LLM dual-check | Multi-agent verification (semantic / version-diff / dependency) with consensus voting |
 | **Layer 5** — additional analysis | Recursive dependency, binary inspection, optional sandbox execution |
-| **Layer 6** — verdict + standard outputs | CycloneDX 1.5 VEX, STIX 2.1 / TAXII 2.1, HMAC-signed webhooks, Falco rules + Tetragon TracingPolicy |
+| **Layer 6** — verdict + standard outputs | CycloneDX 1.5 VEX, STIX 2.1 / TAXII 2.1, HMAC-signed webhooks, Falco rules + Tetragon TracingPolicy, SafeDep pmg policy |
 
 Resulting verdict is one of: `MALICIOUS / HIGH_RISK / SUSPICIOUS / AGENTIC / CLEAN / ERROR / CANNOT_ANALYZE`.
 
@@ -53,9 +53,10 @@ classes:
   severity when corroborated by code signatures; unverified declarations are
   recorded but grant no exemption. Robust trust requires signed manifests
   (e.g. Sigstore) + external attestation, which is out of scope for v0.1.
-- **Trust by Verification** — popular packages are not whitelisted; they are
-  prioritized for *more frequent* scanning, since they are higher-value APT
-  targets (event-stream, ua-parser-js, XZ, etc.).
+- **Trust by Verification** — popular packages are not whitelisted; they run the
+  same full pipeline and are prioritized in the scan queue (popularity rank
+  raises urgency), since past supply-chain incidents (event-stream, ua-parser-js,
+  XZ) all hit widely-used packages.
 - **Encrypted threat DB** — SQLCipher AES-256. Cache integrity is sha256 by
   default; the Merkle-root and row-HMAC layers are opt-in (`paranoid` mode).
   The default mode therefore verifies one layer, not three.
@@ -67,7 +68,7 @@ classes:
 ### Install (editable)
 
 ```bash
-git clone https://github.com/Uisha-J/capstone_project.git pkgsentinel
+git clone https://github.com/Uisha-J/pkgSentinel.git pkgsentinel
 cd pkgsentinel
 python -m venv .venv && source .venv/bin/activate    # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
@@ -140,9 +141,6 @@ of automated CI — equivalent regression is covered by `eval_synthetic.py`.
 
 [datadog-ds]: https://github.com/DataDog/malicious-software-packages-dataset
 
-This started as an undergraduate capstone project and is published under
-Apache 2.0.
-
 ---
 
 ## Documentation
@@ -151,12 +149,7 @@ Apache 2.0.
 - [`docs/cost_model.md`](docs/cost_model.md) — Stage 5 LLM cost model (per-call
   tokens, daily/monthly scenarios, cache strategy)
 - [`docs/aislopsq/`](docs/aislopsq/) — AISLOPSQ Manifest specification, decision
-  tree, R1-R4 rule catalogue, and paper cards (Chhabra 2025, Beurer-Kellner 2025,
-  Shi 2025, Nasr 2025, Meta Rule of Two 2025)
-- [`docs/case-studies/`](docs/case-studies/) — analyses of real supply-chain
-  incidents (event-stream 2018, ua-parser 2021, XZ 2024, …)
-- [`docs/references/`](docs/references/) — 59-entry reference index (papers,
-  frameworks, industry reports, related projects)
+  tree, and R1-R4 rule catalogue
 - [`examples/systemd/`](examples/systemd/) — systemd unit files for
   pkgsentinel-worker / pkgsentinel-cron deployment
 
@@ -165,8 +158,3 @@ Apache 2.0.
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).
-
-## Citing
-
-If you use `pkgsentinel` or its AISLOPSQ Manifest specification in academic
-work, please cite the rule sources documented in `docs/aislopsq/papers/`.
