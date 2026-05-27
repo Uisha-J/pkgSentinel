@@ -339,8 +339,10 @@ class FixtureResult:
     version: str
     label: str                    # "malicious" | "benign"
     source: str                   # "datadog/malicious_intent" 등
-    verdict: str
+    verdict: str                  # 선택된 모드(env)의 verdict — 하위호환
     expected: bool
+    verdict_off: str = ""         # 코어 판정 (production verdict_rules 경로)
+    verdict_on: str = ""          # eval 다운그레이드 적용 후
     matchers: dict = field(default_factory=dict)
     elapsed_s: float = 0.0
     n_files: int = 0
@@ -587,10 +589,14 @@ def _evaluate(
     else:
         verdict = Verdict.CLEAN
 
-    # ─── eval 전용 다운그레이드 (S-5 토글) ───
-    # PKGSENTINEL_EVAL_RULES=off 면 아래 보정 전부 skip → 코어 판정만
-    # (production verdict_rules 와 동일 경로) 으로 측정.
-    if _eval_rules_on:
+    # 코어 판정 = production verdict_rules 경로 (다운그레이드 전).
+    verdict_off = verdict
+
+    # ─── eval 전용 다운그레이드 (S-5) ───
+    # 항상 계산해서 verdict_on / verdict_off 둘 다 기록 (단일 실행으로 ON/OFF
+    # 비교 가능 — claude 모드 LLM 호출 1회로 두 수치 모두 산출).
+    # 최종 verdict 필드는 PKGSENTINEL_EVAL_RULES env 로 선택 (하위호환).
+    if True:
         # benign_context 보정 — 단, ind_high < 2 인 약신호일 때만 다운그레이드.
         # ind_high >= 2 인 강한 신호는 합법 컨텍스트(테스트/IaC) 단어가 보여도 유지.
         # (num2words 처럼 합법 코드 베이스에 악성 페이로드가 섞인 케이스 보호)
@@ -691,11 +697,16 @@ def _evaluate(
         ):
             verdict = Verdict.CLEAN
 
-    expected_set = (
-        {Verdict.MALICIOUS, Verdict.HIGH_RISK, Verdict.SUSPICIOUS}
-        if label == "malicious" else {Verdict.CLEAN}
-    )
-    expected = verdict in expected_set
+    # 다운그레이드 적용 후 = verdict_on. 최종 verdict 필드는 env 토글로 선택.
+    verdict_on = verdict
+    final_verdict = verdict_on if _eval_rules_on else verdict_off
+
+    def _is_correct(v: Verdict) -> bool:
+        if label == "malicious":
+            return v in (Verdict.MALICIOUS, Verdict.HIGH_RISK, Verdict.SUSPICIOUS)
+        return v == Verdict.CLEAN
+
+    expected = _is_correct(final_verdict)
 
     return FixtureResult(
         name=name,
@@ -703,8 +714,10 @@ def _evaluate(
         version=version,
         label=label,
         source=source,
-        verdict=verdict.value,
+        verdict=final_verdict.value,
         expected=expected,
+        verdict_off=verdict_off.value,
+        verdict_on=verdict_on.value,
         matchers={
             "ttp_match": ttp_hits,
             "ind_47": ind_hits,
@@ -747,10 +760,11 @@ def _wilson_interval(successes: int, n: int, z: float = 1.96) -> tuple[float, fl
     return max(0.0, centre - half), min(1.0, centre + half)
 
 
-def _confusion(results: list[FixtureResult]) -> dict:
+def _confusion(results: list[FixtureResult], field: str = "verdict") -> dict:
     tp = fp = tn = fn = 0
     for r in results:
-        is_mal_pred = r.verdict in ("MALICIOUS", "HIGH_RISK", "SUSPICIOUS")
+        v = getattr(r, field, None) or r.verdict
+        is_mal_pred = v in ("MALICIOUS", "HIGH_RISK", "SUSPICIOUS")
         is_mal_true = (r.label == "malicious")
         if is_mal_true and is_mal_pred:
             tp += 1
@@ -1002,20 +1016,27 @@ def main():
         _print_table(results)
     print()
 
-    cm = _confusion(results)
-    print("=== Confusion Matrix (overall) ===")
-    print(f"  TP: {cm['tp']:>4}   FN: {cm['fn']:>4}")
-    print(f"  FP: {cm['fp']:>4}   TN: {cm['tn']:>4}")
+    # S-5: OFF(코어/production 경로) vs ON(eval 다운그레이드) 나란히 출력.
+    def _print_cm(title: str, field: str) -> dict:
+        cm = _confusion(results, field=field)
+        p_lo, p_hi = cm["precision_ci95"]
+        r_lo, r_hi = cm["recall_ci95"]
+        print(f"=== {title} ===")
+        print(f"  TP {cm['tp']:>4}  FN {cm['fn']:>4}  FP {cm['fp']:>4}  TN {cm['tn']:>4}")
+        print(f"  P {cm['precision']:.4f} [CI {p_lo:.3f},{p_hi:.3f}]  "
+              f"R {cm['recall']:.4f} [CI {r_lo:.3f},{r_hi:.3f}]  "
+              f"F1 {cm['f1']:.4f}  Acc {cm['accuracy']:.4f}")
+        return cm
+
+    llm_mode = os.environ.get("PKGSENTINEL_LLM_MODE", "stub")
+    print(f"\n########## S-5 ON/OFF 비교 (llm={llm_mode}) ##########")
+    cm_off = _print_cm("OFF — 코어 판정 (production verdict_rules 경로 = 출하 엔진)", "verdict_off")
     print()
-    print("=== Metrics ===")
-    p_lo, p_hi = cm["precision_ci95"]
-    r_lo, r_hi = cm["recall_ci95"]
-    print(f"  Precision : {cm['precision']:.4f}  (95% CI [{p_lo:.3f}, {p_hi:.3f}])")
-    print(f"  Recall    : {cm['recall']:.4f}  (95% CI [{r_lo:.3f}, {r_hi:.3f}])")
-    print(f"  F1        : {cm['f1']:.4f}")
-    print(f"  Accuracy  : {cm['accuracy']:.4f}")
-    print(f"  Elapsed   : {elapsed:.2f}s "
-          f"({elapsed*1000/max(1,len(results)):.0f} ms/fixture)")
+    cm_on = _print_cm("ON  — eval 다운그레이드 적용 (현재 보고 수치)", "verdict_on")
+    print(f"\n  Δ precision (ON-OFF): {cm_on['precision']-cm_off['precision']:+.4f}  "
+          f"← 이 격차가 '평가 하니스 보정' 효과 (= 출하 엔진이 못 내는 부분)")
+    print(f"  Elapsed: {elapsed:.2f}s ({elapsed*1000/max(1,len(results)):.0f} ms/fixture)\n")
+    cm = cm_on if args.eval_rules == "on" else cm_off
 
     print("\n=== Per-source breakdown ===")
     by_src = _confusion_by_source(results)
@@ -1036,6 +1057,7 @@ def main():
                 "name": r.name, "ecosystem": r.ecosystem,
                 "version": r.version, "label": r.label, "source": r.source,
                 "verdict": r.verdict, "expected": r.expected,
+                "verdict_off": r.verdict_off, "verdict_on": r.verdict_on,
                 "matchers": r.matchers,
                 "elapsed_s": r.elapsed_s,
                 "n_files": r.n_files, "n_python": r.n_python, "n_js": r.n_js,
