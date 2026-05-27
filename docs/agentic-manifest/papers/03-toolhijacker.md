@@ -40,13 +40,13 @@ ToolHijacker는 기존 prompt injection 공격을 크게 능가하며 (paper §e
 
 이 논문은 **tool registry 자체가 supply chain 공격 벡터**임을 입증한다. 따라서:
 
-1. **Manifest의 `tool_registry` 필드가 필수**가 된다 (`AISLOPSQ-MANIFEST-SPEC.md` §6).
+1. **Manifest의 `tool_registry` 필드가 필수**가 된다 (`AGENTIC-CAPABILITY-MANIFEST-SPEC.md` §6).
 2. `dynamic_tools = true` AND `tool_signature_verification = false` 조합은 자동 HIGH_RISK.
 3. 정적 분석은 외부에서 fetch한 tool description을 LLM에 binding하는 코드 패턴을 검출해야 한다 (R1-2).
 
 또한 **R4-5 (description-behavior mismatch)** 룰은 ToolHijacker의 일반화 형태다. 악성 툴은 description을 합리적으로 보이게 작성하지만 구현부가 다른 동작을 한다 — 정적 분석으로 이를 비교 가능.
 
-## AISLOPSQ 매핑
+## Agentic 매핑
 
 | 본 deliverable 항목 | 본 논문에서의 근거 |
 |---|---|

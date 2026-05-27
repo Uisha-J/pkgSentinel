@@ -16,7 +16,7 @@ services:
       - ./adapter:/app/adapter
       # 캐시 + DB 저장 (런타임 생성, .gitignore 로 보호)
       - ./data:/data
-      - ./data/.aislopsquatting:/root/.aislopsquatting
+      - ./data/.pkgsentinel:/root/.pkgsentinel
     environment:
       # ── 필수 ─────────────────────────────────────────────
       - AISLOP_DB_KEY=${AISLOP_DB_KEY}

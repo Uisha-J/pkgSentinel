@@ -73,10 +73,10 @@ def main():
     webhook_path = out_dir / "webhook_payload.json"
     webhook_path.write_text(json.dumps({
         "headers": {
-            "X-AISLOPSQ-Event": "package.verdict",
-            "X-AISLOPSQ-Timestamp": str(ts),
-            "X-AISLOPSQ-Signature": f"sha256={sig}",
-            "X-AISLOPSQ-Tool": "ai-slopsquatting/2.0",
+            "X-PkgSentinel-Event": "package.verdict",
+            "X-PkgSentinel-Timestamp": str(ts),
+            "X-PkgSentinel-Signature": f"sha256={sig}",
+            "X-PkgSentinel-Tool": "pkgsentinel/2.0",
             "Content-Type": "application/json",
         },
         "body": sample_report,

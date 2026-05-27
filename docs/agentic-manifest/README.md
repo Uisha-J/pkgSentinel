@@ -1,4 +1,4 @@
-# AISLOPSQ — Agentic Package Security Standard
+# Agentic — Agentic Package Security Standard
 
 졸업과제 deliverable. npm/PyPI 패키지 중 **agentic** 한 패키지를 식별하고, 그에 맞는 보안 기준을 적용하기 위한 표준·룰셋·근거 논문 묶음.
 
@@ -9,7 +9,7 @@
 이 deliverable은 다음을 정의한다:
 
 1. **`AGENTIC` verdict** — 기존 4 verdict에 추가되는 새 분류
-2. **AISLOPSQ Manifest 표준** — 패키지 작성자가 declared capability를 명시하는 메커니즘 (npm/PyPI)
+2. **Agentic Manifest 표준** — 패키지 작성자가 declared capability를 명시하는 메커니즘 (npm/PyPI)
 3. **Agentic 자동 판별 신호** — manifest가 없는 경우의 fallback 검출 룰
 4. **Capability detection 매핑** — Python/JavaScript 정적 분석으로 detected capability 추출
 5. **4 카테고리 룰셋** — Prompt Injection / Sandbox Escape / Undeclared Capability / Hidden Side Channel
@@ -18,10 +18,10 @@
 ## 파일 구조
 
 ```
-aislopsq/
+agentic/
 ├── README.md                              # (this file)
 ├── spec/
-│   ├── AISLOPSQ-MANIFEST-SPEC.md         # manifest 표준 사양
+│   ├── AGENTIC-CAPABILITY-MANIFEST-SPEC.md         # manifest 표준 사양
 │   ├── DECISION-TREE.md                  # 분류 결정 트리
 │   └── RULES.md                          # 4 카테고리 룰 상세
 ├── detection/
@@ -70,7 +70,7 @@ aislopsq/
 
 ## 표준화 contribution
 
-AISLOPSQ Manifest는 npm/PyPI 어디에도 존재하지 않는 새 표준이다. 이 표준의 핵심 아이디어는 학계 합의에서 직접 도출된다:
+Agentic Manifest는 npm/PyPI 어디에도 존재하지 않는 새 표준이다. 이 표준의 핵심 아이디어는 학계 합의에서 직접 도출된다:
 
 - Meta Agents Rule of Two (2025): "prompt injection은 미해결 문제이며, 시스템 설계 단계에서 가정하고 만들어야 한다"
 - Beurer-Kellner et al. (2025): "에이전트가 신뢰 불가 입력을 처리한 후엔 결과적 행동 능력이 엄격히 제한되어야 한다"

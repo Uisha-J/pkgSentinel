@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 # 격리 DB 경로
-TEST_DB_DIR = tempfile.mkdtemp(prefix="aislopsq_test_")
+TEST_DB_DIR = tempfile.mkdtemp(prefix="agentic_test_")
 TEST_DB_PATH = Path(TEST_DB_DIR) / "test.sqlcipher"
 TEST_PASSPHRASE = "test-passphrase-do-not-reuse"
 

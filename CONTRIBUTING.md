@@ -5,7 +5,7 @@ Thanks for your interest!
 ## Development setup
 
 ```bash
-git clone https://github.com/Uisha-J/capstone_project.git pkgsentinel
+git clone https://github.com/Uisha-J/pkgSentinel.git pkgsentinel
 cd pkgsentinel
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
@@ -53,7 +53,7 @@ If you add a new rule (R5, R6, ... or new indicator), please:
 1. Add the rule signature in the appropriate module under `src/pkgsentinel/agentic/` or `src/pkgsentinel/stages/`
 2. Add at least one passing + one failing test in `tests/`
 3. Cite the source paper / vendor advisory in the docstring
-4. Update `docs/aislopsq/spec/RULES.md` if it's an AISLOPSQ R-rule
+4. Update `docs/agentic-manifest/spec/RULES.md` if it's an Agentic R-rule
 
 ## Reporting issues
 

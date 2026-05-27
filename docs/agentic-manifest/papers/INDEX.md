@@ -1,12 +1,12 @@
 # Papers Index
 
-이 디렉터리는 AISLOPSQ 표준의 모든 룰의 학술적 근거를 제공한다. Claude Code (또는 다른 코딩 에이전트) 가 검사기를 구현할 때, 각 룰의 의도를 정확히 이해하기 위해 해당 논문 카드를 직접 참조해야 한다.
+이 디렉터리는 Agentic 표준의 모든 룰의 학술적 근거를 제공한다. Claude Code (또는 다른 코딩 에이전트) 가 검사기를 구현할 때, 각 룰의 의도를 정확히 이해하기 위해 해당 논문 카드를 직접 참조해야 한다.
 
 각 카드는 다음을 포함한다:
 - 메타데이터 (저자, 출판처, arXiv URL)
 - Abstract (paraphrase)
 - 핵심 섹션 발췌 (paraphrase, ≤15 단어 직접 인용 시 표시)
-- AISLOPSQ deliverable 어느 룰에 매핑되는지
+- Agentic deliverable 어느 룰에 매핑되는지
 
 원문 PDF는 직접 참조 (각 카드의 URL).
 
@@ -85,7 +85,7 @@
 ## Claude Code 사용 패턴 (예시)
 
 ```
-[코드 작성 task: "AISLOPSQ Step 1 자동 판별 로직을 Python으로 구현"]
+[코드 작성 task: "Agentic Step 1 자동 판별 로직을 Python으로 구현"]
 
 1. spec/DECISION-TREE.md 의 Step 1 정의 확인
 2. detection/AGENTIC-SIGNALS.md 의 가중치 표 확인

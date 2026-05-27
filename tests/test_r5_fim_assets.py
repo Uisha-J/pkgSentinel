@@ -91,7 +91,7 @@ def test_trigger_script_syntax():
     # 핵심 변수 / 명령어 등장
     for tok in (
         "PKGSENTINEL_URL", "PKGSENTINEL_SECRET",
-        "X-AISLOPSQ-Signature", "openssl dgst",
+        "X-PkgSentinel-Signature", "openssl dgst",
         "curl",
     ):
         assert tok in text, f"trigger script missing {tok}"

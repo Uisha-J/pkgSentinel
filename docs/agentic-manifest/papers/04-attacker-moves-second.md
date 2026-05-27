@@ -35,7 +35,7 @@ LLM 방어의 robustness를 어떻게 평가해야 하는가? 현재 jailbreak/p
 
 ## 본 논문이 본 deliverable에 미친 영향
 
-이 논문은 본 AISLOPSQ 표준의 **존재 이유**를 학술적으로 정당화한다:
+이 논문은 본 Agentic 표준의 **존재 이유**를 학술적으로 정당화한다:
 
 > **runtime classifier·filter 기반 prompt injection 방어는 신뢰할 수 없다. 따라서 보안은 시스템 설계 단계에서 capability 경계를 좁히는 방식으로 풀어야 한다.**
 
@@ -44,11 +44,11 @@ LLM 방어의 robustness를 어떻게 평가해야 하는가? 현재 jailbreak/p
 1. runtime 방어가 신뢰 불가능 → 사전(install-time) 검증 layer가 필요
 2. 사전 검증은 패키지 작성자의 declared capability에 의존
 3. declared와 detected의 차이가 곧 보안 신호
-4. → AISLOPSQ Manifest
+4. → Agentic Manifest
 
 이 논리는 Beurer-Kellner et al. 2025 와도 정합적이다 (둘 다 "system-level isolation이 필요하다" 결론). Meta Agents Rule of Two 도 본 논문을 명시적으로 인용하며 같은 결론에 도달한다.
 
-## AISLOPSQ 매핑
+## Agentic 매핑
 
 | 본 deliverable 항목 | 본 논문에서의 근거 |
 |---|---|
@@ -61,7 +61,7 @@ LLM 방어의 robustness를 어떻게 평가해야 하는가? 현재 jailbreak/p
 
 이 논문은 **defensive 결론**을 강조하기 위해 인용한다 — 즉 "왜 우리가 패키지 레벨 manifest를 만드는가"의 논거. 공격 기법 자체는 본 deliverable과 직접 관련 없음.
 
-또한 본 논문이 미래의 방어가 어떤 평가를 거쳐야 하는지에 대한 가이드라인도 제공한다 (논문 §끝). 본 deliverable은 runtime 방어를 직접 만들지 않으므로 이 가이드라인을 따르지 않지만, AISLOPSQ를 evaluation할 때는 declared/detected 간 mismatch를 일으키는 adversarial 패키지를 구성해서 검사기의 detection rate를 측정하는 방식이 동등한 접근이 된다.
+또한 본 논문이 미래의 방어가 어떤 평가를 거쳐야 하는지에 대한 가이드라인도 제공한다 (논문 §끝). 본 deliverable은 runtime 방어를 직접 만들지 않으므로 이 가이드라인을 따르지 않지만, Agentic를 evaluation할 때는 declared/detected 간 mismatch를 일으키는 adversarial 패키지를 구성해서 검사기의 detection rate를 측정하는 방식이 동등한 접근이 된다.
 
 ## 직접 인용 (15단어 미만 1회)
 

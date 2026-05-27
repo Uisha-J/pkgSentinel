@@ -1,4 +1,4 @@
-# AISLOPSQ Manifest Specification (v0.1)
+# Agentic Manifest Specification (v0.1)
 
 **Status:** Draft
 **Scope:** npm (`package.json`), PyPI (`pyproject.toml`)
@@ -30,7 +30,7 @@ LLM 에이전트는 planning, tool use, memory, autonomy 4요소를 갖추고 �
 > "현재 시점에서는 prompt injection을 막을 수 없다는 가정 하에, **시스템 설계 단계에서 capability 경계를 명시적으로 좁히는 것**이 가장 신뢰할 수 있는 방어 layer이다."
 > — Beurer-Kellner et al. (2025), Meta Agents Rule of Two (2025)
 
-AISLOPSQ Manifest는 이 원칙을 **패키지 supply chain 레벨**에서 강제하는 첫 표준이다. 패키지 작성자가 자신이 사용하는 capability 집합을 사전에 선언함으로써:
+Agentic Manifest는 이 원칙을 **패키지 supply chain 레벨**에서 강제하는 첫 표준이다. 패키지 작성자가 자신이 사용하는 capability 집합을 사전에 선언함으로써:
 
 1. 패키지 사용자는 의존성 추가 시점에 capability 노출 범위를 알 수 있다
 2. 정적 분석 도구는 declared와 detected의 차이로 은닉된 행위를 식별할 수 있다
@@ -43,7 +43,7 @@ AISLOPSQ Manifest는 이 원칙을 **패키지 supply chain 레벨**에서 강�
 ### 2.1 Python (`pyproject.toml`)
 
 ```toml
-[tool.aislopsq]
+[tool.agentic]
 agentic = true
 spec_version = "0.1"
 capabilities = [
@@ -56,17 +56,17 @@ capabilities = [
 opt_in_required = true
 sandbox_recommended = true
 
-[tool.aislopsq.rule_of_two]
+[tool.agentic.rule_of_two]
 # Meta Agents Rule of Two 적용 선언
 # A: untrusted-input, B: sensitive-data, C: state-change-or-external-comm
 satisfies = ["A", "C"]    # AB / AC / BC 중 하나
 session_isolation = true   # context window 새로 시작 시 reset
 
-[tool.aislopsq.design_patterns]
+[tool.agentic.design_patterns]
 # Beurer-Kellner et al. 2025 design pattern 적용 여부
 applied = ["plan-then-execute", "context-minimization"]
 
-[tool.aislopsq.tool_registry]
+[tool.agentic.tool_registry]
 # 동적 툴 등록 여부 (ToolHijacker 위협 관련)
 dynamic_tools = false
 tool_signature_verification = false
@@ -78,7 +78,7 @@ tool_signature_verification = false
 {
   "name": "my-agent-package",
   "version": "1.0.0",
-  "aislopsq": {
+  "agentic": {
     "agentic": true,
     "specVersion": "0.1",
     "capabilities": [
@@ -172,7 +172,7 @@ tool_signature_verification = false
 `tool_registry.dynamic_tools` 는 ToolHijacker 위협 (Shi et al., arXiv:2504.19793) 의 직접적 대응이다. 동적 툴 로딩을 허용하는 패키지는 악성 툴 문서 주입에 취약하므로 다음 정책을 따라야 한다:
 
 ```toml
-[tool.aislopsq.tool_registry]
+[tool.agentic.tool_registry]
 dynamic_tools = true
 tool_signature_verification = true   # 동적 툴은 반드시 서명 검증
 trusted_tool_sources = ["https://my-org.example/tools/"]
@@ -216,19 +216,19 @@ manifest가 부재한 패키지는 자동 신호 (`AGENTIC-SIGNALS.md`) 로 agen
 샘플 패키지 (`langchain-style email agent`):
 
 ```toml
-[tool.aislopsq]
+[tool.agentic]
 agentic = true
 spec_version = "0.1"
 capabilities = ["network", "llm-call", "tool-loop"]
 
-[tool.aislopsq.rule_of_two]
+[tool.agentic.rule_of_two]
 satisfies = ["A", "C"]   # 외부 이메일 fetch + 전송, 민감 자격증명 미보유
 session_isolation = true
 
-[tool.aislopsq.design_patterns]
+[tool.agentic.design_patterns]
 applied = ["plan-then-execute"]
 
-[tool.aislopsq.tool_registry]
+[tool.agentic.tool_registry]
 dynamic_tools = false
 ```
 

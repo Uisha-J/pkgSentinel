@@ -26,9 +26,9 @@ import traceback
 # .env 자동 로드 (ANTHROPIC_API_KEY, OPENAI_API_KEY 등).
 # detector 모듈을 어떻게 진입하든 — pipeline / worker / cron_main —
 # 첫 import 시점에 1회 실행. 이미 환경변수에 있으면 덮어쓰지 않음.
-from . import _dotenv as _aislopsq_dotenv
+from . import _dotenv as _agentic_dotenv
 
-_aislopsq_dotenv.load()
+_agentic_dotenv.load()
 
 from ._pipeline_state import PipelineContext, PipelineOptions
 from .db.integrity import IntegrityMode
@@ -433,8 +433,8 @@ def run_pipeline(
         report.evidence = ctx.evidence
         return report
 
-    # ========== Stage 1C: AISLOPSQ Agentic Classification ==========
-    # 근거: docs/aislopsq/spec/DECISION-TREE.md
+    # ========== Stage 1C: Agentic Agentic Classification ==========
+    # 근거: docs/agentic-manifest/spec/DECISION-TREE.md
     # 흐름:
     #   - 일반 패키지 → 47-indicator 파이프라인으로 fall-through (verdict 영향 X)
     #   - agentic + MALICIOUS / HIGH_RISK / SUSPICIOUS / AGENTIC → 본 stage 결과로 단축
@@ -464,7 +464,7 @@ def run_pipeline(
         )
         cls = agentic_result.classification
         ctx.stage_results.append(StageResult(
-            stage="stage_1c_aislopsq",
+            stage="stage_1c_agentic",
             success=True,
             payload={
                 "is_agentic": cls.is_agentic if cls else False,
@@ -494,7 +494,7 @@ def run_pipeline(
             ctx.evidence.extend(agentic_result.evidence)
     except Exception as e:
         ctx.stage_results.append(StageResult(
-            stage="stage_1c_aislopsq", success=False,
+            stage="stage_1c_agentic", success=False,
             error=f"{e}\n{traceback.format_exc()[:300]}",
         ))
 
@@ -1240,9 +1240,9 @@ def run_pipeline(
         "source_files": len(ctx.ext.source_files),
         "binary_files": len(ctx.ext.binary_files),
     }
-    # AISLOPSQ agentic classification (판정 영향 — Step 1C 단계에서 이미 처리됨)
+    # Agentic agentic classification (판정 영향 — Step 1C 단계에서 이미 처리됨)
     if agentic_result is not None and agentic_result.classification is not None:
-        report.package_meta["aislopsq"] = (
+        report.package_meta["agentic"] = (
             agentic_result.classification.to_dict()
         )
 

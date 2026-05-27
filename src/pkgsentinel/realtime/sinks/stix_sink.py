@@ -10,7 +10,7 @@ STIX 2.1 indicator/bundle 생성기.
   - software        : 분석 대상 패키지 (SCO)
   - relationship    : indicator <-> malware/software
   - identity        : 본 도구 (creator)
-  - x-aislopsq-*    : custom 확장 (verdict, evidence 등)
+  - x-pkgsentinel-*    : custom 확장 (verdict, evidence 등)
 
 수신자 (TAXII server, MISP, OpenCTI 등) 가 그대로 import 가능.
 """
@@ -23,7 +23,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 
 _TOOL_ID = f"identity--{uuid.uuid5(uuid.NAMESPACE_DNS, 'ai-slopsq-detector')}"
-_TOOL_NAME = "ai-slopsquatting-detector"
+_TOOL_NAME = "pkgsentinel"
 _TOOL_VERSION = "2.0"
 
 
@@ -83,7 +83,7 @@ def _identity_object() -> dict:
         "name": _TOOL_NAME,
         "identity_class": "system",
         "sectors": ["technology"],
-        "description": "AI-slopsquatting supply-chain detector",
+        "description": "pkgsentinel supply-chain detector",
     }
 
 
@@ -96,7 +96,7 @@ def _software_object(pkg: str, ver: str, eco: str) -> dict:
         "version": ver,
         "vendor": eco,
         "extensions": {
-            "extension-definition--aislopsq-purl": {
+            "extension-definition--agentic-purl": {
                 "extension_type": "property-extension",
                 "purl": _purl(eco, pkg, ver),
             },
@@ -170,9 +170,9 @@ def _indicator_object(report: dict) -> dict:
                 "external_id": _purl(eco, pkg, ver),
             },
         ],
-        "x_aislopsq_verdict": verdict,
-        "x_aislopsq_confidence": top_ev.get("confidence", 0.0),
-        "x_aislopsq_evidence_count": len(evs),
+        "x_agentic_verdict": verdict,
+        "x_agentic_confidence": top_ev.get("confidence", 0.0),
+        "x_agentic_evidence_count": len(evs),
     }
 
 

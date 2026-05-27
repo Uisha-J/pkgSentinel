@@ -53,7 +53,7 @@ AISLOP_FALCO_OUT_DIR=/var/lib/pkgsentinel/sinks/falco
 # AISLOP_WEBHOOK_SECRET=<hmac secret>
 # AISLOP_PMG_OUT_DIR=/var/lib/pkgsentinel/sinks/pmg
 # TAXII 2.1 (collection objects endpoint) — Basic 또는 Bearer 중 택1
-# AISLOP_TAXII_URL=https://taxii.example.com/api/v1/collections/aislopsq/objects/
+# AISLOP_TAXII_URL=https://taxii.example.com/api/v1/collections/agentic/objects/
 # AISLOP_TAXII_USER=<basic-user>     # Basic auth
 # AISLOP_TAXII_PASS=<basic-pass>     # Basic auth
 # AISLOP_TAXII_BEARER=<jwt>          # OpenCTI/MISP 류 (우선)

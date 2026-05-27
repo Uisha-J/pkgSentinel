@@ -35,9 +35,9 @@ async function _hmacHeaders(bodyString) {
   const sigHex = Array.from(new Uint8Array(sigBuf))
     .map(b => b.toString(16).padStart(2, "0")).join("");
   return {
-    "X-AISLOPSQ-Signature": `sha256=${sigHex}`,
-    "X-AISLOPSQ-Timestamp": String(ts),
-    "X-AISLOPSQ-Tool": "slop-detector-chrome/0.3.0",
+    "X-PkgSentinel-Signature": `sha256=${sigHex}`,
+    "X-PkgSentinel-Timestamp": String(ts),
+    "X-PkgSentinel-Tool": "slop-detector-chrome/0.3.0",
   };
 }
 

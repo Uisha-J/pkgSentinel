@@ -53,7 +53,7 @@ agentic AI 시스템은 LLM에 planning, tool use, memory, autonomy를 결합한
 - §6.4 Adaptive attack에 대한 안전성 (※ Nasr et al. 2025와 연결됨)
 - §6.5 Human-agent 보안 인터페이스
 
-## AISLOPSQ 매핑
+## Agentic 매핑
 
 | 본 deliverable 항목 | 본 논문에서의 근거 위치 |
 |---|---|

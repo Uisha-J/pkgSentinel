@@ -18,7 +18,7 @@ layered stages across the supply-chain attack surface:
 | Layer | Role |
 |---|---|
 | **Layer 0** — registry / threat-intel | Encrypted DB lookup against 220k+ OSV/GHSA advisories + the OSSF malicious-packages list |
-| **Layer 1** — source extraction + agentic gate | Memory-streamed archive analysis + AISLOPSQ classification for AI-agent packages |
+| **Layer 1** — source extraction + agentic gate | Memory-streamed archive analysis + Agentic classification for AI-agent packages |
 | **Layer 2** — behavior sequence | 4-dimension API call extraction (Python AST + tree-sitter JS) |
 | **Layer 3** — pattern matching | 49-entry malicious-indicator taxonomy (7 categories; 36 with active matchers) + sequence pattern mining + taint slicing + MITRE ATT&CK embedding match |
 | **Layer 4** — LLM dual-check | Multi-agent verification (semantic / version-diff / dependency) with consensus voting |
@@ -43,7 +43,7 @@ classes:
 
 `pkgsentinel` addresses both with new mechanisms:
 
-- **AISLOPSQ Manifest** — a proposed *transparency standard* (this project) for
+- **Agentic Manifest** — a proposed *transparency standard* (this project) for
   agentic packages to declare their capability boundaries in `pyproject.toml` /
   `package.json`. The scanner cross-checks declared vs. detected capabilities to
   surface under-declaration. **It is a transparency aid, not a standalone
@@ -77,7 +77,7 @@ pip install -e ".[dev]"
 ### Initialize the encrypted DB
 
 ```bash
-export AISLOP_DB_KEY="your-strong-passphrase"        # or write to ~/.aislopsquatting/db.key
+export AISLOP_DB_KEY="your-strong-passphrase"        # or write to ~/.pkgsentinel/db.key
 python -m pkgsentinel.db.threat_db --init
 python -m pkgsentinel.feeds.refresh --all            # ingests OSV / popular / IoC feeds
 ```
@@ -148,7 +148,7 @@ of automated CI — equivalent regression is covered by `eval_synthetic.py`.
 - [`docs/architecture.md`](docs/architecture.md) — pipeline overview + operational topology
 - [`docs/cost_model.md`](docs/cost_model.md) — Stage 5 LLM cost model (per-call
   tokens, daily/monthly scenarios, cache strategy)
-- [`docs/aislopsq/`](docs/aislopsq/) — AISLOPSQ Manifest specification, decision
+- [`docs/agentic-manifest/`](docs/agentic-manifest/) — Agentic Manifest specification, decision
   tree, and R1-R4 rule catalogue
 - [`examples/systemd/`](examples/systemd/) — systemd unit files for
   pkgsentinel-worker / pkgsentinel-cron deployment

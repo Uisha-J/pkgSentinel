@@ -31,7 +31,7 @@ from ..schema import (
     Verdict,
 )
 
-_TOOL_VENDOR = "ai-slopsquatting-detector"
+_TOOL_VENDOR = "pkgsentinel"
 _TOOL_NAME = "secure-capstone"
 _TOOL_VERSION = "2.0"
 _SCHEMA_VERSION = "1.5"

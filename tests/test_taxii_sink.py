@@ -65,10 +65,10 @@ def _mock_urlopen_factory(status_code=202, response_body=None):
 
 def test_endpoint_full_url():
     print("== endpoint: full URL ==")
-    s = TaxiiSink(collection_objects_url="https://t.example/c/aislopsq/objects/")
-    assert s._endpoint() == "https://t.example/c/aislopsq/objects/"
+    s = TaxiiSink(collection_objects_url="https://t.example/c/agentic/objects/")
+    assert s._endpoint() == "https://t.example/c/agentic/objects/"
     # trailing slash 자동 보정
-    s2 = TaxiiSink(collection_objects_url="https://t.example/c/aislopsq/objects")
+    s2 = TaxiiSink(collection_objects_url="https://t.example/c/agentic/objects")
     assert s2._endpoint().endswith("/")
     print("  OK")
 
@@ -77,9 +77,9 @@ def test_endpoint_api_root_plus_collection():
     print("\n== endpoint: api_root + collection_id ==")
     s = TaxiiSink(
         api_root_url="https://t.example/api/v1/",
-        collection_id="aislopsq",
+        collection_id="agentic",
     )
-    assert s._endpoint() == "https://t.example/api/v1/collections/aislopsq/objects/"
+    assert s._endpoint() == "https://t.example/api/v1/collections/agentic/objects/"
     print("  OK")
 
 
@@ -105,7 +105,7 @@ def test_post_success_with_basic_auth(monkeypatch):
     _urlopen, captured = _mock_urlopen_factory(status_code=202)
     monkeypatch.setattr("urllib.request.urlopen", _urlopen)
     s = TaxiiSink(
-        collection_objects_url="https://t.example/c/aislopsq/objects/",
+        collection_objects_url="https://t.example/c/agentic/objects/",
         basic_user="u", basic_pass="p",
     )
     res = s.post_bundle(SAMPLE_BUNDLE)

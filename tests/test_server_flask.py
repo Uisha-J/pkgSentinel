@@ -161,8 +161,8 @@ def test_analyze_hmac_invalid_sig(client_with_secret):
         data=body,
         content_type="application/json",
         headers={
-            "X-AISLOPSQ-Signature": "sha256=deadbeef",
-            "X-AISLOPSQ-Timestamp": str(int(time.time() * 1000)),
+            "X-PkgSentinel-Signature": "sha256=deadbeef",
+            "X-PkgSentinel-Timestamp": str(int(time.time() * 1000)),
         },
     )
     assert r.status_code == 401
@@ -193,8 +193,8 @@ def test_analyze_hmac_valid_full_loop(monkeypatch, client_with_secret):
         data=body,
         content_type="application/json",
         headers={
-            "X-AISLOPSQ-Signature": f"sha256={sig}",
-            "X-AISLOPSQ-Timestamp": str(ts),
+            "X-PkgSentinel-Signature": f"sha256={sig}",
+            "X-PkgSentinel-Timestamp": str(ts),
         },
     )
     assert r.status_code == 200
@@ -283,8 +283,8 @@ def test_iocs_export_get_signed_passes(client_with_secret):
     r = client_with_secret.get(
         "/api/v1/iocs/export?" + qs.decode(),
         headers={
-            "X-AISLOPSQ-Signature": f"sha256={sig}",
-            "X-AISLOPSQ-Timestamp": str(ts),
+            "X-PkgSentinel-Signature": f"sha256={sig}",
+            "X-PkgSentinel-Timestamp": str(ts),
         },
     )
     assert r.status_code == 200

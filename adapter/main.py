@@ -103,8 +103,8 @@ app.add_middleware(
 # 알고리즘: VSCode 익스텐션의 hmac.ts 와 동일 (byte-level)
 #   msg = `${timestamp_ms}.` + body_bytes
 #   sig = HMAC_SHA256(secret, msg).hex()
-#   header: X-AISLOPSQ-Signature: sha256=<hex>
-#           X-AISLOPSQ-Timestamp: <ms>
+#   header: X-PkgSentinel-Signature: sha256=<hex>
+#           X-PkgSentinel-Timestamp: <ms>
 import hmac as _hmac_mod
 import hashlib
 import time as _time
@@ -112,17 +112,17 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
 class HMACAuthMiddleware(BaseHTTPMiddleware):
-    """HMAC_SECRET 설정 시 모든 POST 요청에 X-AISLOPSQ-Signature 검증."""
+    """HMAC_SECRET 설정 시 모든 POST 요청에 X-PkgSentinel-Signature 검증."""
     async def dispatch(self, request, call_next):
         if not HMAC_SECRET or request.method != "POST":
             return await call_next(request)
         # /health 같은 GET 은 통과. POST 만 검증.
         body = await request.body()
-        sig_header = request.headers.get("X-AISLOPSQ-Signature", "")
-        ts_header = request.headers.get("X-AISLOPSQ-Timestamp", "")
+        sig_header = request.headers.get("X-PkgSentinel-Signature", "")
+        ts_header = request.headers.get("X-PkgSentinel-Timestamp", "")
         if not sig_header.startswith("sha256=") or not ts_header:
             return JSONResponse(
-                {"detail": "HMAC headers missing (X-AISLOPSQ-Signature/Timestamp)"},
+                {"detail": "HMAC headers missing (X-PkgSentinel-Signature/Timestamp)"},
                 status_code=401,
             )
         try:

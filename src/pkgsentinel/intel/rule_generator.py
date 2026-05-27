@@ -4,7 +4,7 @@
   - indicator_47   : 우리 indicator catalog 호환 룰 (regex 기반)
   - falco          : Falco rules.yaml 호환 룰
   - sequence_pattern : sequence_patterns.py 호환 룰
-  - aislopsq_r     : AISLOPSQ R-rule 후보 (R3-extension 또는 R4-extension)
+  - agentic_r     : Agentic R-rule 후보 (R3-extension 또는 R4-extension)
 
 본 단계는 *draft* 생성만. 사람 검토 후 promote (LearnedRule.status='approved').
 """
@@ -145,14 +145,14 @@ def generate_sequence_pattern_rule(
     )
 
 
-def generate_aislopsq_r_extension(
+def generate_agentic_r_extension(
     observation_ids: list[int],
     pattern: dict,
     rationale: str,
     *,
     confidence: float = 0.45,
 ) -> LearnedRule | None:
-    """AISLOPSQ R-rule 보강 후보.
+    """Agentic R-rule 보강 후보.
 
     예: 패턴이 'cred read + external network' 인데 패키지가 자신을 agentic 으로
     declare 안 했다 → R3-extension (undeclared capability).
@@ -175,12 +175,12 @@ def generate_aislopsq_r_extension(
         "severity": "MALICIOUS",
         "note": (
             "If package did not declare 'env-secrets' + 'network' capabilities "
-            "in AISLOPSQ manifest but runtime shows credential read + "
+            "in Agentic manifest but runtime shows credential read + "
             "external connect, treat as MALICIOUS regardless of static signals."
         ),
     }
     return LearnedRule(
-        rule_kind="aislopsq_r",
+        rule_kind="agentic_r",
         rule_body=json.dumps(body, ensure_ascii=False, indent=2),
         source_observation_ids=list(observation_ids),
         confidence=confidence,
@@ -209,7 +209,7 @@ def generate_all_drafts(
     sr = generate_sequence_pattern_rule(observation_ids, pattern, rationale)
     if sr:
         drafts.append(sr)
-    ar = generate_aislopsq_r_extension(observation_ids, pattern, rationale)
+    ar = generate_agentic_r_extension(observation_ids, pattern, rationale)
     if ar:
         drafts.append(ar)
     return drafts

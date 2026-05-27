@@ -69,7 +69,7 @@ Rule of Two는 본 deliverable의 **Step 3 검증 로직과 R2-1 룰의 직접�
 
 Meta는 이 framework를 Anthropic 같은 다른 frontier lab의 결론과 정렬되는 것으로 본다 — Nasr et al. 2025 와 Beurer-Kellner et al. 2025 모두 동일한 "design-time 보안" 결론에 수렴.
 
-## AISLOPSQ 매핑
+## Agentic 매핑
 
 | 본 deliverable 항목 | 본 블로그에서의 근거 |
 |---|---|

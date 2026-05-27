@@ -44,7 +44,7 @@ class TaxiiSink:
 
     # 옵션 2: API root + collection ID — 자동 조합
     api_root_url: str | None = None      # e.g. "https://taxii.example.com/api/v1"
-    collection_id: str | None = None     # e.g. "indicators-aislopsq"
+    collection_id: str | None = None     # e.g. "indicators-agentic"
 
     # 인증 — Basic 또는 Bearer 중 하나
     basic_user: str | None = None

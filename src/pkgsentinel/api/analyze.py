@@ -51,7 +51,7 @@ def handle_analyze(
     Args:
       payload: {"package", "ecosystem", "version", "llm_mode"}
       signature_header: HMAC sha256= 헤더 값 (Optional)
-      timestamp_ms: X-AISLOPSQ-Timestamp (Optional)
+      timestamp_ms: X-PkgSentinel-Timestamp (Optional)
       raw_body: 원본 body bytes — HMAC 검증용
       shared_secret: HMAC secret. None 이면 검증 skip (dev 모드)
 

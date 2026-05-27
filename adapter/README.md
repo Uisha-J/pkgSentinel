@@ -46,8 +46,8 @@ curl http://localhost:8001/health
 
 ### HMAC 인증 (옵션)
 `AISLOP_HMAC_SECRET` 설정 시:
-- 모든 POST 요청에 `X-AISLOPSQ-Signature: sha256=<hex>` 헤더 필요
-- `X-AISLOPSQ-Timestamp: <ms>` 헤더 — ±5분 허용 (replay 방지)
+- 모든 POST 요청에 `X-PkgSentinel-Signature: sha256=<hex>` 헤더 필요
+- `X-PkgSentinel-Timestamp: <ms>` 헤더 — ±5분 허용 (replay 방지)
 - 알고리즘: `HMAC_SHA256(secret, f"{ts}.{body_bytes}")`
 - `hmac.compare_digest` 사용 (timing attack 방지)
 

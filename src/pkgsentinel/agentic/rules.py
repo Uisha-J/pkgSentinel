@@ -472,7 +472,7 @@ def R3_check(
                 "R3-dangerous-no-manifest", RuleSeverity.SUSPICIOUS,
                 file_path="<capability-set>",
                 snippet=f"dangerous caps without manifest: {bad}",
-                reason=f"dangerous capabilities {bad} used without AISLOPSQ "
+                reason=f"dangerous capabilities {bad} used without Agentic "
                        "manifest (no under-declaration claim; behavioral rules "
                        "decide maliciousness)",
             ))

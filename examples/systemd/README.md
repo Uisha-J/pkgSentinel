@@ -29,7 +29,7 @@ sudo chmod 0700 /etc/pkgsentinel
 ```bash
 sudo -u pkgsentinel python3 -m venv /var/lib/pkgsentinel/venv
 sudo -u pkgsentinel /var/lib/pkgsentinel/venv/bin/pip install -e \
-    git+https://github.com/Uisha-J/capstone_project#egg=pkgsentinel
+    git+https://github.com/Uisha-J/pkgSentinel#egg=pkgsentinel
 
 # 콘솔 스크립트 심볼릭 링크
 sudo ln -sf /var/lib/pkgsentinel/venv/bin/pkgsentinel-worker /usr/local/bin/

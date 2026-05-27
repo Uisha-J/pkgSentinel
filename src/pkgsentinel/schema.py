@@ -52,7 +52,7 @@ class Verdict(str, Enum):
     MALICIOUS = "MALICIOUS"
     HIGH_RISK = "HIGH_RISK"
     SUSPICIOUS = "SUSPICIOUS"
-    AGENTIC = "AGENTIC"               # AISLOPSQ: agentic-by-design, opt-in 필요
+    AGENTIC = "AGENTIC"               # Agentic: agentic-by-design, opt-in 필요
     CLEAN = "CLEAN"
     ERROR = "ERROR"                   # Stage 2/4/5 중 하나 이상 실패
     CANNOT_ANALYZE = "CANNOT_ANALYZE"  # 레지스트리 미등록

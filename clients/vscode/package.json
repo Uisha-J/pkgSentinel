@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Uisha-J/capstone_project.git",
+    "url": "https://github.com/Uisha-J/pkgSentinel.git",
     "directory": "clients/vscode"
   },
   "main": "./out/extension.js",
@@ -62,7 +62,7 @@
         "pkgsentinel.hmacSecret": {
           "type": "string",
           "default": "",
-          "markdownDescription": "HMAC shared secret for `X-AISLOPSQ-Signature`. Empty → unsigned requests (dev only)."
+          "markdownDescription": "HMAC shared secret for `X-PkgSentinel-Signature`. Empty → unsigned requests (dev only)."
         },
         "pkgsentinel.llmMode": {
           "type": "string",

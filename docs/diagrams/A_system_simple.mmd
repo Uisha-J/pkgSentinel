@@ -12,7 +12,7 @@ flowchart LR
     subgraph core[로컬 서버 - SQLCipher AES-256 암호화 DB]
         direction TB
         PIPE[pipeline.py<br/>13-stage<br/>분석 엔진]:::corebox
-        AISLOPSQ[AISLOPSQ<br/>Manifest<br/>분류기]:::corebox
+        Agentic[Agentic<br/>Manifest<br/>분류기]:::corebox
         VERDICT[verdict_rules<br/>최종 판정]:::corebox
         DB[(threat_db<br/>SQLCipher)]:::dbbox
     end
@@ -20,7 +20,7 @@ flowchart LR
     CLI <--> PIPE
     EXT <--> PIPE
 
-    PIPE <--> AISLOPSQ
+    PIPE <--> Agentic
     PIPE <--> VERDICT
     PIPE <--> DB
     VERDICT <--> DB

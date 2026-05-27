@@ -23,7 +23,7 @@ LLM 기반 AI 에이전트가 다양한 작업을 처리하는 만능 시스템�
 
 > **에이전트가 신뢰할 수 없는 입력을 처리한 이후에는 결과적 행동을 취하는 능력이 의도적으로 제한되어야 한다 — 특히 도구 사용, 민감 데이터 접근, 시스템 상태 변경을 동반하는 행동의 경우.**
 
-이 원리는 본 AISLOPSQ 표준의 R1 룰 전체와 manifest 의 `design_patterns.applied` 필드의 직접적 근거다.
+이 원리는 본 Agentic 표준의 R1 룰 전체와 manifest 의 `design_patterns.applied` 필드의 직접적 근거다.
 
 ## §3.1 — 6개 design pattern
 
@@ -31,37 +31,37 @@ LLM 기반 AI 에이전트가 다양한 작업을 처리하는 만능 시스템�
 
 LLM이 사전 승인된 액션 목록에서만 선택. 임의의 tool call이나 자유형 명령 생성 불가. injection이 "이 명령을 실행해" 라고 시켜도 enum 밖이면 시스템적으로 거부됨.
 
-→ **AISLOPSQ R1-2, R1-4 면책 근거**
+→ **Agentic R1-2, R1-4 면책 근거**
 
 ### Pattern 2: Plan-Then-Execute
 
 모델이 한 단계에서 plan을 생성하고, 별도 단계에서 실행. 핵심: tool 출력이 plan을 변경할 수 없음. injection이 tool 출력에 들어와도 이미 결정된 plan을 못 바꿈.
 
-→ **AISLOPSQ R1-3 부분 면책, R2-1 (Lethal Trifecta) 부분 완화 근거**
+→ **Agentic R1-3 부분 면책, R2-1 (Lethal Trifecta) 부분 완화 근거**
 
 ### Pattern 3: LLM Map-Reduce
 
 신뢰 불가 외부 데이터를 격리된 LLM 인스턴스(들)에서 map 처리. 그 결과를 reduce 단계에서 신뢰 layer로 통합. map 단계 LLM은 권한 없는 sandbox에서 실행됨.
 
-→ **AISLOPSQ R1-1 면책 근거**
+→ **Agentic R1-1 면책 근거**
 
 ### Pattern 4: Dual LLM
 
 privileged LLM과 quarantined LLM 분리. quarantined LLM은 신뢰 불가 입력을 처리하지만 도구 접근 없음. privileged LLM은 도구 접근하지만 신뢰 불가 입력을 직접 받지 않음. 두 LLM 사이는 structured data 형식으로만 통신.
 
-→ **AISLOPSQ R1-1, R1-3 면책 근거**
+→ **Agentic R1-1, R1-3 면책 근거**
 
 ### Pattern 5: Code-Then-Execute
 
 LLM이 코드를 한 번 생성, 격리된 실행 환경에서 실행, 출력은 sanitize. LLM이 매 step마다 결정하지 않으므로 injection 영향이 격리됨.
 
-→ **AISLOPSQ R1-4 부분 면책 근거 (sandbox와 결합 시)**
+→ **Agentic R1-4 부분 면책 근거 (sandbox와 결합 시)**
 
 ### Pattern 6: Context-Minimization
 
 신뢰 불가 콘텐츠가 민감한 결정 시점에 컨텍스트 윈도우에 없음. 즉, 외부 데이터를 본 LLM과 민감 액션을 결정하는 LLM이 다른 시점/세션에 동작.
 
-→ **AISLOPSQ R4-3 (provenance) 면책 근거, Meta Rule of Two의 session_isolation과 연결**
+→ **Agentic R4-3 (provenance) 면책 근거, Meta Rule of Two의 session_isolation과 연결**
 
 ## §4 — Case Studies (10개)
 
@@ -88,7 +88,7 @@ LLM이 코드를 한 번 생성, 격리된 실행 환경에서 실행, 출력은
 2. **utility/security 트레이드오프를 명시적으로** 다룬다 — 어떤 패턴은 에이전트의 자유도를 줄임으로써 안전을 얻는다.
 3. **case study 기반 검증** — 추상적 원리만이 아니라 실제 패턴이 어디까지 보호하고 어디서 부족한지 실증적으로 보여줌.
 
-## AISLOPSQ 매핑
+## Agentic 매핑
 
 | 본 deliverable 항목 | 본 논문에서의 근거 |
 |---|---|

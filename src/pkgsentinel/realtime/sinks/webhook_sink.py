@@ -4,14 +4,14 @@ Webhook sink — HMAC-SHA256 서명된 HTTP POST.
 수신자 검증 흐름:
   1. body = raw bytes 읽기
   2. expected = HMAC-SHA256(shared_secret, timestamp + "." + body)
-  3. X-AISLOPSQ-Signature 헤더 값과 비교 (constant-time)
+  3. X-PkgSentinel-Signature 헤더 값과 비교 (constant-time)
   4. 타임스탬프 ±5분 허용 (replay 방지)
 
 heading 형식 (GitHub webhook 과 유사):
-  X-AISLOPSQ-Event:     'package.verdict'
-  X-AISLOPSQ-Timestamp: '<unix-millis>'
-  X-AISLOPSQ-Signature: 'sha256=<hex>'
-  X-AISLOPSQ-Tool:      'ai-slopsquatting/2.0'
+  X-PkgSentinel-Event:     'package.verdict'
+  X-PkgSentinel-Timestamp: '<unix-millis>'
+  X-PkgSentinel-Signature: 'sha256=<hex>'
+  X-PkgSentinel-Tool:      'pkgsentinel/2.0'
   Content-Type:         'application/json'
 """
 from __future__ import annotations
@@ -72,10 +72,10 @@ class WebhookSink:
             headers={
                 "Content-Type": "application/json",
                 "User-Agent": "ai-slopsq/2.0",
-                "X-AISLOPSQ-Event": self.event_name,
-                "X-AISLOPSQ-Timestamp": str(ts),
-                "X-AISLOPSQ-Signature": f"sha256={sig}",
-                "X-AISLOPSQ-Tool": "ai-slopsquatting/2.0",
+                "X-PkgSentinel-Event": self.event_name,
+                "X-PkgSentinel-Timestamp": str(ts),
+                "X-PkgSentinel-Signature": f"sha256={sig}",
+                "X-PkgSentinel-Tool": "pkgsentinel/2.0",
             },
         )
         try:

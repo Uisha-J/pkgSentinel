@@ -13,10 +13,10 @@ import logging
 import os
 import sys
 
-from .. import _dotenv as _aislopsq_dotenv
+from .. import _dotenv as _agentic_dotenv
 from .app import create_app
 
-_aislopsq_dotenv.load()
+_agentic_dotenv.load()
 
 
 def main(argv: list[str] | None = None) -> int:

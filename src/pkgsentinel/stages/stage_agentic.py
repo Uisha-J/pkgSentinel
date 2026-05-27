@@ -1,5 +1,5 @@
 """
-Stage agentic — AISLOPSQ 분류 단계.
+Stage agentic — Agentic 분류 단계.
 
 흐름:
   1. ext.source_files 에서 .py / .js 소스 모음
@@ -133,24 +133,24 @@ def _classification_to_evidence(c: AgenticClassification) -> list[Evidence]:
     # 큰 그림: capability summary 1건
     sev = _severity_from_verdict(c.verdict)
     evs.append(Evidence(
-        file_path="<aislopsq>",
+        file_path="<agentic>",
         line_start=0, line_end=0,
         code_snippet=(
             f"declared={sorted(c.declared)}, detected={sorted(c.detected)}, "
             f"undeclared={sorted(c.undeclared)}, ABC={sorted(c.abc_actual)}, "
             f"HITL={c.has_human_in_the_loop}"
         ),
-        behavior_sequence=[f"aislopsq:{c.verdict.value}"],
+        behavior_sequence=[f"agentic:{c.verdict.value}"],
         attack_dimensions=[],
-        ttp_id="AISLOPSQ-CLS",
-        ttp_name="AISLOPSQ Agentic Classification",
+        ttp_id="AGENTIC-CLS",
+        ttp_name="Agentic Agentic Classification",
         ttp_source=TTPSource.OWASP_LLM,
         ttp_url="https://genai.owasp.org/2025/12/09/owasp-genai-security-project-releases-top-10-risks-and-mitigations-for-agentic-ai-security/",
         ttp_severity=sev,
         vector_similarity=1.0,
         llm_verdict=_llm_verdict_from(c.verdict),
         llm_reasoning=c.reason,
-        llm_model="aislopsq-classifier",
+        llm_model="agentic-classifier",
         confidence=0.9 if c.verdict in (Verdict.MALICIOUS, Verdict.HIGH_RISK)
                   else 0.6,
     ))
@@ -164,16 +164,16 @@ def _classification_to_evidence(c: AgenticClassification) -> list[Evidence]:
                      else Severity.HIGH if h.severity == RuleSeverity.HIGH_RISK
                      else Severity.MEDIUM)
             evs.append(Evidence(
-                file_path=h.file_path or "<aislopsq>",
+                file_path=h.file_path or "<agentic>",
                 line_start=0, line_end=0,
                 code_snippet=h.snippet[:1500],
-                behavior_sequence=[f"aislopsq:{h.rule_id}"],
+                behavior_sequence=[f"agentic:{h.rule_id}"],
                 attack_dimensions=[],
-                ttp_id=f"AISLOPSQ-{h.rule_id}",
-                ttp_name=f"AISLOPSQ {h.rule_id}",
+                ttp_id=f"AGENTIC-{h.rule_id}",
+                ttp_name=f"Agentic {h.rule_id}",
                 ttp_source=TTPSource.OWASP_LLM,
                 ttp_url=(
-                    "https://github.com/anthropics/aislopsq/spec/RULES.md"
+                    "https://github.com/anthropics/agentic/spec/RULES.md"
                 ),
                 ttp_severity=sev_e,
                 vector_similarity=1.0,
@@ -181,7 +181,7 @@ def _classification_to_evidence(c: AgenticClassification) -> list[Evidence]:
                 llm_reasoning=h.reason + (
                     f" [excused: {', '.join(h.excused_by)}]" if h.excused_by else ""
                 ),
-                llm_model="aislopsq-rules",
+                llm_model="agentic-rules",
                 confidence=(
                     0.9 if h.severity == RuleSeverity.MALICIOUS
                     else 0.75 if h.severity == RuleSeverity.HIGH_RISK
@@ -231,7 +231,7 @@ def run(
         return StageAgenticResult(
             triggered=False,
             classification=cls,
-            package_meta={"aislopsq": cls.to_dict()},
+            package_meta={"agentic": cls.to_dict()},
         )
 
     return StageAgenticResult(
@@ -239,5 +239,5 @@ def run(
         classification=cls,
         verdict=cls.verdict,
         evidence=_classification_to_evidence(cls),
-        package_meta={"aislopsq": cls.to_dict()},
+        package_meta={"agentic": cls.to_dict()},
     )

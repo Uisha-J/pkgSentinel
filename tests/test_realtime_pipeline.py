@@ -16,7 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 # 격리 DB
-TEST_DB_DIR = tempfile.mkdtemp(prefix="aislopsq_rt_")
+TEST_DB_DIR = tempfile.mkdtemp(prefix="agentic_rt_")
 TEST_DB_PATH = Path(TEST_DB_DIR) / "test.sqlcipher"
 TEST_PASSPHRASE = "rt-test-passphrase"
 os.environ["AISLOP_DB_KEY"] = TEST_PASSPHRASE
@@ -216,8 +216,8 @@ def test_falco_rules_yaml():
     for line in yml.splitlines()[:8]:
         print(f"    {line}")
     assert "attacker.example.com" in yml, "domain not in rule"
-    assert "AISLOPSQ Outbound" in yml, "rule name missing"
-    assert "tags: [aislopsq, supply-chain, network]" in yml
+    assert "Agentic Outbound" in yml, "rule name missing"
+    assert "tags: [agentic, supply-chain, network]" in yml
     print("  OK domain rule generated")
 
 

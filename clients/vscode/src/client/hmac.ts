@@ -10,9 +10,9 @@ import * as crypto from 'crypto';
 
 export interface SignedHeaders {
   'Content-Type': string;
-  'X-AISLOPSQ-Signature': string;
-  'X-AISLOPSQ-Timestamp': string;
-  'X-AISLOPSQ-Tool': string;
+  'X-PkgSentinel-Signature': string;
+  'X-PkgSentinel-Timestamp': string;
+  'X-PkgSentinel-Tool': string;
 }
 
 export function signBody(
@@ -28,9 +28,9 @@ export function signBody(
     timestampMs: ts,
     headers: {
       'Content-Type': 'application/json',
-      'X-AISLOPSQ-Signature': `sha256=${sig}`,
-      'X-AISLOPSQ-Timestamp': String(ts),
-      'X-AISLOPSQ-Tool': 'pkgsentinel-vscode/0.1.0',
+      'X-PkgSentinel-Signature': `sha256=${sig}`,
+      'X-PkgSentinel-Timestamp': String(ts),
+      'X-PkgSentinel-Tool': 'pkgsentinel-vscode/0.1.0',
     },
   };
 }

@@ -1,6 +1,6 @@
 # Capability Detection: npm/PyPI 매핑 테이블
 
-`AISLOPSQ-MANIFEST-SPEC.md` 의 capability vocabulary를 정적 분석으로 추출하기 위한 시그니처 매핑.
+`AGENTIC-CAPABILITY-MANIFEST-SPEC.md` 의 capability vocabulary를 정적 분석으로 추출하기 위한 시그니처 매핑.
 
 ---
 

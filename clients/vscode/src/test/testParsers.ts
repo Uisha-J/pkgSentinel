@@ -170,8 +170,8 @@ t('signBody — same as Python webhook_sink.hmac_sign', () => {
   // 동일 알고리즘 직접 계산
   const msg = Buffer.concat([Buffer.from(`${ts}.`, 'utf-8'), body]);
   const expected = crypto.createHmac('sha256', secret).update(msg).digest('hex');
-  assert.strictEqual(headers['X-AISLOPSQ-Signature'], `sha256=${expected}`);
-  assert.strictEqual(headers['X-AISLOPSQ-Timestamp'], String(ts));
+  assert.strictEqual(headers['X-PkgSentinel-Signature'], `sha256=${expected}`);
+  assert.strictEqual(headers['X-PkgSentinel-Timestamp'], String(ts));
 });
 
 console.log(`\n${pass} passed, ${fail} failed`);

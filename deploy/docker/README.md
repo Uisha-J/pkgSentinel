@@ -65,8 +65,8 @@ docker compose -f deploy/docker/docker-compose.yml logs -f
 `PKGSENTINEL_HMAC_SECRET` 가 설정되면 모든 POST endpoint 가 HMAC-SHA256
 검증을 수행. 클라이언트는 다음 헤더 동봉:
 
-- `X-AISLOPSQ-Signature: sha256=<hex>`
-- `X-AISLOPSQ-Timestamp: <epoch_ms>`
+- `X-PkgSentinel-Signature: sha256=<hex>`
+- `X-PkgSentinel-Timestamp: <epoch_ms>`
 
 서명 알고리즘: `pkgsentinel.realtime.sinks.webhook_sink.hmac_sign` 참고.
 
@@ -84,8 +84,8 @@ r = requests.post(
     data=body,
     headers={
         "Content-Type": "application/json",
-        "X-AISLOPSQ-Signature": f"sha256={sig}",
-        "X-AISLOPSQ-Timestamp": str(ts),
+        "X-PkgSentinel-Signature": f"sha256={sig}",
+        "X-PkgSentinel-Timestamp": str(ts),
     },
 )
 ```

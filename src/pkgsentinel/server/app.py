@@ -91,9 +91,9 @@ def _auth_posture(hmac_secret: str | None) -> tuple[str | None, tuple[dict, int]
 
 
 def _get_signature_headers() -> tuple[str | None, int | None]:
-    """X-AISLOPSQ-Signature / Timestamp 헤더 추출."""
-    sig = request.headers.get("X-AISLOPSQ-Signature")
-    ts_str = request.headers.get("X-AISLOPSQ-Timestamp")
+    """X-PkgSentinel-Signature / Timestamp 헤더 추출."""
+    sig = request.headers.get("X-PkgSentinel-Signature")
+    ts_str = request.headers.get("X-PkgSentinel-Timestamp")
     try:
         ts = int(ts_str) if ts_str else None
     except (TypeError, ValueError):

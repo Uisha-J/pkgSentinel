@@ -42,8 +42,8 @@ def handle_runtime_alert(
     Args:
       payload: source 파싱 후 dict. {"source": "falco", "event": {...}}
                형식이거나 source 가 top-level key 인 형태.
-      signature_header: X-AISLOPSQ-Signature 헤더 값 (e.g. "sha256=...")
-      timestamp_ms: X-AISLOPSQ-Timestamp 헤더 값 (epoch ms)
+      signature_header: X-PkgSentinel-Signature 헤더 값 (e.g. "sha256=...")
+      timestamp_ms: X-PkgSentinel-Timestamp 헤더 값 (epoch ms)
       raw_body: 원본 body bytes — HMAC 검증용
       shared_secret: HMAC 검증 secret. None 이면 검증 skip (dev 모드).
       store: RuntimeIntelStore 인스턴스. None 이면 default.

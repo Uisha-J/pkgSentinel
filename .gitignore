@@ -3,7 +3,7 @@
 .env.*
 !.env.example
 **/db.key
-~/.aislopsquatting/
+~/.pkgsentinel/
 
 # ─── 학교 제출용 보고서 (로컬 보존) ─────────────────────────
 reports/

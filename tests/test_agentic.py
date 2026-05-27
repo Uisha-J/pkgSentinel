@@ -1,7 +1,7 @@
 """
-AISLOPSQ agentic 분류 단위 테스트.
+Agentic agentic 분류 단위 테스트.
 
-근거: docs/aislopsq/
+근거: docs/agentic-manifest/
 """
 from __future__ import annotations
 
@@ -32,19 +32,19 @@ from pkgsentinel.schema import Verdict
 def test_manifest_python():
     print("== manifest: pyproject.toml ==")
     text = """
-[tool.aislopsq]
+[tool.agentic]
 agentic = true
 spec_version = "0.1"
 capabilities = ["network", "llm-call", "tool-loop"]
 
-[tool.aislopsq.rule_of_two]
+[tool.agentic.rule_of_two]
 satisfies = ["A", "C"]
 session_isolation = true
 
-[tool.aislopsq.design_patterns]
+[tool.agentic.design_patterns]
 applied = ["plan-then-execute"]
 
-[tool.aislopsq.tool_registry]
+[tool.agentic.tool_registry]
 dynamic_tools = false
 """
     m = parse_python_pyproject(text)
@@ -62,7 +62,7 @@ def test_manifest_npm_camelcase():
     print("\n== manifest: package.json (camelCase) ==")
     text = """{
         "name": "my-agent",
-        "aislopsq": {
+        "agentic": {
             "agentic": true,
             "specVersion": "0.1",
             "capabilities": ["network", "shell"],
@@ -326,13 +326,13 @@ def loop():
             print(tc.function.name)
 """},
         pyproject_text="""
-[tool.aislopsq]
+[tool.agentic]
 agentic = true
 capabilities = ["llm-call", "tool-loop"]
-[tool.aislopsq.rule_of_two]
+[tool.agentic.rule_of_two]
 satisfies = ["A"]
 session_isolation = true
-[tool.aislopsq.design_patterns]
+[tool.agentic.design_patterns]
 applied = ["plan-then-execute"]
 """,
     )
@@ -354,7 +354,7 @@ def run(q):
     code = out.choices[0].message.content
     subprocess.run(code, shell=True)
 """},
-        pyproject_text='[tool.aislopsq]\nagentic = true\ncapabilities = ["llm-call"]',
+        pyproject_text='[tool.agentic]\nagentic = true\ncapabilities = ["llm-call"]',
     )
     print(f"  verdict={r.verdict.value}, undeclared={sorted(r.undeclared)}")
     assert r.verdict == Verdict.MALICIOUS and Capability.SHELL in r.undeclared
@@ -377,10 +377,10 @@ def loop(q):
             subprocess.run(tc.function.arguments, shell=True)
 """},
         pyproject_text="""
-[tool.aislopsq]
+[tool.agentic]
 agentic = true
 capabilities = ["network","llm-call","tool-loop","shell","env-secrets"]
-[tool.aislopsq.rule_of_two]
+[tool.agentic.rule_of_two]
 satisfies = ["A","B","C"]
 session_isolation = false
 """,
@@ -533,7 +533,7 @@ def test_q4_subprocess_capability_detected():
 def test_q5_unknown_capability_reported():
     print("\n== Q-5: 비정규(오타) capability 는 declared_set 제외 + unknown 보고 ==")
     text = """
-[tool.aislopsq]
+[tool.agentic]
 agentic = true
 capabilities = ["network", "netwrok", "llm-call", "garbage-cap"]
 """
@@ -586,7 +586,7 @@ def run(q):
     out = openai.chat.completions.create(messages=[{"role":"user","content":q}])
     subprocess.run(out.choices[0].message.content, shell=True)
 """},
-        pyproject_text='[tool.aislopsq]\nagentic = true\ncapabilities = ["llm-call"]',
+        pyproject_text='[tool.agentic]\nagentic = true\ncapabilities = ["llm-call"]',
     )
     print(f"  verdict={r.verdict.value}")
     assert r.verdict == Verdict.MALICIOUS

@@ -6,7 +6,7 @@ from .extractor import (
     parse_event,
 )
 from .rule_generator import (
-    generate_aislopsq_r_extension,
+    generate_agentic_r_extension,
     generate_all_drafts,
     generate_falco_rule,
     generate_indicator_47_rule,
@@ -20,6 +20,6 @@ __all__ = [
     "generate_indicator_47_rule",
     "generate_falco_rule",
     "generate_sequence_pattern_rule",
-    "generate_aislopsq_r_extension",
+    "generate_agentic_r_extension",
     "generate_all_drafts",
 ]

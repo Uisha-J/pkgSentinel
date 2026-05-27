@@ -174,7 +174,7 @@ def _build_parser() -> argparse.ArgumentParser:
     s.add_argument("--status",
                    choices=["draft", "approved", "deployed", "retired"])
     s.add_argument("--kind", choices=[
-        "indicator_47", "falco", "sequence_pattern", "aislopsq_r",
+        "indicator_47", "falco", "sequence_pattern", "agentic_r",
     ])
     s.add_argument("--limit", type=int, default=100)
     s.add_argument("--verbose", "-v", action="store_true")

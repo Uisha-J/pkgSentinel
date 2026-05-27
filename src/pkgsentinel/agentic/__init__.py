@@ -1,8 +1,8 @@
 """
-AISLOPSQ — Agentic Package Security 모듈.
+Agentic — Agentic Package Security 모듈.
 
-근거 사양: docs/aislopsq/
-  - spec/AISLOPSQ-MANIFEST-SPEC.md
+근거 사양: docs/agentic-manifest/
+  - spec/AGENTIC-CAPABILITY-MANIFEST-SPEC.md
   - spec/DECISION-TREE.md
   - spec/RULES.md
   - detection/AGENTIC-SIGNALS.md
@@ -28,7 +28,7 @@ from .classifier import (
     classify,
 )
 from .manifest import (
-    AISLOPSQManifest,
+    AgenticManifest,
     parse_manifest,
     parse_npm_package,
     parse_python_pyproject,
@@ -60,7 +60,7 @@ from .signals import (
 
 __all__ = [
     # manifest
-    "AISLOPSQManifest", "parse_manifest",
+    "AgenticManifest", "parse_manifest",
     "parse_python_pyproject", "parse_npm_package",
     # capability
     "Capability", "CAPABILITIES",

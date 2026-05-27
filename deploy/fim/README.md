@@ -122,9 +122,9 @@ SIG=$(printf '%s.' "$TS" "$BODY" | openssl dgst -sha256 -hmac "$PKGSENTINEL_SECR
 # POST
 curl -fsSL "$PKGSENTINEL_URL" \
   -H "Content-Type: application/json" \
-  -H "X-AISLOPSQ-Event: runtime-alert" \
-  -H "X-AISLOPSQ-Timestamp: $TS" \
-  -H "X-AISLOPSQ-Signature: sha256=$SIG" \
+  -H "X-PkgSentinel-Event: runtime-alert" \
+  -H "X-PkgSentinel-Timestamp: $TS" \
+  -H "X-PkgSentinel-Signature: sha256=$SIG" \
   --data-binary "$BODY" \
   2>/dev/null || true
 
@@ -206,8 +206,8 @@ SHARED_SECRET = os.environ["PKGSENTINEL_SHARED_SECRET"]
 def runtime_alert():
     raw = request.get_data()
     payload = json.loads(raw)
-    sig = request.headers.get("X-AISLOPSQ-Signature")
-    ts = int(request.headers.get("X-AISLOPSQ-Timestamp", "0"))
+    sig = request.headers.get("X-PkgSentinel-Signature")
+    ts = int(request.headers.get("X-PkgSentinel-Timestamp", "0"))
 
     resp, code = handle_runtime_alert(
         payload,
@@ -267,7 +267,7 @@ WantedBy=multi-user.target
    - IOC 추출 (`path: ~/.aws/credentials` 등)
    - DB 적재 (`runtime_observations`)
    - 학습된 IOC 누적 → 다중 패키지 등장 시 자동 promote
-   - 룰 draft 자동 생성 (indicator_47 / falco / aislopsq_r)
+   - 룰 draft 자동 생성 (indicator_47 / falco / agentic_r)
    - attack_index live-update — 즉시 적용
 4. SIEM (STIX/TAXII) 알림 + (옵션) PmgPolicy install 차단
 

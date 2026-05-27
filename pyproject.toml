@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pkgsentinel"
 version = "0.1.0"
-description = "Supply-chain attack detection engine for PyPI / npm with AISLOPSQ agentic-package analysis."
+description = "Supply-chain attack detection engine for PyPI / npm with Agentic agentic-package analysis."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
@@ -53,7 +53,7 @@ dev = [
     "pytest-cov>=4.1",
     "ruff>=0.1.0",
     "mypy>=1.7",
-    # AISLOPSQ manifest JSON Schema 준수 테스트 (test_schema_compliance)
+    # Agentic manifest JSON Schema 준수 테스트 (test_schema_compliance)
     "jsonschema>=4.0",
 ]
 docs = [
@@ -73,10 +73,10 @@ pkgsentinel-cron = "pkgsentinel.monitor.cron_main:main"
 pkgsentinel-server = "pkgsentinel.server.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/Uisha-J/capstone_project"
-Repository = "https://github.com/Uisha-J/capstone_project"
-Documentation = "https://github.com/Uisha-J/capstone_project/tree/main/docs"
-Issues = "https://github.com/Uisha-J/capstone_project/issues"
+Homepage = "https://github.com/Uisha-J/pkgSentinel"
+Repository = "https://github.com/Uisha-J/pkgSentinel"
+Documentation = "https://github.com/Uisha-J/pkgSentinel/tree/main/docs"
+Issues = "https://github.com/Uisha-J/pkgSentinel/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

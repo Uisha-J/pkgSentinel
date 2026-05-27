@@ -1,11 +1,11 @@
 """
-AISLOPSQ Manifest 파서.
+Agentic Manifest 파서.
 
-근거: spec/AISLOPSQ-MANIFEST-SPEC.md (v0.1)
+근거: spec/AGENTIC-CAPABILITY-MANIFEST-SPEC.md (v0.1)
 
 위치:
-  - Python: pyproject.toml [tool.aislopsq]
-  - npm:    package.json  "aislopsq"
+  - Python: pyproject.toml [tool.agentic]
+  - npm:    package.json  "agentic"
 """
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ class ToolRegistryDecl:
 
 
 @dataclass
-class AISLOPSQManifest:
+class AgenticManifest:
     """parsed manifest 구조. None = manifest 부재."""
     agentic: bool
     spec_version: str = "0.1"
@@ -86,8 +86,8 @@ class AISLOPSQManifest:
 
 # ─────────────── Python (pyproject.toml) ───────────────
 
-def parse_python_pyproject(content: str) -> AISLOPSQManifest | None:
-    """pyproject.toml 텍스트 → manifest. [tool.aislopsq] 없으면 None."""
+def parse_python_pyproject(content: str) -> AgenticManifest | None:
+    """pyproject.toml 텍스트 → manifest. [tool.agentic] 없으면 None."""
     try:
         try:
             import tomllib  # Python 3.11+
@@ -98,7 +98,7 @@ def parse_python_pyproject(content: str) -> AISLOPSQManifest | None:
     except Exception:
         return None
 
-    tool = (data.get("tool") or {}).get("aislopsq")
+    tool = (data.get("tool") or {}).get("agentic")
     if not tool:
         return None
     return _from_dict(tool)
@@ -106,14 +106,14 @@ def parse_python_pyproject(content: str) -> AISLOPSQManifest | None:
 
 # ─────────────── npm (package.json) ───────────────
 
-def parse_npm_package(content: str) -> AISLOPSQManifest | None:
-    """package.json 텍스트 → manifest. 'aislopsq' 키 없으면 None."""
+def parse_npm_package(content: str) -> AgenticManifest | None:
+    """package.json 텍스트 → manifest. 'agentic' 키 없으면 None."""
     try:
         data = json.loads(content)
     except Exception:
         return None
 
-    block = data.get("aislopsq")
+    block = data.get("agentic")
     if not block:
         return None
     # camelCase → snake_case 정규화
@@ -152,7 +152,7 @@ def _normalize_keys(d: dict, mapping: dict[str, str]) -> dict:
 
 def parse_manifest(*, pyproject_text: str | None = None,
                    package_json_text: str | None = None,
-                   ) -> AISLOPSQManifest | None:
+                   ) -> AgenticManifest | None:
     """둘 중 하나만 있으면 그것 사용. 둘 다 있으면 npm 우선."""
     if package_json_text is not None:
         m = parse_npm_package(package_json_text)
@@ -167,11 +167,11 @@ def parse_manifest(*, pyproject_text: str | None = None,
 
 # ─────────────── helpers ───────────────
 
-def _from_dict(d: dict) -> AISLOPSQManifest:
+def _from_dict(d: dict) -> AgenticManifest:
     rt = d.get("rule_of_two") or {}
     dp = d.get("design_patterns") or {}
     tr = d.get("tool_registry") or {}
-    return AISLOPSQManifest(
+    return AgenticManifest(
         agentic=bool(d.get("agentic", False)),
         spec_version=str(d.get("spec_version", "0.1")),
         capabilities=list(d.get("capabilities") or []),

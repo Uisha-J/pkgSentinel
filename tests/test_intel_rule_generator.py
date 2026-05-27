@@ -8,7 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pkgsentinel.intel.rule_generator import (
-    generate_aislopsq_r_extension,
+    generate_agentic_r_extension,
     generate_all_drafts,
     generate_falco_rule,
     generate_indicator_47_rule,
@@ -91,23 +91,23 @@ def test_sequence_pattern_skips_single_dim():
     print("  OK")
 
 
-def test_aislopsq_r_extension_for_cred_exfil():
-    print("\n== AISLOPSQ R-extension for cred+net combo ==")
+def test_agentic_r_extension_for_cred_exfil():
+    print("\n== Agentic R-extension for cred+net combo ==")
     pat = {"dimensions": ["INFORMATION_READING", "DATA_TRANSMISSION"],
            "summary": "cred exfil"}
-    r = generate_aislopsq_r_extension([1], pat, "test")
+    r = generate_agentic_r_extension([1], pat, "test")
     assert r is not None
-    assert r.rule_kind == "aislopsq_r"
+    assert r.rule_kind == "agentic_r"
     body = json.loads(r.rule_body)
     assert body["extends"] == "R3"
     assert body["severity"] == "MALICIOUS"
     print("  OK")
 
 
-def test_aislopsq_r_skips_other_combos():
-    print("\n== AISLOPSQ R-extension skips non-cred-exfil ==")
+def test_agentic_r_skips_other_combos():
+    print("\n== Agentic R-extension skips non-cred-exfil ==")
     pat = {"dimensions": ["PAYLOAD_EXECUTION"], "summary": "exec only"}
-    r = generate_aislopsq_r_extension([1], pat, "test")
+    r = generate_agentic_r_extension([1], pat, "test")
     assert r is None
     print("  OK")
 
@@ -122,11 +122,11 @@ def test_generate_all_drafts():
     }
     drafts = generate_all_drafts([99], iocs, pat, "test")
     kinds = {d.rule_kind for d in drafts}
-    # indicator_47 + falco + sequence + aislopsq_r 모두 생성됨
+    # indicator_47 + falco + sequence + agentic_r 모두 생성됨
     assert "indicator_47" in kinds
     assert "falco" in kinds
     assert "sequence_pattern" in kinds
-    assert "aislopsq_r" in kinds
+    assert "agentic_r" in kinds
     print(f"  OK kinds={kinds}")
 
 

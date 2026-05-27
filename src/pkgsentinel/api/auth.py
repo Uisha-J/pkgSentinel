@@ -93,7 +93,7 @@ def check_hmac(
 
     Args:
       signature_header: "sha256=<hex>" 형식
-      timestamp_ms:     X-AISLOPSQ-Timestamp 값
+      timestamp_ms:     X-PkgSentinel-Timestamp 값
       raw_body:         원본 body bytes
       shared_secret:    None 이면 dev 모드 — 검증 skip
       enforce_nonce:    True (기본) 면 같은 (ts, sig) 재전송 차단

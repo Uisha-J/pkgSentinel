@@ -425,13 +425,13 @@ class ThreatDB:
 def _resolve_passphrase() -> str | None:
     """우선순위:
       1. 환경변수 AISLOP_DB_KEY
-      2. ~/.aislopsquatting/db.key (POSIX 0600)
+      2. ~/.pkgsentinel/db.key (POSIX 0600)
       3. None (호출자 명시 필요)
     """
     env = os.environ.get(ENV_KEY)
     if env:
         return env
-    keyfile = Path.home() / ".aislopsquatting" / "db.key"
+    keyfile = Path.home() / ".pkgsentinel" / "db.key"
     if keyfile.exists():
         try:
             data = keyfile.read_text(encoding="utf-8").strip()

@@ -1,5 +1,5 @@
 """
-AISLOPSQ classifier — Step 1~4 결정 트리 통합.
+Agentic classifier — Step 1~4 결정 트리 통합.
 
 근거: spec/DECISION-TREE.md
 """
@@ -13,7 +13,7 @@ from .capability_detector import (
     extract_capabilities_python,
     map_to_abc,
 )
-from .manifest import AISLOPSQManifest, parse_manifest
+from .manifest import AgenticManifest, parse_manifest
 from .rule_of_two import detect_human_in_the_loop
 from .rules import (
     DANGEROUS_UNDECLARED,
@@ -32,7 +32,7 @@ from .signals import (
 @dataclass
 class AgenticClassification:
     is_agentic: bool                       # Step 1
-    manifest: AISLOPSQManifest | None = None
+    manifest: AgenticManifest | None = None
     signal_report: SignalReport | None = None
     declared: set[str] = field(default_factory=set)
     detected: set[str] = field(default_factory=set)

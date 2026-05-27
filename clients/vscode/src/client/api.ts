@@ -84,7 +84,7 @@ export class PkgsentinelClient {
       const signed = signBody(this.opts.hmacSecret, body);
       Object.assign(headers, signed.headers);
     } else {
-      headers['X-AISLOPSQ-Tool'] = 'pkgsentinel-vscode/0.1.0';
+      headers['X-PkgSentinel-Tool'] = 'pkgsentinel-vscode/0.1.0';
     }
 
     const ctrl = new AbortController();

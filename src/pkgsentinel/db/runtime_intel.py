@@ -63,7 +63,7 @@ CREATE INDEX IF NOT EXISTS idx_ioc_status ON learned_iocs(status, confidence);
 
 CREATE TABLE IF NOT EXISTS learned_rules (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    rule_kind       TEXT NOT NULL,                    -- 'indicator_47' | 'falco' | 'sequence_pattern' | 'aislopsq_r'
+    rule_kind       TEXT NOT NULL,                    -- 'indicator_47' | 'falco' | 'sequence_pattern' | 'agentic_r'
     rule_body       TEXT NOT NULL,                    -- YAML / regex / JSON body
     source_observation_ids TEXT NOT NULL DEFAULT '[]',
     confidence      REAL NOT NULL DEFAULT 0.0,
@@ -120,7 +120,7 @@ class LearnedIOC:
 
 @dataclass
 class LearnedRule:
-    rule_kind: str           # 'indicator_47' / 'falco' / 'sequence_pattern' / 'aislopsq_r'
+    rule_kind: str           # 'indicator_47' / 'falco' / 'sequence_pattern' / 'agentic_r'
     rule_body: str           # YAML / regex / JSON
     source_observation_ids: list[int] = field(default_factory=list)
     confidence: float = 0.0

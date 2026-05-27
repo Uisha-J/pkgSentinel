@@ -12,7 +12,7 @@
   ▼
 ┌─────────────────────────────────────────────────────────┐
 │ Step 1: agentic 패키지인가?                              │
-│   - 1A. AISLOPSQ manifest 존재 & agentic=true           │
+│   - 1A. Agentic manifest 존재 & agentic=true           │
 │   - 1B. 자동 신호 가중치 합계 ≥ 5                        │
 │   둘 중 하나라도 만족 → agentic = True                   │
 └─────────────────────────────────────────────────────────┘
@@ -116,9 +116,9 @@
 ### 1A. Manifest 기반 (우선)
 
 ```
-if pyproject.toml has [tool.aislopsq] and tool.aislopsq.agentic == true:
+if pyproject.toml has [tool.agentic] and tool.agentic.agentic == true:
     return agentic = True
-if package.json has aislopsq.agentic == true:
+if package.json has agentic.agentic == true:
     return agentic = True
 ```
 

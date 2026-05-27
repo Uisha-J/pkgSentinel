@@ -47,9 +47,9 @@ SIG=$(printf '%s.' "$TS" | { cat; printf '%s' "$BODY"; } \
 # 실패는 silent — pkgsentinel 가용성 문제 시 Wazuh syscheck 알림은 유지.
 curl --max-time 8 -fsSL "$PKGSENTINEL_URL" \
     -H "Content-Type: application/json" \
-    -H "X-AISLOPSQ-Event: runtime-alert" \
-    -H "X-AISLOPSQ-Timestamp: $TS" \
-    -H "X-AISLOPSQ-Signature: sha256=$SIG" \
+    -H "X-PkgSentinel-Event: runtime-alert" \
+    -H "X-PkgSentinel-Timestamp: $TS" \
+    -H "X-PkgSentinel-Signature: sha256=$SIG" \
     --data-binary "$BODY" \
     >/dev/null 2>&1 || true
 

@@ -3,7 +3,7 @@ DB 마스터 패스프레이즈 관리.
 
 우선순위 (resolve_passphrase 가 위에서 아래로 시도):
   1. 환경변수 AISLOP_DB_KEY
-  2. ~/.aislopsquatting/db.key (단일 파일, POSIX 0600)
+  2. ~/.pkgsentinel/db.key (단일 파일, POSIX 0600)
   3. (대화형 모드) Windows DPAPI / macOS Keychain / Linux Secret Service
      - 본 구현에선 keyring 패키지 시도, 미설치 시 SKIP
   4. 자동 생성 (secrets.token_urlsafe(32)) → 위 (2) 위치에 저장
@@ -22,8 +22,8 @@ import stat
 from pathlib import Path
 
 ENV_KEY = "AISLOP_DB_KEY"
-KEYFILE_PATH = Path.home() / ".aislopsquatting" / "db.key"
-KEYRING_SERVICE = "ai-slopsquatting-detector"
+KEYFILE_PATH = Path.home() / ".pkgsentinel" / "db.key"
+KEYRING_SERVICE = "pkgsentinel"
 KEYRING_USER = "threat-db"
 
 

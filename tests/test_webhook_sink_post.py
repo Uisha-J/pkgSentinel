@@ -65,14 +65,14 @@ def test_emit_sets_required_headers(monkeypatch):
     # 헤더는 case-insensitive
     h = {k.lower(): v for k, v in req.header_items()}
     assert h["content-type"] == "application/json"
-    assert h["x-aislopsq-event"] == "package.verdict"
-    assert h["x-aislopsq-tool"].startswith("ai-slopsquatting/")
-    assert h["x-aislopsq-signature"].startswith("sha256=")
-    ts = int(h["x-aislopsq-timestamp"])
+    assert h["x-pkgsentinel-event"] == "package.verdict"
+    assert h["x-pkgsentinel-tool"].startswith("pkgsentinel/")
+    assert h["x-pkgsentinel-signature"].startswith("sha256=")
+    ts = int(h["x-pkgsentinel-timestamp"])
     # 합리적 시각 (현재 ±10초)
     now_ms = int(time.time() * 1000)
     assert abs(now_ms - ts) < 10_000
-    print(f"  OK sig={h['x-aislopsq-signature'][:24]}..")
+    print(f"  OK sig={h['x-pkgsentinel-signature'][:24]}..")
 
 
 def test_emit_signature_round_trips_through_verify(monkeypatch):
@@ -88,8 +88,8 @@ def test_emit_signature_round_trips_through_verify(monkeypatch):
     req = captured["req"]
     h = {k.lower(): v for k, v in req.header_items()}
     body = req.data
-    ts = int(h["x-aislopsq-timestamp"])
-    sig_header = h["x-aislopsq-signature"]
+    ts = int(h["x-pkgsentinel-timestamp"])
+    sig_header = h["x-pkgsentinel-signature"]
 
     assert hmac_verify("my-secret", ts, body, sig_header) is True
     # wrong secret

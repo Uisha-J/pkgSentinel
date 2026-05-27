@@ -504,7 +504,7 @@ flowchart LR
 - **`threat_db`** — known_malicious, known_popular, network_blocklist,
   feed_meta, analyses, stage_cache, cache_invalidation_log 모두 한 DB
   (단, 페이지 암호화는 동일).
-- **AISLOP_DB_KEY** 환경변수 또는 `~/.aislopsq/key` 파일로 DB 패스워드 주입.
+- **AISLOP_DB_KEY** 환경변수 또는 `~/.agentic/key` 파일로 DB 패스워드 주입.
 
 ### 8.5.3 배포 예시
 

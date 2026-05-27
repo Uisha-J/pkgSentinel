@@ -307,7 +307,7 @@ def run_benchmark(
 # ─────────────── CLI ───────────────
 
 def _argparser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="AI-Slopsquatting Benchmark Harness")
+    p = argparse.ArgumentParser(description="pkgsentinel Benchmark Harness")
     p.add_argument("dataset", help="CSV 또는 JSONL 데이터셋 경로")
     p.add_argument("--ecosystem", choices=["PyPI", "npm"], default="npm",
                    help="기본 생태계 (CSV 에 ecosystem 컬럼이 없을 때)")
