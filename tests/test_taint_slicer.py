@@ -4,6 +4,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pkgsentinel.stages.stage1_entry_point import EntryFile
@@ -13,6 +15,21 @@ from pkgsentinel.stages.taint_slicer import (
     analyze_python,
     analyze_python_cross_file,
     slice_for_llm,
+)
+
+# JS taint 분석은 tree-sitter-javascript 에 의존. core dep 이지만 일부
+# 환경(바이너리 휠 미가용 등)에서 누락될 수 있으므로, 부재 시 hard-fail
+# 대신 skip 한다. (이전엔 단언 실패로 "flows: 0" 오해를 유발)
+_HAS_TS_JS = True
+try:
+    import tree_sitter  # noqa: F401
+    import tree_sitter_javascript  # noqa: F401
+except ImportError:
+    _HAS_TS_JS = False
+
+_skip_no_js = pytest.mark.skipif(
+    not _HAS_TS_JS,
+    reason="tree-sitter-javascript 미설치 — JS taint 분석 skip",
 )
 
 # 실제 악성 패턴 - credential theft + reverse shell
@@ -190,6 +207,7 @@ fetch('https://api.example.com', { body: NORMAL });
 '''
 
 
+@_skip_no_js
 def test_cross_file_basic_js():
     print("\n[JS CROSS-FILE] config exports SECRET, user imports + fetch sink")
     sources = {
@@ -213,6 +231,7 @@ def test_cross_file_basic_js():
     print("  OK")
 
 
+@_skip_no_js
 def test_cross_file_no_match_js():
     """JS import 가 sources 에 없는 모듈을 가리키면 taint 흐르지 않아야."""
     print("\n[JS CROSS-FILE] mismatched module path → no flow")
@@ -242,6 +261,7 @@ console.log(name);
 '''
 
 
+@_skip_no_js
 def test_analyze_file_js_single_malicious():
     """analyze_file 의 JS 분기 — within-file source→sink 흐름 잡힘."""
     print("\n[analyze_file JS] within-file process.env -> fetch")
@@ -262,6 +282,7 @@ def test_analyze_file_js_single_malicious():
     print("  OK")
 
 
+@_skip_no_js
 def test_analyze_file_js_single_benign():
     print("\n[analyze_file JS] benign single file → no flow")
     ef = EntryFile(

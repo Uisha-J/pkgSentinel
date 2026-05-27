@@ -20,7 +20,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pkgsentinel.realtime.sinks.taxii_sink import TaxiiSink
 
-
 SAMPLE_BUNDLE = {
     "type": "bundle",
     "id": "bundle--abcdef",
@@ -212,7 +211,7 @@ def test_stixsink_basic_when_no_bearer(monkeypatch):
     sink.emit(rep)
     auth = captured["req"].get_header("Authorization")
     assert auth.startswith("Basic "), f"got {auth}"
-    print(f"  OK basic auth used")
+    print("  OK basic auth used")
 
 
 def test_sinkconfig_reads_bearer_env(monkeypatch):

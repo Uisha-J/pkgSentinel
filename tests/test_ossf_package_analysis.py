@@ -15,7 +15,6 @@ from pkgsentinel.knowledge import ossf_package_analysis as opa
 from pkgsentinel.schema import Ecosystem
 from pkgsentinel.stages.stage_sandbox import BaseSandbox
 
-
 # ─────────────── 파서 ───────────────
 
 _SAMPLE_RESULT = {

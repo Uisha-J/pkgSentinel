@@ -11,7 +11,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pkgsentinel.stages.stage_sandbox import StraceDockerSandbox
 
-
 _SAMPLE_LOG = """
 1234 execve("/usr/bin/pip", ["pip", "install", "evil-pkg"], 0x7ffe123 /* 25 vars */) = 0
 1234 openat(AT_FDCWD, "/root/.ssh/id_rsa", O_RDONLY) = 5

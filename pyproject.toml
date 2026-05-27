@@ -35,6 +35,9 @@ dependencies = [
     "tomli>=2.0; python_version < '3.11'",
     # 정적 분석
     "sentence-transformers>=2.2.0",
+    # JS/npm AST 분석 (Stage 2 behavior / taint slicing)
+    "tree-sitter>=0.21",
+    "tree-sitter-javascript>=0.21",
     # 실시간
     "httpx>=0.25.0",
     # 선택 (LLM 호출 시)
@@ -50,6 +53,8 @@ dev = [
     "pytest-cov>=4.1",
     "ruff>=0.1.0",
     "mypy>=1.7",
+    # AISLOPSQ manifest JSON Schema 준수 테스트 (test_schema_compliance)
+    "jsonschema>=4.0",
 ]
 docs = [
     "mkdocs>=1.5",

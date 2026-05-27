@@ -72,8 +72,7 @@ def test_path_regex_matches_advisory_layout():
     for p in valid:
         assert om._OSV_PATH_RE.match(p), f"should match: {p}"
     for p in invalid:
-        if om._OSV_PATH_RE.match(p):
-            assert False, f"should NOT match: {p}"
+        assert not om._OSV_PATH_RE.match(p), f"should NOT match: {p}"
     print("  OK")
 
 
@@ -118,7 +117,7 @@ def test_collect_with_ecosystem_filter(monkeypatch):
     by_eco = om.collect_ossf_malicious(ecosystem="npm")
     assert "PyPI" not in by_eco
     assert "npm" in by_eco
-    print(f"  OK only npm")
+    print("  OK only npm")
 
 
 def test_source_field_marked_ossf(monkeypatch):

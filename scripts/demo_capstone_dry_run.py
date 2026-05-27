@@ -28,10 +28,10 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from pkgsentinel.schema import Ecosystem  # noqa: E402
-
 # .env 로드 + Anthropic 키 확인
 from pkgsentinel import _dotenv  # noqa: E402
+from pkgsentinel.schema import Ecosystem  # noqa: E402
+
 _dotenv.load()
 if not os.environ.get("ANTHROPIC_API_KEY"):
     print("ERROR: ANTHROPIC_API_KEY missing", file=sys.stderr)
@@ -45,15 +45,14 @@ def run_synthetic():
     fx = next(f for f in MAL_FIXTURES if f.name == "credential-exfil-base64")
     print(f"\n[1/6] SYNTHETIC: {fx.name}")
     print(f"  description: {fx.description}")
-    print(f"  expected: malicious")
+    print("  expected: malicious")
 
     # 합성 fixture 는 inline 코드 — Stage 2/4c/4d/4e 매처만 호출
     from pkgsentinel.stages.indicator_matcher import match_all
     from pkgsentinel.stages.sequence_patterns import mine as mine_seq
     from pkgsentinel.stages.stage1_entry_point import EntryFile
     from pkgsentinel.stages.stage1b_full_source import FullSourceFile
-    from pkgsentinel.stages.stage2_behavior import (BehaviorReport,
-                                                    _analyze_python)
+    from pkgsentinel.stages.stage2_behavior import BehaviorReport, _analyze_python
     from pkgsentinel.stages.stage5_multi_agent import review_multi
     from pkgsentinel.stages.taint_slicer import analyze_python as taint_analyze
 
@@ -122,7 +121,7 @@ def run_datadog(name: str, ecosystem: str, version: str):
             fx_meta = f
             break
     if fx_meta is None:
-        print(f"  not in fixtures.json — skip")
+        print("  not in fixtures.json — skip")
         return None
 
     data_dir = ROOT / "scripts" / "eval_real_data"
@@ -161,15 +160,15 @@ def run_datadog(name: str, ecosystem: str, version: str):
 
 def run_legitimate():
     """정상 패키지 — requests@latest. CLEAN 기대."""
-    print(f"\n[6/6] LEGITIMATE: requests@latest")
-    from pkgsentinel.pipeline import run_pipeline
-    from pkgsentinel.schema import Ecosystem
+    print("\n[6/6] LEGITIMATE: requests@latest")
     # 격리 DB 셋업
     import tempfile
+
+    from pkgsentinel.pipeline import run_pipeline
     td = tempfile.mkdtemp(prefix="demo_legit_")
     os.environ["AISLOP_DB_KEY"] = "demo-dry-run-key"
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
         passphrase=os.environ["AISLOP_DB_KEY"],
@@ -185,9 +184,10 @@ def run_legitimate():
     print(f"  verdict: {rep.verdict.value}  elapsed={elapsed:.1f}s")
     if rep.evidence:
         print(f"  top evidence: {rep.evidence[0].ttp_name[:80]}")
-    print(f"  → expected: CLEAN")
+    print("  → expected: CLEAN")
 
-    import shutil; shutil.rmtree(td, ignore_errors=True)
+    import shutil
+    shutil.rmtree(td, ignore_errors=True)
     return {
         "id": "PyPI/requests@latest",
         "label": "benign",

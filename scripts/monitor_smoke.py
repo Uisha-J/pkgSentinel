@@ -27,8 +27,8 @@ def main():
     db_path = Path(td) / "smoke.sqlcipher"
     os.environ["AISLOP_DB_KEY"] = "smoke-test-key"
 
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     db = ThreatDB(db_path, passphrase="smoke-test-key")
     tdb_mod._default_db = db
 

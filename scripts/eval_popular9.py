@@ -29,8 +29,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from eval_real import _evaluate, extract_archive  # noqa: E402
 import eval_real_fetch  # noqa: E402
+from eval_real import _evaluate, extract_archive  # noqa: E402
 from eval_real_fetch import _download, _http_json  # noqa: E402
 
 # 인기 패키지 (django/numpy 등) sdist 가 10MB 를 종종 넘김 — 한도 상향.

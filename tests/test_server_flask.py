@@ -19,8 +19,8 @@ import pytest
 def _setup_db():
     td = tempfile.mkdtemp(prefix="srv_s3_")
     os.environ["AISLOP_DB_KEY"] = "srv-s3-test"
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
         passphrase=os.environ["AISLOP_DB_KEY"],
@@ -29,7 +29,8 @@ def _setup_db():
 
 
 def _teardown_db(td):
-    import shutil; shutil.rmtree(td, ignore_errors=True)
+    import shutil
+    shutil.rmtree(td, ignore_errors=True)
 
 
 @pytest.fixture

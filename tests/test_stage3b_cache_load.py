@@ -20,8 +20,8 @@ from pkgsentinel.stages.stage3b_full_diff import _try_load_cached_prev
 def _setup_isolated_db():
     td = tempfile.mkdtemp(prefix="stage3b_cache_")
     os.environ["AISLOP_DB_KEY"] = "stage3b-cache-test"
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     db = ThreatDB(
         Path(td) / "test.sqlcipher",
         passphrase=os.environ["AISLOP_DB_KEY"],

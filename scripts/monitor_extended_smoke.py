@@ -49,12 +49,12 @@ def main():
     db_path = Path(td) / "smoke.sqlcipher"
     os.environ["AISLOP_DB_KEY"] = "monitor-ext-smoke-key"
 
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     db = ThreatDB(db_path, passphrase=os.environ["AISLOP_DB_KEY"])
     tdb_mod._default_db = db
 
-    print(f"=== Monitor extended smoke ===")
+    print("=== Monitor extended smoke ===")
     print(f"  budget       : {args.minutes} min wall-clock")
     print(f"  max packages : {args.max_packages}")
     print(f"  LLM          : {args.llm_mode} / {args.llm_model}")
@@ -92,8 +92,8 @@ def main():
             print(f"    npm poll failed: {e}")
 
     # ──────────── 3) Worker drain ────────────
-    from pkgsentinel.monitor.worker import run_worker
     from pkgsentinel.monitor.priority_queue import PriorityQueue
+    from pkgsentinel.monitor.worker import run_worker
     pq = PriorityQueue(db)
     pre_stats = pq.stats()
     print(f"\n[3] worker drain (max={args.max_packages})")
@@ -129,7 +129,7 @@ def main():
         if r.get("error"):
             err_count += 1
 
-    print(f"\n=== Summary ===")
+    print("\n=== Summary ===")
     print(f"  verdicts     : {by_verdict}")
     print(f"  sinks emitted: {sinks_total}")
     print(f"  errors       : {err_count}")

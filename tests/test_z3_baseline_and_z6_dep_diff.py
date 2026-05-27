@@ -16,20 +16,20 @@ from pkgsentinel.knowledge.package_baseline import (
     check_anomaly,
 )
 from pkgsentinel.schema import Ecosystem
-from pkgsentinel.stages.stage_sandbox import ObservedBehavior
 from pkgsentinel.stages.stage3b_full_diff import (
     DANGEROUS_NEW_DEPS,
-    DependencyChange,
     HIGH_RISK_NEW_DEPS,
+    DependencyChange,
     diff_dependencies,
 )
+from pkgsentinel.stages.stage_sandbox import ObservedBehavior
 
 
 def _setup():
     td = tempfile.mkdtemp(prefix="z3_z6_")
     os.environ["AISLOP_DB_KEY"] = "z3-z6-test"
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
         passphrase=os.environ["AISLOP_DB_KEY"],
@@ -38,7 +38,8 @@ def _setup():
 
 
 def _teardown(td):
-    import shutil; shutil.rmtree(td, ignore_errors=True)
+    import shutil
+    shutil.rmtree(td, ignore_errors=True)
 
 
 # ─────────────── #Z3 — BehaviorProfile + Store ───────────────

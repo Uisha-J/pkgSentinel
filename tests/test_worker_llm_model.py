@@ -46,7 +46,7 @@ def test_cli_argparser_has_llm_model():
     # 기본값
     args2 = p.parse_args([])
     assert args2.llm_model == "claude-sonnet-4-5"
-    print(f"  OK CLI accepts both Sonnet/Haiku")
+    print("  OK CLI accepts both Sonnet/Haiku")
 
 
 def test_run_pipeline_signature_has_llm_model():

@@ -28,8 +28,8 @@ def main():
     db_path = Path(td) / "smoke.sqlcipher"
     os.environ["AISLOP_DB_KEY"] = "npm-smoke-key"
 
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     db = ThreatDB(db_path, passphrase=os.environ["AISLOP_DB_KEY"])
     tdb_mod._default_db = db
 
@@ -64,7 +64,7 @@ def main():
         # 1건만 peek (lock + complete X — 큐 보존)
         job = pq.lock_next()
         if job:
-            print(f"\nfirst job sample:")
+            print("\nfirst job sample:")
             print(f"  id={job.id} pkg={job.package} eco={job.ecosystem} "
                   f"version={job.version} prio={job.priority}")
             print(f"  archive_url={job.archive_url[:80] if job.archive_url else '-'}")

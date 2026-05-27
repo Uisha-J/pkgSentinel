@@ -53,8 +53,8 @@ def main():
     import tempfile
     td = tempfile.mkdtemp(prefix="full_recursion_")
     os.environ["AISLOP_DB_KEY"] = "full-recursion-eval-key"
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
         passphrase=os.environ["AISLOP_DB_KEY"],
@@ -67,7 +67,7 @@ def main():
             print("ERROR: ANTHROPIC_API_KEY missing", file=sys.stderr)
             sys.exit(2)
 
-    print(f"=== Full recursion eval (attack_history_only=False) ===")
+    print("=== Full recursion eval (attack_history_only=False) ===")
     print(f"  dep_llm_mode: {args.dep_llm_mode}")
     print(f"  max_packages/target: {args.max_packages}")
     print()
@@ -76,11 +76,10 @@ def main():
     t_all = time.time()
     for name, eco in TARGETS:
         print(f"=== {name} ({eco.value}) ===")
-        t0 = time.time()
         try:
             info = check(name, eco)
             if not info.found:
-                print(f"  not found")
+                print("  not found")
                 continue
             ver = info.latest_version
             url = info.archive_urls.get(ver)
@@ -128,7 +127,7 @@ def main():
             print(f"  EXCEPTION: {type(e).__name__}: {str(e)[:120]}")
 
     elapsed = time.time() - t_all
-    print(f"\n=== Summary ===")
+    print("\n=== Summary ===")
     print(f"  packages OK: {len(all_rows)}/{len(TARGETS)}")
     print(f"  total elapsed: {elapsed:.1f}s")
 

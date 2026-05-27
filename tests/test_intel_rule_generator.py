@@ -17,7 +17,6 @@ from pkgsentinel.intel.rule_generator import (
 from pkgsentinel.knowledge.attack_index import AttackPatternIndex
 from pkgsentinel.knowledge.osv import AttackPattern
 
-
 # ─────────────── #L5 rule generators ───────────────
 
 def test_generate_indicator_47():

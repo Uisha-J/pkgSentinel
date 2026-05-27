@@ -27,7 +27,6 @@ from pkgsentinel.stages.stage_binary import (
     extract_strings,
 )
 
-
 # ─────────────── 1) magic 검출 ───────────────
 
 def test_detect_pe():

@@ -455,7 +455,7 @@ def test_dual_llm_declared_and_verified_excused():
 
 def test_session_isolation_unverified_stays_high_risk():
     print("\n== Part 2-A: session_isolation 선언만 + trifecta → R2-1 HIGH_RISK ==")
-    from pkgsentinel.agentic import R2_check, Capability, RuleSeverity
+    from pkgsentinel.agentic import Capability, R2_check, RuleSeverity
     # A+B+C trifecta: network(A,C) + env-secrets(B)
     detected = {Capability.NETWORK, Capability.ENV_SECRETS, Capability.SHELL}
     src = {"a.py": "x = 1\n"}  # 컨텍스트 리셋 시그니처 없음
@@ -473,7 +473,7 @@ def test_session_isolation_unverified_stays_high_risk():
 
 def test_satisfies_undersized_mismatch_suspicious():
     print("\n== Part 2-B: satisfies=[A,C] 인데 detected 에 B 포함 → R3-rot-mismatch ==")
-    from pkgsentinel.agentic import R3_rule_of_two_consistency, Capability, RuleSeverity
+    from pkgsentinel.agentic import Capability, R3_rule_of_two_consistency, RuleSeverity
     detected = {Capability.NETWORK, Capability.ENV_SECRETS}  # A,C + B
     hits = R3_rule_of_two_consistency(
         detected=detected, declared_satisfies=["A", "C"], manifest_present=True,
@@ -486,7 +486,7 @@ def test_satisfies_undersized_mismatch_suspicious():
 
 def test_satisfies_all_three_forbidden_high_risk():
     print("\n== Part 2-B: satisfies=[A,B,C] → R3-rot-forbidden HIGH_RISK ==")
-    from pkgsentinel.agentic import R3_rule_of_two_consistency, Capability, RuleSeverity
+    from pkgsentinel.agentic import Capability, R3_rule_of_two_consistency, RuleSeverity
     detected = {Capability.NETWORK}
     hits = R3_rule_of_two_consistency(
         detected=detected, declared_satisfies=["A", "B", "C"], manifest_present=True,

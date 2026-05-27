@@ -28,7 +28,7 @@ def test_missing_headers_returns_400():
 
 def test_bad_signature_returns_401():
     print("\n== check_hmac: 잘못된 sig → 401 ==")
-    from pkgsentinel.api.auth import check_hmac, _reset_nonce_cache
+    from pkgsentinel.api.auth import _reset_nonce_cache, check_hmac
     _reset_nonce_cache()
     ts = int(time.time() * 1000)
     body = b'{"x":1}'
@@ -41,7 +41,7 @@ def test_bad_signature_returns_401():
 
 def test_valid_signature_passes():
     print("\n== check_hmac: 정상 sig → ok ==")
-    from pkgsentinel.api.auth import check_hmac, _reset_nonce_cache
+    from pkgsentinel.api.auth import _reset_nonce_cache, check_hmac
     from pkgsentinel.realtime.sinks.webhook_sink import hmac_sign
     _reset_nonce_cache()
     secret = "test-secret-s4"
@@ -56,7 +56,7 @@ def test_valid_signature_passes():
 def test_replay_within_window_blocked():
     """동일 (ts, sig) 두 번째 요청은 401."""
     print("\n== check_hmac: replay 차단 (같은 ts+sig 재전송) ==")
-    from pkgsentinel.api.auth import check_hmac, _reset_nonce_cache
+    from pkgsentinel.api.auth import _reset_nonce_cache, check_hmac
     from pkgsentinel.realtime.sinks.webhook_sink import hmac_sign
     _reset_nonce_cache()
     secret = "test-secret-replay"
@@ -79,7 +79,7 @@ def test_replay_within_window_blocked():
 def test_replay_disabled_when_nonce_off():
     """enforce_nonce=False 면 재전송 허용."""
     print("\n== check_hmac: enforce_nonce=False → 재전송 허용 ==")
-    from pkgsentinel.api.auth import check_hmac, _reset_nonce_cache
+    from pkgsentinel.api.auth import _reset_nonce_cache, check_hmac
     from pkgsentinel.realtime.sinks.webhook_sink import hmac_sign
     _reset_nonce_cache()
     secret = "test-no-nonce"
@@ -97,7 +97,7 @@ def test_replay_disabled_when_nonce_off():
 def test_expired_timestamp_rejected():
     """5분 윈도 초과 → 401."""
     print("\n== check_hmac: timestamp 1시간 전 → 401 ==")
-    from pkgsentinel.api.auth import check_hmac, _reset_nonce_cache
+    from pkgsentinel.api.auth import _reset_nonce_cache, check_hmac
     from pkgsentinel.realtime.sinks.webhook_sink import hmac_sign
     _reset_nonce_cache()
     secret = "s"
@@ -114,7 +114,7 @@ def test_expired_timestamp_rejected():
 def test_different_signatures_different_nonces():
     """body 다른 → 다른 (ts, sig) → 둘 다 ok."""
     print("\n== check_hmac: 다른 body 두 개 → 둘 다 ok ==")
-    from pkgsentinel.api.auth import check_hmac, _reset_nonce_cache
+    from pkgsentinel.api.auth import _reset_nonce_cache, check_hmac
     from pkgsentinel.realtime.sinks.webhook_sink import hmac_sign
     _reset_nonce_cache()
     secret = "s"

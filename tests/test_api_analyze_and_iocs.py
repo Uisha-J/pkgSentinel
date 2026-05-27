@@ -14,8 +14,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 def _setup():
     td = tempfile.mkdtemp(prefix="api_s1s2_")
     os.environ["AISLOP_DB_KEY"] = "api-s1s2-test"
-    from pkgsentinel.db.threat_db import ThreatDB
     import pkgsentinel.db.threat_db as tdb_mod
+    from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
         passphrase=os.environ["AISLOP_DB_KEY"],
@@ -24,7 +24,8 @@ def _setup():
 
 
 def _teardown(td):
-    import shutil; shutil.rmtree(td, ignore_errors=True)
+    import shutil
+    shutil.rmtree(td, ignore_errors=True)
 
 
 # ─────────────── S1 — analyze ───────────────
@@ -149,7 +150,7 @@ def test_analyze_cache_hit_path(monkeypatch):
         assert resp["verdict"] == "CLEAN"
         assert resp["cache"]["hit"] is True
         assert called[0] is False
-        print(f"  OK cache hit, pipeline not invoked")
+        print("  OK cache hit, pipeline not invoked")
     finally:
         _teardown(td)
 
@@ -195,7 +196,8 @@ def test_iocs_export_returns_approved_only():
     td = _setup()
     try:
         from pkgsentinel.db.runtime_intel import (
-            LearnedIOC, RuntimeIntelStore,
+            LearnedIOC,
+            RuntimeIntelStore,
         )
         s = RuntimeIntelStore()
         # 두 IOC — approved 1개, pending 1개
@@ -227,7 +229,8 @@ def test_iocs_export_since_filter():
     td = _setup()
     try:
         from pkgsentinel.db.runtime_intel import (
-            LearnedIOC, RuntimeIntelStore,
+            LearnedIOC,
+            RuntimeIntelStore,
         )
         s = RuntimeIntelStore()
         # 2 IOC — upsert 후 last_seen 직접 덮어쓰기 (upsert 가 _now() 사용)
@@ -267,7 +270,8 @@ def test_iocs_export_type_filter():
     td = _setup()
     try:
         from pkgsentinel.db.runtime_intel import (
-            LearnedIOC, RuntimeIntelStore,
+            LearnedIOC,
+            RuntimeIntelStore,
         )
         s = RuntimeIntelStore()
         s.upsert_ioc(LearnedIOC(ioc_type="ip", value="1.1.1.1",

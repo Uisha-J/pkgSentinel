@@ -36,6 +36,12 @@ from ..realtime.sinks.webhook_sink import hmac_verify
 
 # ─────────────── replay nonce 캐시 ───────────────
 
+# ⚠️ 한계: 본 nonce 캐시는 **프로세스 로컬 in-memory**. gunicorn 등 멀티워커
+# 배포에서는 워커마다 별도 캐시를 가지므로, 동일 (timestamp, signature) 를
+# 서로 다른 워커로 재전송하면 replay 가 통과할 수 있음. 단일 워커 / 단일
+# 프로세스에서는 정확. 멀티워커 + 강한 replay 보장이 필요하면 Redis 등
+# 공유 저장소 기반 nonce store 로 교체할 것 (TODO).
+#
 # (timestamp_ms, signature_hex) → seen_at_epoch_s
 # 5분 윈도 + 약간 여유 → 6분 TTL. 메모리 상한 8192 entry (LRU).
 _NONCE_CACHE: OrderedDict[tuple[int, str], float] = OrderedDict()

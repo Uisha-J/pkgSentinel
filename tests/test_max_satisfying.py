@@ -17,7 +17,6 @@ from pkgsentinel.stages.stage_dependency import (
     _semver_satisfies,
 )
 
-
 # ─────────────── semver 매칭 ───────────────
 
 def test_semver_caret_majorgt0():

@@ -23,12 +23,12 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from pkgsentinel.schema import Ecosystem  # noqa: E402
+from pkgsentinel.stages.stage0_registry import check  # noqa: E402
 from pkgsentinel.stages.stage1b_full_source import extract_all  # noqa: E402
 from pkgsentinel.stages.stage_dependency import (  # noqa: E402
     analyze_dependencies,
     extract_dependencies,
 )
-from pkgsentinel.stages.stage0_registry import check  # noqa: E402
 
 TARGETS = [
     ("requests", Ecosystem.PYPI),
@@ -53,7 +53,7 @@ def main():
         try:
             info = check(name, eco)
             if not info.found:
-                print(f"  not found")
+                print("  not found")
                 rows.append({"name": name, "ecosystem": eco.value,
                              "error": "registry not found"})
                 continue
@@ -119,7 +119,7 @@ def main():
         total_mal = sum(r["mal"] for r in ok_rows)
         total_sus = sum(r["sus"] for r in ok_rows)
         total_info = sum(r.get("info", 0) for r in ok_rows)
-        print(f"\n=== Summary ===")
+        print("\n=== Summary ===")
         print(f"  packages OK    : {len(ok_rows)}/{len(rows)}")
         print(f"  avg direct deps: {avg_direct:.1f}")
         print(f"  avg analyzed   : {avg_analyzed:.1f}")

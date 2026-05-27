@@ -10,12 +10,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pkgsentinel.knowledge.malicious_indicators import INDICATORS
 from pkgsentinel.realtime.sinks.falco_policy import (
-    FalcoPolicySink,
     TRUSTED_REGISTRY_DOMAINS,
+    FalcoPolicySink,
     generate_strict_mode_falco,
     generate_strict_mode_tetragon,
 )
-
 
 # ─────────────── #R1 — strict-mode generators ───────────────
 
@@ -227,7 +226,7 @@ print(data["users"])
     codes = [h.indicator.code for h in hits]
     assert "DOW-001" not in codes, f"unexpected DOW-001 in {codes}"
     assert "DOW-002" not in codes
-    print(f"  OK no false trigger")
+    print("  OK no false trigger")
 
 
 def main():
