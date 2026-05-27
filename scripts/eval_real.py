@@ -488,6 +488,12 @@ def _evaluate(
     # llm_mode 는 환경변수로 전달 (multiprocessing 서브프로세스도 자동 상속).
     # 기본 stub. PKGSENTINEL_LLM_MODE=claude 면 실제 Anthropic 호출.
     llm_mode = os.environ.get("PKGSENTINEL_LLM_MODE", "stub")
+
+    # eval 전용 다운그레이드 휴리스틱 토글 (S-5).
+    # "on" (기본): popular×benign 등 eval-only 보정 적용 — 평가 점수 ↑
+    #              하지만 production verdict_rules 에는 없는 룰 → 출하 엔진 ≠ 측정값.
+    # "off"      : 코어 판정만 — `python -m pkgsentinel.cli` 가 실제 내는 값에 근접.
+    _eval_rules_on = os.environ.get("PKGSENTINEL_EVAL_RULES", "on").lower() != "off"
     primary_seq = file_seqs[0] if file_seqs else None
     if primary_seq is not None:
         try:
@@ -581,105 +587,109 @@ def _evaluate(
     else:
         verdict = Verdict.CLEAN
 
-    # benign_context 보정 — 단, ind_high < 2 인 약신호일 때만 다운그레이드.
-    # ind_high >= 2 인 강한 신호는 합법 컨텍스트(테스트/IaC) 단어가 보여도 유지.
-    # (num2words 처럼 합법 코드 베이스에 악성 페이로드가 섞인 케이스 보호)
-    if benign_context and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK):
-        if ind_high < 2 and high_sev_seq == 0 and taint_total == 0:
+    # ─── eval 전용 다운그레이드 (S-5 토글) ───
+    # PKGSENTINEL_EVAL_RULES=off 면 아래 보정 전부 skip → 코어 판정만
+    # (production verdict_rules 와 동일 경로) 으로 측정.
+    if _eval_rules_on:
+        # benign_context 보정 — 단, ind_high < 2 인 약신호일 때만 다운그레이드.
+        # ind_high >= 2 인 강한 신호는 합법 컨텍스트(테스트/IaC) 단어가 보여도 유지.
+        # (num2words 처럼 합법 코드 베이스에 악성 페이로드가 섞인 케이스 보호)
+        if benign_context and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK):
+            if ind_high < 2 and high_sev_seq == 0 and taint_total == 0:
+                verdict = Verdict.CLEAN
+
+        # 농도 보정: 라지 패키지에 신호가 분산되어 있으면 (집중되지 않음) 다운그레이드.
+        # 합성 fixture 는 n_analysis_files 가 작아서 is_spread=False — 영향 없음.
+        if is_spread and not is_concentrated:
+            if verdict == Verdict.HIGH_RISK:
+                verdict = Verdict.SUSPICIOUS
+            if verdict == Verdict.SUSPICIOUS:
+                # 분산된 신호만 있으면 CLEAN — 다만 cooccur 나 multi-taint 가 있으면 유지
+                verdict = Verdict.CLEAN
+
+        # 약한 단독 taint (1회) + 다른 신호 없음 → 환경설정 읽기 등으로 보고 다운그레이드
+        if (
+            verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
+            and taint_total == 1
+            and ind_high == 0
+            and high_sev_seq == 0
+            and not is_concentrated
+            and ind_hits <= 5
+        ):
             verdict = Verdict.CLEAN
 
-    # 농도 보정: 라지 패키지에 신호가 분산되어 있으면 (집중되지 않음) 다운그레이드.
-    # 합성 fixture 는 n_analysis_files 가 작아서 is_spread=False — 영향 없음.
-    if is_spread and not is_concentrated:
-        if verdict == Verdict.HIGH_RISK:
-            verdict = Verdict.SUSPICIOUS
-        if verdict == Verdict.SUSPICIOUS:
-            # 분산된 신호만 있으면 CLEAN — 다만 cooccur 나 multi-taint 가 있으면 유지
+        # 단일 seq HIGH (cooccur 없고 ind 없음) — 라이브러리 코드의 정상 패턴 가능성
+        if (
+            verdict == Verdict.SUSPICIOUS
+            and high_sev_seq == 1
+            and seq_hits == 1
+            and ind_high == 0
+            and ind_hits == 0
+            and taint_total == 0
+        ):
             verdict = Verdict.CLEAN
 
-    # 약한 단독 taint (1회) + 다른 신호 없음 → 환경설정 읽기 등으로 보고 다운그레이드
-    if (
-        verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
-        and taint_total == 1
-        and ind_high == 0
-        and high_sev_seq == 0
-        and not is_concentrated
-        and ind_hits <= 5
-    ):
-        verdict = Verdict.CLEAN
+        # popular 화이트리스트 — 인기 패키지에 강하지 않은 신호만 있으면 CLEAN.
+        # decisive 코드 (EXS-003 cmdclass / DEF-005 / EXF-004 등) 도 인기 도구에선 정당:
+        #   - setuptools 의 cmdclass override 는 정상
+        #   - pytest 의 assertion-rewrite 가 compile/exec 사용
+        #   - tqdm 의 텔레그램 콘트리브가 EXF-004 와 패턴 충돌
+        # 단, multi-taint / cooccurrence / 다중 seq HIGH 가 있으면 보호.
+        if (
+            _is_popular(name, ecosystem)
+            and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
+            and len(cooccur_files) == 0
+            and taint_total < 2
+            and ind_high < 5            # 5+ HIGH 면 내용 검토 필요
+            and high_sev_seq < 2
+        ):
+            verdict = Verdict.CLEAN
 
-    # 단일 seq HIGH (cooccur 없고 ind 없음) — 라이브러리 코드의 정상 패턴 가능성
-    if (
-        verdict == Verdict.SUSPICIOUS
-        and high_sev_seq == 1
-        and seq_hits == 1
-        and ind_high == 0
-        and ind_hits == 0
-        and taint_total == 0
-    ):
-        verdict = Verdict.CLEAN
+        # 큰 인기 도구 (setuptools/pip/pytest 등) — ind_high 5+ 라도 분산 + 단일 신호 카테고리만
+        # 가질 때는 정상 도구 가능성 높음. cooccur / taint / seq_high 같은 "결합 신호" 가
+        # 없으면 다운그레이드.
+        if (
+            _is_popular(name, ecosystem)
+            and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
+            and n_analysis_files > 50           # 큰 도구
+            and max_high_per_file <= 2          # 분산 분포
+            and len(cooccur_files) == 0
+            and taint_total == 0
+            and high_sev_seq < 2
+        ):
+            verdict = Verdict.CLEAN
 
-    # popular 화이트리스트 — 인기 패키지에 강하지 않은 신호만 있으면 CLEAN.
-    # decisive 코드 (EXS-003 cmdclass / DEF-005 / EXF-004 등) 도 인기 도구에선 정당:
-    #   - setuptools 의 cmdclass override 는 정상
-    #   - pytest 의 assertion-rewrite 가 compile/exec 사용
-    #   - tqdm 의 텔레그램 콘트리브가 EXF-004 와 패턴 충돌
-    # 단, multi-taint / cooccurrence / 다중 seq HIGH 가 있으면 보호.
-    if (
-        _is_popular(name, ecosystem)
-        and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
-        and len(cooccur_files) == 0
-        and taint_total < 2
-        and ind_high < 5            # 5+ HIGH 면 내용 검토 필요
-        and high_sev_seq < 2
-    ):
-        verdict = Verdict.CLEAN
+        # popular + LLM benign → 강 다운그레이드.
+        # LLM 이 정상이라고 명시적으로 판정한 인기 패키지면, 매처가 발화한 다중 신호도
+        # 정당 사용으로 간주. 단 multi-taint 나 결정적 코드 cooccurrence 가 있으면 보호.
+        # (typescript / pandas / fastapi / scikit-learn 같이 dangerous API 를
+        #  legitimate 사용하는 도구의 13 FP 케이스 정리)
+        if (
+            llm_mode == "claude"
+            and _is_popular(name, ecosystem)
+            and llm_verdict == LLMVerdict.BENIGN
+            and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
+            and taint_total < 2
+            and len(cooccur_files) <= 2
+        ):
+            verdict = Verdict.CLEAN
 
-    # 큰 인기 도구 (setuptools/pip/pytest 등) — ind_high 5+ 라도 분산 + 단일 신호 카테고리만
-    # 가질 때는 정상 도구 가능성 높음. cooccur / taint / seq_high 같은 "결합 신호" 가
-    # 없으면 다운그레이드.
-    if (
-        _is_popular(name, ecosystem)
-        and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
-        and n_analysis_files > 50           # 큰 도구
-        and max_high_per_file <= 2          # 분산 분포
-        and len(cooccur_files) == 0
-        and taint_total == 0
-        and high_sev_seq < 2
-    ):
-        verdict = Verdict.CLEAN
-
-    # popular + LLM benign → 강 다운그레이드.
-    # LLM 이 정상이라고 명시적으로 판정한 인기 패키지면, 매처가 발화한 다중 신호도
-    # 정당 사용으로 간주. 단 multi-taint 나 결정적 코드 cooccurrence 가 있으면 보호.
-    # (typescript / pandas / fastapi / scikit-learn 같이 dangerous API 를
-    #  legitimate 사용하는 도구의 13 FP 케이스 정리)
-    if (
-        llm_mode == "claude"
-        and _is_popular(name, ecosystem)
-        and llm_verdict == LLMVerdict.BENIGN
-        and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
-        and taint_total < 2
-        and len(cooccur_files) <= 2
-    ):
-        verdict = Verdict.CLEAN
-
-    # popular + LLM benign + 결정적 코드 부재 → taint 다중도 허용.
-    # 인기 라이브러리는 taint 가 발화해도 거의 항상 internal templating/
-    # serialization 으로 sink 에 닿지 않음 (flask Werkzeug, numpy einops 등).
-    # 단 decisive 코드 (EXF-004/EXS-002/EXS-003 등) 가 있으면 보호 — 진짜
-    # 침해 버전을 cooccur=0 으로 통과시키지 않기 위해. 또한 taint 가
-    # 비정상적으로 많으면 (>= 10) 라이브러리 패턴이 아니므로 보호 유지.
-    if (
-        llm_mode == "claude"
-        and _is_popular(name, ecosystem)
-        and llm_verdict == LLMVerdict.BENIGN
-        and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
-        and not has_decisive
-        and taint_total < 10
-        and len(cooccur_files) <= 2
-    ):
-        verdict = Verdict.CLEAN
+        # popular + LLM benign + 결정적 코드 부재 → taint 다중도 허용.
+        # 인기 라이브러리는 taint 가 발화해도 거의 항상 internal templating/
+        # serialization 으로 sink 에 닿지 않음 (flask Werkzeug, numpy einops 등).
+        # 단 decisive 코드 (EXF-004/EXS-002/EXS-003 등) 가 있으면 보호 — 진짜
+        # 침해 버전을 cooccur=0 으로 통과시키지 않기 위해. 또한 taint 가
+        # 비정상적으로 많으면 (>= 10) 라이브러리 패턴이 아니므로 보호 유지.
+        if (
+            llm_mode == "claude"
+            and _is_popular(name, ecosystem)
+            and llm_verdict == LLMVerdict.BENIGN
+            and verdict in (Verdict.SUSPICIOUS, Verdict.HIGH_RISK)
+            and not has_decisive
+            and taint_total < 10
+            and len(cooccur_files) <= 2
+        ):
+            verdict = Verdict.CLEAN
 
     expected_set = (
         {Verdict.MALICIOUS, Verdict.HIGH_RISK, Verdict.SUSPICIOUS}
@@ -854,13 +864,22 @@ def main():
         help="Stage 5 LLM 모드. claude → 실제 Anthropic API 호출 (요금 발생)",
     )
     ap.add_argument(
+        "--eval-rules", choices=["on", "off"], default="on",
+        help=(
+            "eval 전용 다운그레이드 휴리스틱 (popular×benign 등). "
+            "on=현재 보고 수치(평가 하니스 보정 포함). "
+            "off=production verdict_rules 와 동일 경로 — 출하 엔진이 실제 내는 값."
+        ),
+    )
+    ap.add_argument(
         "--stratified", type=int, default=0,
         help="N 개 fixture 를 카테고리별 균형 sample (compromised + malicious_intent + benign FP 후보).",
     )
     args = ap.parse_args()
 
-    # Stage 5 mode 를 환경변수로 전파 — sub-process 도 상속.
+    # Stage 5 mode + eval-rules 토글을 환경변수로 전파 — sub-process 도 상속.
     os.environ["PKGSENTINEL_LLM_MODE"] = args.llm
+    os.environ["PKGSENTINEL_EVAL_RULES"] = args.eval_rules
     if args.llm == "claude":
         # 실제 API 호출 시 multiprocessing rate limit 위험 → worker 수 제한
         if args.workers == 0:
