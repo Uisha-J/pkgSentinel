@@ -32,4 +32,5 @@ if _DB_DIR.exists():
             pass
 
 # DB key 환경변수 — CI workflow 와 동일 값. 미설정 시에만 보충.
-os.environ.setdefault("AISLOP_DB_KEY", "ci-test-passphrase-do-not-reuse")
+# 정규 이름은 PKGSENTINEL_DB_KEY (구 AISLOP_DB_KEY 는 _env.getenv fallback).
+os.environ.setdefault("PKGSENTINEL_DB_KEY", "ci-test-passphrase-do-not-reuse")

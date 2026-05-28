@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 TEST_DB_DIR = tempfile.mkdtemp(prefix="agentic_rt_")
 TEST_DB_PATH = Path(TEST_DB_DIR) / "test.sqlcipher"
 TEST_PASSPHRASE = "rt-test-passphrase"
-os.environ["AISLOP_DB_KEY"] = TEST_PASSPHRASE
+os.environ["PKGSENTINEL_DB_KEY"] = TEST_PASSPHRASE
 
 from pkgsentinel.db.threat_db import ThreatDB, reset_default_db
 from pkgsentinel.monitor.priority_queue import PriorityQueue

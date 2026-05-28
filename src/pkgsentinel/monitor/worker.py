@@ -14,11 +14,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import time
 import traceback
 from dataclasses import dataclass
 
+from .._env import getenv
 from ..db.threat_db import ThreatDB, get_default_db
 from ..pipeline import _report_to_serializable, run_pipeline
 from ..realtime.sinks.falco_policy import FalcoPolicySink
@@ -31,29 +31,30 @@ from .priority_queue import PriorityQueue, QueuedJob
 
 @dataclass
 class SinkConfig:
-    stix_out_dir: str | None = None     # AISLOP_STIX_OUT_DIR
-    webhook_url: str | None = None      # AISLOP_WEBHOOK_URL
-    webhook_secret: str | None = None   # AISLOP_WEBHOOK_SECRET
-    falco_out_dir: str | None = None    # AISLOP_FALCO_OUT_DIR
+    stix_out_dir: str | None = None     # PKGSENTINEL_STIX_OUT_DIR
+    webhook_url: str | None = None      # PKGSENTINEL_WEBHOOK_URL
+    webhook_secret: str | None = None   # PKGSENTINEL_WEBHOOK_SECRET
+    falco_out_dir: str | None = None    # PKGSENTINEL_FALCO_OUT_DIR
     # TAXII 2.1 — Basic auth (user/pass) 또는 Bearer 토큰 중 하나
-    taxii_url: str | None = None        # AISLOP_TAXII_URL (collection objects endpoint)
-    taxii_user: str | None = None       # AISLOP_TAXII_USER (Basic)
-    taxii_pass: str | None = None       # AISLOP_TAXII_PASS (Basic)
-    taxii_bearer: str | None = None     # AISLOP_TAXII_BEARER (modern OpenCTI/MISP)
-    pmg_out_dir: str | None = None      # AISLOP_PMG_OUT_DIR — SafeDep pmg policy yaml
+    taxii_url: str | None = None        # PKGSENTINEL_TAXII_URL (collection objects endpoint)
+    taxii_user: str | None = None       # PKGSENTINEL_TAXII_USER (Basic)
+    taxii_pass: str | None = None       # PKGSENTINEL_TAXII_PASS (Basic)
+    taxii_bearer: str | None = None     # PKGSENTINEL_TAXII_BEARER (modern OpenCTI/MISP)
+    pmg_out_dir: str | None = None      # PKGSENTINEL_PMG_OUT_DIR — SafeDep pmg policy yaml
 
     @classmethod
     def from_env(cls) -> SinkConfig:
+        # getenv: PKGSENTINEL_* 우선, 구 AISLOP_* fallback
         return cls(
-            stix_out_dir=os.getenv("AISLOP_STIX_OUT_DIR"),
-            webhook_url=os.getenv("AISLOP_WEBHOOK_URL"),
-            webhook_secret=os.getenv("AISLOP_WEBHOOK_SECRET"),
-            falco_out_dir=os.getenv("AISLOP_FALCO_OUT_DIR"),
-            taxii_url=os.getenv("AISLOP_TAXII_URL"),
-            taxii_user=os.getenv("AISLOP_TAXII_USER"),
-            taxii_pass=os.getenv("AISLOP_TAXII_PASS"),
-            taxii_bearer=os.getenv("AISLOP_TAXII_BEARER"),
-            pmg_out_dir=os.getenv("AISLOP_PMG_OUT_DIR"),
+            stix_out_dir=getenv("PKGSENTINEL_STIX_OUT_DIR"),
+            webhook_url=getenv("PKGSENTINEL_WEBHOOK_URL"),
+            webhook_secret=getenv("PKGSENTINEL_WEBHOOK_SECRET"),
+            falco_out_dir=getenv("PKGSENTINEL_FALCO_OUT_DIR"),
+            taxii_url=getenv("PKGSENTINEL_TAXII_URL"),
+            taxii_user=getenv("PKGSENTINEL_TAXII_USER"),
+            taxii_pass=getenv("PKGSENTINEL_TAXII_PASS"),
+            taxii_bearer=getenv("PKGSENTINEL_TAXII_BEARER"),
+            pmg_out_dir=getenv("PKGSENTINEL_PMG_OUT_DIR"),
         )
 
     def any_configured(self) -> bool:
@@ -298,7 +299,7 @@ def run_worker(
 # ─────────────── CLI ───────────────
 
 def _argparser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="ai-slopsq monitor worker")
+    p = argparse.ArgumentParser(description="pkgsentinel monitor worker")
     p.add_argument("--max", type=int, default=10,
                    help="처리할 작업 수 (cron 모드)")
     p.add_argument("--loop", action="store_true",

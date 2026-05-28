@@ -2,7 +2,7 @@
 DB 마스터 패스프레이즈 관리.
 
 우선순위 (resolve_passphrase 가 위에서 아래로 시도):
-  1. 환경변수 AISLOP_DB_KEY
+  1. 환경변수 PKGSENTINEL_DB_KEY (구 AISLOP_DB_KEY 도 fallback 인식)
   2. ~/.pkgsentinel/db.key (단일 파일, POSIX 0600)
   3. (대화형 모드) Windows DPAPI / macOS Keychain / Linux Secret Service
      - 본 구현에선 keyring 패키지 시도, 미설치 시 SKIP
@@ -21,7 +21,9 @@ import secrets
 import stat
 from pathlib import Path
 
-ENV_KEY = "AISLOP_DB_KEY"
+from .._env import getenv
+
+ENV_KEY = "PKGSENTINEL_DB_KEY"
 KEYFILE_PATH = Path.home() / ".pkgsentinel" / "db.key"
 KEYRING_SERVICE = "pkgsentinel"
 KEYRING_USER = "threat-db"
@@ -30,7 +32,7 @@ KEYRING_USER = "threat-db"
 # ─────────────── 조회 ───────────────
 
 def from_env() -> str | None:
-    v = os.environ.get(ENV_KEY)
+    v = getenv(ENV_KEY)
     return v.strip() if v else None
 
 
@@ -57,30 +59,30 @@ def from_keyring() -> str | None:
 
 
 # ─────────────── KMS 백엔드 (선택적) ───────────────
-# AISLOP_KMS = "aws" | "vault" | "gcp"  로 선택. 미설정 시 비활성.
+# PKGSENTINEL_KMS = "aws" | "vault" | "gcp"  로 선택. 미설정 시 비활성.
 # 각 백엔드는 해당 SDK 가 설치되어 있을 때만 동작. 클라우드 IAM 자격증명은
 # 호스트 환경 (EC2 IMDSv2, 워크로드 ID 등) 으로 자동 픽업.
 
-ENV_KMS_BACKEND = "AISLOP_KMS"
+ENV_KMS_BACKEND = "PKGSENTINEL_KMS"
 
-ENV_AWS_SECRET_ID = "AISLOP_AWS_SECRET_ID"        # e.g. "prod/pkgsentinel/db-key"
+ENV_AWS_SECRET_ID = "PKGSENTINEL_AWS_SECRET_ID"   # e.g. "prod/pkgsentinel/db-key"
 ENV_AWS_REGION = "AWS_REGION"
 
 ENV_VAULT_ADDR = "VAULT_ADDR"                     # e.g. "https://vault.corp:8200"
 ENV_VAULT_TOKEN = "VAULT_TOKEN"
-ENV_VAULT_PATH = "AISLOP_VAULT_PATH"              # e.g. "secret/data/pkgsentinel/db-key"
-ENV_VAULT_FIELD = "AISLOP_VAULT_FIELD"            # default: "passphrase"
+ENV_VAULT_PATH = "PKGSENTINEL_VAULT_PATH"         # e.g. "secret/data/pkgsentinel/db-key"
+ENV_VAULT_FIELD = "PKGSENTINEL_VAULT_FIELD"       # default: "passphrase"
 
-ENV_GCP_NAME = "AISLOP_GCP_SECRET_NAME"
+ENV_GCP_NAME = "PKGSENTINEL_GCP_SECRET_NAME"
 # e.g. "projects/MY_PROJECT/secrets/pkgsentinel-db-key/versions/latest"
 
 
 def from_aws_secrets_manager() -> str | None:
     """AWS Secrets Manager 에서 secret string 조회.
 
-    설정: AISLOP_AWS_SECRET_ID + AWS_REGION (또는 ~/.aws/config 의 default region).
+    설정: PKGSENTINEL_AWS_SECRET_ID + AWS_REGION (또는 ~/.aws/config 의 default region).
     """
-    secret_id = os.environ.get(ENV_AWS_SECRET_ID, "").strip()
+    secret_id = (getenv(ENV_AWS_SECRET_ID, "") or "").strip()
     if not secret_id:
         return None
     try:
@@ -100,11 +102,11 @@ def from_aws_secrets_manager() -> str | None:
 def from_hashicorp_vault() -> str | None:
     """HashiCorp Vault KV v2 에서 비밀 조회.
 
-    설정: VAULT_ADDR + VAULT_TOKEN + AISLOP_VAULT_PATH (예: 'secret/data/foo').
-    AISLOP_VAULT_FIELD 가 없으면 'passphrase' 필드 사용.
+    설정: VAULT_ADDR + VAULT_TOKEN + PKGSENTINEL_VAULT_PATH (예: 'secret/data/foo').
+    PKGSENTINEL_VAULT_FIELD 가 없으면 'passphrase' 필드 사용.
     """
     addr = os.environ.get(ENV_VAULT_ADDR, "").strip()
-    path = os.environ.get(ENV_VAULT_PATH, "").strip()
+    path = (getenv(ENV_VAULT_PATH, "") or "").strip()
     token = os.environ.get(ENV_VAULT_TOKEN, "").strip()
     if not (addr and path and token):
         return None
@@ -116,7 +118,7 @@ def from_hashicorp_vault() -> str | None:
         client = hvac.Client(url=addr, token=token)
         # KV v2 는 secret/data/<path> 형식 — 호출 시 mount 와 path 분리 필요.
         # 간소화: read_secret_version 사용 (mount_point 기본 'secret').
-        # AISLOP_VAULT_PATH 가 'secret/data/foo/bar' 라면 분해해서 mount=secret, path=foo/bar.
+        # PKGSENTINEL_VAULT_PATH 가 'secret/data/foo/bar' 라면 분해해서 mount=secret, path=foo/bar.
         if path.startswith("secret/data/"):
             mount = "secret"
             inner = path[len("secret/data/"):]
@@ -128,7 +130,7 @@ def from_hashicorp_vault() -> str | None:
         resp = client.secrets.kv.v2.read_secret_version(
             mount_point=mount, path=inner, raise_on_deleted_version=True,
         )
-        field = os.environ.get(ENV_VAULT_FIELD, "passphrase")
+        field = getenv(ENV_VAULT_FIELD, "passphrase")
         data = (resp.get("data") or {}).get("data") or {}
         v = data.get(field)
         return v.strip() if isinstance(v, str) and v else None
@@ -139,9 +141,9 @@ def from_hashicorp_vault() -> str | None:
 def from_gcp_secret_manager() -> str | None:
     """GCP Secret Manager 에서 비밀 조회.
 
-    설정: AISLOP_GCP_SECRET_NAME (전체 리소스 이름).
+    설정: PKGSENTINEL_GCP_SECRET_NAME (전체 리소스 이름).
     """
-    name = os.environ.get(ENV_GCP_NAME, "").strip()
+    name = (getenv(ENV_GCP_NAME, "") or "").strip()
     if not name:
         return None
     try:
@@ -158,8 +160,8 @@ def from_gcp_secret_manager() -> str | None:
 
 
 def from_kms() -> str | None:
-    """AISLOP_KMS 설정에 따라 해당 백엔드 호출."""
-    backend = os.environ.get(ENV_KMS_BACKEND, "").strip().lower()
+    """PKGSENTINEL_KMS 설정에 따라 해당 백엔드 호출."""
+    backend = (getenv(ENV_KMS_BACKEND, "") or "").strip().lower()
     if backend == "aws":
         return from_aws_secrets_manager()
     if backend == "vault":

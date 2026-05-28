@@ -3,7 +3,7 @@ OSV (osv.dev) 위협 피드 -> 암호화 DB 적재.
 
 근거: https://osv.dev/
 
-기존 detector/knowledge/osv.py 의 파싱 로직을 그대로 활용하되,
+기존 pkgsentinel/knowledge/osv.py 의 파싱 로직을 그대로 활용하되,
 이번엔 JSON 파일이 아니라 SQLCipher DB 의 known_malicious 에 직접 INSERT.
 
 다운로드 무결성:
@@ -99,7 +99,7 @@ def _download_with_sha256(url: str, timeout: int = 180) -> tuple[bytes, str]:
     if not url.startswith("https://"):
         raise ValueError(f"feed URL must be HTTPS: {url}")
     print(f"[OSV] downloading {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "ai-slopsq/2.0 osv-feed"})
+    req = urllib.request.Request(url, headers={"User-Agent": "pkgsentinel/2.0 osv-feed"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         body = resp.read()
     sha = hashlib.sha256(body).hexdigest()

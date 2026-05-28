@@ -37,7 +37,7 @@ async function _hmacHeaders(bodyString) {
   return {
     "X-PkgSentinel-Signature": `sha256=${sigHex}`,
     "X-PkgSentinel-Timestamp": String(ts),
-    "X-PkgSentinel-Tool": "slop-detector-chrome/0.3.0",
+    "X-PkgSentinel-Tool": "pkgsentinel-chrome/0.3.0",
   };
 }
 

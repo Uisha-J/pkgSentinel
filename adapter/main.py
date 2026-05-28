@@ -8,12 +8,14 @@ V1 Chrome / VS Code 확장 ↔ V2 pkgsentinel 엔진 FastAPI 어댑터.
   GET  /verdict-legend     V1 프론트엔드용 레벨 정의 (디버깅)
 
 환경변수:
-  ANTHROPIC_API_KEY        Claude API 키 (llm_mode=claude 일 때)
-  AISLOP_DB_KEY            SQLCipher 마스터 패스프레이즈
-  AISLOP_LLM_MODE          stub | claude (기본: stub)
-  AISLOP_INTEGRITY_MODE    fast | strict | paranoid (기본: strict)
-  AISLOP_USE_CACHE         "true" | "false" (기본: true)
-  AISLOP_ALLOWED_ORIGINS   CORS 허용 origin 콤마 구분 (기본: claude.ai/chatgpt/gemini)
+  ANTHROPIC_API_KEY          Claude API 키 (llm_mode=claude 일 때)
+  PKGSENTINEL_DB_KEY         SQLCipher 마스터 패스프레이즈
+  PKGSENTINEL_LLM_MODE       stub | claude (기본: stub)
+  PKGSENTINEL_INTEGRITY_MODE fast | strict | paranoid (기본: strict)
+  PKGSENTINEL_USE_CACHE      "true" | "false" (기본: true)
+  PKGSENTINEL_ALLOWED_ORIGINS CORS 허용 origin 콤마 구분 (기본: claude.ai/chatgpt/gemini)
+
+  (구 AISLOP_* 환경변수도 fallback 으로 계속 인식된다.)
 """
 from __future__ import annotations
 
@@ -25,6 +27,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from pkgsentinel._env import getenv
 from pkgsentinel.pipeline import run_pipeline
 from pkgsentinel.schema import Ecosystem, Verdict
 from pkgsentinel.entrypoint.import_parser import parse_code
@@ -34,10 +37,10 @@ from adapter.closest_match import find_closest
 # ─────────────── 설정 (env-driven) ───────────────
 
 # LLM 모드 자동 결정:
-#   - AISLOP_LLM_MODE 명시값 ("stub" / "claude") 있으면 그대로
+#   - PKGSENTINEL_LLM_MODE 명시값 ("stub" / "claude") 있으면 그대로
 #   - 명시 없거나 "auto" 면 ANTHROPIC_API_KEY 유효성으로 자동 선택
 def _resolve_llm_mode() -> str:
-    raw = (os.getenv("AISLOP_LLM_MODE") or "auto").strip().lower()
+    raw = (getenv("PKGSENTINEL_LLM_MODE") or "auto").strip().lower()
     if raw in ("stub", "claude"):
         return raw
     # auto / 빈값: API 키 존재 + 형식 유효(placeholder 아님)면 claude
@@ -47,18 +50,18 @@ def _resolve_llm_mode() -> str:
     return "stub"
 
 LLM_MODE = _resolve_llm_mode()
-INTEGRITY_MODE = os.getenv("AISLOP_INTEGRITY_MODE", "strict") # fast|strict|paranoid
-USE_CACHE = os.getenv("AISLOP_USE_CACHE", "true").lower() != "false"
+INTEGRITY_MODE = getenv("PKGSENTINEL_INTEGRITY_MODE", "strict") # fast|strict|paranoid
+USE_CACHE = getenv("PKGSENTINEL_USE_CACHE", "true").lower() != "false"
 
 # HMAC 인증 (선택): 비어 있으면 검증 X (개발 모드)
-HMAC_SECRET = (os.getenv("AISLOP_HMAC_SECRET") or "").strip()
+HMAC_SECRET = (getenv("PKGSENTINEL_HMAC_SECRET") or "").strip()
 HMAC_TIMESTAMP_TOLERANCE_MS = 5 * 60 * 1000  # 5분 (replay 방지)
 
 # 시작 로그
 import sys
 print(f"[Adapter] LLM_MODE={LLM_MODE} (auto-resolved from ANTHROPIC_API_KEY presence)",
       file=sys.stderr, flush=True)
-print(f"[Adapter] HMAC auth: {'ENABLED' if HMAC_SECRET else 'disabled (no AISLOP_HMAC_SECRET)'}",
+print(f"[Adapter] HMAC auth: {'ENABLED' if HMAC_SECRET else 'disabled (no PKGSENTINEL_HMAC_SECRET)'}",
       file=sys.stderr, flush=True)
 
 _DEFAULT_ORIGINS = (
@@ -66,7 +69,7 @@ _DEFAULT_ORIGINS = (
     "https://chatgpt.com,https://gemini.google.com"
 )
 ALLOWED_ORIGINS = [
-    o.strip() for o in os.getenv("AISLOP_ALLOWED_ORIGINS", _DEFAULT_ORIGINS).split(",")
+    o.strip() for o in getenv("PKGSENTINEL_ALLOWED_ORIGINS", _DEFAULT_ORIGINS).split(",")
     if o.strip()
 ]
 

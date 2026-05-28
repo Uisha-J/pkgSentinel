@@ -13,7 +13,7 @@
 
 ```bash
 # 1) DB 키 + HMAC secret 생성
-export AISLOP_DB_KEY=$(openssl rand -hex 32)
+export PKGSENTINEL_DB_KEY=$(openssl rand -hex 32)
 export PKGSENTINEL_HMAC_SECRET=$(openssl rand -hex 32)
 
 # 2) 이미지 빌드
@@ -23,7 +23,7 @@ docker build -t pkgsentinel-server:latest \
 # 3) 실행
 docker run -d --name pkgsentinel \
     -p 8787:8787 \
-    -e AISLOP_DB_KEY=$AISLOP_DB_KEY \
+    -e PKGSENTINEL_DB_KEY=$PKGSENTINEL_DB_KEY \
     -e PKGSENTINEL_HMAC_SECRET=$PKGSENTINEL_HMAC_SECRET \
     -e ANTHROPIC_API_KEY=sk-ant-... \
     -v pkgsentinel-data:/var/lib/pkgsentinel \

@@ -1,4 +1,4 @@
-"""_try_load_cached_prev — stage_2_behavior 캐시에서 직전 버전 복원 검증.
+"""_try_load_cached_prev — stage_08_behavior 캐시에서 직전 버전 복원 검증.
 
 격리 DB 에 BehaviorReport 를 직접 put → 같은 키로 _try_load_cached_prev 호출
 시 (apis_by_file, files_partial) 반환되는지.
@@ -19,12 +19,12 @@ from pkgsentinel.stages.stage3b_full_diff import _try_load_cached_prev
 
 def _setup_isolated_db():
     td = tempfile.mkdtemp(prefix="stage3b_cache_")
-    os.environ["AISLOP_DB_KEY"] = "stage3b-cache-test"
+    os.environ["PKGSENTINEL_DB_KEY"] = "stage3b-cache-test"
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
     db = ThreatDB(
         Path(td) / "test.sqlcipher",
-        passphrase=os.environ["AISLOP_DB_KEY"],
+        passphrase=os.environ["PKGSENTINEL_DB_KEY"],
     )
     tdb_mod._default_db = db
     return td, db
@@ -88,7 +88,7 @@ def test_cache_hit_returns_apis_and_files():
         sc = StageCache()
         key = StageCacheKey(
             package="evil-pkg", ecosystem="PyPI", version="0.0.1",
-            stage="stage_2_behavior",
+            stage="stage_08_behavior",
         )
         behavior = _build_sample_behavior()
         sc.put(key, behavior.to_dict())
@@ -123,7 +123,7 @@ def test_files_partial_has_zero_size():
         sc.put(
             StageCacheKey(
                 package="p", ecosystem="PyPI", version="1.0",
-                stage="stage_2_behavior",
+                stage="stage_08_behavior",
             ),
             _build_sample_behavior().to_dict(),
         )
@@ -147,7 +147,7 @@ def test_corrupt_payload_returns_none():
         sc.put(
             StageCacheKey(
                 package="x", ecosystem="PyPI", version="1.0",
-                stage="stage_2_behavior",
+                stage="stage_08_behavior",
             ),
             {"completely": "wrong shape", "no": "files key"},
         )

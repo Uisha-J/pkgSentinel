@@ -14,7 +14,7 @@ pip install -e ".[dev]"
 Set the encrypted DB passphrase before running tests:
 
 ```bash
-export AISLOP_DB_KEY="your-dev-passphrase"
+export PKGSENTINEL_DB_KEY="your-dev-passphrase"
 ```
 
 ## Running tests

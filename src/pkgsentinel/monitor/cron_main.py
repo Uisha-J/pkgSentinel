@@ -9,10 +9,10 @@ cron 단일 entrypoint.
   status        현재 큐 + 피드 상태
 
 권장 cron 설정:
-  */10 * * * *  python -m detector.monitor.cron_main watch-pypi
-  */5  * * * *  python -m detector.monitor.cron_main watch-npm  --limit 200
-  */5  * * * *  python -m detector.monitor.cron_main worker     --max 5
-  0 3 * * *     python -m detector.monitor.cron_main refresh-feeds
+  */10 * * * *  python -m pkgsentinel.monitor.cron_main watch-pypi
+  */5  * * * *  python -m pkgsentinel.monitor.cron_main watch-npm  --limit 200
+  */5  * * * *  python -m pkgsentinel.monitor.cron_main worker     --max 5
+  0 3 * * *     python -m pkgsentinel.monitor.cron_main refresh-feeds
 """
 from __future__ import annotations
 
@@ -99,7 +99,7 @@ def _cmd_status(args) -> int:
 # ─────────────── argparse ───────────────
 
 def _build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="detector.monitor.cron_main")
+    p = argparse.ArgumentParser(prog="pkgsentinel.monitor.cron_main")
     p.add_argument("--passphrase", default=None)
     sub = p.add_subparsers(dest="cmd", required=True)
 

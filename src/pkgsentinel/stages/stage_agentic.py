@@ -4,7 +4,7 @@ Stage agentic — Agentic 분류 단계.
 흐름:
   1. ext.source_files 에서 .py / .js 소스 모음
   2. pyproject.toml / package.json 텍스트 추출
-  3. detector.agentic.classify() 실행
+  3. pkgsentinel.agentic.classify() 실행
   4. 결과를 (verdict, evidence, package_meta) 형태로 변환
 
 이 stage 는 Step 1 (agentic 판별) 까지만 게이트로 사용. agentic 인 경우
@@ -143,7 +143,7 @@ def _classification_to_evidence(c: AgenticClassification) -> list[Evidence]:
         behavior_sequence=[f"agentic:{c.verdict.value}"],
         attack_dimensions=[],
         ttp_id="AGENTIC-CLS",
-        ttp_name="Agentic Agentic Classification",
+        ttp_name="Agentic Capability Classification",
         ttp_source=TTPSource.OWASP_LLM,
         ttp_url="https://genai.owasp.org/2025/12/09/owasp-genai-security-project-releases-top-10-risks-and-mitigations-for-agentic-ai-security/",
         ttp_severity=sev,

@@ -1,7 +1,7 @@
 """
 Threat DB + 캐시 + 무결성 + threat_filter 통합 테스트.
 
-전제: AISLOP_DB_KEY 환경변수 또는 master_key 파일이 있어야 함.
+전제: PKGSENTINEL_DB_KEY 환경변수 또는 master_key 파일이 있어야 함.
 이 테스트는 실 OSV 다운로드는 하지 않고, 직접 INSERT 한 데이터로 검증.
 """
 from __future__ import annotations
@@ -19,7 +19,7 @@ TEST_DB_DIR = tempfile.mkdtemp(prefix="agentic_test_")
 TEST_DB_PATH = Path(TEST_DB_DIR) / "test.sqlcipher"
 TEST_PASSPHRASE = "test-passphrase-do-not-reuse"
 
-os.environ["AISLOP_DB_KEY"] = TEST_PASSPHRASE
+os.environ["PKGSENTINEL_DB_KEY"] = TEST_PASSPHRASE
 
 from pkgsentinel.db.analysis_cache import AnalysisCache, CacheKey
 from pkgsentinel.db.integrity import (

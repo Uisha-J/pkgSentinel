@@ -25,7 +25,7 @@ class RegistryInfo:
 
 def _http_get_json(url: str, timeout: int = 15) -> dict:
     req = urllib.request.Request(
-        url, headers={"User-Agent": "slop-detector/2.0"}
+        url, headers={"User-Agent": "pkgsentinel/2.0"}
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode("utf-8"))

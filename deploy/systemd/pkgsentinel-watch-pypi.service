@@ -10,8 +10,8 @@ User=pkgsentinel
 Group=pkgsentinel
 WorkingDirectory=/opt/pkgsentinel
 EnvironmentFile=/etc/pkgsentinel/env
-# AISLOP_DB_KEY 등 비밀은 EnvironmentFile (root:pkgsentinel 0640) 로만.
-# 또는 AISLOP_KMS=aws + AISLOP_AWS_SECRET_ID 로 외부 KMS 연동.
+# PKGSENTINEL_DB_KEY 등 비밀은 EnvironmentFile (root:pkgsentinel 0640) 로만.
+# 또는 PKGSENTINEL_KMS=aws + PKGSENTINEL_AWS_SECRET_ID 로 외부 KMS 연동.
 
 ExecStart=/opt/pkgsentinel/.venv/bin/python -m pkgsentinel.monitor.cron_main watch-pypi --max 500
 

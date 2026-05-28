@@ -41,7 +41,7 @@ jobs:
 
       - name: Run tests
         env:
-          AISLOP_DB_KEY: ci-test-passphrase-do-not-reuse
+          PKGSENTINEL_DB_KEY: ci-test-passphrase-do-not-reuse
         run: pytest -q --tb=short
         # NOTE: 직전에 --ignore 했던 test_synthetic_malicious / test_47_indicators
         # 두 파일은 def main() 형태의 데모 스크립트라 pytest collect 0 items 였음.

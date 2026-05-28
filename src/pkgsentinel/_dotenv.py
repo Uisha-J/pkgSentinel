@@ -5,7 +5,7 @@ python-dotenv 의존성 없이 표준 라이브러리만으로 작동.
 설치되어 있으면 그것 사용 (더 정확한 파싱).
 
 검색 위치 (순서대로 첫 매칭):
-  1. 환경변수 AISLOP_DOTENV (명시적 경로)
+  1. 환경변수 PKGSENTINEL_DOTENV (구 AISLOP_DOTENV fallback, 명시적 경로)
   2. <cwd>/.env
   3. <repo_root>/.env
 
@@ -19,13 +19,15 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from ._env import getenv
+
 _LOADED: bool = False
 
 
 def _candidates() -> list[Path]:
     paths: list[Path] = []
     # 1) 명시적 경로
-    explicit = os.environ.get("AISLOP_DOTENV")
+    explicit = getenv("PKGSENTINEL_DOTENV")
     if explicit:
         paths.append(Path(explicit))
 
@@ -152,7 +154,7 @@ def report() -> dict:
     # 주요 키 보유 여부 (값 마스킹)
     interesting = [
         "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GOOGLE_API_KEY",
-        "GITHUB_TOKEN", "AISLOP_DB_KEY",
+        "GITHUB_TOKEN", "PKGSENTINEL_DB_KEY",
     ]
     info["env_keys"] = {}
     for k in interesting:

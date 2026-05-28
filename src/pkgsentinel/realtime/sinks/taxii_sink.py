@@ -52,7 +52,7 @@ class TaxiiSink:
     bearer_token: str | None = None
 
     timeout: int = 15
-    user_agent: str = "ai-slopsq-taxii/1.0"
+    user_agent: str = "pkgsentinel-taxii/1.0"
     # 추가 헤더 (예: X-Tenant-ID 등 커스텀)
     extra_headers: dict[str, str] = field(default_factory=dict)
 

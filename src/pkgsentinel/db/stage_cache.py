@@ -6,19 +6,19 @@ Stage-level 분석 캐시.
 선택적으로 재실행하기 위함.
 
 지원 stage 와 의존성 (stage_version 해시 입력):
-    stage_2_behavior         pkgsentinel.stages.api_catalog
+    stage_08_behavior         pkgsentinel.stages.api_catalog
                              pkgsentinel.stages.stage2_behavior
-    stage_2b_string          pkgsentinel.stages.string_analysis
-    stage_3b_version_diff    pkgsentinel.stages.stage3b_full_diff
+    stage_09_string          pkgsentinel.stages.string_analysis
+    stage_10_version_diff    pkgsentinel.stages.stage3b_full_diff
                              pkgsentinel.stages.stage1b_full_source
-    stage_4_ttp              pkgsentinel.stages.stage4_ttp_match
+    stage_11_ttp              pkgsentinel.stages.stage4_ttp_match
                              pkgsentinel.knowledge.mitre_attack
-    stage_4c_ind47           pkgsentinel.stages.indicator_matcher
+    stage_13_ind47           pkgsentinel.stages.indicator_matcher
                              pkgsentinel.knowledge.malicious_indicators
-    stage_4d_taint           pkgsentinel.stages.taint_slicer
-    stage_4e_sequence        pkgsentinel.stages.sequence_patterns
-    stage_0a_threat_filter   feed_version (DB)
-    stage_0b_attack_history  feed_version (DB)
+    stage_15_taint           pkgsentinel.stages.taint_slicer
+    stage_14_sequence        pkgsentinel.stages.sequence_patterns
+    stage_01_threat_filter   feed_version (DB)
+    stage_02_attack_history  feed_version (DB)
 
 Stage 5 (LLM review) 는 원리상 캐시하지 않음 — 동일 입력에도 모델이 다른 응답을
 줄 수 있고, 재현 불가능한 응답을 캐시하면 디버깅이 어려움.
@@ -42,36 +42,36 @@ from .threat_db import ThreatDB, get_default_db
 # 모듈 한 줄만 바뀌어도 stage_version 이 달라져 캐시 미스.
 
 _STAGE_DEPS: dict[str, tuple[str, ...]] = {
-    "stage_2_behavior": (
+    "stage_08_behavior": (
         "pkgsentinel.stages.api_catalog",
         "pkgsentinel.stages.stage2_behavior",
     ),
-    "stage_2b_string": (
+    "stage_09_string": (
         "pkgsentinel.stages.string_analysis",
     ),
-    "stage_3b_version_diff": (
+    "stage_10_version_diff": (
         "pkgsentinel.stages.stage3b_full_diff",
         "pkgsentinel.stages.stage1b_full_source",
     ),
-    "stage_4_ttp": (
+    "stage_11_ttp": (
         "pkgsentinel.stages.stage4_ttp_match",
         "pkgsentinel.knowledge.mitre_attack",
     ),
-    "stage_4c_ind47": (
+    "stage_13_ind47": (
         "pkgsentinel.stages.indicator_matcher",
         "pkgsentinel.knowledge.malicious_indicators",
     ),
-    "stage_4d_taint": (
+    "stage_15_taint": (
         "pkgsentinel.stages.taint_slicer",
     ),
-    "stage_4e_sequence": (
+    "stage_14_sequence": (
         "pkgsentinel.stages.sequence_patterns",
     ),
     # threat_filter / attack_history 는 모듈 + DB 의 feed_version 둘 다 의존
-    "stage_0a_threat_filter": (
+    "stage_01_threat_filter": (
         "pkgsentinel.stages.stage0_threat_filter",
     ),
-    "stage_0b_attack_history": (
+    "stage_02_attack_history": (
         "pkgsentinel.stages.stage0b_attack_history",
     ),
 }
@@ -101,7 +101,7 @@ def stage_version_for(stage: str, feed_version: str | None = None) -> str:
         # 정의되지 않은 stage 는 stage 이름을 hash 화 (캐시 사실상 disabled)
         return hashlib.sha256(stage.encode()).hexdigest()[:16]
     base = _module_files_hash(deps)
-    if stage in ("stage_0a_threat_filter", "stage_0b_attack_history") and feed_version:
+    if stage in ("stage_01_threat_filter", "stage_02_attack_history") and feed_version:
         h = hashlib.sha256(f"{base}|{feed_version}".encode()).hexdigest()[:16]
         return h
     return base

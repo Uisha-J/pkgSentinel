@@ -164,7 +164,7 @@ def fetch_scorecard(repo_slug: str, timeout: int = 8) -> ScorecardReport:
     url = _SCORECARD_API.format(slug=repo_slug)
     try:
         req = urllib.request.Request(
-            url, headers={"User-Agent": "slop-detector/2.0 scorecard"}
+            url, headers={"User-Agent": "pkgsentinel/2.0 scorecard"}
         )
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             data = json.loads(resp.read().decode("utf-8"))
@@ -257,7 +257,7 @@ def extract_risk_signals(report: ScorecardReport) -> list[str]:
 if __name__ == "__main__":
     import sys
 
-    # 사용법: python -m detector.stages.stage_scorecard <slug-or-url>
+    # 사용법: python -m pkgsentinel.stages.stage_scorecard <slug-or-url>
     arg = sys.argv[1] if len(sys.argv) > 1 else "anthropics/anthropic-sdk-python"
     if arg.startswith(("http", "git")):
         slug = extract_github_repo(arg)

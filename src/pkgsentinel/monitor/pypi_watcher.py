@@ -80,7 +80,7 @@ def _to_release_events_xmlrpc(rows: Iterable[dict]) -> list[ReleaseEvent]:
 
 def _fetch_rss() -> list[dict]:
     req = urllib.request.Request(
-        PYPI_RSS, headers={"User-Agent": "ai-slopsq/2.0 pypi-watcher"},
+        PYPI_RSS, headers={"User-Agent": "pkgsentinel/2.0 pypi-watcher"},
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         body = resp.read()

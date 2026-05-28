@@ -25,7 +25,7 @@ sys.path.insert(0, str(ROOT / "src"))
 def main():
     td = tempfile.mkdtemp(prefix="monitor_smoke_")
     db_path = Path(td) / "smoke.sqlcipher"
-    os.environ["AISLOP_DB_KEY"] = "smoke-test-key"
+    os.environ["PKGSENTINEL_DB_KEY"] = "smoke-test-key"
 
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB

@@ -36,8 +36,8 @@ sudo -u pkgsentinel /opt/pkgsentinel/.venv/bin/pip install -e /opt/pkgsentinel
 
 # 3. 환경 파일 (DB 키 + 옵션 sink 설정)
 sudo install -m 0640 -o root -g pkgsentinel /dev/stdin /etc/pkgsentinel/env <<'EOF'
-# 필수 — DB 마스터 패스프레이즈 (또는 AISLOP_KMS=aws 로 외부 KMS)
-AISLOP_DB_KEY=__GENERATE_AND_REPLACE__
+# 필수 — DB 마스터 패스프레이즈 (또는 PKGSENTINEL_KMS=aws 로 외부 KMS)
+PKGSENTINEL_DB_KEY=__GENERATE_AND_REPLACE__
 
 # 필수 — Stage 5 LLM
 ANTHROPIC_API_KEY=__YOUR_KEY__
@@ -47,16 +47,16 @@ ANTHROPIC_API_KEY=__YOUR_KEY__
 PKGSENTINEL_HMAC_SECRET=__GENERATE_AND_REPLACE__
 
 # 선택 — sink. 비어 두면 sink 비활성, verdict 만 DB 에 적재.
-AISLOP_STIX_OUT_DIR=/var/lib/pkgsentinel/sinks/stix
-AISLOP_FALCO_OUT_DIR=/var/lib/pkgsentinel/sinks/falco
-# AISLOP_WEBHOOK_URL=https://siem.example.com/in
-# AISLOP_WEBHOOK_SECRET=<hmac secret>
-# AISLOP_PMG_OUT_DIR=/var/lib/pkgsentinel/sinks/pmg
+PKGSENTINEL_STIX_OUT_DIR=/var/lib/pkgsentinel/sinks/stix
+PKGSENTINEL_FALCO_OUT_DIR=/var/lib/pkgsentinel/sinks/falco
+# PKGSENTINEL_WEBHOOK_URL=https://siem.example.com/in
+# PKGSENTINEL_WEBHOOK_SECRET=<hmac secret>
+# PKGSENTINEL_PMG_OUT_DIR=/var/lib/pkgsentinel/sinks/pmg
 # TAXII 2.1 (collection objects endpoint) — Basic 또는 Bearer 중 택1
-# AISLOP_TAXII_URL=https://taxii.example.com/api/v1/collections/agentic/objects/
-# AISLOP_TAXII_USER=<basic-user>     # Basic auth
-# AISLOP_TAXII_PASS=<basic-pass>     # Basic auth
-# AISLOP_TAXII_BEARER=<jwt>          # OpenCTI/MISP 류 (우선)
+# PKGSENTINEL_TAXII_URL=https://taxii.example.com/api/v1/collections/agentic/objects/
+# PKGSENTINEL_TAXII_USER=<basic-user>     # Basic auth
+# PKGSENTINEL_TAXII_PASS=<basic-pass>     # Basic auth
+# PKGSENTINEL_TAXII_BEARER=<jwt>          # OpenCTI/MISP 류 (우선)
 EOF
 
 # 4. 캐시 빌드 (한 번만; refresh-feeds.timer 가 이후 갱신)

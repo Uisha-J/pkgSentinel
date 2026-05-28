@@ -68,6 +68,10 @@ class FullSourceExtract:
     skipped: list[tuple[str, str]] = field(default_factory=list)  # (path, reason)
     error: str | None = None
 
+    # 바이너리 파일이 있을 때만 보관 — Stage 7 이 재다운로드 없이 재사용.
+    # (바이너리 없는 일반 패키지는 None 으로 두어 메모리 점유 방지.)
+    archive_bytes: bytes | None = None
+
 
 # ─────────────── 파일 분류 ───────────────
 
@@ -122,7 +126,7 @@ def _assign_tier(name: str, ecosystem: Ecosystem) -> int:
 # ─────────────── 다운로드 ───────────────
 
 def _download(url: str, timeout: int = 60) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": "slop-detector/2.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "pkgsentinel/2.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         data = resp.read(MAX_ARCHIVE_SIZE + 1)
     if len(data) > MAX_ARCHIVE_SIZE:
@@ -266,6 +270,10 @@ def extract_all(
     result.binary_files = bins
     result.all_file_names = names
     result.skipped = skipped
+    # 바이너리 분석(Stage 7)이 동일 아카이브를 다시 받지 않도록, 바이너리가
+    # 있을 때만 원본 bytes 를 보관한다.
+    if bins:
+        result.archive_bytes = data
     return result
 
 

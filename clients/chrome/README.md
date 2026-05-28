@@ -37,14 +37,14 @@ AI 챗봇 응답의 패키지 추천을 **실시간으로 슬롭스쿼팅(악성
 
 익스텐션 아이콘 클릭 → 팝업 하단:
 
-- **HMAC Secret** *(선택)* — 어댑터 `AISLOP_HMAC_SECRET`와 같은 값 입력 시 인증 활성화. 비우면 인증 안 함 (개발 모드)
+- **HMAC Secret** *(선택)* — 어댑터 `PKGSENTINEL_HMAC_SECRET`와 같은 값 입력 시 인증 활성화. 비우면 인증 안 함 (개발 모드)
 
 ## 보안
 - **권한**: `storage` 1개만 + 명시된 호스트 (와일드카드 남용 없음)
 - **외부 통신**: `http://localhost:8001` (어댑터)로만, 외부 서비스 직접 호출 없음
 - **XSS 방어**: LLM 응답의 모든 텍스트 `_esc()`로 HTML escape
 - **CSP 우회 없음** — `eval`, `document.write`, 원격 스크립트 로드 X
-- **HMAC 인증** *(옵션)* — `AISLOP_HMAC_SECRET` 설정 시 WebCrypto로 SHA-256 서명, replay 방지(±5분), timing-safe 비교
+- **HMAC 인증** *(옵션)* — `PKGSENTINEL_HMAC_SECRET` 설정 시 WebCrypto로 SHA-256 서명, replay 방지(±5분), timing-safe 비교
 
 ## 아키텍처
 ```

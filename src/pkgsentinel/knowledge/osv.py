@@ -63,7 +63,7 @@ class AttackPattern:
 
 def _download_zip(url: str, timeout: int = 120) -> bytes:
     print(f"[OSV] downloading {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "slop-detector/2.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "pkgsentinel/2.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return resp.read()
 

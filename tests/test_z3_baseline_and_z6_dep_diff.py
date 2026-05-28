@@ -27,12 +27,12 @@ from pkgsentinel.stages.stage_sandbox import ObservedBehavior
 
 def _setup():
     td = tempfile.mkdtemp(prefix="z3_z6_")
-    os.environ["AISLOP_DB_KEY"] = "z3-z6-test"
+    os.environ["PKGSENTINEL_DB_KEY"] = "z3-z6-test"
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
-        passphrase=os.environ["AISLOP_DB_KEY"],
+        passphrase=os.environ["PKGSENTINEL_DB_KEY"],
     )
     return td
 

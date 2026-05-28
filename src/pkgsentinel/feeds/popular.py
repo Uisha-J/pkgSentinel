@@ -39,7 +39,7 @@ def _http_json(url: str, timeout: int = 60) -> tuple[dict | list, str]:
     if not url.startswith("https://"):
         raise ValueError(f"feed URL must be HTTPS: {url}")
     print(f"[POPULAR] downloading {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "ai-slopsq/2.0 popular"})
+    req = urllib.request.Request(url, headers={"User-Agent": "pkgsentinel/2.0 popular"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         body = resp.read()
     sha = hashlib.sha256(body).hexdigest()

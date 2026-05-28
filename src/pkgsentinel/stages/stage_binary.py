@@ -227,7 +227,7 @@ def extract_and_analyze(
 if __name__ == "__main__":
     import sys
     if len(sys.argv) < 2:
-        print("usage: python -m detector.stages.stage_binary <path-to-binary>")
+        print("usage: python -m pkgsentinel.stages.stage_binary <path-to-binary>")
         sys.exit(1)
     with open(sys.argv[1], "rb") as f:
         data = f.read()

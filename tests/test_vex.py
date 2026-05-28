@@ -94,11 +94,11 @@ def test_metadata_properties():
     bom = to_cyclonedx(rep)
     props = {p["name"]: p["value"] for p in bom["components"][0]["properties"]}
     expected = {
-        "ai-slopsq:verdict": "SUSPICIOUS",
-        "ai-slopsq:source_files": "3",
-        "ai-slopsq:scorecard_score": "7.0",
-        "ai-slopsq:slsa_level": "L2",
-        "ai-slopsq:ssdf_pass": "9/11",
+        "pkgsentinel:verdict": "SUSPICIOUS",
+        "pkgsentinel:source_files": "3",
+        "pkgsentinel:scorecard_score": "7.0",
+        "pkgsentinel:slsa_level": "L2",
+        "pkgsentinel:ssdf_pass": "9/11",
     }
     ok = True
     for k, v in expected.items():

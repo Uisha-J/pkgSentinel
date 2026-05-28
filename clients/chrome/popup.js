@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const secret = hmacInput.value.trim();
     chrome.storage.sync.set({ hmacSecret: secret }, () => {
       statusEl.textContent = secret
-        ? `저장됨 (${secret.length}자) — 어댑터 AISLOP_HMAC_SECRET 와 동일해야 함`
+        ? `저장됨 (${secret.length}자) — 어댑터 PKGSENTINEL_HMAC_SECRET 와 동일해야 함`
         : "삭제됨 — 인증 비활성화";
       hmacInput.value = "";
     });

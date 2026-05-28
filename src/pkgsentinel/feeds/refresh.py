@@ -2,13 +2,13 @@
 모든 위협 피드 통합 갱신 CLI.
 
 사용 예:
-  python -m detector.feeds.refresh --all
-  python -m detector.feeds.refresh --osv --popular
-  python -m detector.feeds.refresh --osv-pypi --no-skip   # 강제 재적재
-  python -m detector.feeds.refresh --status               # 갱신 상태만 확인
+  python -m pkgsentinel.feeds.refresh --all
+  python -m pkgsentinel.feeds.refresh --osv --popular
+  python -m pkgsentinel.feeds.refresh --osv-pypi --no-skip   # 강제 재적재
+  python -m pkgsentinel.feeds.refresh --status               # 갱신 상태만 확인
 
 cron 예시 (1일 1회):
-  0 3 * * * AISLOP_DB_KEY="..." python -m detector.feeds.refresh --all
+  0 3 * * * PKGSENTINEL_DB_KEY="..." python -m pkgsentinel.feeds.refresh --all
 """
 from __future__ import annotations
 
@@ -126,7 +126,7 @@ def _argparser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Threat feed refresh")
     p.add_argument("--db", default=str(DEFAULT_DB_PATH))
     p.add_argument("--passphrase", default=None,
-                   help="명시 (기본: env AISLOP_DB_KEY)")
+                   help="명시 (기본: env PKGSENTINEL_DB_KEY, 구 AISLOP_DB_KEY fallback)")
 
     # 선택 플래그
     p.add_argument("--all", action="store_true", help="모든 피드 갱신")

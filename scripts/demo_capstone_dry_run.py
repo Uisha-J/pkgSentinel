@@ -166,12 +166,12 @@ def run_legitimate():
 
     from pkgsentinel.pipeline import run_pipeline
     td = tempfile.mkdtemp(prefix="demo_legit_")
-    os.environ["AISLOP_DB_KEY"] = "demo-dry-run-key"
+    os.environ["PKGSENTINEL_DB_KEY"] = "demo-dry-run-key"
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
-        passphrase=os.environ["AISLOP_DB_KEY"],
+        passphrase=os.environ["PKGSENTINEL_DB_KEY"],
     )
 
     t0 = time.time()

@@ -20,7 +20,7 @@ services:
     ports:
       - "${PKGSENTINEL_PORT:-8787}:8787"
     environment:
-      AISLOP_DB_KEY:            "${AISLOP_DB_KEY:?missing AISLOP_DB_KEY}"
+      PKGSENTINEL_DB_KEY:            "${PKGSENTINEL_DB_KEY:?missing PKGSENTINEL_DB_KEY}"
       PKGSENTINEL_HMAC_SECRET:  "${PKGSENTINEL_HMAC_SECRET:?missing HMAC secret}"
       ANTHROPIC_API_KEY:        "${ANTHROPIC_API_KEY:-}"
       OPENAI_API_KEY:           "${OPENAI_API_KEY:-}"

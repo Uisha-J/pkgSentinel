@@ -47,11 +47,11 @@ def main():
 
     td = tempfile.mkdtemp(prefix="monitor_ext_")
     db_path = Path(td) / "smoke.sqlcipher"
-    os.environ["AISLOP_DB_KEY"] = "monitor-ext-smoke-key"
+    os.environ["PKGSENTINEL_DB_KEY"] = "monitor-ext-smoke-key"
 
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
-    db = ThreatDB(db_path, passphrase=os.environ["AISLOP_DB_KEY"])
+    db = ThreatDB(db_path, passphrase=os.environ["PKGSENTINEL_DB_KEY"])
     tdb_mod._default_db = db
 
     print("=== Monitor extended smoke ===")

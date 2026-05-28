@@ -73,7 +73,7 @@ TIMEOUT = 60
 
 def _download(url: str) -> bytes:
     req = urllib.request.Request(
-        url, headers={"User-Agent": "slop-detector/2.0"}
+        url, headers={"User-Agent": "pkgsentinel/2.0"}
     )
     with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
         data = resp.read(MAX_ARCHIVE_SIZE + 1)

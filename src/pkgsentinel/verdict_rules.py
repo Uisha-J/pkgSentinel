@@ -4,7 +4,7 @@ Verdict 결정 규칙.
 설계 원칙:
 - Evidence 리스트와 스테이지 결과만으로 결정.
 - 패키지 나이 / 인기도 / 다운로드 수 일절 참조하지 않음.
-- 부분 판정 금지: Stage 2/4/5 중 하나라도 실패하면 ERROR.
+- 부분 판정 금지: 필수 stage (08 Behavior / 11 TTP / 16 LLM) 중 하나라도 실패하면 ERROR.
 
 LLM 처리 정책:
 - **BENIGN LLM verdict 는 weak TTP 신호 (similarity 0.70~0.85, severity LOW)
@@ -24,8 +24,8 @@ LLM 처리 정책:
                        OR LLM-only suspicious (confidence ≥ 0.5)
     CLEAN        : all stages passed AND evidence list empty
                        OR weak TTP + LLM=BENIGN (BENIGN overrides)
-    ERROR        : Stage 2/4/5 중 하나 이상 실패
-    CANNOT_ANALYZE : Stage 0에서 레지스트리 미등록 확정
+    ERROR        : 필수 stage (08 Behavior / 11 TTP / 16 LLM) 중 하나 이상 실패
+    CANNOT_ANALYZE : Stage 00 에서 레지스트리 미등록 확정
 """
 from __future__ import annotations
 
@@ -42,9 +42,9 @@ from .schema import (
 # ─────────────────────── 설정 상수 ───────────────────────
 
 REQUIRED_STAGES_FOR_JUDGMENT = {
-    "stage_2_behavior_sequence",
-    "stage_4_ttp_matching",
-    "stage_5_llm_review",
+    "stage_08_behavior_sequence",
+    "stage_11_ttp_matching",
+    "stage_16_llm_review",
 }
 
 MALICIOUS_CONFIDENCE_THRESHOLD = 0.85

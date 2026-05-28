@@ -6,7 +6,7 @@
 # 실행 (단독):
 #   docker run -d --name pkgsentinel \
 #     -p 8787:8787 \
-#     -e AISLOP_DB_KEY=$(openssl rand -hex 32) \
+#     -e PKGSENTINEL_DB_KEY=$(openssl rand -hex 32) \
 #     -e PKGSENTINEL_HMAC_SECRET=$(openssl rand -hex 32) \
 #     -e ANTHROPIC_API_KEY=sk-ant-... \
 #     -v pkgsentinel-data:/var/lib/pkgsentinel \

@@ -296,7 +296,7 @@
 
 **사용 예:**
 ```
-python -m detector.benchmarks.harness data/npm_benchmark.csv \
+python -m pkgsentinel.benchmarks.harness data/npm_benchmark.csv \
     --ecosystem npm --max 500 --output results.jsonl --summary summary.json
 ```
 
@@ -356,13 +356,13 @@ python -m detector.benchmarks.harness data/npm_benchmark.csv \
 
 - OSV 캐시는 2026-04-24 시점. 필요 시 재수집:
   ```
-  python -m detector.knowledge.osv PyPI
-  python -m detector.knowledge.osv npm
+  python -m pkgsentinel.knowledge.osv PyPI
+  python -m pkgsentinel.knowledge.osv npm
   ```
 - MITRE 캐시는 2026-04-24 시점. 최신 갱신 필요 시:
   ```
-  python -m detector.knowledge.mitre_attack
-  python -m detector.knowledge.embedder
+  python -m pkgsentinel.knowledge.mitre_attack
+  python -m pkgsentinel.knowledge.embedder
   ```
 - Python 가상환경 및 설치된 패키지 확인:
   - `tree-sitter`, `tree-sitter-javascript`

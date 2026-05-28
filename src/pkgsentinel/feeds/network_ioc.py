@@ -32,7 +32,7 @@ def _http_get(url: str, timeout: int = 60) -> tuple[bytes, str]:
     if not url.startswith("https://"):
         raise ValueError(f"feed URL must be HTTPS: {url}")
     print(f"[IOC] downloading {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "ai-slopsq/2.0 ioc"})
+    req = urllib.request.Request(url, headers={"User-Agent": "pkgsentinel/2.0 ioc"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         body = resp.read()
     return body, hashlib.sha256(body).hexdigest()

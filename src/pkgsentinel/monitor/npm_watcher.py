@@ -34,7 +34,7 @@ NPM_REGISTRY = "https://registry.npmjs.org"
 
 def _http_get(url: str, timeout: int = 60) -> bytes:
     req = urllib.request.Request(
-        url, headers={"User-Agent": "ai-slopsq/2.0 npm-watcher"},
+        url, headers={"User-Agent": "pkgsentinel/2.0 npm-watcher"},
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return resp.read()

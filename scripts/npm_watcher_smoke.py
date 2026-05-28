@@ -26,11 +26,11 @@ def main():
 
     td = tempfile.mkdtemp(prefix="npm_smoke_")
     db_path = Path(td) / "smoke.sqlcipher"
-    os.environ["AISLOP_DB_KEY"] = "npm-smoke-key"
+    os.environ["PKGSENTINEL_DB_KEY"] = "npm-smoke-key"
 
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
-    db = ThreatDB(db_path, passphrase=os.environ["AISLOP_DB_KEY"])
+    db = ThreatDB(db_path, passphrase=os.environ["PKGSENTINEL_DB_KEY"])
     tdb_mod._default_db = db
 
     from pkgsentinel.monitor.npm_watcher import poll_once as poll_npm

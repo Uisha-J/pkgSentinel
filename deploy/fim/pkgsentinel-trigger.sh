@@ -5,7 +5,7 @@
 #
 # 환경변수 (/etc/pkgsentinel/env 또는 wazuh-manager systemd unit):
 #   PKGSENTINEL_URL=https://pkgsentinel.internal/api/v1/runtime-alert
-#   PKGSENTINEL_SECRET=<HMAC shared secret — pkgsentinel 의 AISLOP_WEBHOOK_SECRET 과 동일>
+#   PKGSENTINEL_SECRET=<HMAC shared secret — pkgsentinel 의 PKGSENTINEL_WEBHOOK_SECRET 과 동일>
 set -euo pipefail
 
 # Wazuh 가 전달하는 위치 인자

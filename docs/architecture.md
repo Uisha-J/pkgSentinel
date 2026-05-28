@@ -57,6 +57,16 @@
 
 **자동 갱신 파이프라인이 필수.** 현직자 조언: "DB 수집하고 그 DB는 계속 어떻게 갱신이 될 거고 자동화해서."
 
+> **구현 현황 (2026-05):** 위 표는 목표 설계다. 현재 구현은 두 갈래로 나뉜다.
+> - **OSV / popular / IoC 피드** — `pkgsentinel-cron refresh-feeds` (매일 03:00) 로
+>   실제 자동 갱신된다.
+> - **MITRE ATT&CK / ATLAS / OWASP-LLM TTP 지식 베이스** — 현재는 수동 수집기
+>   (`python -m pkgsentinel.knowledge.mitre_attack` → `...embedder`) 로 생성한
+>   **정적 스냅샷을 리포지토리에 커밋**해 사용한다 (`knowledge/cache/*.json`).
+>   파이프라인은 이 캐시를 로드하며 `kb_versions` 는 `"cached-local"` 로 보고된다.
+>   주기적 재수집·재임베딩의 cron 편입은 **로드맵 항목**이며 아직 자동화되지 않았다.
+> MITRE ATLAS / OWASP-LLM / CVE·CWE 의 동적 수집도 부분 구현 상태다.
+
 ### 2.2 분석 캐시 DB (Analysis Cache) — 성능 최적화
 
 같은 패키지+버전을 반복 분석하지 않기 위한 캐시. **판정 근거가 아님.**
@@ -192,7 +202,39 @@ Input: package_name + ecosystem (PyPI | npm) + version (optional)
   └─ (package, version) → Evidence + Verdict
 ```
 
-**Stage 2, 4, 5 중 하나라도 실패하면 `verdict: ERROR`.** 부분 판정 금지.
+**필수 stage (Behavior / TTP / LLM) 중 하나라도 실패하면 `verdict: ERROR`.** 부분 판정 금지.
+
+### 4.1 구현 매핑 (개념 Stage → 실제 stage 식별자)
+
+위 다이어그램은 개념 모델이다. 실제 `run_pipeline()` 은 이를 실행 순서대로
+세분화한 stage 식별자(`stage_00` ~ `stage_20`)로 구현한다 (`StageResult.stage`):
+
+| 식별자 | 내용 | 비고 |
+|---|---|---|
+| `stage_00_registry` | 레지스트리 존재 확인 | 미등록 → CANNOT_ANALYZE |
+| `stage_01_threat_filter` | known_malicious / popular / typosquat 게이트 | exact match → MALICIOUS 단축 |
+| `stage_02_attack_history` | OSV 공격 이력 조회 | |
+| `stage_03_scorecard` | OpenSSF Scorecard | 참고 메타 |
+| `stage_04_slsa` | SLSA 프로비넌스 추정 | 참고 메타 |
+| `stage_05_cache_lookup` | 분석 캐시 조회 | hit 시 즉시 반환 |
+| `stage_06_full_source` | 전 파일 소스 추출 (Tier 1+2+3) | |
+| `stage_07_agentic` | Agentic capability 분류 | agentic 게이트 |
+| `stage_08_behavior_sequence` | Behavior Sequence (AST) | **필수** |
+| `stage_09_string_analysis` | 문자열 상수 풀 분석 | |
+| `stage_10_version_diff` | 전 파일 버전 diff | |
+| `stage_11_ttp_matching` | TTP 매칭 (임베딩 + 규칙) | **필수** |
+| `stage_12_anomaly_detection` | 카테고리 이상 탐지 | |
+| `stage_13_indicator_matcher` | 47-indicator 매처 | |
+| `stage_14_sequence_mining` | Sequential pattern mining | |
+| `stage_15_taint_slicing` | Taint slicing (source→sink) | |
+| `stage_16_llm_review` | LLM 이중 검증 | **필수** |
+| `stage_17_dependencies` | 의존성 재귀 (`--deps`) | 옵션 |
+| `stage_18_binary` | 바이너리 분석 | 바이너리 존재 시 |
+| `stage_19_sandbox` | 샌드박스 동적 분석 (`--sandbox`) | 옵션 |
+| `stage_20_ssdf_compliance` | NIST SSDF 준수 체크 | 참고 메타 |
+
+> 캐시 키(`stage_cache.stage`)는 동일 번호 체계를 쓰되 접미사가 짧다
+> (예: 리포트 `stage_08_behavior_sequence` ↔ 캐시 `stage_08_behavior`).
 
 ---
 
@@ -504,7 +546,8 @@ flowchart LR
 - **`threat_db`** — known_malicious, known_popular, network_blocklist,
   feed_meta, analyses, stage_cache, cache_invalidation_log 모두 한 DB
   (단, 페이지 암호화는 동일).
-- **AISLOP_DB_KEY** 환경변수 또는 `~/.agentic/key` 파일로 DB 패스워드 주입.
+- **PKGSENTINEL_DB_KEY** 환경변수 (구 `AISLOP_DB_KEY` 도 fallback 으로 인식)
+  또는 `~/.pkgsentinel/db.key` 파일로 DB 패스워드 주입.
 
 ### 8.5.3 배포 예시
 

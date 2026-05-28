@@ -340,7 +340,7 @@ def _pick_previous_versions(
 def _try_load_cached_prev(
     pkg: str, eco, prev_v: str,
 ) -> tuple[dict[str, set[str]] | None, dict[str, FullSourceFile] | None]:
-    """직전 버전의 stage_2_behavior 캐시에서 (apis_by_file, files_partial) 복원.
+    """직전 버전의 stage_08_behavior 캐시에서 (apis_by_file, files_partial) 복원.
 
     Stage cache 에 BehaviorReport 가 to_dict 직렬화로 저장돼 있으면 그대로 로드.
     - apis_by_file: {정규화된 path: {API 호출명, ...}}
@@ -365,7 +365,7 @@ def _try_load_cached_prev(
             package=pkg,
             ecosystem=getattr(eco, "value", str(eco)),
             version=prev_v,
-            stage="stage_2_behavior",
+            stage="stage_08_behavior",
         )
         # archive_sha256 일치 검증은 skip — 직전 버전 archive 가 안 바뀌었을
         # 거라는 가정. 만약 변경 시 stage_version 해시도 함께 바뀌므로 cache miss.

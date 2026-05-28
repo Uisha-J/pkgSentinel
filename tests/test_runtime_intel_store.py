@@ -19,12 +19,12 @@ from pkgsentinel.db.runtime_intel import (
 
 def _setup():
     td = tempfile.mkdtemp(prefix="runtime_intel_")
-    os.environ["AISLOP_DB_KEY"] = "runtime-intel-test"
+    os.environ["PKGSENTINEL_DB_KEY"] = "runtime-intel-test"
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
-        passphrase=os.environ["AISLOP_DB_KEY"],
+        passphrase=os.environ["PKGSENTINEL_DB_KEY"],
     )
     return td
 

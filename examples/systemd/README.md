@@ -42,7 +42,7 @@ sudo ln -sf /var/lib/pkgsentinel/venv/bin/pkgsentinel-feeds /usr/local/bin/
 ```bash
 sudo install -m 0600 -o pkgsentinel -g pkgsentinel /dev/null /etc/pkgsentinel/env
 # /etc/pkgsentinel/env 내용 (예시 — 실제 비밀번호로 교체):
-#   AISLOP_DB_KEY=replace-with-strong-random-passphrase
+#   PKGSENTINEL_DB_KEY=replace-with-strong-random-passphrase
 #   ANTHROPIC_API_KEY=sk-ant-...   # LLM 모드 사용 시
 ```
 

@@ -33,7 +33,7 @@ from .threat_db import ThreatDB, get_default_db
 
 # ─────────────── 버전 해시 헬퍼 ───────────────
 
-# 엔진 자체 버전. detector/__init__.py 에 박을 수도 있지만 여기 단일소스.
+# 엔진 자체 버전. pkgsentinel/__init__.py 에 박을 수도 있지만 여기 단일소스.
 ENGINE_VERSION = "2.0.0"
 
 

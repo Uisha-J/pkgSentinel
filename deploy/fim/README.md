@@ -293,7 +293,7 @@ pkgsentinel-intel export-osv --out-dir /tmp/osv-pr-batch-2026-05
 
 ## 6. 보안 고려사항
 
-- **HMAC 공유 secret** — pkgsentinel `AISLOP_WEBHOOK_SECRET` 환경변수와 Wazuh
+- **HMAC 공유 secret** — pkgsentinel `PKGSENTINEL_WEBHOOK_SECRET` 환경변수와 Wazuh
   `PKGSENTINEL_SECRET` 환경변수가 *동일* 해야. KMS (#3.4 KMS backends) 사용 권장.
 - **replay 방지** — timestamp ±5분 외 alert 자동 거부 (hmac_verify 가 처리).
 - **TLS 강제** — pkgsentinel API 는 HTTPS 만. self-signed 또는 Let's Encrypt.

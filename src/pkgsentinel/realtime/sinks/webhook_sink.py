@@ -71,7 +71,7 @@ class WebhookSink:
             data=body, method="POST",
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "ai-slopsq/2.0",
+                "User-Agent": "pkgsentinel/2.0",
                 "X-PkgSentinel-Event": self.event_name,
                 "X-PkgSentinel-Timestamp": str(ts),
                 "X-PkgSentinel-Signature": f"sha256={sig}",

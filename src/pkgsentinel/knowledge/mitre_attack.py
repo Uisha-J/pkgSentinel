@@ -101,7 +101,7 @@ def _get_tactics(obj: dict) -> list[str]:
 def download_raw(url: str = ENTERPRISE_ATTACK_URL) -> dict:
     """MITRE ATT&CK 원본 JSON 다운로드."""
     print(f"[MITRE] downloading {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "slop-detector/2.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "pkgsentinel/2.0"})
     with urllib.request.urlopen(req, timeout=60) as resp:
         return json.loads(resp.read().decode("utf-8"))
 

@@ -116,7 +116,7 @@ def _load_index() -> TTPIndex:
     if not emb_path.exists():
         raise FileNotFoundError(
             "임베딩된 TTP 캐시가 없습니다. 먼저 아래 명령으로 생성하세요:\n"
-            "  python -m detector.knowledge.embedder"
+            "  python -m pkgsentinel.knowledge.embedder"
         )
     entries = load_cached(emb_path)
     return TTPIndex(entries)

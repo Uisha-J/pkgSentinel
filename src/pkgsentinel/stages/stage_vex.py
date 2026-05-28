@@ -109,10 +109,10 @@ def _evidence_to_vuln(
             "response": ["update", "rollback"] if state == "exploitable" else [],
         },
         "properties": [
-            {"name": "ai-slopsq:vector_similarity", "value": str(round(e.vector_similarity, 3))},
-            {"name": "ai-slopsq:confidence", "value": str(round(e.confidence, 3))},
-            {"name": "ai-slopsq:llm_model", "value": e.llm_model or ""},
-            {"name": "ai-slopsq:llm_verdict",
+            {"name": "pkgsentinel:vector_similarity", "value": str(round(e.vector_similarity, 3))},
+            {"name": "pkgsentinel:confidence", "value": str(round(e.confidence, 3))},
+            {"name": "pkgsentinel:llm_model", "value": e.llm_model or ""},
+            {"name": "pkgsentinel:llm_verdict",
              "value": e.llm_verdict.value if e.llm_verdict else ""},
         ],
     }
@@ -141,24 +141,24 @@ def to_cyclonedx(report: AnalysisReport) -> dict:
     # Scorecard / SLSA 메타 → component.properties
     pm = report.package_meta or {}
     properties: list[dict] = [
-        {"name": "ai-slopsq:verdict", "value": report.verdict.value},
-        {"name": "ai-slopsq:source_files", "value": str(pm.get("source_files", 0))},
-        {"name": "ai-slopsq:archive_size", "value": str(pm.get("archive_size", 0))},
+        {"name": "pkgsentinel:verdict", "value": report.verdict.value},
+        {"name": "pkgsentinel:source_files", "value": str(pm.get("source_files", 0))},
+        {"name": "pkgsentinel:archive_size", "value": str(pm.get("archive_size", 0))},
     ]
     if "scorecard" in pm and pm["scorecard"].get("overall_score") is not None:
         properties.append({
-            "name": "ai-slopsq:scorecard_score",
+            "name": "pkgsentinel:scorecard_score",
             "value": str(pm["scorecard"]["overall_score"]),
         })
     if "slsa" in pm:
         properties.append({
-            "name": "ai-slopsq:slsa_level",
+            "name": "pkgsentinel:slsa_level",
             "value": pm["slsa"].get("level", "UNKNOWN"),
         })
     if "ssdf" in pm:
         ssdf = pm["ssdf"]
         properties.append({
-            "name": "ai-slopsq:ssdf_pass",
+            "name": "pkgsentinel:ssdf_pass",
             "value": f"{ssdf.get('pass', 0)}/{len(ssdf.get('checks', []))}",
         })
     component["properties"] = properties

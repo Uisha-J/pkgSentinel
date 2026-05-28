@@ -77,7 +77,7 @@ pip install -e ".[dev]"
 ### Initialize the encrypted DB
 
 ```bash
-export AISLOP_DB_KEY="your-strong-passphrase"        # or write to ~/.pkgsentinel/db.key
+export PKGSENTINEL_DB_KEY="your-strong-passphrase"        # or write to ~/.pkgsentinel/db.key
 python -m pkgsentinel.db.threat_db --init
 python -m pkgsentinel.feeds.refresh --all            # ingests OSV / popular / IoC feeds
 ```
@@ -107,9 +107,9 @@ print(report.verdict.value, len(report.evidence), "evidence items")
 ```
 
 Detection signals are emitted to:
-- `AISLOP_STIX_OUT_DIR/` — STIX 2.1 bundles
-- `AISLOP_FALCO_OUT_DIR/` — Falco rule + Tetragon `TracingPolicy` YAML
-- `AISLOP_WEBHOOK_URL` — HMAC-SHA256 signed POST
+- `PKGSENTINEL_STIX_OUT_DIR/` — STIX 2.1 bundles
+- `PKGSENTINEL_FALCO_OUT_DIR/` — Falco rule + Tetragon `TracingPolicy` YAML
+- `PKGSENTINEL_WEBHOOK_URL` — HMAC-SHA256 signed POST
 
 ---
 

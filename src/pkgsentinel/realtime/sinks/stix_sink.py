@@ -22,7 +22,7 @@ import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
-_TOOL_ID = f"identity--{uuid.uuid5(uuid.NAMESPACE_DNS, 'ai-slopsq-detector')}"
+_TOOL_ID = f"identity--{uuid.uuid5(uuid.NAMESPACE_DNS, 'pkgsentinel-detector')}"
 _TOOL_NAME = "pkgsentinel"
 _TOOL_VERSION = "2.0"
 

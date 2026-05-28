@@ -139,16 +139,16 @@
 
 ```bash
 # MITRE ATT&CK 568 techniques
-python -m detector.knowledge.mitre_attack
+python -m pkgsentinel.knowledge.mitre_attack
 
 # 임베딩 생성 (Sentence-Transformers)
-python -m detector.knowledge.embedder
+python -m pkgsentinel.knowledge.embedder
 
 # OSV PyPI (11,164 건)
-python -m detector.knowledge.osv PyPI
+python -m pkgsentinel.knowledge.osv PyPI
 
 # OSV npm (212,465 건)
-python -m detector.knowledge.osv npm
+python -m pkgsentinel.knowledge.osv npm
 ```
 
 ---

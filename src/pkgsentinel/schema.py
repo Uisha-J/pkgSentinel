@@ -204,7 +204,7 @@ class Evidence:
 @dataclass
 class StageResult:
     """각 Stage의 성공/실패와 산출물."""
-    stage: str                              # "stage_2_behavior_sequence" 등
+    stage: str                              # "stage_08_behavior_sequence" 등
     success: bool
     error: str | None = None
     payload: dict = field(default_factory=dict)

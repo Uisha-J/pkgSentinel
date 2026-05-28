@@ -5,13 +5,13 @@ Precision/Recall 벤치마크 하니스.
   - NPM Benchmark (2025): https://arxiv.org/html/2603.27549
     - 6,420 malicious + 7,288 benign npm packages (라벨 포함 CSV)
   - PyPI dataset (논문 별첨)
-  - Internal synthetic: detector/tests/test_synthetic_malicious.py
+  - Internal synthetic: scripts/eval_synthetic.py
 
 본 모듈은 데이터셋을 메모리에 적재하지 않고
 "한 줄 = 한 패키지" CSV/JSONL 스트리밍으로 처리.
 
 사용 예:
-  python -m detector.benchmarks.harness data/npm_benchmark.csv \\
+  python -m pkgsentinel.benchmarks.harness data/npm_benchmark.csv \\
       --ecosystem npm --max 100 --output report.json
 """
 from __future__ import annotations

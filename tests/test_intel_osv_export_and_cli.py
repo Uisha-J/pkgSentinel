@@ -27,12 +27,12 @@ from pkgsentinel.intel.osv_export import (
 
 def _setup():
     td = tempfile.mkdtemp(prefix="osv_export_")
-    os.environ["AISLOP_DB_KEY"] = "osv-export-test"
+    os.environ["PKGSENTINEL_DB_KEY"] = "osv-export-test"
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
-        passphrase=os.environ["AISLOP_DB_KEY"],
+        passphrase=os.environ["PKGSENTINEL_DB_KEY"],
     )
     return td
 

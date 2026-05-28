@@ -12,7 +12,7 @@ Group=pkgsentinel
 # Load DB key from systemd credential or environment file (do NOT hardcode).
 # 옵션 A: systemd credential
 #   LoadCredential=db_key:/etc/pkgsentinel/db.key
-#   Environment=AISLOP_DB_KEY=%d/db_key
+#   Environment=PKGSENTINEL_DB_KEY=%d/db_key
 # 옵션 B: env file
 EnvironmentFile=/etc/pkgsentinel/env
 

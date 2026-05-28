@@ -16,7 +16,7 @@
   PKGSENTINEL_DEV_NO_AUTH — "1" 이면 secret 없이 인증 skip (dev 전용, insecure).
   PKGSENTINEL_PORT        — 기본 8787
   PKGSENTINEL_BIND        — 기본 127.0.0.1 (loopback). 외부 노출은 명시적 변경 필요.
-  AISLOP_DB_KEY           — SQLCipher 키 (필수, prod)
+  PKGSENTINEL_DB_KEY      — SQLCipher 키 (필수, prod). 구 AISLOP_DB_KEY 도 fallback.
 
 사용:
   python -m pkgsentinel.server         # dev 서버 (Flask built-in)

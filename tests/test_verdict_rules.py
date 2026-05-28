@@ -79,12 +79,12 @@ def test_cannot_analyze_when_registry_not_found():
 def test_error_when_required_stage_failed():
     partial_fail = [
         StageResult(
-            stage="stage_2_behavior_sequence",
+            stage="stage_08_behavior_sequence",
             success=False,
             error="AST parse failed",
         ),
-        StageResult(stage="stage_4_ttp_matching", success=True),
-        StageResult(stage="stage_5_llm_review", success=True),
+        StageResult(stage="stage_11_ttp_matching", success=True),
+        StageResult(stage="stage_16_llm_review", success=True),
     ]
     assert decide_verdict([], partial_fail) == Verdict.ERROR
 
@@ -216,9 +216,9 @@ def test_evidence_with_failed_required_stage_yields_error():
         llm_verdict=LLMVerdict.MALICIOUS, confidence=0.95,
     )
     partial_fail = [
-        StageResult(stage="stage_2_behavior_sequence", success=False, error="x"),
-        StageResult(stage="stage_4_ttp_matching", success=True),
-        StageResult(stage="stage_5_llm_review", success=True),
+        StageResult(stage="stage_08_behavior_sequence", success=False, error="x"),
+        StageResult(stage="stage_11_ttp_matching", success=True),
+        StageResult(stage="stage_16_llm_review", success=True),
     ]
     assert decide_verdict([e], partial_fail) == Verdict.ERROR
 

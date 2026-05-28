@@ -36,6 +36,7 @@ except ImportError as e:  # pragma: no cover
         "  pip install sqlcipher3\n"
     ) from e
 
+from .._env import getenv
 
 # ─────────────── 기본 경로 / 키 ───────────────
 
@@ -43,7 +44,7 @@ DEFAULT_DB_DIR = Path(__file__).resolve().parent / "data"
 DEFAULT_DB_PATH = DEFAULT_DB_DIR / "threat_db.sqlcipher"
 
 # 환경변수 우선순위 (db/master_key.py 와 통합)
-ENV_KEY = "AISLOP_DB_KEY"
+ENV_KEY = "PKGSENTINEL_DB_KEY"   # 구 AISLOP_DB_KEY 도 _env.getenv fallback 으로 인식
 
 # 페이지 크기 (4096 = SQLCipher 기본값)
 CIPHER_PAGE_SIZE = 4096
@@ -176,7 +177,7 @@ CREATE TABLE IF NOT EXISTS stage_cache (
     package         TEXT NOT NULL,
     ecosystem       TEXT NOT NULL CHECK (ecosystem IN ('PyPI', 'npm')),
     version         TEXT NOT NULL,
-    stage           TEXT NOT NULL,    -- 'stage_2_behavior' / 'stage_4c_ind47' 등
+    stage           TEXT NOT NULL,    -- 'stage_08_behavior' / 'stage_13_ind47' 등
     stage_version   TEXT NOT NULL,    -- 해당 stage 의 dependency hash
     archive_sha256  TEXT,             -- 본 stage 가 본 archive sha (변경 시 무효)
     payload_json    TEXT NOT NULL,    -- stage 결과 직렬화
@@ -221,7 +222,7 @@ AFTER INSERT ON known_malicious
 BEGIN
     DELETE FROM stage_cache
     WHERE ecosystem = NEW.ecosystem AND package = NEW.package
-      AND stage IN ('stage_0a_threat_filter', 'stage_0b_attack_history');
+      AND stage IN ('stage_01_threat_filter', 'stage_02_attack_history');
 END;
 
 
@@ -424,11 +425,11 @@ class ThreatDB:
 
 def _resolve_passphrase() -> str | None:
     """우선순위:
-      1. 환경변수 AISLOP_DB_KEY
+      1. 환경변수 PKGSENTINEL_DB_KEY (구 AISLOP_DB_KEY fallback)
       2. ~/.pkgsentinel/db.key (POSIX 0600)
       3. None (호출자 명시 필요)
     """
-    env = os.environ.get(ENV_KEY)
+    env = getenv(ENV_KEY)
     if env:
         return env
     keyfile = Path.home() / ".pkgsentinel" / "db.key"

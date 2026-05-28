@@ -215,9 +215,9 @@ def test_stixsink_basic_when_no_bearer(monkeypatch):
 
 
 def test_sinkconfig_reads_bearer_env(monkeypatch):
-    """monitor.worker.SinkConfig 가 AISLOP_TAXII_BEARER 읽음."""
+    """monitor.worker.SinkConfig 가 PKGSENTINEL_TAXII_BEARER 읽음."""
     print("\n== SinkConfig.from_env reads taxii_bearer ==")
-    monkeypatch.setenv("AISLOP_TAXII_BEARER", "env-bearer-token")
+    monkeypatch.setenv("PKGSENTINEL_TAXII_BEARER", "env-bearer-token")
     from pkgsentinel.monitor.worker import SinkConfig
     cfg = SinkConfig.from_env()
     assert cfg.taxii_bearer == "env-bearer-token"

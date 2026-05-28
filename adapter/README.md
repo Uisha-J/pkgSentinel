@@ -12,7 +12,7 @@ Chrome / VSCode 익스텐션과 `pkgsentinel` V2 엔진을 연결하는 **FastAP
 ```bash
 # 1. 환경변수 설정
 cp ../.env.example ../.env
-# .env 열어서 AISLOP_DB_KEY 와 (선택) ANTHROPIC_API_KEY 입력
+# .env 열어서 PKGSENTINEL_DB_KEY 와 (선택) ANTHROPIC_API_KEY 입력
 
 # 2. Docker 실행 (프로젝트 루트에서)
 cd ..
@@ -37,22 +37,22 @@ curl http://localhost:8001/health
 
 `.env.example` 참고. 핵심:
 
-- **`AISLOP_DB_KEY`** *(필수)* — SQLCipher 패스프레이즈
+- **`PKGSENTINEL_DB_KEY`** *(필수)* — SQLCipher 패스프레이즈
 - **`ANTHROPIC_API_KEY`** *(선택)* — Claude API 키. 있으면 진짜 LLM 분석, 없으면 stub
-- **`AISLOP_LLM_MODE`** — `auto` / `stub` / `claude`. 기본 `auto` (키 유무로 자동 결정)
-- **`AISLOP_HMAC_SECRET`** *(선택)* — 설정 시 모든 POST 요청에 HMAC-SHA256 서명 검증
+- **`PKGSENTINEL_LLM_MODE`** — `auto` / `stub` / `claude`. 기본 `auto` (키 유무로 자동 결정)
+- **`PKGSENTINEL_HMAC_SECRET`** *(선택)* — 설정 시 모든 POST 요청에 HMAC-SHA256 서명 검증
 
 ## 보안
 
 ### HMAC 인증 (옵션)
-`AISLOP_HMAC_SECRET` 설정 시:
+`PKGSENTINEL_HMAC_SECRET` 설정 시:
 - 모든 POST 요청에 `X-PkgSentinel-Signature: sha256=<hex>` 헤더 필요
 - `X-PkgSentinel-Timestamp: <ms>` 헤더 — ±5분 허용 (replay 방지)
 - 알고리즘: `HMAC_SHA256(secret, f"{ts}.{body_bytes}")`
 - `hmac.compare_digest` 사용 (timing attack 방지)
 
 ### LLM 모드 자동 결정
-`AISLOP_LLM_MODE=auto` (기본):
+`PKGSENTINEL_LLM_MODE=auto` (기본):
 - `ANTHROPIC_API_KEY`가 `sk-ant-` 로 시작 + 30자 초과 + `...` 미포함 → `claude`
 - 그 외 → `stub`
 

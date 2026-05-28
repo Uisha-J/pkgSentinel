@@ -52,12 +52,12 @@ def main():
     # 격리 DB + 마스터 키 (run_pipeline 내부의 stage_0a / cache 가 DB 사용)
     import tempfile
     td = tempfile.mkdtemp(prefix="full_recursion_")
-    os.environ["AISLOP_DB_KEY"] = "full-recursion-eval-key"
+    os.environ["PKGSENTINEL_DB_KEY"] = "full-recursion-eval-key"
     import pkgsentinel.db.threat_db as tdb_mod
     from pkgsentinel.db.threat_db import ThreatDB
     tdb_mod._default_db = ThreatDB(
         Path(td) / "t.sqlcipher",
-        passphrase=os.environ["AISLOP_DB_KEY"],
+        passphrase=os.environ["PKGSENTINEL_DB_KEY"],
     )
 
     if args.dep_llm_mode == "claude":

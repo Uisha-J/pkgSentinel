@@ -19,8 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 # 모듈 import 시점에 DB key 확보 — pytest fixture 없이도 동작.
 # (다른 tests/test_*.py 와 같은 패턴: 모듈 레벨 sys.path / env 셋업)
-if not os.environ.get("AISLOP_DB_KEY"):
-    os.environ["AISLOP_DB_KEY"] = "test-stage-cache-passphrase"
+if not os.environ.get("PKGSENTINEL_DB_KEY"):
+    os.environ["PKGSENTINEL_DB_KEY"] = "test-stage-cache-passphrase"
 
 from pkgsentinel.db.stage_cache import (
     StageCache,
@@ -37,27 +37,27 @@ def _key(pkg: str, stage: str) -> StageCacheKey:
 def test_supported_stages_nonempty():
     stages = all_supported_stages()
     assert len(stages) >= 5
-    assert "stage_4c_ind47" in stages
-    assert "stage_2_behavior" in stages
+    assert "stage_13_ind47" in stages
+    assert "stage_08_behavior" in stages
 
 
 def test_stage_version_deterministic():
-    v1 = stage_version_for("stage_4c_ind47")
-    v2 = stage_version_for("stage_4c_ind47")
+    v1 = stage_version_for("stage_13_ind47")
+    v2 = stage_version_for("stage_13_ind47")
     assert v1 == v2
     assert len(v1) == 16
 
 
 def test_stage_version_differs_per_stage():
-    v_ind = stage_version_for("stage_4c_ind47")
-    v_seq = stage_version_for("stage_4e_sequence")
+    v_ind = stage_version_for("stage_13_ind47")
+    v_seq = stage_version_for("stage_14_sequence")
     assert v_ind != v_seq, "different stages must have different version hashes"
 
 
 def test_threat_filter_version_includes_feed():
-    v_no_feed = stage_version_for("stage_0a_threat_filter")
-    v_with_feed = stage_version_for("stage_0a_threat_filter", feed_version="abc123")
-    v_with_feed2 = stage_version_for("stage_0a_threat_filter", feed_version="xyz789")
+    v_no_feed = stage_version_for("stage_01_threat_filter")
+    v_with_feed = stage_version_for("stage_01_threat_filter", feed_version="abc123")
+    v_with_feed2 = stage_version_for("stage_01_threat_filter", feed_version="xyz789")
     assert v_no_feed != v_with_feed
     assert v_with_feed != v_with_feed2
 
@@ -65,7 +65,7 @@ def test_threat_filter_version_includes_feed():
 def test_get_miss_then_put_hit():
     sc = StageCache()
     sc.invalidate(package="t_get_miss_put_hit")
-    k = _key("t_get_miss_put_hit", "stage_4c_ind47")
+    k = _key("t_get_miss_put_hit", "stage_13_ind47")
 
     h = sc.get(k)
     assert not h.hit
@@ -83,7 +83,7 @@ def test_get_miss_then_put_hit():
 def test_archive_sha_mismatch_misses():
     sc = StageCache()
     sc.invalidate(package="t_archive_mismatch")
-    k = _key("t_archive_mismatch", "stage_2_behavior")
+    k = _key("t_archive_mismatch", "stage_08_behavior")
     sc.put(k, {"calls": 3}, archive_sha256="aaa")
 
     assert sc.get(k, archive_sha256="aaa").hit
@@ -95,13 +95,13 @@ def test_archive_sha_mismatch_misses():
 def test_invalidate_by_stage():
     sc = StageCache()
     sc.invalidate(package="t_inv_stage")
-    k1 = _key("t_inv_stage", "stage_2_behavior")
-    k2 = _key("t_inv_stage", "stage_4c_ind47")
+    k1 = _key("t_inv_stage", "stage_08_behavior")
+    k2 = _key("t_inv_stage", "stage_13_ind47")
     sc.put(k1, {"a": 1})
     sc.put(k2, {"a": 2})
 
     # delete only one stage
-    deleted = sc.invalidate(package="t_inv_stage", stage="stage_2_behavior")
+    deleted = sc.invalidate(package="t_inv_stage", stage="stage_08_behavior")
     assert deleted == 1
 
     assert not sc.get(k1).hit
@@ -111,7 +111,7 @@ def test_invalidate_by_stage():
 def test_invalidate_all_stages_of_package():
     sc = StageCache()
     sc.invalidate(package="t_inv_all")
-    for s in ("stage_2_behavior", "stage_4c_ind47", "stage_4e_sequence"):
+    for s in ("stage_08_behavior", "stage_13_ind47", "stage_14_sequence"):
         sc.put(_key("t_inv_all", s), {"x": 1})
 
     deleted = sc.invalidate(package="t_inv_all")
@@ -121,7 +121,7 @@ def test_invalidate_all_stages_of_package():
 def test_payload_must_be_serializable():
     sc = StageCache()
     sc.invalidate(package="t_payload")
-    k = _key("t_payload", "stage_4d_taint")
+    k = _key("t_payload", "stage_15_taint")
     # set: not JSON-serializable by default
     info = sc.put(k, {"x": {1, 2, 3}})
     # default=str fallback ensures store succeeds; payload becomes string repr
@@ -131,7 +131,7 @@ def test_payload_must_be_serializable():
 def test_cache_survives_multiple_writes():
     sc = StageCache()
     sc.invalidate(package="t_overwrite")
-    k = _key("t_overwrite", "stage_2_behavior")
+    k = _key("t_overwrite", "stage_08_behavior")
     sc.put(k, {"v": 1})
     sc.put(k, {"v": 2})
     h = sc.get(k)
@@ -147,10 +147,10 @@ def test_advisory_trigger_drops_threat_stages_only():
 
     # 4 stage 결과 적재
     for s in (
-        "stage_0a_threat_filter",
-        "stage_0b_attack_history",
-        "stage_2_behavior",
-        "stage_4c_ind47",
+        "stage_01_threat_filter",
+        "stage_02_attack_history",
+        "stage_08_behavior",
+        "stage_13_ind47",
     ):
         sc.put(_key(pkg, s), {"x": 1})
 
@@ -165,11 +165,11 @@ def test_advisory_trigger_drops_threat_stages_only():
         """, (pkg,))
 
     # threat_filter / attack_history 만 사라져야 함
-    assert not sc.get(_key(pkg, "stage_0a_threat_filter")).hit
-    assert not sc.get(_key(pkg, "stage_0b_attack_history")).hit
+    assert not sc.get(_key(pkg, "stage_01_threat_filter")).hit
+    assert not sc.get(_key(pkg, "stage_02_attack_history")).hit
     # 나머지는 그대로
-    assert sc.get(_key(pkg, "stage_2_behavior")).hit
-    assert sc.get(_key(pkg, "stage_4c_ind47")).hit
+    assert sc.get(_key(pkg, "stage_08_behavior")).hit
+    assert sc.get(_key(pkg, "stage_13_ind47")).hit
 
     # 정리
     with sc.db.cursor() as cur:

@@ -87,7 +87,7 @@ class Fingerprint:
 def _http_get_stream(url: str, timeout: int = DEFAULT_TIMEOUT) -> tuple[bytes, dict]:
     """archive 전체 + 응답 헤더 반환."""
     req = urllib.request.Request(
-        url, headers={"User-Agent": "ai-slopsq/2.0 integrity"}
+        url, headers={"User-Agent": "pkgsentinel/2.0 integrity"}
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         headers = {k.lower(): v for k, v in resp.headers.items()}
@@ -98,7 +98,7 @@ def _http_get_stream(url: str, timeout: int = DEFAULT_TIMEOUT) -> tuple[bytes, d
 def _http_head(url: str, timeout: int = DEFAULT_TIMEOUT) -> dict:
     req = urllib.request.Request(
         url, method="HEAD",
-        headers={"User-Agent": "ai-slopsq/2.0 integrity"},
+        headers={"User-Agent": "pkgsentinel/2.0 integrity"},
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return {k.lower(): v for k, v in resp.headers.items()}
@@ -310,7 +310,7 @@ class RowHMAC:
     재계산 → mismatch → invalidate 로 잡는다.
 
     HMAC 키는 별도 (DB 패스프레이즈 와는 다름):
-      - 환경변수 AISLOP_ROW_HMAC_KEY 또는
+      - 환경변수 PKGSENTINEL_ROW_HMAC_KEY 또는
       - master_key.resolve_passphrase() 의 sha256 derivation 으로 자동 생성
     """
 
