@@ -57,19 +57,22 @@ function scanCodeBlocks() {
   const selectors = ["div[dir='ltr']", "pre code"].join(", ");
   document.querySelectorAll(selectors).forEach(el => {
     if (el.hasAttribute("data-slop-scanned")) return;
-    // 응답 단위 dedup: 같은 응답에 이미 다른 element 가 처리 시작했으면 스킵
-    // (div[dir='ltr'] 와 pre code 가 nested 되어 둘 다 매칭되는 케이스 방지)
-    const msg = el.closest("div[data-message-author-role='assistant']");
-    if (msg && msg.hasAttribute("data-slop-code-scanned")) {
-      el.setAttribute("data-slop-scanned", "1"); // 재스캔 방지
-      return;
-    }
     const text = ((el.innerText || el.textContent) || "").trim();
     if (text.length < 80) return;
     const hasImport = /^\s*(import |from .+ import)/m.test(text)
       || /require\(|"dependencies"/.test(text);
     if (!hasImport) return;
+    // 컨텐츠 해시로 dedup — 한 응답에 코드블록 여러 개 있으면 각각 분석
+    // (div[dir='ltr']와 pre code nested 케이스도 같은 텍스트로 dedup됨)
+    const key = getKey(text);
+    if (processedKeys.has(key)) {
+      el.setAttribute("data-slop-scanned", "1");
+      return;
+    }
+    processedKeys.add(key);
     el.setAttribute("data-slop-scanned", "1");
+    // text 스캔이 같은 응답에서 nlp/span 추출 안 돌도록 마킹 (pip은 여전히 추출)
+    const msg = el.closest("div[data-message-author-role='assistant']");
     if (msg) msg.setAttribute("data-slop-code-scanned", "1");
     const filename = guessFilename(el);
     analyzeAndRender(text, filename, (newEl) => insertAfterCodeBlock(el, newEl));
@@ -143,25 +146,27 @@ function extractSpanPackages(el) {
 function scanResponseText() {
   document.querySelectorAll("div[data-message-author-role='assistant']").forEach(el => {
     if (el.hasAttribute("data-slop-scanned")) return;
-    // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
-    if (el.hasAttribute("data-slop-code-scanned")) return;
     const text = el.innerText || "";
     if (text.length < 20) return;
 
-    // pip install 패턴 추출
+    // pip install 패턴은 항상 추출 (고신뢰, 코드블록 import와 안 겹침)
+    // 예: 응답 맨 아래 bash 코드블록의 "pip install fastapi-users redis"
     const pipPackages = extractPackagesFromText(text);
 
-    // span.whitespace-normal 패턴 추출 (ChatGPT 자연어 언급)
-    const spanPackages = extractSpanPackages(el);
-
-    // 자연어 감지 — 백틱, import 패턴, 인기 패키지 매칭
-    const nlpPackages = typeof extractPackagesFromNaturalText === "function"
+    // 코드블록 스캔이 이미 처리했으면 nlp/span 은 스킵 (중복 방지)
+    // pip 추출은 그대로 유지 — 코드블록과 패키지가 다름
+    const codeAlreadyScanned = el.hasAttribute("data-slop-code-scanned");
+    const spanPackages = codeAlreadyScanned ? [] : extractSpanPackages(el);
+    const nlpPackages = codeAlreadyScanned ? [] : (typeof extractPackagesFromNaturalText === "function"
       ? extractPackagesFromNaturalText(text)
-      : [];
+      : []);
 
-    // 합치고 코드블록에서 이미 분석된 것 제외
-    const allPackages = [...new Set([...pipPackages, ...spanPackages, ...nlpPackages])]
-      .filter(p => ![...processedKeys].some(k => k.includes(p)));
+    // 합치고 lowercase 정규화로 dedup
+    const allPackages = [...new Set(
+      [...pipPackages, ...spanPackages, ...nlpPackages]
+        .map(p => (p || "").toString().toLowerCase().trim())
+        .filter(Boolean)
+    )].filter(p => ![...processedKeys].some(k => k.includes(p)));
 
     if (!allPackages.length) return;
 

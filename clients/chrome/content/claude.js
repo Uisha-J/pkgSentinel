@@ -65,18 +65,23 @@ let _pendingCard = null;
 function scanCodeBlocks() {
   document.querySelectorAll("pre code").forEach(el => {
     if (el.hasAttribute("data-slop-scanned")) return;
-    // 응답 단위 dedup: 같은 응답에 이미 다른 코드블록이 처리 중이면 스킵
-    const msg = el.closest(".font-claude-message, [data-is-streaming], [class*='prose']");
-    if (msg && msg.hasAttribute("data-slop-code-scanned")) {
-      el.setAttribute("data-slop-scanned", "1");
-      return;
-    }
     const text = (el.textContent || "").trim();
     if (text.length < 80) return;
     const hasImport = /^\s*(import |from .+ import)/m.test(text)
       || /require\(|"dependencies"/.test(text);
     if (!hasImport) return;
+    // 컨텐츠 해시로 dedup — 같은 메시지에 백엔드/프론트 코드블록 2개 있으면 둘 다 분석
+    // (per-message 잠금 제거 — 두 번째 코드블록이 누락되던 버그 해결)
+    const key = getKey(text);
+    if (processedKeys.has(key)) {
+      el.setAttribute("data-slop-scanned", "1");
+      return;
+    }
+    processedKeys.add(key);
     el.setAttribute("data-slop-scanned", "1");
+    // text 스캔이 같은 응답에서 안 돌도록 마킹 (텍스트+코드 패널 중복 방지)
+    // 여러 후보 셀렉터 시도 — Claude DOM 변경 대응
+    const msg = el.closest(".font-claude-message, [data-message-author-role], [data-test-render-count]");
     if (msg) msg.setAttribute("data-slop-code-scanned", "1");
     const filename = guessFilename(el);
     analyzeAndRender(text, filename, (newEl) => insertAfterCode(el, newEl));
@@ -270,6 +275,11 @@ function _analyzeStableArtifact() {
         || card?.parentElement?.parentElement?.parentElement?.parentElement
         || found.container;
       if (!target) return false;
+      // 메인 채팅 영역 안인지 확인 — 사이드바 보호 (target이 사이드바면 삽입 skip)
+      if (!target.closest("main, [role='main']")) {
+        console.warn("[Slop Detector] 삽입 타겟이 메인 채팅 밖 (사이드바 추정), skip");
+        return false;
+      }
       // 기존 형제 패널 제거
       let next = target.nextElementSibling;
       while (next?.hasAttribute("data-slop-artifact-panel")) {
@@ -288,17 +298,22 @@ function _analyzeStableArtifact() {
     }
     console.log("[Slop Detector] 아티팩트 패널 삽입 완료");
 
-    // React reconciliation 대비: 사라지면 재삽입 (최대 5회, 30초 timeout)
+    // React reconciliation 대비: 사라지면 재삽입 (최대 5회, 15초 timeout)
     let reattempts = 0;
     const watcher = new MutationObserver(() => {
-      if (!document.contains(newEl) && reattempts < 5) {
-        reattempts++;
-        console.log(`[Slop Detector] 패널 제거 감지, 재삽입 #${reattempts}`);
-        _insert();
+      if (!document.contains(newEl)) {
+        if (reattempts < 5) {
+          reattempts++;
+          console.log(`[Slop Detector] 패널 제거 감지, 재삽입 #${reattempts}`);
+          _insert();
+        } else {
+          console.log("[Slop Detector] 재삽입 5회 도달, watcher 정리");
+          watcher.disconnect();
+        }
       }
     });
     watcher.observe(document.body, { childList: true, subtree: true });
-    setTimeout(() => watcher.disconnect(), 30000);
+    setTimeout(() => watcher.disconnect(), 15000);
 
     return true;
   });
@@ -343,7 +358,8 @@ window.addEventListener("message", (event) => {
     targetCard.setAttribute("data-slop-analyzed", "1");
     const rowContainer = targetCard
       ?.parentElement?.parentElement?.parentElement?.parentElement;
-    if (rowContainer) {
+    // 메인 채팅 영역 안인지 확인 — 사이드바 보호
+    if (rowContainer && rowContainer.closest("main, [role='main']")) {
       let next = rowContainer.nextElementSibling;
       while (next?.hasAttribute("data-slop-artifact-panel")) {
         const toRemove = next;
@@ -355,9 +371,11 @@ window.addEventListener("message", (event) => {
   }
 
   // 전략 2: 대화 내 마지막 응답 블록 뒤에 삽입
-  const responseBlocks = document.querySelectorAll(
-    ".font-claude-message, [class*='prose'], div[data-is-streaming='false']"
-  );
+  // .font-claude-message 만 사용 + 메인 채팅 영역 안인지 확인 (사이드바 보호)
+  const mainArea = document.querySelector("main, [role='main']");
+  const responseBlocks = mainArea
+    ? mainArea.querySelectorAll(".font-claude-message")
+    : [];
   const lastBlock = responseBlocks[responseBlocks.length - 1];
   if (lastBlock) {
     // 기존 아티팩트 패널이 있으면 제거
@@ -366,10 +384,10 @@ window.addEventListener("message", (event) => {
     try { lastBlock.insertAdjacentElement("afterend", panel); return; } catch {}
   }
 
-  // 전략 3: 대화 컨테이너 끝에 추가
-  const chatContainer = document.querySelector("[class*='conversation'], main, [role='main']");
-  if (chatContainer) {
-    try { chatContainer.appendChild(panel); } catch {}
+  // 전략 3: 메인 채팅 컨테이너 끝에 추가 — [class*='conversation']은 대화목록까지
+  // 매치되므로 제외. main/[role='main']만 사용
+  if (mainArea) {
+    try { mainArea.appendChild(panel); } catch {}
   }
 });
 
@@ -438,16 +456,25 @@ function extractTablePackages(el) {
 }
 
 function scanResponseText() {
-  // Claude 응답 컨테이너
-  document.querySelectorAll(
-    ".prose, [class*='prose'], div[data-is-streaming='false'], .font-claude-message"
-  ).forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+  // Claude 응답 컨테이너 — .font-claude-message 만 사용 (사이드바/대화목록 보호).
+  // [class*='prose'], data-is-streaming 같은 광범위 셀렉터는 사이드바 요소까지
+  // 매치되어 패널이 엉뚱한 곳에 삽입되므로 제외.
+  const candidates = document.querySelectorAll(".font-claude-message");
+  const seen = new Set();
+  for (const el of candidates) {
+    if (seen.has(el)) continue;
+    seen.add(el);
+    if (el.hasAttribute("data-slop-scanned")) continue;
     // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
-    if (el.hasAttribute("data-slop-code-scanned")) return;
-    if (el.closest("[data-slop-code-scanned]")) return;
+    if (el.hasAttribute("data-slop-code-scanned")) continue;
+    if (el.closest("[data-slop-code-scanned]")) continue;
+    // 자식에 처리된 코드블록 있으면 스킵 — 마킹 누락 케이스도 잡음 (broad fallback)
+    if (el.querySelector("pre code[data-slop-scanned]")) continue;
+    // 이미 이 응답 또는 그 후손에 텍스트 패널이 있으면 스킵
+    if (el.querySelector("[data-slop-text-panel]")) continue;
+    if (el.nextElementSibling?.hasAttribute("data-slop-text-panel")) continue;
     const text = el.innerText || "";
-    if (text.length < 20) return;
+    if (text.length < 20) continue;
 
     // 1. pip/npm install 패턴
     const pipPackages = extractPackagesFromText(text);
@@ -455,18 +482,19 @@ function scanResponseText() {
     // 2. table td > strong 태그 (Claude 패키지 소개 표)
     const tablePackages = extractTablePackages(el);
 
-    // 3. 자연어 감지 — 백틱, import 패턴, 인기 패키지 매칭
+    // 3. 자연어 감지 — 백틱, import 패턴, 인기 패키지 매칭, **bold**, 하이픈 패키지명
     const nlpPackages = typeof extractPackagesFromNaturalText === "function"
       ? extractPackagesFromNaturalText(text)
       : [];
 
-    const allPackages = [...new Set([...pipPackages, ...tablePackages, ...nlpPackages])]
-      .filter(p => ![...processedKeys].some(k => k.includes(p)));
+    // 4. 모두 소문자 정규화 후 dedup (대소문자 다른 동일 패키지 합치기)
+    const allPackages = [...new Set(
+      [...pipPackages, ...tablePackages, ...nlpPackages]
+        .map(p => (p || "").toString().toLowerCase().trim())
+        .filter(Boolean)
+    )].filter(p => ![...processedKeys].some(k => k.includes(p)));
 
-    if (!allPackages.length) return;
-
-    // DOM에 이미 텍스트 패널이 있으면 스킵
-    if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
+    if (!allPackages.length) continue;
 
     el.setAttribute("data-slop-scanned", "1");
     console.log(`[Slop Detector] Claude 텍스트 패키지 감지:`, allPackages);
@@ -479,5 +507,5 @@ function scanResponseText() {
       try { insertTarget.insertAdjacentElement("afterend", newEl); return true; } catch {}
       return false;
     });
-  });
+  }
 }

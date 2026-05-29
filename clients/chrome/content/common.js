@@ -85,8 +85,8 @@ function extractPackagesFromText(text) {
         if (/^\d/.test(pkg)) return;              // 숫자로 시작
         // 일반 영어 단어/언어 키워드 제외 (LLM 이 jum-bled pip install 명령 생성 시 오탐 방지)
         if (NLP_STOPWORDS.has(pkg.toLowerCase())) return;
-        // import name → PyPI name 매핑 (cv2 → opencv-python 등)
-        packages.add(_normalizeImportName(pkg));
+        // import name → PyPI name 매핑 (cv2 → opencv-python 등) + lowercase 정규화
+        packages.add(_normalizeImportName(pkg.toLowerCase()));
       });
     }
   }
@@ -159,7 +159,9 @@ const IMPORT_TO_PYPI = {
 function _normalizeImportName(name) {
   if (!name) return name;
   const lower = name.toLowerCase().trim();
-  return IMPORT_TO_PYPI[lower] || name;
+  // 매핑이 있으면 매핑값 (그대로 lowercase) 없으면 lower 자체 — 대소문자 일관성 보장
+  const mapped = IMPORT_TO_PYPI[lower];
+  return (mapped || lower).toLowerCase();
 }
 
 // 오탐 방지: 일반 영어 단어/프로그래밍 키워드
@@ -218,6 +220,37 @@ function extractPackagesFromNaturalText(text) {
     // 단어 경계로 매칭 (대소문자 무시)
     const re = new RegExp(`(?:^|[\\s\`"'(\\[,;:])${escapeRegex(pkg)}(?:$|[\\s\`"')\\],;:.!?])`, "im");
     if (re.test(text)) found.add(_normalizeImportName(pkg));  // pytorch → torch 등 매핑
+  }
+
+  // 4) 마크다운 볼드/이탤릭 안의 패키지명: **foo-bar**, *foo-bar*, __foo-bar__
+  //    Claude/Gemini 가 환각 패키지를 볼드로 강조하는 흔한 패턴
+  const boldRe = /(?:\*\*|__|\*)([a-z][a-z0-9_\-\.]{1,40})(?:\*\*|__|\*)/gi;
+  while ((m = boldRe.exec(text)) !== null) {
+    const raw = m[1].toLowerCase().trim();
+    const name = _normalizeImportName(raw);
+    if (_isLikelyPackage(name.toLowerCase())) found.add(name);
+  }
+
+  // 5) 다중 하이픈 패키지명 (3 segments 이상, 하이픈만 — underscore 제외)
+  //    react-router-dom, torch-cv-utils, langchain-voice-rag 같은 환각 이름 패턴
+  //    underscore 포함 시 snake_case 함수명(current_active_user 등) 오탐 → 하이픈 only
+  //    합성 영어(well-known, real-time)는 하이픈 1개라 제외됨
+  //    1-hyphen 패키지(scikit-learn 등)는 POPULAR_PACKAGES(#3)로 이미 잡힘
+  const hyphenRe = /(?:^|[\s\(\[,;:"'])([a-z][a-z0-9]*-[a-z0-9]+-[a-z0-9\-]+[a-z0-9])(?=$|[\s\)\],;:."'!?])/gim;
+  while ((m = hyphenRe.exec(text)) !== null) {
+    const raw = m[1].toLowerCase().trim();
+    if (raw.length < 8 || raw.length > 40) continue;
+    const name = _normalizeImportName(raw);
+    if (_isLikelyPackage(name)) found.add(name);
+  }
+
+  // 6) "install pkg" / "use the X library/package/module" 패턴
+  //    (백틱 없이 평문으로 언급되는 케이스)
+  const phraseRe = /\b(?:install|use(?:s)?(?: the)?|using|via|with)\s+(?:the\s+)?([a-z][a-z0-9_\-\.]{2,40})\s+(?:library|package|module|wrapper|sdk|client|lib)/gi;
+  while ((m = phraseRe.exec(text)) !== null) {
+    const raw = m[1].toLowerCase().trim();
+    const name = _normalizeImportName(raw);
+    if (_isLikelyPackage(name)) found.add(name);
   }
 
   return [...found];

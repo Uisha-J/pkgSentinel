@@ -150,11 +150,15 @@ const observer = new MutationObserver(() => {
   // CF 보호 프레임이면 즉시 종료 (불필요한 리소스 낭비 방지)
   if (_isCloudflareFrame()) {
     console.log("[Slop Detector] 아티팩트 iframe - CF 프레임이라 종료");
+    observer.disconnect();
     return;
   }
   const serverUp = await checkApiServer();
   console.log(`[Slop Detector] 아티팩트 iframe, URL: ${location.host}, API: ${serverUp ? "✅" : "❌"}`);
-  if (!serverUp) return;
+  if (!serverUp) {
+    observer.disconnect();
+    return;
+  }
 
   setTimeout(runAnalysis, 800);
   observer.observe(document.body, { childList: true, subtree: true });

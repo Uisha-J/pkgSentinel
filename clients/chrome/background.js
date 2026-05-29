@@ -100,6 +100,84 @@ async function updateRiskState(analysisResult) {
   });
 }
 
+// ── 대화 히스토리 (FIFO + LRU 하이브리드 링버퍼) ───────────────────────────
+// chrome.storage.local 의 detectionHistory 키에 최근 5건 저장.
+// 새 대화 → push + 6번째면 가장 오래된 거 shift
+// 기존 대화 재방문/추가 분석 → 해당 항목을 끝으로 이동 (LRU bump) + 패키지 병합
+const HISTORY_MAX = 5;
+const PACKAGES_PER_CONV_MAX = 30;
+
+function _extractConvInfo(url, title) {
+  if (!url) return null;
+  let convId = null, site = null;
+  try {
+    const u = new URL(url);
+    const host = u.hostname.toLowerCase();
+    const path = u.pathname;
+    if (host.endsWith("claude.ai")) {
+      const m = path.match(/\/chat\/([a-zA-Z0-9\-_]+)/);
+      if (m) { convId = m[1]; site = "claude"; }
+    } else if (host.endsWith("chatgpt.com")) {
+      const m = path.match(/\/c\/([a-zA-Z0-9\-_]+)/);
+      if (m) { convId = m[1]; site = "chatgpt"; }
+    } else if (host.endsWith("gemini.google.com")) {
+      const m = path.match(/\/app\/([a-zA-Z0-9\-_]+)/);
+      if (m) { convId = m[1]; site = "gemini"; }
+    }
+  } catch {}
+  if (!convId) return null;
+  // 페이지 타이틀에서 대화명 추출 (사이트 이름 접미 제거)
+  let cleanTitle = (title || "").trim();
+  cleanTitle = cleanTitle.replace(/\s*[-—|·]\s*(Claude|ChatGPT|Gemini).*$/i, "");
+  if (!cleanTitle) cleanTitle = "(이름 없음)";
+  return { convId, site, url, title: cleanTitle.slice(0, 80) };
+}
+
+async function _saveToHistory(sender, apiResult) {
+  if (!sender?.tab?.url) return;
+  const info = _extractConvInfo(sender.tab.url, sender.tab.title);
+  if (!info) return;
+  const items = Array.isArray(apiResult)
+    ? apiResult
+    : (Array.isArray(apiResult?.results) ? apiResult.results : []);
+  if (!items.length) return;
+  const newPkgs = items.map(r => ({
+    name: r.package || r.name || "(unknown)",
+    level: r.level || "UNKNOWN",
+    verdict: r.verdict || "",
+    at: Date.now(),
+  })).filter(p => p.name && p.name !== "(unknown)");
+  if (!newPkgs.length) return;
+
+  const stored = await chrome.storage.local.get(["detectionHistory"]);
+  const history = Array.isArray(stored.detectionHistory) ? stored.detectionHistory : [];
+  const existingIdx = history.findIndex(h => h.convId === info.convId);
+  let entry;
+  if (existingIdx >= 0) {
+    // 기존 — LRU bump + 패키지 병합 (이름 기준 dedup, 최신 verdict 우선)
+    entry = history.splice(existingIdx, 1)[0];
+    const byName = new Map(entry.packages.map(p => [p.name, p]));
+    for (const p of newPkgs) byName.set(p.name, p);
+    entry.packages = [...byName.values()].slice(-PACKAGES_PER_CONV_MAX);
+    entry.lastSeenAt = Date.now();
+    entry.title = info.title;
+    entry.url = info.url;
+  } else {
+    entry = {
+      convId: info.convId,
+      site: info.site,
+      url: info.url,
+      title: info.title,
+      lastSeenAt: Date.now(),
+      packages: newPkgs.slice(0, PACKAGES_PER_CONV_MAX),
+    };
+  }
+  history.push(entry);
+  // FIFO evict — max 5건 유지
+  while (history.length > HISTORY_MAX) history.shift();
+  await chrome.storage.local.set({ detectionHistory: history });
+}
+
 // ── 헬스체크 ────────────────────────────────────────────────────────────────
 async function checkHealth() {
   try {
@@ -160,15 +238,30 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     switch (message.type) {
       case "HEALTH_CHECK":
         return { ok: await checkHealth() };
-      case "ANALYZE_PACKAGES":
-        return await analyzePackages(message.packages);
+      case "ANALYZE_PACKAGES": {
+        const result = await analyzePackages(message.packages);
+        await _saveToHistory(_sender, result);
+        return result;
+      }
       case "PARSE_AND_ANALYZE": {
         const codeIn = (message.code || "").replace(/\u00a0/g, " ");
-        return await parseAndAnalyze(message.filename, codeIn);
+        const result = await parseAndAnalyze(message.filename, codeIn);
+        await _saveToHistory(_sender, result);
+        return result;
       }
       case "GET_STATS":
         return new Promise((resolve) => {
           chrome.storage.local.get(['scanStats'], (res) => resolve(res.scanStats || null));
+        });
+      case "GET_HISTORY":
+        return new Promise((resolve) => {
+          chrome.storage.local.get(['detectionHistory'], (res) =>
+            resolve(Array.isArray(res.detectionHistory) ? res.detectionHistory : [])
+          );
+        });
+      case "CLEAR_HISTORY":
+        return new Promise((resolve) => {
+          chrome.storage.local.remove("detectionHistory", () => resolve({ ok: true }));
         });
       default:
         return { error: `알 수 없는 메시지 타입: ${message.type}` };

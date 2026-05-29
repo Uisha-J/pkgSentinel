@@ -12,7 +12,21 @@
 const SELECTORS = [
   "message-content pre code",
   ".code-block pre code",
+  "model-response pre code",
+  ".model-response-text pre code",
+  ".markdown-main-panel pre code",
+  "[data-message-id] pre code",
   "pre code",
+].join(", ");
+
+// 응답 컨테이너 셀렉터 (텍스트 스캔용) — model 응답에만 한정.
+// .markdown-main-panel, [data-message-id] 는 대화 전체/유저 입력까지 포함하므로 제외.
+const RESPONSE_SELECTORS = [
+  "message-content",
+  "model-response",
+  ".model-response-text",
+  ".response-container-content",
+  "[class*='model-response']",
 ].join(", ");
 
 // ── 언어 감지 ─────────────────────────────────────────────────────────────────
@@ -75,8 +89,8 @@ function getKey(text) {
 function scanCodeBlocks() {
   document.querySelectorAll(SELECTORS).forEach(el => {
     if (el.hasAttribute("data-slop-scanned")) return;
-    // 응답 단위 dedup (Gemini message-content)
-    const msg = el.closest("message-content");
+    // 응답 단위 dedup — 다양한 컨테이너 셀렉터 시도
+    const msg = el.closest(RESPONSE_SELECTORS);
     if (msg && msg.hasAttribute("data-slop-code-scanned")) {
       el.setAttribute("data-slop-scanned", "1");
       return;
@@ -120,32 +134,41 @@ const observer = new MutationObserver(() => {
 const processedTextKeys = new Set();
 
 function scanResponseText() {
-  document.querySelectorAll("message-content").forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
-    // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
-    if (el.hasAttribute("data-slop-code-scanned")) return;
+  // 다양한 응답 컨테이너 셀렉터 — Gemini가 message-content 빼도 fallback으로 잡힘.
+  // 중첩 매치 dedup: model-response를 canonical로 — 없으면 message-content, 둘 다 없으면 자기 자신
+  const candidates = document.querySelectorAll(RESPONSE_SELECTORS);
+  const seen = new Set();
+  for (const raw of candidates) {
+    const el = raw.closest("model-response") || raw.closest("message-content") || raw;
+    if (seen.has(el)) continue;
+    seen.add(el);
+    if (el.hasAttribute("data-slop-scanned")) continue;
+    if (el.hasAttribute("data-slop-code-scanned")) continue;
+    if (el.closest("[data-slop-code-scanned]")) continue;
+    if (el.querySelector("[data-slop-text-panel]")) continue;
     const text = el.innerText || "";
-    if (text.length < 20) return;
+    if (text.length < 20) continue;
 
     // 1단계: pip/npm install 패턴 (고신뢰)
     const installPackages = extractPackagesFromText(text);
 
-    // 2단계: 자연어 감지 — 백틱, import 패턴, 인기 패키지 매칭
+    // 2단계: 자연어 감지 — 백틱, import 패턴, 인기 패키지 매칭, **bold**, 하이픈 패키지명
     const nlpPackages = typeof extractPackagesFromNaturalText === "function"
       ? extractPackagesFromNaturalText(text)
       : [];
 
-    // 합집합 (중복 제거)
-    const allPackages = [...new Set([...installPackages, ...nlpPackages])];
+    // 모두 소문자 정규화 + 합집합
+    const allPackages = [...new Set(
+      [...installPackages, ...nlpPackages]
+        .map(p => (p || "").toString().toLowerCase().trim())
+        .filter(Boolean)
+    )];
 
     // 코드블록에서 이미 분석된 패키지 제외
     const newPackages = allPackages.filter(p => {
       return ![...processedKeys].some(k => k.includes(p));
     });
-    if (!newPackages.length) return;
-
-    // DOM에 이미 텍스트 패널 있으면 스킵
-    if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
+    if (!newPackages.length) continue;
 
     el.setAttribute("data-slop-scanned", "1");
     console.log(`[Slop Detector] Gemini 패키지 감지:`, newPackages);
@@ -158,5 +181,5 @@ function scanResponseText() {
       try { insertTarget.insertAdjacentElement("afterend", newEl); return true; } catch {}
       return false;
     });
-  });
+  }
 }
