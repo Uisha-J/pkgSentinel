@@ -467,12 +467,13 @@ _MULTILINE_PATTERNS: list[tuple[str, str, float, str]] = [
 
 # package.json 스크립트 안에 흔한 위험 명령. preinstall/postinstall 에 들어 있을 시 매우 강한 신호.
 _NPM_SCRIPT_DANGEROUS = re.compile(
-    r"(?:nc\s+-[le]|netcat|"
-    r"curl\s+[^\"]*\|\s*(?:bash|sh|node|python)|"
-    r"wget\s+[^\"]*\|\s*(?:bash|sh|node|python)|"
+    r"(?:nc\s+-[le]|netcat|/dev/tcp/|"                 # reverse shell
+    r"\bcurl\b|\bwget\b|"                              # install hook 내 curl/wget = 네트워크 송출
+    r"https?://[^\s\"']+|"                             # 원시 URL 리터럴 (다운로드/exfil)
+    r"oast(?:ify)?\.|burpcollaborator|interactsh|requestbin|webhook\.site|pinggy|\bngrok\b|"  # exfil collaborator 도메인
     r"powershell\s+-(?:e|enc|encodedcommand)|"
-    r"(?:bash|sh|node|python)\s+-c\s+|"
-    r"\beval\b|\bexec\b|\bbase64\b|\bxxd\b)",
+    r"base64\s+-d|\batob\s*\(|\beval\s*\(|"            # decode/eval 함수 호출 형태만
+    r"/etc/(?:shadow|passwd)|\bid_rsa\b|\.aws/credentials|\.ssh/|\.npmrc\b)",  # 민감 파일 접근
     re.IGNORECASE,
 )
 _NPM_SCRIPT_HOOKS = ("preinstall", "postinstall", "install", "preuninstall", "preprepare", "prepare")

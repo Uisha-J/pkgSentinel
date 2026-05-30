@@ -13,9 +13,12 @@ import json
 from dataclasses import dataclass, field
 
 from .capability_detector import CAPABILITIES
+from .cluster import normalize_set
 
 # canonical capability 어휘 (15종). 선언된 capability 중 이 집합에 없는 항목은
 # 오타/쓰레기로 간주 — declared_set 에서 제외하고 unknown 으로 보고한다 (Q-5).
+# v2 (EXTEND): 자체 어휘 (net.http, T1071 등) 도 cluster.normalize() 로 canonical
+# 변환 후 비교 (backward compat 유지 + 외부 vocabulary 지원).
 _CANONICAL_CAPS: frozenset[str] = frozenset(CAPABILITIES)
 
 # ─────────────── Schema ───────────────
@@ -52,17 +55,20 @@ class AgenticManifest:
 
     @property
     def declared_set(self) -> set[str]:
-        """canonical 어휘로 검증된 declared capability set.
+        """canonical 어휘로 검증된 declared capability set (EXTEND v2).
 
-        Q-5 (스펙 §7 step 1): 오타/비정규 문자열은 detected 와 영원히 불일치하므로
-        canonical 15종만 비교에 사용한다. 비정규 항목은 unknown_capabilities 로 보고.
+        v2 변경 (Q-5 보강): 작성자가 자체 어휘 (net.http) 또는 MITRE TTP (T1071)
+        로 declared 한 경우도 cluster.normalize() 로 canonical 변환 후 비교.
+        backward compat — 기존 canonical 어휘 그대로 작동.
         """
-        return {c for c in self.capabilities if c in _CANONICAL_CAPS}
+        canonical, _unknown = normalize_set(self.capabilities)
+        return canonical
 
     @property
     def unknown_capabilities(self) -> list[str]:
-        """canonical 어휘에 없는 선언 capability (오타/쓰레기 후보)."""
-        return sorted(c for c in self.capabilities if c not in _CANONICAL_CAPS)
+        """canonical / 자체 / MITRE 어느 vocabulary 에도 매칭 안 된 선언 (오타/신규)."""
+        _canonical, unknown = normalize_set(self.capabilities)
+        return unknown
 
     def to_dict(self) -> dict:
         return {
