@@ -159,9 +159,13 @@ const IMPORT_TO_PYPI = {
 function _normalizeImportName(name) {
   if (!name) return name;
   const lower = name.toLowerCase().trim();
-  // 매핑이 있으면 매핑값 (그대로 lowercase) 없으면 lower 자체 — 대소문자 일관성 보장
+  // 매핑이 있으면 매핑값 그대로 (discord.py 등 dot 포함 정식명 보존)
   const mapped = IMPORT_TO_PYPI[lower];
-  return (mapped || lower).toLowerCase();
+  if (mapped) return mapped.toLowerCase();
+  // 매핑 없는 이름은 PEP 503 정규화: 언더스코어 → 하이픈
+  // (fastapi_users 와 fastapi-users 를 같은 패키지로 합쳐 중복 표시 방지)
+  // dot 은 discord.py/ruamel.yaml 같은 정식명이 있으므로 건드리지 않음
+  return lower.replace(/_+/g, "-");
 }
 
 // 오탐 방지: 일반 영어 단어/프로그래밍 키워드
@@ -554,12 +558,12 @@ async function analyzeAndRender(code, filename, insertFn) {
   const loading = document.createElement("div");
   loading.setAttribute("data-slop-panel", "1");
   loading.style.cssText = "font-size:11px;color:#94a3b8;padding:3px 2px;font-family:sans-serif;";
-  loading.textContent = "🔍 Slop Detector 분석 중...";
+  loading.textContent = "🔍 Slop Detector 분석 중... (코드가 길면 수십 초 걸릴 수 있어요)";
 
   if (!insertFn(loading)) return;
 
   try {
-    const result = await callBackground({ type: "PARSE_AND_ANALYZE", filename, code });
+    const result = await callBackground({ type: "PARSE_AND_ANALYZE", filename, code }, 120000);
     loading.remove();
     const items = Array.isArray(result) ? result : result?.results;
     if (!items?.length) return;
@@ -579,11 +583,11 @@ async function analyzePackagesFromText(packages, insertFn) {
   const loading = document.createElement("div");
   loading.setAttribute("data-slop-panel", "1");
   loading.style.cssText = "font-size:11px;color:#94a3b8;padding:3px 2px;font-family:sans-serif;";
-  loading.textContent = "🔍 Slop Detector 분석 중...";
+  loading.textContent = "🔍 Slop Detector 분석 중... (시간이 걸릴 수 있어요)";
   if (!insertFn(loading)) return;
 
   try {
-    const result = await callBackground({ type: "ANALYZE_PACKAGES", packages });
+    const result = await callBackground({ type: "ANALYZE_PACKAGES", packages }, 120000);
     loading.remove();
     // 백엔드 응답 정규화: {results: [...]} 객체 또는 [...] 배열 양쪽 지원
     const items = Array.isArray(result) ? result : result?.results;

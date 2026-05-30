@@ -81,7 +81,7 @@ function scanCodeBlocks() {
     el.setAttribute("data-slop-scanned", "1");
     // text 스캔이 같은 응답에서 안 돌도록 마킹 (텍스트+코드 패널 중복 방지)
     // 여러 후보 셀렉터 시도 — Claude DOM 변경 대응
-    const msg = el.closest(".font-claude-message, [data-message-author-role], [data-test-render-count]");
+    const msg = el.closest(".font-claude-message, .font-claude-response, [data-message-author-role], [data-test-render-count]");
     if (msg) msg.setAttribute("data-slop-code-scanned", "1");
     const filename = guessFilename(el);
     analyzeAndRender(text, filename, (newEl) => insertAfterCode(el, newEl));
@@ -93,11 +93,16 @@ function scanCodeBlocks() {
 function extractArtifactCode() {
   // ── 전략 0: 신규 Claude 아티팩트 UI (2026~) ─────────────────────────
   // 각 코드 줄이 [class*='group/line'] 컨테이너로 마킹됨.
-  // 각 line 의 innerText 를 join — 줄 번호는 line 외부 컬럼이라 자연 제외됨.
+  // ★ 줄번호 span(<span data-line-number>)이 group/line 안에 같이 있으므로
+  //   innerText 를 쓰면 줄번호가 코드에 섞여 AST 파싱이 깨짐(=import 미검출).
+  //   각 줄의 <code> 요소에서만 추출 + nbsp(빈 줄) 정리. 빈 줄도 보존해 구조 유지.
   const lineEls = document.querySelectorAll("[class*='group/line']");
   if (lineEls.length >= 3) {
-    const codes = [...lineEls].map(l => (l.innerText || "").replace(/\n+$/, ""));
-    const code = codes.filter(Boolean).join("\n").trim();
+    const codes = [...lineEls].map(l => {
+      const c = l.querySelector("code");
+      return ((c ? c.textContent : (l.innerText || "")) || "").replace(/ /g, "");
+    });
+    const code = codes.join("\n").replace(/\n+$/, "").trim();
     if (code.length >= 80) {
       // 로그 중복 방지: 같은 추출 결과면 로그 출력 안 함
       const logKey = `${lineEls.length}:${code.length}`;
@@ -149,7 +154,7 @@ function extractArtifactCode() {
       const els = root.querySelectorAll(sel);
       for (const el of els) {
         // 채팅 메시지 내부면 스킵 (대화 본문은 scanCodeBlocks 가 처리)
-        if (el.closest(".font-claude-message, .prose, [data-message-author-role]")) continue;
+        if (el.closest(".font-claude-message, .font-claude-response, .prose, [data-message-author-role]")) continue;
         const raw = el.innerText || el.textContent || "";
         const code = _cleanText(raw);
         if (code.length < 80) continue;
@@ -160,7 +165,7 @@ function extractArtifactCode() {
           for (let i = 0; i < 12; i++) {
             cur = cur.parentElement;
             if (!cur || cur === document.body) break;
-            if (cur.closest(".font-claude-message, .prose, [data-message-author-role]")) break;
+            if (cur.closest(".font-claude-message, .font-claude-response, .prose, [data-message-author-role]")) break;
             const cnt = cur.querySelectorAll("[class*='token']").length;
             if (cnt >= 5 && (cur.innerText || "").length > best.innerText?.length) {
               best = cur;
@@ -208,7 +213,13 @@ function scanArtifacts() {
   }
 
   // 카드는 있으면 잠금 (선택적), 없어도 진행
-  const cards = [...document.querySelectorAll("[class*='artifact-block'], [class*='artifact-preview'], [class*='ArtifactPreview'], [data-testid*='artifact'], [aria-label*='artifact' i]")];
+  // 마지막 셀렉터: 신규 Claude UI 아티팩트 카드 오버레이 버튼
+  // (<button class="absolute inset-0 cursor-pointer ..." aria-label="... 보기">)
+  const cards = [...document.querySelectorAll(
+    "[class*='artifact-block'], [class*='artifact-preview'], [class*='ArtifactPreview'], " +
+    "[data-testid*='artifact'], [aria-label*='artifact' i], " +
+    "button[aria-label][class*='inset-0'][class*='cursor-pointer']"
+  )];
   _pendingCard = cards.find(c => !c.hasAttribute("data-slop-analyzed")) || null;
   if (_pendingCard) _pendingCard.setAttribute("data-slop-analyzed", "1");
 
@@ -269,20 +280,42 @@ function _analyzeStableArtifact() {
 
     // 삽입 위치: 카드의 메시지 element 다음 — 옛 코드의 4단계 부모 hardcode 대신
     // semantic 매칭으로 안정성 확보
+    // 매 호출마다 live DOM 에서 타겟을 다시 찾음 — React 가 메시지 노드를 교체하면
+    // 기존 card/target 참조가 detach(死 노드)되어, 거기 삽입하면 화면엔 안 보였음.
+    function _findLiveTarget() {
+      // ★ 항상 .font-claude-message, .font-claude-response(응답 본문)만 반환 — 좌측 사이드바엔 이 클래스가 없으므로
+      //   사이드바('아티팩트' 메뉴 등) 오삽입이 원천 차단됨.
+      // 카드 후보도 .font-claude-message, .font-claude-response 안에 있는 것만 (사이드바 '아티팩트' 메뉴 제외).
+      const allCards = [...document.querySelectorAll(
+        "button[aria-label][class*='inset-0'][class*='cursor-pointer'], " +
+        "[class*='artifact-block'], [data-testid*='artifact']"
+      )].filter(c => document.contains(c) && c.closest(".font-claude-message, .font-claude-response"));
+      // 열린 아티팩트 뷰어 제목(<h2 title="...">)으로 같은 제목 카드 매칭 → 정확한 아티팩트 카드
+      const openTitle = (document.querySelector("h2[title]")?.getAttribute("title") || "").trim();
+      let liveCard = null;
+      if (openTitle) {
+        liveCard = allCards.find(c => (c.getAttribute("aria-label") || "").includes(openTitle));
+      }
+      if (!liveCard) liveCard = allCards[allCards.length - 1] || null;
+      if (liveCard) {
+        const msg = liveCard.closest(".font-claude-message, .font-claude-response");
+        if (msg) return msg;
+      }
+      // 폴백: 마지막 응답 본문 (사이드바엔 .font-claude-message, .font-claude-response 없음 → 안전)
+      const blocks = document.querySelectorAll(".font-claude-message, .font-claude-response");
+      return blocks[blocks.length - 1] || null;
+    }
+
     function _insert() {
-      const target =
-        card?.closest("[data-message-author-role], .font-claude-message, [data-test-render-count]")
-        || card?.parentElement?.parentElement?.parentElement?.parentElement
-        || found.container;
-      if (!target) return false;
-      // 메인 채팅 영역 안인지 확인 — 사이드바 보호 (target이 사이드바면 삽입 skip)
-      if (!target.closest("main, [role='main']")) {
-        console.warn("[Slop Detector] 삽입 타겟이 메인 채팅 밖 (사이드바 추정), skip");
+      const target = _findLiveTarget();
+      if (!target || !document.contains(target)) {
+        console.warn("[Slop Detector] 아티팩트 삽입: live 타겟 없음");
         return false;
       }
-      // 기존 형제 패널 제거
+      // 이미 이 타겟 뒤에 패널이 제자리면 그대로 두고, 다른 잔여 패널만 정리
       let next = target.nextElementSibling;
       while (next?.hasAttribute("data-slop-artifact-panel")) {
+        if (next === newEl) return true;                 // 이미 제자리
         const toRemove = next; next = next.nextElementSibling; toRemove.remove();
       }
       try {
@@ -296,24 +329,31 @@ function _analyzeStableArtifact() {
       console.warn("[Slop Detector] 아티팩트 패널 삽입 타겟 없음");
       return false;
     }
-    console.log("[Slop Detector] 아티팩트 패널 삽입 완료");
 
-    // React reconciliation 대비: 사라지면 재삽입 (최대 5회, 15초 timeout)
+    // 로딩 패널("분석 중...")은 watcher 없이 삽입만 — 결과 도착 시 loading.remove() 와
+    // watcher 가 싸우는(재삽입 #N) 문제 방지. 결과 패널(.slop-toggle 보유)에만 watcher.
+    const isResultPanel = !!newEl.querySelector(".slop-toggle");
+    if (!isResultPanel) return true;
+
+    console.log("[Slop Detector] 아티팩트 결과 패널 삽입 완료");
+
+    // React reconciliation 대비: 사라지면 live 타겟에 재삽입 (최대 20회, 40초 timeout)
+    // 매 재삽입마다 _insert()가 live DOM 을 다시 찾으므로 detach 노드 문제 없음.
     let reattempts = 0;
     const watcher = new MutationObserver(() => {
       if (!document.contains(newEl)) {
-        if (reattempts < 5) {
+        if (reattempts < 20) {
           reattempts++;
           console.log(`[Slop Detector] 패널 제거 감지, 재삽입 #${reattempts}`);
           _insert();
         } else {
-          console.log("[Slop Detector] 재삽입 5회 도달, watcher 정리");
+          console.log("[Slop Detector] 재삽입 20회 도달, watcher 정리");
           watcher.disconnect();
         }
       }
     });
     watcher.observe(document.body, { childList: true, subtree: true });
-    setTimeout(() => watcher.disconnect(), 15000);
+    setTimeout(() => watcher.disconnect(), 40000);
 
     return true;
   });
@@ -371,10 +411,10 @@ window.addEventListener("message", (event) => {
   }
 
   // 전략 2: 대화 내 마지막 응답 블록 뒤에 삽입
-  // .font-claude-message 만 사용 + 메인 채팅 영역 안인지 확인 (사이드바 보호)
+  // .font-claude-message, .font-claude-response 만 사용 + 메인 채팅 영역 안인지 확인 (사이드바 보호)
   const mainArea = document.querySelector("main, [role='main']");
   const responseBlocks = mainArea
-    ? mainArea.querySelectorAll(".font-claude-message")
+    ? mainArea.querySelectorAll(".font-claude-message, .font-claude-response")
     : [];
   const lastBlock = responseBlocks[responseBlocks.length - 1];
   if (lastBlock) {
@@ -399,6 +439,7 @@ window.addEventListener("message", (event) => {
 
   watchNavigation(() => {
     processedKeys = new Set();
+    processedTextKeys.clear();
     clearTimeout(_artifactTimer);
     _artifactTimer = null;
     _pendingCard = null;
@@ -456,15 +497,18 @@ function extractTablePackages(el) {
 }
 
 function scanResponseText() {
-  // Claude 응답 컨테이너 — .font-claude-message 만 사용 (사이드바/대화목록 보호).
+  // Claude 응답 컨테이너 — .font-claude-message, .font-claude-response 만 사용 (사이드바/대화목록 보호).
   // [class*='prose'], data-is-streaming 같은 광범위 셀렉터는 사이드바 요소까지
   // 매치되어 패널이 엉뚱한 곳에 삽입되므로 제외.
-  const candidates = document.querySelectorAll(".font-claude-message");
+  const candidates = document.querySelectorAll(".font-claude-message, .font-claude-response");
   const seen = new Set();
   for (const el of candidates) {
     if (seen.has(el)) continue;
     seen.add(el);
     if (el.hasAttribute("data-slop-scanned")) continue;
+    // 아티팩트가 있는 응답은 텍스트 스캔(전체 패키지 집계) 스킵 — 아티팩트 패널이 대신 표시.
+    // (사용자 요청: 아티팩트 있으면 아티팩트 하단에만, 마지막 전체 집계 패널 안 띄움)
+    if (el.querySelector("[class*='artifact-block'], [data-testid*='artifact'], button[aria-label][class*='inset-0'][class*='cursor-pointer']")) continue;
     // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
     if (el.hasAttribute("data-slop-code-scanned")) continue;
     if (el.closest("[data-slop-code-scanned]")) continue;
@@ -495,6 +539,15 @@ function scanResponseText() {
     )].filter(p => ![...processedKeys].some(k => k.includes(p)));
 
     if (!allPackages.length) continue;
+
+    // 콘텐츠 기반 중복 방지 — 스트리밍 중 메시지 재렌더로 같은 패키지 세트가
+    // 다른 .font-claude-message, .font-claude-response 요소에서 재스캔되어 패널이 2~3개 쌓이던 버그 해결
+    const pkgKey = allPackages.slice().sort().join(",");
+    if (processedTextKeys.has(pkgKey)) {
+      el.setAttribute("data-slop-scanned", "1");
+      continue;
+    }
+    processedTextKeys.add(pkgKey);
 
     el.setAttribute("data-slop-scanned", "1");
     console.log(`[Slop Detector] Claude 텍스트 패키지 감지:`, allPackages);

@@ -93,6 +93,7 @@ const observer = new MutationObserver(() => {
 
   watchNavigation(() => {
     processedKeys = new Set();
+    processedTextKeys.clear();
     setTimeout(scanCodeBlocks, 1000);
   });
 
@@ -172,6 +173,14 @@ function scanResponseText() {
 
     // DOM에 이미 텍스트 패널이 삽입되어 있으면 스킵 (타이밍 중복 방지)
     if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
+
+    // 콘텐츠 기반 중복 방지 — 재렌더로 같은 패키지 세트 패널이 중복 삽입되던 것 방지
+    const pkgKey = allPackages.slice().sort().join(",");
+    if (processedTextKeys.has(pkgKey)) {
+      el.setAttribute("data-slop-scanned", "1");
+      return;
+    }
+    processedTextKeys.add(pkgKey);
 
     el.setAttribute("data-slop-scanned", "1");
     console.log(`[Slop Detector] ChatGPT 텍스트 패키지 감지:`, allPackages);

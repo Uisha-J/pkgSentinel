@@ -122,6 +122,7 @@ const observer = new MutationObserver(() => {
 
   watchNavigation(() => {
     processedKeys = new Set();
+    processedTextKeys.clear();
     setTimeout(scanCodeBlocks, 1000);
   });
 
@@ -169,6 +170,14 @@ function scanResponseText() {
       return ![...processedKeys].some(k => k.includes(p));
     });
     if (!newPackages.length) continue;
+
+    // 콘텐츠 기반 중복 방지 — 재렌더로 같은 패키지 세트 패널이 중복 삽입되던 것 방지
+    const pkgKey = newPackages.slice().sort().join(",");
+    if (processedTextKeys.has(pkgKey)) {
+      el.setAttribute("data-slop-scanned", "1");
+      continue;
+    }
+    processedTextKeys.add(pkgKey);
 
     el.setAttribute("data-slop-scanned", "1");
     console.log(`[Slop Detector] Gemini 패키지 감지:`, newPackages);

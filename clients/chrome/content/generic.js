@@ -31,7 +31,9 @@ const MESSAGE_SELECTORS = [
   "[class*='AssistantMessage']",
   "[class*='assistant-message']",
   "[class*='ProseMirror']",                   // Phind
-  "[class*='prose']:not(input):not(textarea)",
+  // 토큰 정확 매칭(~=) — [class*='prose'] 는 print:prose, not-prose(반대 의미)까지
+  // 오매칭해서 <main> 전체가 잡혀 패널이 풀폭으로 튀어나옴. 진짜 prose 토큰만 매칭.
+  "[class~='prose']:not(input):not(textarea)",
   "article",                                  // Perplexity
   "[role='article']",
 ].join(", ");
@@ -83,13 +85,44 @@ function insertAfterCode(codeEl, newEl) {
   return false;
 }
 
+// ── 유저 질문 메시지 식별 ────────────────────────────────────────────────────
+// MESSAGE_SELECTORS 가 광범위(message-content/prose/article)해서 유저 질문 말풍선까지
+// 매칭됨 → 응답(assistant)만 검사하도록 유저 컨테이너를 제외.
+const USER_MESSAGE_SELECTORS = [
+  "[data-message-author-role='user']",
+  "[data-role='user']",
+  "[class*='user-message']", "[class*='UserMessage']",
+  "[class*='user-query']",   "[class*='UserQuery']",
+  "[class*='user-bubble']",  "[class*='UserBubble']",
+  "[class*='message-bubble--user']",
+  "[class*='human']",
+  "[aria-label*='your message' i]",
+].join(", ");
+
+function _isUserMessage(el) {
+  try {
+    if (el.closest(USER_MESSAGE_SELECTORS)) return true;
+    // Grok: 유저 질문은 <p class="break-words" node="[object Object]"> 로 렌더됨.
+    // node 속성은 Grok 입력 직렬화 흔적 — AI 응답(마크다운)엔 없음.
+    // 스캔 컨테이너가 이 <p>를 감싸므로 descendant 로 검사.
+    if (el.matches?.("p.break-words[node]")) return true;
+    const q = el.querySelector?.("p.break-words[node]");
+    // 코드블록(pre/code)이 없는 컨테이너만 유저 질문으로 판단 — 응답 오제외 방지
+    if (q && !el.querySelector("pre, code")) return true;
+    return false;
+  } catch { return false; }
+}
+
 // ── 중복 방지 ─────────────────────────────────────────────────────────────────
 let processedKeys = new Set();
+const processedTextKeys = new Set();
 
 // ── 코드블록 스캔 ─────────────────────────────────────────────────────────────
 function scanCodeBlocks() {
   document.querySelectorAll(CODE_SELECTORS).forEach(el => {
     if (el.hasAttribute("data-slop-scanned")) return;
+    // 유저 질문 안의 코드는 제외 — AI 응답만 검사
+    if (_isUserMessage(el)) return;
     // pre 안에 code가 있으면 code 우선, 아니면 pre 자체
     if (el.tagName === "PRE" && el.querySelector("code")) return;
     const text = ((el.innerText || el.textContent) || "").trim();
@@ -107,6 +140,8 @@ function scanCodeBlocks() {
 function scanResponseText() {
   document.querySelectorAll(MESSAGE_SELECTORS).forEach(el => {
     if (el.hasAttribute("data-slop-scanned")) return;
+    // 유저 질문은 제외 — AI 응답만 검사
+    if (_isUserMessage(el)) return;
     const text = el.innerText || "";
     if (text.length < 20 || text.length > 50000) return;
 
@@ -121,8 +156,19 @@ function scanResponseText() {
     if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
     if (el.querySelector("[data-slop-text-panel]")) return;
 
+    // 콘텐츠 기반 중복 방지 — 중첩 매칭/재렌더로 같은 패키지 세트가 중복 검사되던 것 방지
+    const pkgKey = allPackages.slice().sort().join(",");
+    if (processedTextKeys.has(pkgKey)) {
+      el.setAttribute("data-slop-scanned", "1");
+      return;
+    }
+    processedTextKeys.add(pkgKey);
+
     el.setAttribute("data-slop-scanned", "1");
-    console.log(`[Slop Detector] ${SITE_NAME} 텍스트 패키지 감지:`, allPackages);
+    // 진단용: 검사된 컨테이너의 태그/클래스 출력 — 유저 질문 말풍선 식별에 사용
+    const _cls = typeof el.className === "string" ? el.className : "(non-string)";
+    console.log(`[Slop Detector] ${SITE_NAME} 텍스트 패키지 감지:`, allPackages,
+      `\n  ↳ 컨테이너: <${el.tagName.toLowerCase()} class="${_cls}">`);
 
     analyzePackagesFromText(allPackages, (newEl) => {
       newEl.setAttribute("data-slop-text-panel", "1");
