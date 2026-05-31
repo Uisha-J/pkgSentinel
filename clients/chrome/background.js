@@ -68,12 +68,15 @@ async function sha256(text) {
 // API 응답 (V2 어댑터):
 //   /analyze            → { results: [PackageResult] }
 //   /parse-and-analyze  → { results: [PackageResult] }
-// 각 PackageResult.level ∈ { CRITICAL, HIGH, MEDIUM, AGENTIC, LOW, UNKNOWN }
-// 매핑:
-//   CRITICAL          → malicious
-//   HIGH / MEDIUM     → suspicious
-//   AGENTIC           → agentic (별도 — langchain 등 AI 라이브러리, opt-in 필요)
-//   LOW / UNKNOWN     → safe
+// 집계는 엔진 raw verdict(본 로직)를 직접 따른다.
+// PackageResult.verdict ∈ { MALICIOUS, HIGH_RISK, SUSPICIOUS, AGENTIC, CLEAN,
+//                           CANNOT_ANALYZE, ERROR }
+// 매핑(팝업 4박스):
+//   MALICIOUS / CANNOT_ANALYZE → malicious (미등록=슬롭스쿼팅 강력 의심)
+//   AGENTIC                    → agentic (별도 — langchain 등 AI 라이브러리, opt-in 필요)
+//   HIGH_RISK / SUSPICIOUS     → suspicious
+//   CLEAN                      → safe
+//   ERROR / 기타               → 집계 제외 (분석 실패/불가는 안전이 아님)
 async function updateRiskState(analysisResult) {
   const items = Array.isArray(analysisResult)
     ? analysisResult
@@ -89,11 +92,12 @@ async function updateRiskState(analysisResult) {
     if (stats.agentic === undefined) stats.agentic = 0;
 
     for (const item of items) {
-      const level = (item && item.level) || "LOW";
-      if (level === "CRITICAL") stats.malicious++;
-      else if (level === "AGENTIC" || item?.is_agentic) stats.agentic++;
-      else if (level === "HIGH" || level === "MEDIUM") stats.suspicious++;
-      else stats.safe++;
+      const v = (item && item.verdict) || "";
+      if (v === "MALICIOUS" || v === "CANNOT_ANALYZE") stats.malicious++;
+      else if (v === "AGENTIC" || item?.is_agentic) stats.agentic++;
+      else if (v === "HIGH_RISK" || v === "SUSPICIOUS") stats.suspicious++;
+      else if (v === "CLEAN") stats.safe++;
+      // ERROR / 기타: 집계 제외
     }
 
     chrome.storage.local.set({ scanStats: stats });

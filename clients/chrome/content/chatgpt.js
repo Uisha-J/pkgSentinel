@@ -41,7 +41,7 @@ function insertAfterCodeBlock(codeEl, newEl) {
     }
     el = p;
   }
-  console.warn("[Slop Detector] ChatGPT 패널 삽입 위치 없음");
+  console.warn("[pkgSentinel] ChatGPT 패널 삽입 위치 없음");
   return false;
 }
 
@@ -56,12 +56,12 @@ function getKey(text) {
 function scanCodeBlocks() {
   const selectors = ["div[dir='ltr']", "pre code"].join(", ");
   document.querySelectorAll(selectors).forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-scanned")) return;
     // 응답 단위 dedup: 같은 응답에 이미 다른 element 가 처리 시작했으면 스킵
     // (div[dir='ltr'] 와 pre code 가 nested 되어 둘 다 매칭되는 케이스 방지)
     const msg = el.closest("div[data-message-author-role='assistant']");
-    if (msg && msg.hasAttribute("data-slop-code-scanned")) {
-      el.setAttribute("data-slop-scanned", "1"); // 재스캔 방지
+    if (msg && msg.hasAttribute("data-pkgsentinel-code-scanned")) {
+      el.setAttribute("data-pkgsentinel-scanned", "1"); // 재스캔 방지
       return;
     }
     const text = ((el.innerText || el.textContent) || "").trim();
@@ -69,8 +69,8 @@ function scanCodeBlocks() {
     const hasImport = /^\s*(import |from .+ import)/m.test(text)
       || /require\(|"dependencies"/.test(text);
     if (!hasImport) return;
-    el.setAttribute("data-slop-scanned", "1");
-    if (msg) msg.setAttribute("data-slop-code-scanned", "1");
+    el.setAttribute("data-pkgsentinel-scanned", "1");
+    if (msg) msg.setAttribute("data-pkgsentinel-code-scanned", "1");
     const filename = guessFilename(el);
     analyzeAndRender(text, filename, (newEl) => insertAfterCodeBlock(el, newEl));
   });
@@ -85,7 +85,7 @@ const observer = new MutationObserver(() => {
 // ── 시작 ──────────────────────────────────────────────────────────────────────
 (async () => {
   const serverUp = await checkApiServer();
-  console.log(`[Slop Detector] 시작 — 사이트: chatgpt, API: ${serverUp ? "✅ 연결됨" : "❌ 오프라인"}`);
+  console.log(`[pkgSentinel] 시작 — 사이트: chatgpt, API: ${serverUp ? "✅ 연결됨" : "❌ 오프라인"}`);
   if (!serverUp) return;
 
   watchNavigation(() => {
@@ -142,9 +142,9 @@ function extractSpanPackages(el) {
 
 function scanResponseText() {
   document.querySelectorAll("div[data-message-author-role='assistant']").forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-scanned")) return;
     // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
-    if (el.hasAttribute("data-slop-code-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-code-scanned")) return;
     const text = el.innerText || "";
     if (text.length < 20) return;
 
@@ -166,14 +166,14 @@ function scanResponseText() {
     if (!allPackages.length) return;
 
     // DOM에 이미 텍스트 패널이 삽입되어 있으면 스킵 (타이밍 중복 방지)
-    if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
+    if (el.parentElement?.querySelector("[data-pkgsentinel-text-panel]")) return;
 
-    el.setAttribute("data-slop-scanned", "1");
-    console.log(`[Slop Detector] ChatGPT 텍스트 패키지 감지:`, allPackages);
+    el.setAttribute("data-pkgsentinel-scanned", "1");
+    console.log(`[pkgSentinel] ChatGPT 텍스트 패키지 감지:`, allPackages);
 
     analyzePackagesFromText(allPackages, (newEl) => {
-      newEl.setAttribute("data-slop-text-panel", "1");
-      const existingPanel = el.nextElementSibling?.hasAttribute("data-slop-panel")
+      newEl.setAttribute("data-pkgsentinel-text-panel", "1");
+      const existingPanel = el.nextElementSibling?.hasAttribute("data-pkgsentinel-panel")
         ? el.nextElementSibling : null;
       const insertTarget = existingPanel || el;
       try { insertTarget.insertAdjacentElement("afterend", newEl); return true; } catch {}

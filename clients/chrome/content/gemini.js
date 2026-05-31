@@ -74,11 +74,11 @@ function getKey(text) {
 // ── 코드블록 스캔 ─────────────────────────────────────────────────────────────
 function scanCodeBlocks() {
   document.querySelectorAll(SELECTORS).forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-scanned")) return;
     // 응답 단위 dedup (Gemini message-content)
     const msg = el.closest("message-content");
-    if (msg && msg.hasAttribute("data-slop-code-scanned")) {
-      el.setAttribute("data-slop-scanned", "1");
+    if (msg && msg.hasAttribute("data-pkgsentinel-code-scanned")) {
+      el.setAttribute("data-pkgsentinel-scanned", "1");
       return;
     }
     const text = (el.textContent || "").trim();
@@ -86,8 +86,8 @@ function scanCodeBlocks() {
     const hasImport = /^\s*(import |from .+ import)/m.test(text)
       || /require\(|"dependencies"/.test(text);
     if (!hasImport) return;
-    el.setAttribute("data-slop-scanned", "1");
-    if (msg) msg.setAttribute("data-slop-code-scanned", "1");
+    el.setAttribute("data-pkgsentinel-scanned", "1");
+    if (msg) msg.setAttribute("data-pkgsentinel-code-scanned", "1");
     const filename = guessFilename(el);
     analyzeAndRender(text, filename, (newEl) => insertAfterCode(el, newEl));
   });
@@ -103,7 +103,7 @@ const observer = new MutationObserver(() => {
 // ── 시작 ──────────────────────────────────────────────────────────────────────
 (async () => {
   const serverUp = await checkApiServer();
-  console.log(`[Slop Detector] 시작 — 사이트: gemini, API: ${serverUp ? "✅ 연결됨" : "❌ 오프라인"}`);
+  console.log(`[pkgSentinel] 시작 — 사이트: gemini, API: ${serverUp ? "✅ 연결됨" : "❌ 오프라인"}`);
   if (!serverUp) return;
 
   watchNavigation(() => {
@@ -121,9 +121,9 @@ const processedTextKeys = new Set();
 
 function scanResponseText() {
   document.querySelectorAll("message-content").forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-scanned")) return;
     // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
-    if (el.hasAttribute("data-slop-code-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-code-scanned")) return;
     const text = el.innerText || "";
     if (text.length < 20) return;
 
@@ -145,14 +145,14 @@ function scanResponseText() {
     if (!newPackages.length) return;
 
     // DOM에 이미 텍스트 패널 있으면 스킵
-    if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
+    if (el.parentElement?.querySelector("[data-pkgsentinel-text-panel]")) return;
 
-    el.setAttribute("data-slop-scanned", "1");
-    console.log(`[Slop Detector] Gemini 패키지 감지:`, newPackages);
+    el.setAttribute("data-pkgsentinel-scanned", "1");
+    console.log(`[pkgSentinel] Gemini 패키지 감지:`, newPackages);
 
     analyzePackagesFromText(newPackages, (newEl) => {
-      newEl.setAttribute("data-slop-text-panel", "1");
-      const existingPanel = el.nextElementSibling?.hasAttribute("data-slop-panel")
+      newEl.setAttribute("data-pkgsentinel-text-panel", "1");
+      const existingPanel = el.nextElementSibling?.hasAttribute("data-pkgsentinel-panel")
         ? el.nextElementSibling : null;
       const insertTarget = existingPanel || el;
       try { insertTarget.insertAdjacentElement("afterend", newEl); return true; } catch {}

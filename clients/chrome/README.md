@@ -1,6 +1,6 @@
-# Slop Detector — Chrome 익스텐션
+# pkgSentinel — Chrome 익스텐션
 
-AI 챗봇 응답의 패키지 추천을 **실시간으로 슬롭스쿼팅(악성 패키지) 분석**.
+AI 챗봇 응답의 패키지 추천을 **pkgsentinel 엔진으로 실시간 공급망 악성 분석**(슬롭스쿼팅·악성 패키지).
 
 ## 지원 사이트
 | 사이트 | 호스트 |
@@ -75,7 +75,7 @@ import 이름과 PyPI 패키지명이 다른 흔한 경우 자동 보정:
 
 | 증상 | 해결 |
 |---|---|
-| "분석 엔진 오프라인" | `docker compose ps` 로 `slop_api` 컨테이너 확인 |
+| "분석 엔진 오프라인" | `docker compose ps` 로 `pkgsentinel_api` 컨테이너 확인 |
 | 패널 안 나옴 | `chrome://extensions/` 새로고침 + 페이지 Ctrl+R |
 | Claude 아티팩트 안 나옴 | 매니페스트에 `*.claudeusercontent.com` 권한 확인 |
 | 같은 응답에 패널 2개 | 익스텐션 새로고침 (옛 코드 캐시) |

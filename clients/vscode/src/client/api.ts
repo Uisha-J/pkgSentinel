@@ -9,11 +9,15 @@
 import { signBody } from './hmac';
 import { DependencyMention, Ecosystem } from '../manifest/types';
 
+// 엔진 본 로직(Verdict enum)과 1:1. NETWORK_ERROR 만 클라이언트 측 센티넬.
 export type Verdict =
   | 'MALICIOUS'
   | 'HIGH_RISK'
   | 'SUSPICIOUS'
+  | 'AGENTIC'
   | 'CLEAN'
+  | 'CANNOT_ANALYZE'
+  | 'ERROR'
   | 'UNKNOWN'
   | 'NETWORK_ERROR';
 

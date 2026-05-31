@@ -29,8 +29,11 @@ function emoji(v: Verdict | undefined): string {
     case 'MALICIOUS': return '🛑';
     case 'HIGH_RISK': return '⛔';
     case 'SUSPICIOUS': return '⚠️';
+    case 'AGENTIC': return '🤖';
+    case 'CANNOT_ANALYZE': return '🚫';
     case 'CLEAN': return '✅';
     case 'NETWORK_ERROR': return '🔌';
+    case 'ERROR': return '⚠️';
     default: return '❓';
   }
 }

@@ -22,7 +22,7 @@
   .conversation { display: none; }
   .artifact-block-card { padding: 8px; margin: 4px; background: #1e293b; border-radius: 8px; }
   .row-wrapper > .row-inner > .row-deep > .row-deeper > .artifact-block-card { display: block; }
-  [data-slop-artifact-panel] { background: #14532d; padding: 6px; margin: 4px 0; border-radius: 4px; }
+  [data-pkgsentinel-artifact-panel] { background: #14532d; padding: 6px; margin: 4px 0; border-radius: 4px; }
   .token-line { font-family: monospace; }
 </style>
 </head>
@@ -82,8 +82,8 @@ function assert(condition, msg) {
 }
 
 function resetDOM() {
-  document.querySelectorAll("[data-slop-analyzed]").forEach(el => el.removeAttribute("data-slop-analyzed"));
-  document.querySelectorAll("[data-slop-artifact-panel]").forEach(el => el.remove());
+  document.querySelectorAll("[data-pkgsentinel-analyzed]").forEach(el => el.removeAttribute("data-pkgsentinel-analyzed"));
+  document.querySelectorAll("[data-pkgsentinel-artifact-panel]").forEach(el => el.remove());
   clearTimeout(_artifactTimer);
   _artifactTimer = null;
   _pendingCard = null;
@@ -160,10 +160,10 @@ function scanArtifacts() {
   }
 
   const cards = [...document.querySelectorAll("[class*='artifact-block']")];
-  const targetCard = cards.find(c => !c.hasAttribute("data-slop-analyzed"));
+  const targetCard = cards.find(c => !c.hasAttribute("data-pkgsentinel-analyzed"));
   if (!targetCard) return;
 
-  targetCard.setAttribute("data-slop-analyzed", "1");
+  targetCard.setAttribute("data-pkgsentinel-analyzed", "1");
   _pendingCard = targetCard;
 
   _artifactTimer = setTimeout(() => _analyzeStableArtifact(), 2000);
@@ -177,20 +177,20 @@ function _analyzeStableArtifact() {
 
   const code = extractArtifactCode();
   if (!code || code.length < 80) {
-    card.removeAttribute("data-slop-analyzed");
+    card.removeAttribute("data-pkgsentinel-analyzed");
     return;
   }
 
   const filename = guessFilenameFromCode(code);
 
   analyzeAndRender(code, filename, (newEl) => {
-    newEl.setAttribute("data-slop-artifact-panel", "1");
+    newEl.setAttribute("data-pkgsentinel-artifact-panel", "1");
     newEl.style.margin = "4px 0 0";
     const rowContainer = card
       ?.parentElement?.parentElement?.parentElement?.parentElement;
     if (rowContainer) {
       let next = rowContainer.nextElementSibling;
-      while (next?.hasAttribute("data-slop-artifact-panel")) {
+      while (next?.hasAttribute("data-pkgsentinel-artifact-panel")) {
         const toRemove = next;
         next = next.nextElementSibling;
         toRemove.remove();
@@ -222,13 +222,13 @@ function scanArtifacts_OLD() {
   const filename = guessFilenameFromCode(code);
 
   const cards = [...document.querySelectorAll("[class*='artifact-block']")];
-  const targetCard = cards.find(c => !c.hasAttribute("data-slop-analyzed-old"));
+  const targetCard = cards.find(c => !c.hasAttribute("data-pkgsentinel-analyzed-old"));
   if (!targetCard) return;
 
-  targetCard.setAttribute("data-slop-analyzed-old", "1");
+  targetCard.setAttribute("data-pkgsentinel-analyzed-old", "1");
 
   analyzeAndRender(code, filename, (newEl) => {
-    newEl.setAttribute("data-slop-artifact-panel-old", "1");
+    newEl.setAttribute("data-pkgsentinel-artifact-panel-old", "1");
     const rowContainer = targetCard
       ?.parentElement?.parentElement?.parentElement?.parentElement;
     if (rowContainer) {
@@ -243,8 +243,8 @@ function scanArtifacts_OLD() {
 async function test1_oldBugReproduction() {
   log("\n[TEST 1] 기존 버그 재현: 스트리밍 중 여러 카드에 패널 삽입", "info");
   resetDOM();
-  document.querySelectorAll("[data-slop-analyzed-old]").forEach(el => el.removeAttribute("data-slop-analyzed-old"));
-  document.querySelectorAll("[data-slop-artifact-panel-old]").forEach(el => el.remove());
+  document.querySelectorAll("[data-pkgsentinel-analyzed-old]").forEach(el => el.removeAttribute("data-pkgsentinel-analyzed-old"));
+  document.querySelectorAll("[data-pkgsentinel-artifact-panel-old]").forEach(el => el.remove());
   processedArtifactsOld.clear();
 
   const token = document.getElementById("token1");
@@ -260,15 +260,15 @@ async function test1_oldBugReproduction() {
   token.textContent = basePy + "# phase 1\n".repeat(5) + "# phase 2\n".repeat(5) + "# phase 3\n".repeat(5);
   scanArtifacts_OLD();
 
-  const panels = document.querySelectorAll("[data-slop-artifact-panel-old]");
-  const analyzed = document.querySelectorAll("[data-slop-analyzed-old]");
+  const panels = document.querySelectorAll("[data-pkgsentinel-artifact-panel-old]");
+  const analyzed = document.querySelectorAll("[data-pkgsentinel-analyzed-old]");
 
   log(`  패널 개수: ${panels.length}, 분석된 카드: ${analyzed.length}`);
   assert(panels.length > 1, `기존 버그 재현됨: 패널 ${panels.length}개 (1개여야 하지만 여러 개)`);
 
   // Cleanup
-  document.querySelectorAll("[data-slop-analyzed-old]").forEach(el => el.removeAttribute("data-slop-analyzed-old"));
-  document.querySelectorAll("[data-slop-artifact-panel-old]").forEach(el => el.remove());
+  document.querySelectorAll("[data-pkgsentinel-analyzed-old]").forEach(el => el.removeAttribute("data-pkgsentinel-analyzed-old"));
+  document.querySelectorAll("[data-pkgsentinel-artifact-panel-old]").forEach(el => el.remove());
 }
 
 async function test2_fixedStreamingDedup() {
@@ -289,8 +289,8 @@ async function test2_fixedStreamingDedup() {
   scanArtifacts();
 
   // Before timer fires: no panels yet, one card locked
-  const panelsBefore = document.querySelectorAll("[data-slop-artifact-panel]");
-  const analyzedBefore = document.querySelectorAll("[data-slop-analyzed]");
+  const panelsBefore = document.querySelectorAll("[data-pkgsentinel-artifact-panel]");
+  const analyzedBefore = document.querySelectorAll("[data-pkgsentinel-analyzed]");
   assert(panelsBefore.length === 0, `debounce 대기 중 패널 없음 (${panelsBefore.length}개)`);
   assert(analyzedBefore.length === 1, `잠긴 카드 1개만 (${analyzedBefore.length}개)`);
   assert(analyzedBefore[0]?.id === "card1", `첫 번째 카드만 잠김 (${analyzedBefore[0]?.id})`);
@@ -299,8 +299,8 @@ async function test2_fixedStreamingDedup() {
   log("  (2.5초 대기: debounce 완료 대기...)", "info");
   await sleep(2500);
 
-  const panelsAfter = document.querySelectorAll("[data-slop-artifact-panel]");
-  const analyzedAfter = document.querySelectorAll("[data-slop-analyzed]");
+  const panelsAfter = document.querySelectorAll("[data-pkgsentinel-artifact-panel]");
+  const analyzedAfter = document.querySelectorAll("[data-pkgsentinel-analyzed]");
   assert(panelsAfter.length === 1, `패널 정확히 1개 (${panelsAfter.length}개)`);
   assert(analyzedAfter.length === 1, `분석된 카드 1개만 (${analyzedAfter.length}개)`);
 
@@ -321,7 +321,7 @@ async function test3_multipleArtifactsSequential() {
   scanArtifacts();
   await sleep(2500);
 
-  const panels1 = document.querySelectorAll("[data-slop-artifact-panel]");
+  const panels1 = document.querySelectorAll("[data-pkgsentinel-artifact-panel]");
   assert(panels1.length === 1, `아티팩트 1 분석 후 패널 1개 (${panels1.length}개)`);
 
   // Artifact 2: different code appears in viewer
@@ -329,8 +329,8 @@ async function test3_multipleArtifactsSequential() {
   scanArtifacts();
   await sleep(2500);
 
-  const panels2 = document.querySelectorAll("[data-slop-artifact-panel]");
-  const analyzed2 = document.querySelectorAll("[data-slop-analyzed]");
+  const panels2 = document.querySelectorAll("[data-pkgsentinel-artifact-panel]");
+  const analyzed2 = document.querySelectorAll("[data-pkgsentinel-analyzed]");
   assert(panels2.length === 2, `아티팩트 2 분석 후 총 패널 2개 (${panels2.length}개)`);
   assert(analyzed2.length === 2, `분석된 카드 2개 (${analyzed2.length}개)`);
 
@@ -350,18 +350,18 @@ async function test4_navigationReset() {
   scanArtifacts();
   await sleep(2500);
 
-  assert(document.querySelectorAll("[data-slop-artifact-panel]").length === 1, "리셋 전 패널 1개");
+  assert(document.querySelectorAll("[data-pkgsentinel-artifact-panel]").length === 1, "리셋 전 패널 1개");
 
   // Simulate navigation reset
   processedKeys = new Set();
   clearTimeout(_artifactTimer);
   _artifactTimer = null;
   _pendingCard = null;
-  document.querySelectorAll("[data-slop-analyzed]").forEach(el => el.removeAttribute("data-slop-analyzed"));
-  document.querySelectorAll("[data-slop-artifact-panel]").forEach(el => el.remove());
+  document.querySelectorAll("[data-pkgsentinel-analyzed]").forEach(el => el.removeAttribute("data-pkgsentinel-analyzed"));
+  document.querySelectorAll("[data-pkgsentinel-artifact-panel]").forEach(el => el.remove());
 
-  assert(document.querySelectorAll("[data-slop-artifact-panel]").length === 0, "리셋 후 패널 0개");
-  assert(document.querySelectorAll("[data-slop-analyzed]").length === 0, "리셋 후 마킹 0개");
+  assert(document.querySelectorAll("[data-pkgsentinel-artifact-panel]").length === 0, "리셋 후 패널 0개");
+  assert(document.querySelectorAll("[data-pkgsentinel-analyzed]").length === 0, "리셋 후 마킹 0개");
 }
 
 async function runAllTests() {

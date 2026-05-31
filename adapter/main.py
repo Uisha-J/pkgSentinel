@@ -406,17 +406,6 @@ class VSCodeAnalyzeRequest(BaseModel):
     llm_mode: Optional[str] = None  # 무시 (서버 측 LLM_MODE 사용)
     version: Optional[str] = None
 
-# Adapter level (CRITICAL/HIGH/MEDIUM/AGENTIC/LOW/UNKNOWN)
-# → VSCode verdict (MALICIOUS/HIGH_RISK/SUSPICIOUS/CLEAN/UNKNOWN) 매핑
-_LEVEL_TO_VSCODE_VERDICT = {
-    "CRITICAL":   "MALICIOUS",
-    "HIGH":       "HIGH_RISK",
-    "MEDIUM":     "SUSPICIOUS",
-    "AGENTIC":    "SUSPICIOUS",   # 안내성 의심 (opt-in 권장)
-    "LOW":        "CLEAN",
-    "UNKNOWN":    "UNKNOWN",
-}
-
 @app.post("/api/v1/analyze")
 def analyze_v1(req: VSCodeAnalyzeRequest):
     """VSCode 익스텐션 호환 — 단일 패키지 분석 + spec 변환."""
@@ -427,8 +416,10 @@ def analyze_v1(req: VSCodeAnalyzeRequest):
     eco = _ecosystem_of(req.ecosystem or "pypi")
     pkg_result = _analyze_single(req.package.strip(), eco)
     d = pkg_result.dict()
-    level = d.get("level", "UNKNOWN")
-    verdict = _LEVEL_TO_VSCODE_VERDICT.get(level, "UNKNOWN")
+    # 엔진 raw verdict(본 로직)를 그대로 전달 — VSCode 익스텐션이 7개 verdict
+    # (MALICIOUS/HIGH_RISK/SUSPICIOUS/AGENTIC/CLEAN/CANNOT_ANALYZE/ERROR)를
+    # 직접 인식한다. level로 우회 변환하지 않아 AGENTIC·CANNOT_ANALYZE 구분 보존.
+    verdict = d.get("verdict", "UNKNOWN")
 
     # evidence_summary 구성 (ttp_details + code_snippets 결합)
     evidence_summary = []

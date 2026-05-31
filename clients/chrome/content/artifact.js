@@ -30,7 +30,7 @@ function _isCloudflareFrame() {
 function extractCode() {
   // CF 프레임이면 즉시 종료
   if (_isCloudflareFrame()) {
-    console.log("[Slop Detector] CF 보호 프레임 감지 - 스킵");
+    console.log("[pkgSentinel] CF 보호 프레임 감지 - 스킵");
     return null;
   }
 
@@ -50,7 +50,7 @@ function extractCode() {
           ? lines.filter((_, i) => i % 2 === 1).join("\n")
           : raw;
         if (code.length > 30) {
-          console.log(`[Slop Detector] 코드 추출 성공 (token→parent, ${code.length}자)`);
+          console.log(`[pkgSentinel] 코드 추출 성공 (token→parent, ${code.length}자)`);
           return code;
         }
       }
@@ -75,7 +75,7 @@ function extractCode() {
     if (el) {
       const text = (el.innerText || el.textContent || "").trim();
       if (text.length > 30) {
-        console.log(`[Slop Detector] 코드 추출 성공 (${sel}, ${text.length}자)`);
+        console.log(`[pkgSentinel] 코드 추출 성공 (${sel}, ${text.length}자)`);
         return text;
       }
     }
@@ -86,13 +86,13 @@ function extractCode() {
   if (bodyText.length > 80) {
     const hasCode = /^\s*(import |from .+ import|def |class |require\(|const |function )/m.test(bodyText);
     if (hasCode) {
-      console.log(`[Slop Detector] 코드 추출 성공 (body 전체, ${bodyText.length}자)`);
+      console.log(`[pkgSentinel] 코드 추출 성공 (body 전체, ${bodyText.length}자)`);
       return bodyText;
     }
   }
 
   // 디버그: DOM 구조 출력
-  console.log(`[Slop Detector] 코드 추출 실패. DOM 디버그:`);
+  console.log(`[pkgSentinel] 코드 추출 실패. DOM 디버그:`);
   console.log(`  token 요소: ${!!tokenEl}`);
   console.log(`  body 길이: ${bodyText.length}`);
   console.log(`  body 미리보기: ${bodyText.slice(0, 200)}`);
@@ -119,25 +119,25 @@ async function runAnalysis() {
   const filename = guessFilenameFromCode(code);
   analyzed = true;
 
-  console.log(`[Slop Detector] 아티팩트 분석: ${filename} (${code.length}자)`);
+  console.log(`[pkgSentinel] 아티팩트 분석: ${filename} (${code.length}자)`);
 
   try {
     const result = await callBackground({ type: "PARSE_AND_ANALYZE", filename, code });
     if (!result?.results?.length) return;
 
-    console.log(`[Slop Detector] 아티팩트 완료:`, result.results.map(r => `${r.package}(${r.level})`));
+    console.log(`[pkgSentinel] 아티팩트 완료:`, result.results.map(r => `${r.package}(${r.level})`));
 
     // 결과를 부모 페이지로 전송 (claude.ai 또는 어떤 부모든)
     const parentOrigin = document.referrer
       ? new URL(document.referrer).origin
       : "https://claude.ai";
     window.parent.postMessage({
-      type: "SLOP_ARTIFACT_RESULT",
+      type: "PKGSENTINEL_ARTIFACT_RESULT",
       results: result.results,
     }, parentOrigin);
 
   } catch (err) {
-    console.error("[Slop Detector] 아티팩트 오류:", err.message);
+    console.error("[pkgSentinel] 아티팩트 오류:", err.message);
   }
 }
 
@@ -149,11 +149,11 @@ const observer = new MutationObserver(() => {
 (async () => {
   // CF 보호 프레임이면 즉시 종료 (불필요한 리소스 낭비 방지)
   if (_isCloudflareFrame()) {
-    console.log("[Slop Detector] 아티팩트 iframe - CF 프레임이라 종료");
+    console.log("[pkgSentinel] 아티팩트 iframe - CF 프레임이라 종료");
     return;
   }
   const serverUp = await checkApiServer();
-  console.log(`[Slop Detector] 아티팩트 iframe, URL: ${location.host}, API: ${serverUp ? "✅" : "❌"}`);
+  console.log(`[pkgSentinel] 아티팩트 iframe, URL: ${location.host}, API: ${serverUp ? "✅" : "❌"}`);
   if (!serverUp) return;
 
   setTimeout(runAnalysis, 800);

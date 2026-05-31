@@ -40,9 +40,9 @@ export class StatusBar {
     let clean = 0, susp = 0, bad = 0, neterr = 0;
     for (const r of results) {
       const v = r.response.verdict;
-      if (v === 'MALICIOUS' || v === 'HIGH_RISK') bad++;
-      else if (v === 'SUSPICIOUS') susp++;
-      else if (v === 'NETWORK_ERROR') neterr++;
+      if (v === 'MALICIOUS' || v === 'HIGH_RISK' || v === 'CANNOT_ANALYZE') bad++;
+      else if (v === 'SUSPICIOUS' || v === 'AGENTIC') susp++;
+      else if (v === 'NETWORK_ERROR' || v === 'ERROR') neterr++;
       else if (v === 'CLEAN') clean++;
     }
     const parts: string[] = [];

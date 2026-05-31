@@ -64,11 +64,11 @@ let _pendingCard = null;
 // ── 케이스 1: 코드블록 스캔 ──────────────────────────────────────────────────
 function scanCodeBlocks() {
   document.querySelectorAll("pre code").forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-scanned")) return;
     // 응답 단위 dedup: 같은 응답에 이미 다른 코드블록이 처리 중이면 스킵
     const msg = el.closest(".font-claude-message, [data-is-streaming], [class*='prose']");
-    if (msg && msg.hasAttribute("data-slop-code-scanned")) {
-      el.setAttribute("data-slop-scanned", "1");
+    if (msg && msg.hasAttribute("data-pkgsentinel-code-scanned")) {
+      el.setAttribute("data-pkgsentinel-scanned", "1");
       return;
     }
     const text = (el.textContent || "").trim();
@@ -76,8 +76,8 @@ function scanCodeBlocks() {
     const hasImport = /^\s*(import |from .+ import)/m.test(text)
       || /require\(|"dependencies"/.test(text);
     if (!hasImport) return;
-    el.setAttribute("data-slop-scanned", "1");
-    if (msg) msg.setAttribute("data-slop-code-scanned", "1");
+    el.setAttribute("data-pkgsentinel-scanned", "1");
+    if (msg) msg.setAttribute("data-pkgsentinel-code-scanned", "1");
     const filename = guessFilename(el);
     analyzeAndRender(text, filename, (newEl) => insertAfterCode(el, newEl));
   });
@@ -97,7 +97,7 @@ function extractArtifactCode() {
       // 로그 중복 방지: 같은 추출 결과면 로그 출력 안 함
       const logKey = `${lineEls.length}:${code.length}`;
       if (extractArtifactCode._lastLogKey !== logKey) {
-        console.log(`[Slop Detector] 신규 UI 코드 추출 (group/line, ${lineEls.length}줄, ${code.length}자)`);
+        console.log(`[pkgSentinel] 신규 UI 코드 추출 (group/line, ${lineEls.length}줄, ${code.length}자)`);
         extractArtifactCode._lastLogKey = logKey;
       }
       const linesParent = lineEls[0].parentElement;
@@ -204,8 +204,8 @@ function scanArtifacts() {
 
   // 카드는 있으면 잠금 (선택적), 없어도 진행
   const cards = [...document.querySelectorAll("[class*='artifact-block'], [class*='artifact-preview'], [class*='ArtifactPreview'], [data-testid*='artifact'], [aria-label*='artifact' i]")];
-  _pendingCard = cards.find(c => !c.hasAttribute("data-slop-analyzed")) || null;
-  if (_pendingCard) _pendingCard.setAttribute("data-slop-analyzed", "1");
+  _pendingCard = cards.find(c => !c.hasAttribute("data-pkgsentinel-analyzed")) || null;
+  if (_pendingCard) _pendingCard.setAttribute("data-pkgsentinel-analyzed", "1");
 
   _artifactTimer = setTimeout(() => _analyzeStableArtifact(), 2000);
 }
@@ -249,17 +249,17 @@ function _analyzeStableArtifact() {
   // 안정화된 최종 코드 다시 추출
   const found = extractArtifactCode();
   if (!found || !found.code || found.code.length < 80) {
-    if (card) card.removeAttribute("data-slop-analyzed");
+    if (card) card.removeAttribute("data-pkgsentinel-analyzed");
     return;
   }
 
   _lastArtifactKey = _artifactKey(found.code);
 
   const filename = guessFilenameFromCode(found.code);
-  console.log(`[Slop Detector] 아티팩트 분석 시작: ${filename} (${found.code.length}자, 카드: ${!!card})`);
+  console.log(`[pkgSentinel] 아티팩트 분석 시작: ${filename} (${found.code.length}자, 카드: ${!!card})`);
 
   analyzeAndRender(found.code, filename, (newEl) => {
-    newEl.setAttribute("data-slop-artifact-panel", "1");
+    newEl.setAttribute("data-pkgsentinel-artifact-panel", "1");
     newEl.style.margin = "8px 0";
 
     // 삽입 위치: 카드의 메시지 element 다음 — 옛 코드의 4단계 부모 hardcode 대신
@@ -272,7 +272,7 @@ function _analyzeStableArtifact() {
       if (!target) return false;
       // 기존 형제 패널 제거
       let next = target.nextElementSibling;
-      while (next?.hasAttribute("data-slop-artifact-panel")) {
+      while (next?.hasAttribute("data-pkgsentinel-artifact-panel")) {
         const toRemove = next; next = next.nextElementSibling; toRemove.remove();
       }
       try {
@@ -283,17 +283,17 @@ function _analyzeStableArtifact() {
 
     const ok = _insert();
     if (!ok) {
-      console.warn("[Slop Detector] 아티팩트 패널 삽입 타겟 없음");
+      console.warn("[pkgSentinel] 아티팩트 패널 삽입 타겟 없음");
       return false;
     }
-    console.log("[Slop Detector] 아티팩트 패널 삽입 완료");
+    console.log("[pkgSentinel] 아티팩트 패널 삽입 완료");
 
     // React reconciliation 대비: 사라지면 재삽입 (최대 5회, 30초 timeout)
     let reattempts = 0;
     const watcher = new MutationObserver(() => {
       if (!document.contains(newEl) && reattempts < 5) {
         reattempts++;
-        console.log(`[Slop Detector] 패널 제거 감지, 재삽입 #${reattempts}`);
+        console.log(`[pkgSentinel] 패널 제거 감지, 재삽입 #${reattempts}`);
         _insert();
       }
     });
@@ -320,7 +320,7 @@ const _processedArtifactMessages = new Set();
 window.addEventListener("message", (event) => {
   const allowed = ["https://a.claude.ai", "https://www.claudeusercontent.com"];
   if (!allowed.some(o => event.origin === o || event.origin.endsWith(".claudeusercontent.com"))) return;
-  if (event.data?.type !== "SLOP_ARTIFACT_RESULT") return;
+  if (event.data?.type !== "PKGSENTINEL_ARTIFACT_RESULT") return;
   const results = event.data.results;
   if (!results?.length) return;
 
@@ -329,23 +329,23 @@ window.addEventListener("message", (event) => {
   if (_processedArtifactMessages.has(msgKey)) return;
   _processedArtifactMessages.add(msgKey);
 
-  console.log(`[Slop Detector] 아티팩트 iframe 결과 수신:`, results.map(r => `${r.package}(${r.level})`));
+  console.log(`[pkgSentinel] 아티팩트 iframe 결과 수신:`, results.map(r => `${r.package}(${r.level})`));
 
   const panel = buildPanel(results);
-  panel.setAttribute("data-slop-artifact-panel", "1");
+  panel.setAttribute("data-pkgsentinel-artifact-panel", "1");
   panel.style.margin = "4px 0 0";
 
   // 전략 1: artifact-block 카드 찾기
   const cards = [...document.querySelectorAll("[class*='artifact-block'], [class*='artifact-preview'], [class*='ArtifactPreview'], [data-testid*='artifact'], [aria-label*='artifact' i]")];
-  const targetCard = cards.find(c => !c.hasAttribute("data-slop-analyzed"));
+  const targetCard = cards.find(c => !c.hasAttribute("data-pkgsentinel-analyzed"));
 
   if (targetCard) {
-    targetCard.setAttribute("data-slop-analyzed", "1");
+    targetCard.setAttribute("data-pkgsentinel-analyzed", "1");
     const rowContainer = targetCard
       ?.parentElement?.parentElement?.parentElement?.parentElement;
     if (rowContainer) {
       let next = rowContainer.nextElementSibling;
-      while (next?.hasAttribute("data-slop-artifact-panel")) {
+      while (next?.hasAttribute("data-pkgsentinel-artifact-panel")) {
         const toRemove = next;
         next = next.nextElementSibling;
         toRemove.remove();
@@ -361,7 +361,7 @@ window.addEventListener("message", (event) => {
   const lastBlock = responseBlocks[responseBlocks.length - 1];
   if (lastBlock) {
     // 기존 아티팩트 패널이 있으면 제거
-    const existing = lastBlock.parentElement?.querySelector("[data-slop-artifact-panel]");
+    const existing = lastBlock.parentElement?.querySelector("[data-pkgsentinel-artifact-panel]");
     if (existing) existing.remove();
     try { lastBlock.insertAdjacentElement("afterend", panel); return; } catch {}
   }
@@ -376,7 +376,7 @@ window.addEventListener("message", (event) => {
 // ── 시작 ──────────────────────────────────────────────────────────────────────
 (async () => {
   const serverUp = await checkApiServer();
-  console.log(`[Slop Detector] 시작 — 사이트: claude, API: ${serverUp ? "✅ 연결됨" : "❌ 오프라인"}`);
+  console.log(`[pkgSentinel] 시작 — 사이트: claude, API: ${serverUp ? "✅ 연결됨" : "❌ 오프라인"}`);
   if (!serverUp) return;
 
   watchNavigation(() => {
@@ -387,8 +387,8 @@ window.addEventListener("message", (event) => {
     _lastArtifactKey = null;
     _processedArtifactMessages.clear();
     // 아티팩트 카드 분석 마킹 초기화
-    document.querySelectorAll("[data-slop-analyzed]").forEach(el => el.removeAttribute("data-slop-analyzed"));
-    document.querySelectorAll("[data-slop-artifact-panel]").forEach(el => el.remove());
+    document.querySelectorAll("[data-pkgsentinel-analyzed]").forEach(el => el.removeAttribute("data-pkgsentinel-analyzed"));
+    document.querySelectorAll("[data-pkgsentinel-artifact-panel]").forEach(el => el.remove());
     setTimeout(() => { scanCodeBlocks(); scanArtifacts(); }, 1000);
   });
 
@@ -442,10 +442,10 @@ function scanResponseText() {
   document.querySelectorAll(
     ".prose, [class*='prose'], div[data-is-streaming='false'], .font-claude-message"
   ).forEach(el => {
-    if (el.hasAttribute("data-slop-scanned")) return;
+    if (el.hasAttribute("data-pkgsentinel-scanned")) return;
     // 코드블록 스캔이 이미 처리한 응답이면 텍스트 스캔 스킵 (패널 중복 방지)
-    if (el.hasAttribute("data-slop-code-scanned")) return;
-    if (el.closest("[data-slop-code-scanned]")) return;
+    if (el.hasAttribute("data-pkgsentinel-code-scanned")) return;
+    if (el.closest("[data-pkgsentinel-code-scanned]")) return;
     const text = el.innerText || "";
     if (text.length < 20) return;
 
@@ -466,14 +466,14 @@ function scanResponseText() {
     if (!allPackages.length) return;
 
     // DOM에 이미 텍스트 패널이 있으면 스킵
-    if (el.parentElement?.querySelector("[data-slop-text-panel]")) return;
+    if (el.parentElement?.querySelector("[data-pkgsentinel-text-panel]")) return;
 
-    el.setAttribute("data-slop-scanned", "1");
-    console.log(`[Slop Detector] Claude 텍스트 패키지 감지:`, allPackages);
+    el.setAttribute("data-pkgsentinel-scanned", "1");
+    console.log(`[pkgSentinel] Claude 텍스트 패키지 감지:`, allPackages);
 
     analyzePackagesFromText(allPackages, (newEl) => {
-      newEl.setAttribute("data-slop-text-panel", "1");
-      const existingPanel = el.nextElementSibling?.hasAttribute("data-slop-panel")
+      newEl.setAttribute("data-pkgsentinel-text-panel", "1");
+      const existingPanel = el.nextElementSibling?.hasAttribute("data-pkgsentinel-panel")
         ? el.nextElementSibling : null;
       const insertTarget = existingPanel || el;
       try { insertTarget.insertAdjacentElement("afterend", newEl); return true; } catch {}

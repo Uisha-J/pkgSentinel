@@ -1,11 +1,11 @@
 /**
  * Diagnostics — 의존성 한 줄마다 squiggle.
  *
- * 색상:
- *   MALICIOUS / HIGH_RISK → Error (red squiggle)
- *   SUSPICIOUS            → Warning (yellow)
- *   CLEAN                 → 표시 안 함
- *   NETWORK_ERROR         → Information (회색)
+ * 색상 (엔진 본 로직 verdict 기준):
+ *   MALICIOUS / HIGH_RISK / CANNOT_ANALYZE → Error (red squiggle)
+ *   SUSPICIOUS / AGENTIC                   → Warning (yellow)
+ *   CLEAN                                  → 표시 안 함
+ *   NETWORK_ERROR / ERROR                  → Information (회색)
  */
 import * as vscode from 'vscode';
 
@@ -92,10 +92,13 @@ function severityFor(v: Verdict | undefined): vscode.DiagnosticSeverity | null {
   switch (v) {
     case 'MALICIOUS':
     case 'HIGH_RISK':
+    case 'CANNOT_ANALYZE':   // 미등록 = 슬롭스쿼팅 강력 의심
       return vscode.DiagnosticSeverity.Error;
     case 'SUSPICIOUS':
+    case 'AGENTIC':          // AI 에이전트 권한 — opt-in 검토 필요
       return vscode.DiagnosticSeverity.Warning;
     case 'NETWORK_ERROR':
+    case 'ERROR':            // 분석 실패
       return vscode.DiagnosticSeverity.Information;
     default:
       return null;

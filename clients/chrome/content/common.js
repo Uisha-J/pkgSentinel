@@ -332,7 +332,7 @@ function buildPanel(results) {
   }
 
   const panel = document.createElement("div");
-  panel.setAttribute("data-slop-panel", "1");
+  panel.setAttribute("data-pkgsentinel-panel", "1");
   panel.style.cssText = `
     margin:4px 0 6px;
     border:1px solid ${T.panelBd};
@@ -357,7 +357,7 @@ function buildPanel(results) {
     cursor:pointer; user-select:none;
   `;
   summary.innerHTML = `
-    <b style="color:${T.title};font-size:12px;flex-shrink:0;">Slop Detector</b>
+    <b style="color:${T.title};font-size:12px;flex-shrink:0;">pkgSentinel</b>
     <span style="display:flex;gap:8px;font-size:11px;flex-shrink:0;">
       ${counters.join('<span style="color:'+T.sub+';">·</span>')}
     </span>
@@ -371,7 +371,7 @@ function buildPanel(results) {
         ">${_esc(r.package)}</span>`;
       }).join("")}
     </span>
-    <span class="slop-toggle" style="color:${T.sub};font-size:11px;flex-shrink:0;">▸ 상세</span>
+    <span class="pkgs-toggle" style="color:${T.sub};font-size:11px;flex-shrink:0;">▸ 상세</span>
   `;
   panel.appendChild(summary);
 
@@ -506,11 +506,11 @@ function buildPanel(results) {
   // 토글
   let open = dangerous.length > 0;
   detail.style.display = open ? "block" : "none";
-  summary.querySelector(".slop-toggle").textContent = open ? "▾ 닫기" : "▸ 상세";
+  summary.querySelector(".pkgs-toggle").textContent = open ? "▾ 닫기" : "▸ 상세";
   summary.addEventListener("click", () => {
     open = !open;
     detail.style.display = open ? "block" : "none";
-    summary.querySelector(".slop-toggle").textContent = open ? "▾ 닫기" : "▸ 상세";
+    summary.querySelector(".pkgs-toggle").textContent = open ? "▾ 닫기" : "▸ 상세";
   });
 
   return panel;
@@ -519,9 +519,9 @@ function buildPanel(results) {
 // ── 공통 분석 실행 ─────────────────────────────────────────────────────────────
 async function analyzeAndRender(code, filename, insertFn) {
   const loading = document.createElement("div");
-  loading.setAttribute("data-slop-panel", "1");
+  loading.setAttribute("data-pkgsentinel-panel", "1");
   loading.style.cssText = "font-size:11px;color:#94a3b8;padding:3px 2px;font-family:sans-serif;";
-  loading.textContent = "🔍 Slop Detector 분석 중...";
+  loading.textContent = "🔍 pkgSentinel 분석 중...";
 
   if (!insertFn(loading)) return;
 
@@ -530,11 +530,11 @@ async function analyzeAndRender(code, filename, insertFn) {
     loading.remove();
     const items = Array.isArray(result) ? result : result?.results;
     if (!items?.length) return;
-    console.log(`[Slop Detector] 완료:`, items.map(r => `${r.package}(${r.level})`));
+    console.log(`[pkgSentinel] 완료:`, items.map(r => `${r.package}(${r.level})`));
     insertFn(buildPanel(items));
   } catch (err) {
-    console.error("[Slop Detector] 오류:", err.message);
-    loading.textContent = `⚠️ Slop Detector 오류: ${err.message}`;
+    console.error("[pkgSentinel] 오류:", err.message);
+    loading.textContent = `⚠️ pkgSentinel 오류: ${err.message}`;
     setTimeout(() => loading.remove(), 5000);
   }
 }
@@ -544,9 +544,9 @@ async function analyzePackagesFromText(packages, insertFn) {
   if (!packages.length) return;
 
   const loading = document.createElement("div");
-  loading.setAttribute("data-slop-panel", "1");
+  loading.setAttribute("data-pkgsentinel-panel", "1");
   loading.style.cssText = "font-size:11px;color:#94a3b8;padding:3px 2px;font-family:sans-serif;";
-  loading.textContent = "🔍 Slop Detector 분석 중...";
+  loading.textContent = "🔍 pkgSentinel 분석 중...";
   if (!insertFn(loading)) return;
 
   try {
@@ -555,11 +555,11 @@ async function analyzePackagesFromText(packages, insertFn) {
     // 백엔드 응답 정규화: {results: [...]} 객체 또는 [...] 배열 양쪽 지원
     const items = Array.isArray(result) ? result : result?.results;
     if (!items?.length) return;
-    console.log(`[Slop Detector] 텍스트 분석 완료:`, items.map(r => `${r.package}(${r.level})`));
+    console.log(`[pkgSentinel] 텍스트 분석 완료:`, items.map(r => `${r.package}(${r.level})`));
     insertFn(buildPanel(items));
   } catch (err) {
-    console.error("[Slop Detector] 오류:", err.message);
-    loading.textContent = `⚠️ Slop Detector 오류: ${err.message}`;
+    console.error("[pkgSentinel] 오류:", err.message);
+    loading.textContent = `⚠️ pkgSentinel 오류: ${err.message}`;
     setTimeout(() => loading.remove(), 5000);
   }
 }
@@ -570,8 +570,8 @@ function watchNavigation(onNavigate) {
   new MutationObserver(() => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
-      console.log("[Slop Detector] 페이지 이동 감지 → 상태 초기화");
-      document.querySelectorAll("[data-slop-panel]").forEach(el => el.remove());
+      console.log("[pkgSentinel] 페이지 이동 감지 → 상태 초기화");
+      document.querySelectorAll("[data-pkgsentinel-panel]").forEach(el => el.remove());
       onNavigate();
     }
   }).observe(document.body, { childList: true, subtree: true });

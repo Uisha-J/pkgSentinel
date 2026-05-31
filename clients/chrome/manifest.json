@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Slop Detector",
+  "name": "pkgSentinel",
   "version": "0.3.0",
-  "description": "AI가 추천한 패키지의 슬롭스쿼팅(악성 패키지)을 실시간으로 탐지합니다.",
+  "description": "AI 챗봇이 추천·생성한 패키지의 공급망 악성 여부(슬롭스쿼팅·악성 패키지)를 pkgsentinel 엔진으로 실시간 탐지합니다.",
 
   "permissions": ["storage"],
 
@@ -68,7 +68,7 @@
 
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Slop Detector"
+    "default_title": "pkgSentinel"
   },
 
   "icons": {
