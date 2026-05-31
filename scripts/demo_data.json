@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "package": "requests",
+      "ecosystem": "PyPI",
+      "level": "LOW",
+      "verdict": "CLEAN",
+      "is_agentic": false,
+      "evidence_count": 0,
+      "reasons": [],
+      "ttp_ids": [],
+      "confidence": 0.0,
+      "version": "2.34.2",
+      "engine_version": "2.0.0-alpha",
+      "analyzed_at": "2026-05-31T12:16:36.615312+00:00",
+      "ttp_details": [],
+      "code_snippets": [],
+      "closest_match": null,
+      "error": null
+    },
+    {
+      "package": "reqeusts-helper-ai",
+      "ecosystem": "PyPI",
+      "level": "CRITICAL",
+      "verdict": "CANNOT_ANALYZE",
+      "is_agentic": false,
+      "evidence_count": 0,
+      "reasons": [],
+      "ttp_ids": [],
+      "confidence": 0.0,
+      "version": "unknown",
+      "engine_version": "2.0.0-alpha",
+      "analyzed_at": "2026-05-31T12:16:36.696313+00:00",
+      "ttp_details": [],
+      "code_snippets": [],
+      "closest_match": null,
+      "error": null
+    },
+    {
+      "package": "six",
+      "ecosystem": "PyPI",
+      "level": "LOW",
+      "verdict": "CLEAN",
+      "is_agentic": false,
+      "evidence_count": 0,
+      "reasons": [],
+      "ttp_ids": [],
+      "confidence": 0.0,
+      "version": "1.17.0",
+      "engine_version": "2.0.0-alpha",
+      "analyzed_at": "2026-05-31T12:16:37.345313+00:00",
+      "ttp_details": [],
+      "code_snippets": [],
+      "closest_match": null,
+      "error": null
+    }
+  ]
+}
