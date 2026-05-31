@@ -516,12 +516,53 @@ function buildPanel(results) {
   return panel;
 }
 
+// ── 로딩 인디케이터 (분석 중 — 카드 + indeterminate 진행 바) ──────────────────
+function buildLoading() {
+  // 애니메이션 keyframes 1회 주입
+  if (!document.getElementById("pkgs-anim-style")) {
+    const st = document.createElement("style");
+    st.id = "pkgs-anim-style";
+    st.textContent =
+      "@keyframes pkgs-indet{0%{transform:translateX(-100%);}100%{transform:translateX(360%);}}" +
+      "@keyframes pkgs-pulse{0%,100%{opacity:.5;}50%{opacity:1;}}";
+    (document.head || document.documentElement).appendChild(st);
+  }
+  const dark  = _isDarkPage();
+  const bg    = dark ? "#1e293b" : "#ffffff";
+  const bd    = dark ? "#334155" : "#e2e8f0";
+  const tx    = dark ? "#cbd5e1" : "#475569";
+  const track = dark ? "#0f172a" : "#eef2f7";
+  const el = document.createElement("div");
+  el.setAttribute("data-pkgsentinel-panel", "1");
+  el.style.cssText =
+    `margin:4px 0 6px;border:1px solid ${bd};border-radius:6px;background:${bg};` +
+    `overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;`;
+  el.innerHTML =
+    `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;">` +
+      `<span style="font-size:13px;animation:pkgs-pulse 1.2s ease-in-out infinite;">🛡</span>` +
+      `<b style="color:${dark ? "#f1f5f9" : "#1e293b"};font-size:12px;">pkgSentinel</b>` +
+      `<span style="color:${tx};font-size:12px;">패키지 분석 중...</span>` +
+    `</div>` +
+    `<div style="height:3px;background:${track};overflow:hidden;">` +
+      `<div style="height:100%;width:28%;border-radius:2px;` +
+        `background:linear-gradient(90deg,#60a5fa,#3b82f6);` +
+        `animation:pkgs-indet 1.05s cubic-bezier(.65,0,.35,1) infinite;"></div>` +
+    `</div>`;
+  return el;
+}
+
+// ── 분석 오류 표시 (로딩 카드를 에러 메시지로 교체) ───────────────────────────
+function showLoadingError(el, msg) {
+  const dark = _isDarkPage();
+  el.innerHTML =
+    `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;` +
+    `color:#ef4444;font-size:12px;">⚠️ <b>pkgSentinel 오류</b> ` +
+    `<span style="color:${dark ? "#fca5a5" : "#b91c1c"};">${_esc(msg)}</span></div>`;
+}
+
 // ── 공통 분석 실행 ─────────────────────────────────────────────────────────────
 async function analyzeAndRender(code, filename, insertFn) {
-  const loading = document.createElement("div");
-  loading.setAttribute("data-pkgsentinel-panel", "1");
-  loading.style.cssText = "font-size:11px;color:#94a3b8;padding:3px 2px;font-family:sans-serif;";
-  loading.textContent = "🔍 pkgSentinel 분석 중...";
+  const loading = buildLoading();
 
   if (!insertFn(loading)) return;
 
@@ -534,7 +575,7 @@ async function analyzeAndRender(code, filename, insertFn) {
     insertFn(buildPanel(items));
   } catch (err) {
     console.error("[pkgSentinel] 오류:", err.message);
-    loading.textContent = `⚠️ pkgSentinel 오류: ${err.message}`;
+    showLoadingError(loading, err.message);
     setTimeout(() => loading.remove(), 5000);
   }
 }
@@ -543,10 +584,7 @@ async function analyzeAndRender(code, filename, insertFn) {
 async function analyzePackagesFromText(packages, insertFn) {
   if (!packages.length) return;
 
-  const loading = document.createElement("div");
-  loading.setAttribute("data-pkgsentinel-panel", "1");
-  loading.style.cssText = "font-size:11px;color:#94a3b8;padding:3px 2px;font-family:sans-serif;";
-  loading.textContent = "🔍 pkgSentinel 분석 중...";
+  const loading = buildLoading();
   if (!insertFn(loading)) return;
 
   try {
@@ -559,7 +597,7 @@ async function analyzePackagesFromText(packages, insertFn) {
     insertFn(buildPanel(items));
   } catch (err) {
     console.error("[pkgSentinel] 오류:", err.message);
-    loading.textContent = `⚠️ pkgSentinel 오류: ${err.message}`;
+    showLoadingError(loading, err.message);
     setTimeout(() => loading.remove(), 5000);
   }
 }
