@@ -338,12 +338,15 @@ def run_pipeline(
 
     # ========== Stage 02: 공격 이력 ==========
     try:
-        # target_version 가 결정됐다면 version-aware 매칭 — historical-only
-        # (이름은 매칭되지만 현재 버전이 affected_versions 에 없는) 케이스를
-        # MALICIOUS 에서 historical_name_matches 로 분리.
+        # version-aware 매칭 — historical-only (이름은 매칭되지만 현재 버전이
+        # affected_versions 에 없는) 케이스를 MALICIOUS 에서
+        # historical_name_matches 로 분리.
+        # 사용자가 버전을 지정하지 않으면 레지스트리의 latest 버전을 사용한다.
+        # (None 으로 두면 정상 패키지의 과거 취약점 권고[PYSEC/GHSA]가 현재
+        #  악성 매치로 오인되어 인기 패키지가 MALICIOUS 로 오탐됨.)
         hist = check_attack_history(
             package, ecosystem,
-            version=ctx.version if ctx.version else None,
+            version=ctx.version or reg.latest_version or None,
         )
         ctx.stage_results.append(StageResult(
             stage="stage_02_attack_history",
