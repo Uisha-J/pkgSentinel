@@ -123,7 +123,7 @@ def _build_semantic_prompt(
     ttp_lines = []
     for m in ttp_matches[:5]:
         ttp_lines.append(
-            f"- {m.ttp.ttp_id} ({m.ttp.ttp_source.value}): {m.ttp.ttp_name} "
+            f"- {m.ttp.ttp_id} ({m.ttp.source.value}): {m.ttp.ttp_name} "
             f"(sim {m.similarity:.2f}, sev {m.ttp.severity.value})"
         )
     ttp_block = "\n".join(ttp_lines) if ttp_lines else "(none)"

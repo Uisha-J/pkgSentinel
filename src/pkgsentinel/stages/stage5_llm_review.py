@@ -57,7 +57,7 @@ def _build_user_prompt(
         lines = ["Matched TTPs:"]
         for m in ttp_matches[:5]:
             lines.append(
-                f"- {m.ttp.ttp_id} ({m.ttp.ttp_source.value}): {m.ttp.ttp_name} "
+                f"- {m.ttp.ttp_id} ({m.ttp.source.value}): {m.ttp.ttp_name} "
                 f"(similarity {m.similarity:.2f}, severity {m.ttp.severity.value})"
             )
             desc = m.ttp.description.replace("\n", " ")[:300]
