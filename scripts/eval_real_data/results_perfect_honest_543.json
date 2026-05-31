@@ -1,0 +1,31 @@
+{
+  "policy": "Perfectly honest author manifest (detected = declared exact)",
+  "fixtures": [
+    {
+      "name": "@crowdstrike/glide-core",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths']"
+      }
+    }
+  ],
+  "by_verdict_off": {
+    "CLEAN": 1
+  },
+  "by_verdict_perfect": {
+    "MALICIOUS": 1
+  },
+  "benign_n": 0,
+  "malicious_n": 1,
+  "off_fp": 0,
+  "perfect_fp": 0,
+  "off_tp": 0,
+  "perfect_tp": 1
+}

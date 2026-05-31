@@ -1,0 +1,62 @@
+{
+  "figure": "npm 3-way (unpublish 제외, 동일 n)",
+  "n": 273,
+  "malicious": 243,
+  "benign": 30,
+  "unpublished_excluded": [
+    "@sporta-technology/d11-web-components.shell-loading",
+    "hoodle-plugins-manager",
+    "math-crypto",
+    "os-apps-ui-curvelibrary",
+    "sap-cd",
+    "test-kaks3c",
+    "tml-sso"
+  ],
+  "note": "npm unpublish/삭제 패키지만 제외. 존재하나 Socket가 ERROR낸 패키지는 미탐(FN) 처리.",
+  "rows": [
+    {
+      "tool": "Socket.dev (행위+LLM)",
+      "n": 273,
+      "tp": 178,
+      "fp": 2,
+      "fn": 65,
+      "tn": 28,
+      "precision": 0.989,
+      "recall": 0.733,
+      "f1": 0.842
+    },
+    {
+      "tool": "OSV-Scanner (DB)",
+      "n": 273,
+      "tp": 213,
+      "fp": 4,
+      "fn": 30,
+      "tn": 26,
+      "precision": 0.982,
+      "recall": 0.877,
+      "f1": 0.926
+    },
+    {
+      "tool": "pkgsentinel (L0 OFF 행위만)",
+      "n": 273,
+      "tp": 155,
+      "fp": 0,
+      "fn": 88,
+      "tn": 30,
+      "precision": 1.0,
+      "recall": 0.638,
+      "f1": 0.779
+    },
+    {
+      "tool": "pkgsentinel (L0 ON 프로덕션)",
+      "n": 273,
+      "tp": 234,
+      "fp": 4,
+      "fn": 9,
+      "tn": 26,
+      "precision": 0.983,
+      "recall": 0.963,
+      "f1": 0.973
+    }
+  ]
+}

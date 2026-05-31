@@ -1,0 +1,1017 @@
+{
+  "tool": "pkgsentinel (agentic ablation OFF vs ON)",
+  "fixtures": [
+    {
+      "name": "@postman/postman-mcp-cli",
+      "ecosystem": "npm",
+      "version": "1.0.3",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@postman/postman-mcp-server",
+      "ecosystem": "npm",
+      "version": "2.4.11",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "@postman/tunnel-agent",
+      "ecosystem": "npm",
+      "version": "0.6.5",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@seezo/sdr-mcp-server",
+      "ecosystem": "npm",
+      "version": "0.0.5",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "ai-agent-email",
+      "ecosystem": "npm",
+      "version": "9.0.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "amazon-seller-analytics-mcp-server",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "android-mobile-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "auth0-mcp-server",
+      "ecosystem": "npm",
+      "version": "1.0.2",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "create-mcp-use-app",
+      "ecosystem": "npm",
+      "version": "0.5.3",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "demo-mercadopago-mcp-server",
+      "ecosystem": "npm",
+      "version": "99.0.4",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "excluder-mcp-package",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "glean-mcp-server",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "greeting-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "hoppscotch-agent",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "ids-enterprise-mcp-server",
+      "ecosystem": "npm",
+      "version": "0.0.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "image-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "kubernetes-agent",
+      "ecosystem": "npm",
+      "version": "2.40.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "list-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llamaindex-js",
+      "ecosystem": "npm",
+      "version": "1.0.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "logdna-agent",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "markdown-agent",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "mcp-knowledge-base",
+      "ecosystem": "npm",
+      "version": "0.0.2",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "mcp-knowledge-graph",
+      "ecosystem": "npm",
+      "version": "1.2.1",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths']",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "mcp-lumin",
+      "ecosystem": "npm",
+      "version": "2.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "mcp-server-everything",
+      "ecosystem": "npm",
+      "version": "2.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "mcp-server-fixthis",
+      "ecosystem": "npm",
+      "version": "0.1.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium",
+        "detected": [
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R3-medium"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch",
+        "detected": [
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "mcp-server-todo",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']",
+        "detected": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "credential-paths",
+          "env-secrets",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "mcp-use",
+      "ecosystem": "npm",
+      "version": "1.4.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R1-2, R2-1",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths']",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-dangerous",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "multiturn-prompts-agent",
+      "ecosystem": "npm",
+      "version": "10.0.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "oracle-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "photo-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "pipet-code-agent",
+      "ecosystem": "npm",
+      "version": "2.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "shop-chat-agent",
+      "ecosystem": "npm",
+      "version": "339.52.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "spelunker-agent",
+      "ecosystem": "npm",
+      "version": "99.0.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    }
+  ],
+  "aggregate": {
+    "n_valid": 34,
+    "by_verdict_off": {
+      "CLEAN": 27,
+      "HIGH_RISK": 6,
+      "SUSPICIOUS": 1
+    },
+    "by_verdict_on": {
+      "CLEAN": 27,
+      "MALICIOUS": 6,
+      "SUSPICIOUS": 1
+    },
+    "fp_off": 7,
+    "fpr_off": 0.2059,
+    "fp_on": 7,
+    "fpr_on": 0.2059,
+    "delta_fpr": 0.0
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "policy": "Option E — manifest presence signal",
+  "rules": {
+    "E1 (current)": "agentic + no manifest + dangerous detected → suspicion ↑",
+    "E2 (counter-factual)": "agentic + manifest present → trust ↑"
+  },
+  "framework_note": "Option E 현실 측정 한계: 모든 정상 패키지가 매니페스트 부재 (표준 보급 전). → counter-factual simulation: 매니페스트 도입 시 잠재 효과 정량.",
+  "dangerous_caps": [
+    "code-exec",
+    "credential-paths",
+    "dynamic-tool-load",
+    "env-secrets",
+    "filesystem-write",
+    "network",
+    "shell"
+  ],
+  "benign_100": {
+    "dataset": "정상 agentic 100",
+    "label": "benign",
+    "n": 100,
+    "metric": "FPR",
+    "original": 0.28,
+    "option_e_real": 0.28,
+    "option_e_counterfactual": 0.21,
+    "delta_real": 0.0,
+    "delta_counterfactual": -0.07,
+    "cf_changes_count": 27,
+    "cf_changes": [
+      {
+        "name": "@modelcontextprotocol/server-github",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "@modelcontextprotocol/server-postgres",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "@langchain/community",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-core",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-community",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-openai",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-anthropic",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-google-genai",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-google-vertexai",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-experimental",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-cohere",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "langchain-mistralai",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-ollama",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "langchain-aws",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "llama-index-core",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "llama-index-llms-openai",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "llama-index-llms-anthropic",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "crewai",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "crewai-tools",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "autogen-agentchat",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "autogen-ext",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "autogen-core",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "mcp",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "letta",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "semantic-kernel",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      }
+    ]
+  },
+  "malicious_34": {
+    "dataset": "악성 agentic 34",
+    "label": "malicious",
+    "n": 34,
+    "metric": "Recall",
+    "original": 0.2059,
+    "option_e_real": 0.2059,
+    "option_e_counterfactual": 0.1765,
+    "delta_real": 0.0,
+    "delta_counterfactual": -0.0294,
+    "cf_changes_count": 7,
+    "cf_changes": [
+      {
+        "name": "@postman/postman-mcp-server",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "@seezo/sdr-mcp-server",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "ids-enterprise-mcp-server",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "mcp-knowledge-graph",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "mcp-server-fixthis",
+        "orig": "SUSPICIOUS",
+        "cf": "AGENTIC"
+      },
+      {
+        "name": "mcp-server-todo",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      },
+      {
+        "name": "mcp-use",
+        "orig": "HIGH_RISK",
+        "cf": "SUSPICIOUS"
+      }
+    ]
+  }
+}

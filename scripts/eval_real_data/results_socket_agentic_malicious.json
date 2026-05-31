@@ -1,0 +1,258 @@
+{
+  "tool": "Socket on agentic malicious",
+  "results": [
+    {
+      "name": "@postman/postman-mcp-cli",
+      "verdict": "CLEAN",
+      "score": 0.6105,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@postman/postman-mcp-server",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@postman/tunnel-agent",
+      "verdict": "CLEAN",
+      "score": 0.9882,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@seezo/sdr-mcp-server",
+      "verdict": "SUSPICIOUS",
+      "score": 0.4467,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "ai-agent-email",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "amazon-seller-analytics-mcp-server",
+      "verdict": "HIGH_RISK",
+      "score": 0.3727,
+      "critical": 0,
+      "high": 2
+    },
+    {
+      "name": "android-mobile-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "auth0-mcp-server",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "create-mcp-use-app",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "demo-mercadopago-mcp-server",
+      "verdict": "MALICIOUS",
+      "score": 0.2028,
+      "critical": 2,
+      "high": 1
+    },
+    {
+      "name": "excluder-mcp-package",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "glean-mcp-server",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "greeting-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "hoppscotch-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "ids-enterprise-mcp-server",
+      "verdict": "CLEAN",
+      "score": 0.5231,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "image-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "kubernetes-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "list-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "llamaindex-js",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "logdna-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "markdown-agent",
+      "verdict": "CLEAN",
+      "score": 0.5772,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "mcp-knowledge-base",
+      "verdict": "CLEAN",
+      "score": 0.6698,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "mcp-knowledge-graph",
+      "verdict": "CLEAN",
+      "score": 0.6622,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "mcp-lumin",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "mcp-server-everything",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "mcp-server-fixthis",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "mcp-server-todo",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "mcp-use",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "multiturn-prompts-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "oracle-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "photo-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    },
+    {
+      "name": "pipet-code-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "shop-chat-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 0
+    },
+    {
+      "name": "spelunker-agent",
+      "verdict": "MALICIOUS",
+      "score": 0.0625,
+      "critical": 1,
+      "high": 1
+    }
+  ],
+  "tp": 24,
+  "fn": 6,
+  "err": 4,
+  "n": 30,
+  "recall": 0.8,
+  "quota_start": {
+    "quota": 500,
+    "maxQuota": 500,
+    "nextWindowRefresh": null
+  },
+  "quota_end": {
+    "quota": 500,
+    "maxQuota": 500,
+    "nextWindowRefresh": null
+  }
+}

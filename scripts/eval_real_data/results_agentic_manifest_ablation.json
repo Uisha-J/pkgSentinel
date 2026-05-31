@@ -1,0 +1,3470 @@
+{
+  "tool": "pkgsentinel (agentic ablation OFF vs ON)",
+  "fixtures": [
+    {
+      "name": "@modelcontextprotocol/sdk",
+      "ecosystem": "npm",
+      "version": "1.29.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-filesystem",
+      "ecosystem": "npm",
+      "version": "2026.1.14",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-github",
+      "ecosystem": "npm",
+      "version": "2025.4.8",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium",
+        "detected": [
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "network"
+        ],
+        "rule_hits": [
+          "R3-medium"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch",
+        "detected": [
+          "network"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [],
+        "rule_hits": [
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-puppeteer",
+      "ecosystem": "npm",
+      "version": "2025.5.12",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-postgres",
+      "ecosystem": "npm",
+      "version": "0.6.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "db-access"
+        ],
+        "declared": [],
+        "undeclared": [
+          "db-access"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "db-access"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "db-access"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-slack",
+      "ecosystem": "npm",
+      "version": "2025.4.25",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-brave-search",
+      "ecosystem": "npm",
+      "version": "0.6.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "npm",
+      "version": "1.4.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-minor-no-manifest",
+        "detected": [
+          "llm-call"
+        ],
+        "declared": [],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [
+          "llm-call"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/core",
+      "ecosystem": "npm",
+      "version": "1.1.48",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/community",
+      "ecosystem": "npm",
+      "version": "1.1.29",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "db-access",
+          "llm-call",
+          "memory-persistent"
+        ],
+        "declared": [],
+        "undeclared": [
+          "db-access",
+          "llm-call",
+          "memory-persistent"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-3"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "db-access",
+          "llm-call",
+          "memory-persistent"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "db-access",
+          "llm-call",
+          "memory-persistent"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch",
+          "R4-3"
+        ]
+      }
+    },
+    {
+      "name": "@langchain/openai",
+      "ecosystem": "npm",
+      "version": "1.4.7",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/anthropic",
+      "ecosystem": "npm",
+      "version": "1.4.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/langgraph",
+      "ecosystem": "npm",
+      "version": "1.3.2",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/google-genai",
+      "ecosystem": "npm",
+      "version": "2.1.31",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/textsplitters",
+      "ecosystem": "npm",
+      "version": "1.0.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/cohere",
+      "ecosystem": "npm",
+      "version": "1.0.5",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/mistralai",
+      "ecosystem": "npm",
+      "version": "1.1.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/ollama",
+      "ecosystem": "npm",
+      "version": "1.2.7",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/qdrant",
+      "ecosystem": "npm",
+      "version": "1.0.3",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/redis",
+      "ecosystem": "npm",
+      "version": "1.1.3",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@langchain/aws",
+      "ecosystem": "npm",
+      "version": "1.3.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llamaindex",
+      "ecosystem": "npm",
+      "version": "0.12.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@llamaindex/core",
+      "ecosystem": "npm",
+      "version": "0.6.23",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@llamaindex/openai",
+      "ecosystem": "npm",
+      "version": "0.4.23",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "ai",
+      "ecosystem": "npm",
+      "version": "6.0.191",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/openai",
+      "ecosystem": "npm",
+      "version": "3.0.66",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/anthropic",
+      "ecosystem": "npm",
+      "version": "3.0.80",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/google",
+      "ecosystem": "npm",
+      "version": "3.0.80",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/react",
+      "ecosystem": "npm",
+      "version": "3.0.193",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/svelte",
+      "ecosystem": "npm",
+      "version": "4.0.191",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/vue",
+      "ecosystem": "npm",
+      "version": "3.0.191",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/azure",
+      "ecosystem": "npm",
+      "version": "3.0.67",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/cohere",
+      "ecosystem": "npm",
+      "version": "3.0.36",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/mistral",
+      "ecosystem": "npm",
+      "version": "3.0.37",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/groq",
+      "ecosystem": "npm",
+      "version": "3.0.39",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@ai-sdk/togetherai",
+      "ecosystem": "npm",
+      "version": "2.0.53",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "openai",
+      "ecosystem": "npm",
+      "version": "6.39.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@anthropic-ai/sdk",
+      "ecosystem": "npm",
+      "version": "0.99.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@google/generative-ai",
+      "ecosystem": "npm",
+      "version": "0.24.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "cohere-ai",
+      "ecosystem": "npm",
+      "version": "8.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@aws-sdk/client-bedrock-runtime",
+      "ecosystem": "npm",
+      "version": "3.1055.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "chromadb",
+      "ecosystem": "npm",
+      "version": "3.4.3",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@pinecone-database/pinecone",
+      "ecosystem": "npm",
+      "version": "7.2.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "@qdrant/js-client-rest",
+      "ecosystem": "npm",
+      "version": "1.18.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "weaviate-client",
+      "ecosystem": "npm",
+      "version": "3.13.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "tiktoken",
+      "ecosystem": "npm",
+      "version": "1.0.22",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "gpt-tokenizer",
+      "ecosystem": "npm",
+      "version": "3.4.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langfuse",
+      "ecosystem": "npm",
+      "version": "3.38.20",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langsmith",
+      "ecosystem": "npm",
+      "version": "0.7.3",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "PyPI",
+      "version": "1.3.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "env-secrets",
+          "llm-call",
+          "shell"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "env-secrets",
+          "llm-call",
+          "shell"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "env-secrets",
+          "llm-call",
+          "shell"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-core",
+      "ecosystem": "PyPI",
+      "version": "1.4.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5",
+        "detected": [
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5",
+        "detected": [
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-community",
+      "ecosystem": "PyPI",
+      "version": "0.4.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "db-access",
+          "dynamic-tool-load",
+          "llm-call",
+          "mcp-client",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-openai",
+      "ecosystem": "PyPI",
+      "version": "1.2.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "langchain-anthropic",
+      "ecosystem": "PyPI",
+      "version": "1.4.3",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "env-secrets",
+          "filesystem-write",
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "env-secrets",
+          "filesystem-write",
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch",
+        "detected": [
+          "env-secrets",
+          "filesystem-write",
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "langchain-google-genai",
+      "ecosystem": "PyPI",
+      "version": "4.2.3",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-google-vertexai",
+      "ecosystem": "PyPI",
+      "version": "3.2.3",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-text-splitters",
+      "ecosystem": "PyPI",
+      "version": "1.1.2",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langchain-experimental",
+      "ecosystem": "PyPI",
+      "version": "0.4.2",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "shell"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "shell"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "shell"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-cohere",
+      "ecosystem": "PyPI",
+      "version": "0.5.1",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-minor-no-manifest",
+        "detected": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langchain-mistralai",
+      "ecosystem": "PyPI",
+      "version": "1.1.4",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "declared": [],
+        "undeclared": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "network"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "langchain-ollama",
+      "ecosystem": "PyPI",
+      "version": "1.1.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5",
+        "detected": [
+          "llm-call"
+        ],
+        "declared": [],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R3-minor-no-manifest",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5",
+        "detected": [
+          "llm-call"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "langchain-aws",
+      "ecosystem": "PyPI",
+      "version": "1.5.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "langgraph",
+      "ecosystem": "PyPI",
+      "version": "1.2.2",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langgraph-sdk",
+      "ecosystem": "PyPI",
+      "version": "0.3.15",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langgraph-checkpoint",
+      "ecosystem": "PyPI",
+      "version": "4.1.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langgraph-checkpoint-postgres",
+      "ecosystem": "PyPI",
+      "version": "3.1.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "langgraph-checkpoint-sqlite",
+      "ecosystem": "PyPI",
+      "version": "3.1.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index",
+      "ecosystem": "PyPI",
+      "version": "0.14.22",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-core",
+      "ecosystem": "PyPI",
+      "version": "0.14.22",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5",
+        "detected": [
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "memory-persistent",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "memory-persistent",
+          "network",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5",
+        "detected": [
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "memory-persistent",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "memory-persistent",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "llama-index-llms-openai",
+      "ecosystem": "PyPI",
+      "version": "0.7.8",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-minor-no-manifest",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "env-secrets",
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch",
+        "detected": [
+          "env-secrets",
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "llama-index-llms-anthropic",
+      "ecosystem": "PyPI",
+      "version": "0.11.4",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-minor-no-manifest",
+        "detected": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)",
+        "detected": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-llms-gemini",
+      "ecosystem": "PyPI",
+      "version": "0.6.2",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-embeddings-openai",
+      "ecosystem": "PyPI",
+      "version": "0.6.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-vector-stores-chroma",
+      "ecosystem": "PyPI",
+      "version": "0.5.5",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-vector-stores-pinecone",
+      "ecosystem": "PyPI",
+      "version": "0.8.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-vector-stores-qdrant",
+      "ecosystem": "PyPI",
+      "version": "0.10.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-readers-file",
+      "ecosystem": "PyPI",
+      "version": "0.6.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "llama-index-agent-openai",
+      "ecosystem": "PyPI",
+      "version": "0.4.12",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "crewai",
+      "ecosystem": "PyPI",
+      "version": "1.14.5",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-1, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "agent-to-agent",
+          "code-exec",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-1",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-4",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-1, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "agent-to-agent",
+          "db-access",
+          "dynamic-tool-load",
+          "llm-call",
+          "mcp-client",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-1",
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch",
+          "R4-4",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "crewai-tools",
+      "ecosystem": "PyPI",
+      "version": "1.14.5",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-dangerous-no-manifest, R3-medium, R3-minor-no-manifest",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell"
+        ],
+        "declared": [],
+        "undeclared": [
+          "agent-to-agent",
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "agent-to-agent",
+          "llm-call",
+          "mcp-client"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "autogen",
+      "ecosystem": "PyPI",
+      "version": "0.13.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "autogen-agentchat",
+      "ecosystem": "PyPI",
+      "version": "0.7.5",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-medium, R3-minor-no-manifest",
+        "detected": [
+          "agent-to-agent",
+          "env-secrets",
+          "llm-call"
+        ],
+        "declared": [],
+        "undeclared": [
+          "agent-to-agent",
+          "env-secrets",
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch",
+        "detected": [
+          "agent-to-agent",
+          "env-secrets",
+          "llm-call"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "agent-to-agent",
+          "llm-call"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "autogen-ext",
+      "ecosystem": "PyPI",
+      "version": "0.7.5",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "agent-to-agent",
+          "code-exec",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "db-access",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "agent-to-agent",
+          "db-access",
+          "dynamic-tool-load",
+          "llm-call",
+          "mcp-client",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "autogen-core",
+      "ecosystem": "PyPI",
+      "version": "0.7.5",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "env-secrets",
+          "mcp-client"
+        ],
+        "declared": [],
+        "undeclared": [
+          "agent-to-agent",
+          "code-exec",
+          "env-secrets",
+          "mcp-client"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "env-secrets",
+          "mcp-client"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "agent-to-agent",
+          "mcp-client"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R3-rot-mismatch"
+        ]
+      }
+    },
+    {
+      "name": "haystack-ai",
+      "ecosystem": "PyPI",
+      "version": "2.29.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "MALICIOUS",
+        "reason": "R1-R4 MALICIOUS hit: R2-3",
+        "detected": [
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R2-3",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "MALICIOUS",
+        "reason": "R1-R4 MALICIOUS hit: R2-3",
+        "detected": [
+          "code-exec",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "llm-call",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R2-1",
+          "R2-3",
+          "R3-rot-mismatch",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "mcp",
+      "ecosystem": "PyPI",
+      "version": "1.27.1",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R2-1, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "mcp-client",
+          "mcp-server",
+          "network",
+          "shell"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "mcp-client",
+          "mcp-server",
+          "network",
+          "shell"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R2-1, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "mcp-client",
+          "mcp-server",
+          "network",
+          "shell"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "dynamic-tool-load",
+          "mcp-client",
+          "mcp-server"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R1-2",
+          "R1-2",
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "openai-agents",
+      "ecosystem": "PyPI",
+      "version": "0.17.4",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "letta",
+      "ecosystem": "PyPI",
+      "version": "0.16.8",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R2-1, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5",
+        "detected": [
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "network",
+          "shell",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "dynamic-tool-load",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "marvin",
+      "ecosystem": "PyPI",
+      "version": "3.2.7",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "instructor",
+      "ecosystem": "PyPI",
+      "version": "1.15.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "pydantic-ai",
+      "ecosystem": "PyPI",
+      "version": "1.103.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "semantic-kernel",
+      "ecosystem": "PyPI",
+      "version": "1.42.0",
+      "is_agentic": true,
+      "manifest_off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R2-1, R4-5, R4-5, R4-5",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "memory-persistent",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [],
+        "undeclared": [
+          "agent-to-agent",
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "memory-persistent",
+          "network",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R2-1",
+          "R3-dangerous-no-manifest",
+          "R3-medium",
+          "R3-minor-no-manifest",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      },
+      "manifest_on": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R4-5, R4-5, R4-5",
+        "detected": [
+          "agent-to-agent",
+          "code-exec",
+          "credential-paths",
+          "dynamic-tool-load",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "memory-persistent",
+          "network",
+          "tool-loop"
+        ],
+        "declared": [
+          "code-exec",
+          "credential-paths",
+          "env-secrets",
+          "filesystem-read",
+          "filesystem-write",
+          "network",
+          "shell"
+        ],
+        "undeclared": [
+          "agent-to-agent",
+          "dynamic-tool-load",
+          "llm-call",
+          "mcp-client",
+          "mcp-server",
+          "memory-persistent",
+          "tool-loop"
+        ],
+        "rule_hits": [
+          "R1-2",
+          "R2-1",
+          "R3-medium",
+          "R3-rot-mismatch",
+          "R4-5",
+          "R4-5",
+          "R4-5"
+        ]
+      }
+    },
+    {
+      "name": "openai",
+      "ecosystem": "PyPI",
+      "version": "2.38.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "anthropic",
+      "ecosystem": "PyPI",
+      "version": "0.104.1",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "google-generativeai",
+      "ecosystem": "PyPI",
+      "version": "0.8.6",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "cohere",
+      "ecosystem": "PyPI",
+      "version": "7.0.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "mistralai",
+      "ecosystem": "PyPI",
+      "version": "2.4.8",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "chromadb",
+      "ecosystem": "PyPI",
+      "version": "1.5.9",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "qdrant-client",
+      "ecosystem": "PyPI",
+      "version": "1.18.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    },
+    {
+      "name": "tiktoken",
+      "ecosystem": "PyPI",
+      "version": "0.13.0",
+      "is_agentic": false,
+      "manifest_off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      },
+      "manifest_on": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)",
+        "detected": [],
+        "declared": [],
+        "undeclared": [],
+        "rule_hits": []
+      }
+    }
+  ],
+  "aggregate": {
+    "n_valid": 100,
+    "by_verdict_off": {
+      "CLEAN": 68,
+      "AGENTIC": 4,
+      "SUSPICIOUS": 7,
+      "HIGH_RISK": 20,
+      "MALICIOUS": 1
+    },
+    "by_verdict_on": {
+      "CLEAN": 68,
+      "AGENTIC": 7,
+      "SUSPICIOUS": 6,
+      "HIGH_RISK": 18,
+      "MALICIOUS": 1
+    },
+    "fp_off": 28,
+    "fpr_off": 0.28,
+    "fp_on": 25,
+    "fpr_on": 0.25,
+    "delta_fpr": 0.03
+  }
+}

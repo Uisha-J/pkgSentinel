@@ -1,0 +1,6 @@
+{
+  "tool": "OSV-Scanner agentic malicious",
+  "tp": 34,
+  "fn": 0,
+  "recall": 1.0
+}

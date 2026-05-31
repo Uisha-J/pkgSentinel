@@ -1,0 +1,14 @@
+{
+  "mini_shai_hulud": {
+    "n": 40,
+    "njsscan": 0,
+    "osv": 40,
+    "label": "Mini Shai-Hulud (2026-05, TeamPCP)"
+  },
+  "trapdoor": {
+    "n": 46,
+    "njsscan": 0,
+    "osv": 41,
+    "label": "TrapDoor (2026-05, wallet/crypto stealer)"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "tool": "OSV-Scanner equivalent on agentic dataset",
+  "fp": 4,
+  "tn": 96,
+  "fpr": 0.04,
+  "fp_packages": [
+    {
+      "ecosystem": "npm",
+      "name": "@langchain/community"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "langsmith"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "langchain-openai"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "mistralai"
+    }
+  ]
+}

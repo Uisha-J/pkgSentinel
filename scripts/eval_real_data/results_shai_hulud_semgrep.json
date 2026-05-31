@@ -1,0 +1,820 @@
+{
+  "tool": "Semgrep JS (p/javascript)",
+  "results": [
+    {
+      "name": "@ahmedhfarag/ngx-perfect-scrollbar",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ahmedhfarag/ngx-virtual-scroller",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/common",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/config-eslint",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/db-context",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/di",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/di-node",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/eslint",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/fastify-http-server",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/http-server",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/openapi",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/package-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/prettier",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/slf",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/ssl-info",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@art-ws/web-app",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@crowdstrike/commitlint",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@crowdstrike/falcon-shoelace",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@crowdstrike/foundry-js",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@crowdstrike/logscale-file-editor",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@crowdstrike/tailwind-toucan-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/deluge",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/golang-template",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/magnet-link",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/ngx-codemirror",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/ngx-csv",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/ngx-rightclick",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/qbittorrent",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/react-adsense",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/shared-torrent",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/tinycolor",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/torrent-file",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/transmission",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@ctrl/ts-base32",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@hestjs/cqrs",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@hestjs/demo",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@hestjs/eslint-config",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@hestjs/scalar",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@hestjs/validation",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/arraybuffers",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/gesturehandler",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/perms",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/sentry",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/sqlite",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/text",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-collectionview",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-document-picker",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-drawer",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-image",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-material-bottom-navigation",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-material-bottomsheet",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-material-core",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-material-core-tabs",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-material-tabs",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-pager",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nativescript-community/ui-pulltorefresh",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nexe/config-manager",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nexe/eslint-config",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nexe/logger",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/angular",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/focus",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/nativescript-loading-indicator",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/ui-collectionview",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/web",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/web-angular",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/xplat",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@nstudio/xplat-utils",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/board",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/graphql",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/headroom",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/help",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/i18n",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/input",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/popup",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/shell",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@operato/styles",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/bio-parsers",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/bounce-loader",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/file-utils",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/liquibase-tools",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/range-utils",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/react-list",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@teselagen/sequence-utils",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@thangved/callback-window",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/attachment-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/auth-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/email-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/env",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/integration-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/integration-marketplace",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@things-factory/shell",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@tnf-dev/core",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@tnf-dev/js",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@tnf-dev/mui",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@tnf-dev/react",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@yoobic/design-system",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@yoobic/jpeg-camera-es6",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "@yoobic/yobi",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ace-colorpicker-rpk",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "airchief",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "airpilot",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "browser-webdriver-downloader",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "capacitor-notificationhandler",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "capacitor-plugin-healthapp",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "capacitor-plugin-ihealth",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "capacitor-plugin-vonage",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "capacitorandroidpermissions",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "config-cordova",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "cordova-voxeet",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "create-hest-app",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "db-evo",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ember-browser-services",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ember-headless-form-yup",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ember-headless-table",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ember-url-hash-polyfill",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ember-velcro",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "encounter-playground",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "eslint-config-crowdstrike",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "eslint-config-teselagen",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "globalize-rpk",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "graphql-sequelize-teselagen",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "html-to-base64-image",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "json-rules-engine-simplified",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "jumpgate",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "koa2-swagger-ui",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "mcfly-semantic-release",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "mcp-knowledge-base",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "mcp-knowledge-graph",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "monorepo-next",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ng-imports-checker",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ng2-file-upload",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ngx-bootstrap",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ngx-color",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ngx-toastr",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ngx-trend",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ngx-ws",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "oradm-to-gql",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "oradm-to-sqlz",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "pm2-gelf-json",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "react-complaint-image",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "react-jsonschema-form-conditionals",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "react-jsonschema-form-extras",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "react-jsonschema-rxnt-extras",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "remark-preset-lint-crowdstrike",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "rxnt-authentication",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "rxnt-healthchecks-nestjs",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "rxnt-kue",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "tbssnch",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "tg-client-query-builder",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "tg-redbird",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "tg-seq-gen",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "thangved-react-grid",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ts-gaussian",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ts-imports",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "tvi-cli",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ve-bamreader",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "ve-editor",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "verror-extra",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "voip-callkit",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "wdio-web-reporter",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "yargs-help-output",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    },
+    {
+      "name": "yoo-styles",
+      "verdict": "ERROR",
+      "error": "[WinError 2] 지정된 파일을 찾을 수 없습니다"
+    }
+  ],
+  "tp": 0,
+  "fn": 0,
+  "err": 162,
+  "n": 0,
+  "recall": 0.0
+}

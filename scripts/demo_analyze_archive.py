@@ -243,20 +243,53 @@ def analyze_local_files(
     return report
 
 
+_USE_COLOR = sys.stdout.isatty()
+_RESET = "\033[0m" if _USE_COLOR else ""
+
+def _c(code: str) -> str:
+    return code if _USE_COLOR else ""
+
+# 시연 가시성 우선 — MALICIOUS 는 흰 글씨 + 빨간 배경 + 볼드 (강한 강조)
+_VERDICT_COLOR = {
+    "MALICIOUS":      _c("\033[1;97;41m"),  # bold white on red bg
+    "HIGH_RISK":      _c("\033[1;91m"),     # bold bright red
+    "SUSPICIOUS":     _c("\033[1;93m"),     # bold bright yellow
+    "AGENTIC":        _c("\033[1;96m"),     # bold bright cyan
+    "CLEAN":          _c("\033[1;92m"),     # bold bright green
+    "ERROR":          _c("\033[1;91m"),
+    "CANNOT_ANALYZE": _c("\033[1;95m"),     # bold bright magenta
+}
+_LLM_COLOR = {
+    "malicious":  _c("\033[1;91m"),  # bold bright red
+    "suspicious": _c("\033[1;93m"),  # bold bright yellow
+    "benign":     _c("\033[2m"),     # dim
+}
+_SEV_COLOR = {
+    "HIGH":   _c("\033[1;91m"),
+    "MEDIUM": _c("\033[1;93m"),
+    "LOW":    _c("\033[2m"),
+}
+
+
 def _print_demo_summary(report, top_n: int) -> None:
     """녹화용 간결 뷰: verdict + evidence 요약 + 결정적 근거 Top-N.
 
     번들/난독화 파일은 high-entropy 문자열을 수백~수천 개 쏟아내므로(대부분
     LOW/BENIGN, 판정엔 영향 없음) 전체 덤프(format_report) 대신 강한 신호만 추린다.
+    Verdict / llm_verdict / severity 는 ANSI 컬러로 강조 (TTY 일 때만).
     """
     from collections import Counter
 
     ev = report.evidence
     sev = dict(Counter(e.ttp_severity.value for e in ev))
     llmv = dict(Counter(e.llm_verdict.value for e in ev))
+    vstr = report.verdict.value
+    vcol = _VERDICT_COLOR.get(vstr, "")
+    # MALICIOUS 는 배경색이라 양옆 공백을 줘서 좀 더 도드라지게
+    pad = " " if vstr == "MALICIOUS" else ""
     print("=" * 70)
     print(f"Package : {report.package} {report.version} ({report.ecosystem.value})")
-    print(f"Verdict : {report.verdict.value}")
+    print(f"Verdict : {vcol}{pad}{vstr}{pad}{_RESET}")
     print("=" * 70)
     print(f"\n[Evidence 요약] total={len(ev)} | severity={sev} | llm={llmv}")
 
@@ -268,8 +301,11 @@ def _print_demo_summary(report, top_n: int) -> None:
     )
     print(f"\n[결정적 근거 Top {min(top_n, len(decisive))} / {len(decisive)}]")
     for i, e in enumerate(decisive[:top_n], 1):
-        print(f"\n  #{i}  [{e.llm_verdict.value} · {e.ttp_severity.value} · "
-              f"conf {e.confidence:.2f}]  {e.file_path} (L{e.line_start})")
+        lc = _LLM_COLOR.get(e.llm_verdict.value, "")
+        sc = _SEV_COLOR.get(e.ttp_severity.value, "")
+        print(f"\n  #{i}  [{lc}{e.llm_verdict.value}{_RESET} · "
+              f"{sc}{e.ttp_severity.value}{_RESET} · conf {e.confidence:.2f}]  "
+              f"{e.file_path} (L{e.line_start})")
         print(f"      {e.ttp_id} — {e.ttp_name}")
         seq = " -> ".join(e.behavior_sequence[:6])
         if seq:

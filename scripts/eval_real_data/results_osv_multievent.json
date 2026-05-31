@@ -1,0 +1,6 @@
+{
+  "tool": "OSV-Scanner multievent",
+  "tp": 100,
+  "n": 150,
+  "recall": 0.6667
+}

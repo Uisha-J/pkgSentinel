@@ -1,0 +1,8 @@
+{
+  "recall": 0.212,
+  "mal_caught": 17,
+  "mal_n": 80,
+  "benign_fp": 40,
+  "benign_n": 59,
+  "precision": 0.298
+}

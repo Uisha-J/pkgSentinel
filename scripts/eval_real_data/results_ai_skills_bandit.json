@@ -1,0 +1,1642 @@
+{
+  "tool": "Bandit (Python SAST)",
+  "results": [
+    {
+      "name": "3bkader-gpt-malicious-skill-poc-malicious-skill-poc",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "3bkader-gpt-malicious-skill-poc",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "Charpup-skill-security-auditor-backdoor-skill",
+      "verdict": "MALICIOUS",
+      "high": 2,
+      "medium": 1,
+      "low": 2,
+      "total_issues": 5
+    },
+    {
+      "name": "Charpup-skill-security-auditor-command-injection-skill",
+      "verdict": "MALICIOUS",
+      "high": 2,
+      "medium": 1,
+      "low": 1,
+      "total_issues": 4
+    },
+    {
+      "name": "Charpup-skill-security-auditor-credential-harvester-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 1,
+      "low": 2,
+      "total_issues": 3
+    },
+    {
+      "name": "Charpup-skill-security-auditor-data-exfiltration-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 0,
+      "low": 2,
+      "total_issues": 2
+    },
+    {
+      "name": "Charpup-skill-security-auditor-dependency-confusion-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 0,
+      "low": 3,
+      "total_issues": 3
+    },
+    {
+      "name": "Charpup-skill-security-auditor-malicious-code-execution-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 0,
+      "total_issues": 3
+    },
+    {
+      "name": "Charpup-skill-security-auditor-network-egress-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 2,
+      "total_issues": 5
+    },
+    {
+      "name": "Charpup-skill-security-auditor-obfuscation-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 0,
+      "total_issues": 3
+    },
+    {
+      "name": "Charpup-skill-security-auditor-privilege-escalation-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 0,
+      "low": 7,
+      "total_issues": 7
+    },
+    {
+      "name": "Charpup-skill-security-auditor-prompt-injection-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "ZackKorman-skills-audit",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "ZackKorman-skills-openclaw-admin-security-breakglass",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "aaaaqwq-agi-super-skills-skills-deepwork-tracker",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "aaaaqwq-agi-super-skills-skills-env-setup",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "aaaaqwq-claude-code-skills-skills-deepwork-tracker",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "aaarnv-claude-skills-herobrine",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "abpai-skills-codex",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "agentinsync-agentinsync-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "alfredang-skills-start-app",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "arjenschwarz-agentic-coding-claude-skills-project-init",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "arlenagreer-claude_configuration_docs-skills-email",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "atrislabs-atris-atris-skills-magic-inbox",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "avivk5498-claude-code-beads-orchestration-dot-claude-skills-create-beads-orchestration",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "bigboggy-derp-derp",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "binhmuc-autobot-review-dot-claude-skills-frontend-development",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "blessonism-openclaw-skills-gitclaw-backup",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "boomsystel-code-openclaw-workspace-skills-autonomous-brain",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "boomsystel-code-openclaw-workspace-skills-financial-market-analysis",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "boomsystel-code-openclaw-workspace-skills-mia-twitter-stealth",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "boomsystel-code-openclaw-workspace-skills-nanopdf",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "boomsystel-code-openclaw-workspace-skills-yahoo-finance-who",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "boshu2-agentops-skills-update",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "britg-landing-the-plane-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "buff-m-email-sender-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-base64-payload",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 1,
+      "low": 0,
+      "total_issues": 1
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-database-query",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-environment-secrets",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-eval-execution",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-exfiltrator",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-file-reader",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-file-validator",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-infinite-loop",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-jailbreak-override",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-magic-string-trigger",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 1,
+      "low": 3,
+      "total_issues": 4
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-prompt-injection",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cisco-ai-defense-skill-scanner-simple-math",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "clawsights-clawsights-dot-agents-skills-clawsights",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "clawsights-clawsights-skills-clawsights",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cybertechajju-productivity-boost-skills-productivity-boost",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cybertechajju-version-demo-helper",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "cybertechajju-version-demo-skills-helper",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "danielmiessler-paiplugin-skills-always-init",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dauquangthanh-hanoi-rainbow-skills-rpg-migration-analyzer",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "devxoul-agent-messenger-skills-agent-discord",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dglowacki-mega-agent-v2-dot-claude-skills-skill-find",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dibenkobit-solaris-dot-agents-skills-private-diary",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dibenkobit-solaris-skills-private-diary",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "doccker-cc-use-exp-dot-claude-skills-ruanzhu",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dreamineering-meme-times-dot-claude-skills-community-architect",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dreamineering-meme-times-dot-claude-skills-meme-pumper",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "dtinth-agent-skills-discord",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "eraserlabs-eraser-io-skills-azure-diagrams",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "eraserlabs-eraser-io-skills-terraform-diagrams",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "escapewu-skills-skills-CPA-antigravity-RT-exract",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "feed-mob-agent-skills-skills-civitai-analyst",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "galz10-pickle-rick-extension-skills-load-pickle-persona",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "gchan-bad-humanizer-bad-humanizer",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "gchan-bad-humanizer",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "gmh5225-awesome-game-security-dot-claude-skills-anti-cheat",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "gmh5225-awesome-game-security-dot-claude-skills-graphics-api",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "h1paastha-test-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "henryxv-study-platform-dot-agent-skills-vercel-deploy",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "jitha-afk-projectscourgewizard-dot-agents-skills-security-review",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "karlorz-cloudrouter-skills-cloudrouter",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "lannieyoo-gangwon-business-portal-dot-agent-skills-learning-brightspace_scraper",
+      "verdict": "MALICIOUS",
+      "high": 1,
+      "medium": 0,
+      "low": 2,
+      "total_issues": 3
+    },
+    {
+      "name": "luoluoluo22-jianying-editor-skill",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 46,
+      "total_issues": 49
+    },
+    {
+      "name": "manaflow-ai-cloudrouter-dot-agents-skills-cloudrouter",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "manojbajaj95-gtm-skills-skills-community-architect",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "manojbajaj95-gtm-skills-skills-leadgenius-api",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 12,
+      "low": 2,
+      "total_issues": 14
+    },
+    {
+      "name": "matteocervelli-llms-dot-claude-skills-whitelist-bypass-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "mcpcat-skills-skills-install-mcpcat-typescript",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "mindverse-second-me-skills-skills-secondme-reference",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "mitsuhiko-agent-commands-skills-google-workspace",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "mitsuhiko-agent-stuff-skills-google-workspace",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "mvanhorn-clawdbot-skill-parallel",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 0,
+      "total_issues": 3
+    },
+    {
+      "name": "natemcgrady-slack-gif-creator-slack-gif-creator",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 0,
+      "low": 36,
+      "total_issues": 36
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-base-agent",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-bybit-agent",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-linkedin-job-application",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-polymarket-assistant",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-polymarket-bot",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-polymarket-hyperliquid-trading",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-polymarket-trading",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-polymarket-traiding-bot",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-polymarketagent",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-proxy-scrap",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "netcode-openclaw-skills-old-fork-reddit-trends",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "nickoc-clawscan-malicious-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "ninehills-skills-skills-firecrawl",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "ninehills-skills-skills-vercel-deploy",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "one-box-u-openclaw-daily-hot-news",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 0,
+      "low": 6,
+      "total_issues": 6
+    },
+    {
+      "name": "openclaw-hightower6eu-autoupdate",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-clawhubcli",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-cllawhub",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-poly",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-polym",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-polytrading",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-update",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-hightower6eu-updater",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-jordanprater-twittertrends",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-jordanprater-xtrends",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-jordanprater-yahoofinance",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-jordanprater-youtube-summarize",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-jordanprater-youtube-thumbnail-grabber",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-jordanprater-youtube-video-downloader",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-stveenli-browserautomation-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-stveenli-shieldphenix",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-stveenli-ytwatchervideo",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-bear-notes7mcp",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-clawdbot-logs1kzm",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-coding-agent696vg",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-coding-agent9vr",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-coding-agentagb2",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-coding-agentem9ak",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-coding-agentoj9u",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-deep-researchj",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-discord-voicetwhtm",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-finance-news9",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-finance-newsz",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-google-drivezqx",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-instagramjg",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-jirayb4nt",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-moltbookwmap4",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-n8nemk",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-n8nsk",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-perplexityt9d",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-pptx-creatord",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-search-xepv0",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-seo-optimizerc6ynb",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-seo-optimizereq",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-seo-optimizeruu",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-seo-optimizervoo",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-tavily-web-searchajss",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-tavily-web-searchesq",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-telegramb4c",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-todo-tracker1",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-transcribeeqdq6t",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-transcribeexx",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-veo3-genay",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-web-searchod",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-web-searchuigr",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-wechate",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-wechatt9y1",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-youtube37puq",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "openclaw-thiagoruss0-youtubea",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "parcadei-continuous-claude-v3-dot-claude-skills-git-commits",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "pauldelavallaz-morpheus-fashion-design-morpheus-fashion-design",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "phy041-claude-skill-reddit-dot-claude-skills-reddit-cultivate",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "phy041-claude-skill-reddit-dot-claude-skills-reddit-post",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "plugins-world-pw-skills-pw-image-generation",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "plurigrid-asi-skills-aqua-voice-malleability",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "plurigrid-asi-skills-vercel-deploy",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "pooriaarab-vibeads",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "ralph-wren-omni-recall",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 1,
+      "low": 0,
+      "total_issues": 1
+    },
+    {
+      "name": "riba2534-feishu-cli-skills-feishu-cli-create",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "ronyparra-fake-dep-check-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sanjay3290-ai-skills-skills-gmail",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "sanjay3290-ai-skills-skills-google-drive",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 4,
+      "low": 0,
+      "total_issues": 4
+    },
+    {
+      "name": "sanjay3290-ai-skills-skills-google-sheets",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 0,
+      "total_issues": 3
+    },
+    {
+      "name": "sanjay3290-postgres-skill-skills-gmail",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "sanjay3290-postgres-skill-skills-google-calendar",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "sanjay3290-postgres-skill-skills-google-chat",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "sanjay3290-postgres-skill-skills-google-docs",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 2,
+      "low": 0,
+      "total_issues": 2
+    },
+    {
+      "name": "sanjay3290-postgres-skill-skills-google-sheets",
+      "verdict": "SUSPICIOUS",
+      "high": 0,
+      "medium": 3,
+      "low": 0,
+      "total_issues": 3
+    },
+    {
+      "name": "sebastiaanwouters-dotagents-skills-e2e-tester",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "senturysh-skills-social",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "shuliuzhenhua-sys-shuliu-skills-skills-banana-proxy",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-bybit-trading",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-deep-research",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-deepwork-tracker",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-financial-market-analysis",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-polymarket",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-recruitment",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-twitter-openclaw-2",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "sundial-org-awesome-openclaw-skills-skills-vercel-deploy",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "syncause-debug-skill-skills-syncause-debugger",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "tjade273-agent-skills-skills-simple-formatter",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "tjade273-agent-skills-test-skills-simple-formatter",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "tmdgusya-code-squad-skills-subway",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "toolsai-auto-skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "wangyendt-wayne-skills-send-email",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "weklica-firecrawl-cli-skills-firecrawl-cli",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "wpsteak-popmagic-skills-skills-emotion-bird",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "yoitaoai-yoitao-skills-skills-yoitao-jimeng-sessionid",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zackkorman-skills-skills-audit",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zackkorman-skills-skills-pdf-helper",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zackkorman-skills-skills-security-review-4",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zackkorman-skills-skills-security-review-6",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zackkorman-skills-skills-security-review",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zhangyanxs-repo2skill-repo2skill",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zhanlincui-ultimate-agent-skills-collection-vercel-deploy",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    },
+    {
+      "name": "zircote-dot-claude-skills-frontend-development",
+      "verdict": "CLEAN",
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "total_issues": 0
+    }
+  ],
+  "tp": 29,
+  "fn": 175,
+  "err": 0,
+  "n": 204,
+  "recall": 0.1422
+}

@@ -1,0 +1,542 @@
+{
+  "policy": "Perfectly honest author manifest (detected = declared exact)",
+  "fixtures": [
+    {
+      "name": "@postman/postman-mcp-cli",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "@postman/postman-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "credential-paths",
+        "env-secrets",
+        "mcp-server",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "@postman/tunnel-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "@seezo/sdr-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "credential-paths",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "mcp-server",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "ai-agent-email",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "amazon-seller-analytics-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "android-mobile-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "auth0-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "create-mcp-use-app",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "demo-mercadopago-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "excluder-mcp-package",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "glean-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "greeting-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "hoppscotch-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "ids-enterprise-mcp-server",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "credential-paths",
+        "env-secrets",
+        "mcp-server"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "image-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "kubernetes-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "list-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llamaindex-js",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "logdna-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "markdown-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths', 'shell']"
+      }
+    },
+    {
+      "name": "mcp-knowledge-base",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths']"
+      }
+    },
+    {
+      "name": "mcp-knowledge-graph",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "db-access",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "mcp-server",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "mcp-lumin",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "mcp-server-everything",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "mcp-server-fixthis",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "mcp-server",
+        "network"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "mcp-server-todo",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "credential-paths",
+        "env-secrets",
+        "mcp-server",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "mcp-use",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "mcp-server",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R1-2, R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R1-2, R2-1"
+      }
+    },
+    {
+      "name": "multiturn-prompts-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "oracle-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "photo-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "pipet-code-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "shop-chat-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "spelunker-agent",
+      "ecosystem": "npm",
+      "label": "malicious",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    }
+  ],
+  "by_verdict_off": {
+    "CLEAN": 27,
+    "HIGH_RISK": 6,
+    "SUSPICIOUS": 1
+  },
+  "by_verdict_perfect": {
+    "MALICIOUS": 7,
+    "HIGH_RISK": 8,
+    "SUSPICIOUS": 4,
+    "AGENTIC": 15
+  },
+  "benign_n": 0,
+  "malicious_n": 34,
+  "off_fp": 0,
+  "perfect_fp": 0,
+  "off_tp": 7,
+  "perfect_tp": 19
+}

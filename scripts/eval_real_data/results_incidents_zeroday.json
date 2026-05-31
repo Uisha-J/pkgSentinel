@@ -1,0 +1,27 @@
+{
+  "figure": "다중 사건 zero-day",
+  "env": "zero-day(사건 공개시점), OSV=0 by definition",
+  "incidents": [
+    {
+      "name": "Shai-Hulud (2025-09, worm)",
+      "n": 162,
+      "pkgsentinel": 1.0,
+      "njsscan": 0.0,
+      "osv": 0.0
+    },
+    {
+      "name": "Mini Shai-Hulud (2026-05, TeamPCP)",
+      "n": 40,
+      "pkgsentinel": 1.0,
+      "njsscan": 0.0,
+      "osv": 0.0
+    },
+    {
+      "name": "TrapDoor (2026-05, 지갑탈취)",
+      "n": 46,
+      "pkgsentinel": 0.609,
+      "njsscan": 0.0,
+      "osv": 0.0
+    }
+  ]
+}

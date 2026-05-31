@@ -1,0 +1,46 @@
+{
+  "experiment": "PyPI cross-ecosystem comparison",
+  "dataset": "DataDog pypi/malicious_intent (seed=42 무작위 80) + 인기 정상 PyPI 59 = n139",
+  "rows": [
+    {
+      "tool": "pkgsentinel (claude 프로덕션)",
+      "recall": 0.886,
+      "precision": 0.972,
+      "f1": 0.927,
+      "note": "FP 2/59"
+    },
+    {
+      "tool": "pkgsentinel (stub, LLM無)",
+      "recall": 0.886,
+      "precision": 0.843,
+      "f1": 0.864,
+      "note": "FP 13/59"
+    },
+    {
+      "tool": "Bandit (HIGH+MEDIUM)",
+      "recall": 0.487,
+      "precision": 0.47,
+      "f1": 0.478,
+      "note": "FP 44/56"
+    },
+    {
+      "tool": "Semgrep docker (ERROR+WARNING)",
+      "recall": 0.212,
+      "precision": 0.298,
+      "f1": 0.247,
+      "note": "FP 40/59; 일부 batch OOM"
+    },
+    {
+      "tool": "OSV (DB, well-known 지표)",
+      "recall": 0.762,
+      "precision": null,
+      "f1": null,
+      "note": "현재 등재율; 공개시점엔 정의상 0"
+    }
+  ],
+  "caveats": [
+    "pkgsentinel recall은 모든 설정 동일 0.886 — LLM/룰은 precision만 개선(FP 45->13->2)",
+    "Semgrep: ai-skills는 네이티브, PyPI는 docker(네이티브가 5-29 이후 osemgrep로 깨짐) — 동일 룰셋",
+    "OSV는 탐지경쟁자 아니라 데이터셋 well-known 지표"
+  ]
+}

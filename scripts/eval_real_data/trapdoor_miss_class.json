@@ -1,0 +1,24 @@
+{
+  "keep_fn": [
+    "@walletwave/ui",
+    "@zoebuildsai/skill-base-wallet",
+    "lib-wallet-pay-btc",
+    "my-wallet-backupt-decryption-tool",
+    "raydiums1",
+    "react-native-wallet-sdk-demo-app",
+    "solana-dexfi-suite",
+    "solana-pda-helper"
+  ],
+  "drop_nopayload": [
+    "@frontend-clients/core",
+    "@frontend-clients/design-system",
+    "@walletwave/core",
+    "cdp-wallet-manager",
+    "climate-wallet",
+    "morpher-wallet-backend",
+    "solana-dev-mcp",
+    "solana-gateway-contracts-private",
+    "@ton-wallet/create",
+    "@walletwave/backend"
+  ]
+}

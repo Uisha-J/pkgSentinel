@@ -1,0 +1,1610 @@
+{
+  "policy": "Perfectly honest author manifest (detected = declared exact)",
+  "fixtures": [
+    {
+      "name": "@modelcontextprotocol/sdk",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-filesystem",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-github",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [
+        "network"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-puppeteer",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-postgres",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [
+        "db-access"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-slack",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@modelcontextprotocol/server-brave-search",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (manifest absent - explicit opt-in required, warning shown)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [
+        "llm-call"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-minor-no-manifest"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/core",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/community",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [
+        "db-access",
+        "llm-call",
+        "memory-persistent"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "@langchain/openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/anthropic",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/langgraph",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "@langchain/google-genai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/textsplitters",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/cohere",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/mistralai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/ollama",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/qdrant",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch, R4-3"
+      }
+    },
+    {
+      "name": "@langchain/redis",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@langchain/aws",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llamaindex",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@llamaindex/core",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@llamaindex/openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "ai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "@ai-sdk/openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/anthropic",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/google",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "@ai-sdk/react",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/svelte",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/vue",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/azure",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/cohere",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/mistral",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/groq",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "@ai-sdk/togetherai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "@anthropic-ai/sdk",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R1-2"
+      }
+    },
+    {
+      "name": "@google/generative-ai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "cohere-ai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "@aws-sdk/client-bedrock-runtime",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "chromadb",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "@pinecone-database/pinecone",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch, R4-3"
+      }
+    },
+    {
+      "name": "@qdrant/js-client-rest",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch, R4-3"
+      }
+    },
+    {
+      "name": "weaviate-client",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "tiktoken",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "gpt-tokenizer",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "langfuse",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "langsmith",
+      "ecosystem": "npm",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "env-secrets",
+        "llm-call",
+        "shell"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5"
+      }
+    },
+    {
+      "name": "langchain-core",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "env-secrets",
+        "filesystem-read",
+        "llm-call",
+        "network",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5"
+      }
+    },
+    {
+      "name": "langchain-community",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "db-access",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "network",
+        "shell",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5"
+      }
+    },
+    {
+      "name": "langchain-openai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "env-secrets",
+        "llm-call",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "langchain-anthropic",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "env-secrets",
+        "filesystem-write",
+        "llm-call",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "langchain-google-genai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "env-secrets",
+        "llm-call",
+        "network",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5"
+      }
+    },
+    {
+      "name": "langchain-google-vertexai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "env-secrets",
+        "llm-call",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5, R4-5, R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5, R4-5, R4-5, R4-5"
+      }
+    },
+    {
+      "name": "langchain-text-splitters",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "langchain-experimental",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "network",
+        "shell"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5, R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5, R4-5, R4-5"
+      }
+    },
+    {
+      "name": "langchain-cohere",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "llm-call",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-minor-no-manifest"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "langchain-mistralai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "env-secrets",
+        "llm-call",
+        "network"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "langchain-ollama",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "llm-call"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5"
+      }
+    },
+    {
+      "name": "langchain-aws",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "network",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "langgraph",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5, R4-5"
+      }
+    },
+    {
+      "name": "langgraph-sdk",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['credential-paths']"
+      }
+    },
+    {
+      "name": "langgraph-checkpoint",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec']"
+      }
+    },
+    {
+      "name": "langgraph-checkpoint-postgres",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "langgraph-checkpoint-sqlite",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "llama-index",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llama-index-core",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "memory-persistent",
+        "network",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R4-5"
+      }
+    },
+    {
+      "name": "llama-index-llms-openai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "env-secrets",
+        "llm-call",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium, R3-minor-no-manifest"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llama-index-llms-anthropic",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "llm-call",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-minor-no-manifest"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llama-index-llms-gemini",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium"
+      }
+    },
+    {
+      "name": "llama-index-embeddings-openai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-medium"
+      }
+    },
+    {
+      "name": "llama-index-vector-stores-chroma",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llama-index-vector-stores-pinecone",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "llama-index-vector-stores-qdrant",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "llama-index-readers-file",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "llama-index-agent-openai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "crewai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "agent-to-agent",
+        "code-exec",
+        "db-access",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "network",
+        "shell",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-1, R4-5, R4-5, R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-1, R4-5, R4-5, R4-5, R4-5"
+      }
+    },
+    {
+      "name": "crewai-tools",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "agent-to-agent",
+        "code-exec",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "network",
+        "shell"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-dangerous-no-manifest, R3-medium, R3-minor-no-manifest"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "autogen",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec']"
+      }
+    },
+    {
+      "name": "autogen-agentchat",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "agent-to-agent",
+        "env-secrets",
+        "llm-call"
+      ],
+      "off": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-medium, R3-minor-no-manifest"
+      },
+      "perfect": {
+        "verdict": "SUSPICIOUS",
+        "reason": "R1-R4 SUSPICIOUS: R2-1, R3-rot-mismatch"
+      }
+    },
+    {
+      "name": "autogen-ext",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "agent-to-agent",
+        "code-exec",
+        "db-access",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "network",
+        "shell",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2"
+      }
+    },
+    {
+      "name": "autogen-core",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "agent-to-agent",
+        "code-exec",
+        "env-secrets",
+        "mcp-client"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "haystack-ai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "network",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "MALICIOUS",
+        "reason": "R1-R4 MALICIOUS hit: R2-3"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "R1-R4 MALICIOUS hit: R2-3"
+      }
+    },
+    {
+      "name": "mcp",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "mcp-client",
+        "mcp-server",
+        "network",
+        "shell"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R2-1, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R1-2, R1-2, R2-1, R4-5"
+      }
+    },
+    {
+      "name": "openai-agents",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths', 'shell']"
+      }
+    },
+    {
+      "name": "letta",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "code-exec",
+        "credential-paths",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "mcp-server",
+        "network",
+        "shell",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R2-1, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5, R4-5"
+      }
+    },
+    {
+      "name": "marvin",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths', 'shell']"
+      }
+    },
+    {
+      "name": "instructor",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'shell']"
+      }
+    },
+    {
+      "name": "pydantic-ai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "AGENTIC",
+        "reason": "AGENTIC (declared >= detected, all R1-R4 clean - explicit opt-in required)"
+      }
+    },
+    {
+      "name": "semantic-kernel",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [
+        "agent-to-agent",
+        "code-exec",
+        "credential-paths",
+        "dynamic-tool-load",
+        "env-secrets",
+        "filesystem-read",
+        "filesystem-write",
+        "llm-call",
+        "mcp-client",
+        "mcp-server",
+        "memory-persistent",
+        "network",
+        "tool-loop"
+      ],
+      "off": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R2-1, R4-5, R4-5, R4-5"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R1-2, R4-5, R4-5, R4-5"
+      }
+    },
+    {
+      "name": "openai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec']"
+      }
+    },
+    {
+      "name": "anthropic",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec']"
+      }
+    },
+    {
+      "name": "google-generativeai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "HIGH_RISK",
+        "reason": "R1-R4 HIGH_RISK: R2-1"
+      }
+    },
+    {
+      "name": "cohere",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths']"
+      }
+    },
+    {
+      "name": "mistralai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec']"
+      }
+    },
+    {
+      "name": "chromadb",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'credential-paths', 'shell']"
+      }
+    },
+    {
+      "name": "qdrant-client",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec']"
+      }
+    },
+    {
+      "name": "tiktoken",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "detected": [],
+      "off": {
+        "verdict": "CLEAN",
+        "reason": "not agentic (manifest absent / signals < threshold)"
+      },
+      "perfect": {
+        "verdict": "MALICIOUS",
+        "reason": "Step 2: undeclared dangerous capabilities ['code-exec', 'shell']"
+      }
+    }
+  ],
+  "by_verdict_off": {
+    "CLEAN": 68,
+    "AGENTIC": 4,
+    "SUSPICIOUS": 7,
+    "HIGH_RISK": 20,
+    "MALICIOUS": 1
+  },
+  "by_verdict_perfect": {
+    "AGENTIC": 40,
+    "SUSPICIOUS": 15,
+    "HIGH_RISK": 27,
+    "MALICIOUS": 18
+  },
+  "benign_n": 100,
+  "malicious_n": 0,
+  "off_fp": 28,
+  "perfect_fp": 60,
+  "off_tp": 0,
+  "perfect_tp": 0
+}

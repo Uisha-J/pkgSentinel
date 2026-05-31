@@ -1,0 +1,110 @@
+{
+  "policy": "EXTEND cluster diff simulation",
+  "clusters": [
+    "CredAccess",
+    "Discovery-fs",
+    "Impact-fs",
+    "agent-comm",
+    "Execution",
+    "Collection",
+    "C2-network"
+  ],
+  "dangerous_clusters": [
+    "C2-network",
+    "Collection",
+    "CredAccess",
+    "Execution",
+    "Impact-fs",
+    "agent-comm"
+  ],
+  "scenarios": {
+    "honest_benign_100": {
+      "scenario": "honest_author",
+      "label": "benign",
+      "n": 100,
+      "orig_caught": 28,
+      "new_caught": 0,
+      "orig_rate": 0.28,
+      "new_rate": 0.0,
+      "delta": -0.28,
+      "orig_dist": {
+        "CLEAN": 68,
+        "AGENTIC": 4,
+        "SUSPICIOUS": 7,
+        "HIGH_RISK": 20,
+        "MALICIOUS": 1
+      },
+      "new_dist": {
+        "CLEAN": 68,
+        "AGENTIC": 32
+      },
+      "changes_count": 28
+    },
+    "adversarial_malicious_34": {
+      "scenario": "adversarial",
+      "label": "malicious",
+      "n": 34,
+      "orig_caught": 7,
+      "new_caught": 7,
+      "orig_rate": 0.2059,
+      "new_rate": 0.2059,
+      "delta": 0.0,
+      "orig_dist": {
+        "CLEAN": 27,
+        "HIGH_RISK": 6,
+        "SUSPICIOUS": 1
+      },
+      "new_dist": {
+        "CLEAN": 27,
+        "MALICIOUS": 5,
+        "HIGH_RISK": 2
+      },
+      "changes_count": 6
+    },
+    "adversarial_benign_100": {
+      "scenario": "adversarial",
+      "label": "benign",
+      "n": 100,
+      "orig_caught": 28,
+      "new_caught": 28,
+      "orig_rate": 0.28,
+      "new_rate": 0.28,
+      "delta": 0.0,
+      "orig_dist": {
+        "CLEAN": 68,
+        "AGENTIC": 4,
+        "SUSPICIOUS": 7,
+        "HIGH_RISK": 20,
+        "MALICIOUS": 1
+      },
+      "new_dist": {
+        "CLEAN": 68,
+        "AGENTIC": 4,
+        "SUSPICIOUS": 4,
+        "HIGH_RISK": 6,
+        "MALICIOUS": 18
+      },
+      "changes_count": 21
+    },
+    "honest_malicious_34": {
+      "scenario": "honest_author",
+      "label": "malicious",
+      "n": 34,
+      "orig_caught": 7,
+      "new_caught": 0,
+      "orig_rate": 0.2059,
+      "new_rate": 0.0,
+      "delta": -0.2059,
+      "orig_dist": {
+        "CLEAN": 27,
+        "HIGH_RISK": 6,
+        "SUSPICIOUS": 1
+      },
+      "new_dist": {
+        "CLEAN": 27,
+        "AGENTIC": 7
+      },
+      "changes_count": 7
+    }
+  }
+}

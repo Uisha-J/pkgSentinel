@@ -1,0 +1,1306 @@
+{
+  "tool": "njsscan (Node.js SAST)",
+  "results": [
+    {
+      "name": "@ahmedhfarag/ngx-perfect-scrollbar",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ahmedhfarag/ngx-virtual-scroller",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/common",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/config-eslint",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/db-context",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/di",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/di-node",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/eslint",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/fastify-http-server",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/http-server",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/openapi",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/package-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/prettier",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/slf",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/ssl-info",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@art-ws/web-app",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@crowdstrike/commitlint",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@crowdstrike/falcon-shoelace",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@crowdstrike/foundry-js",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@crowdstrike/logscale-file-editor",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@crowdstrike/tailwind-toucan-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/deluge",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/golang-template",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/magnet-link",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/ngx-codemirror",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/ngx-csv",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/ngx-rightclick",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/qbittorrent",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/react-adsense",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/shared-torrent",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/tinycolor",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/torrent-file",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/transmission",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@ctrl/ts-base32",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@hestjs/cqrs",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@hestjs/demo",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@hestjs/eslint-config",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@hestjs/scalar",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@hestjs/validation",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/arraybuffers",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/gesturehandler",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/perms",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/sentry",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/sqlite",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/text",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-collectionview",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-document-picker",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-drawer",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-image",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-material-bottom-navigation",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-material-bottomsheet",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-material-core",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-material-core-tabs",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-material-tabs",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-pager",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nativescript-community/ui-pulltorefresh",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nexe/config-manager",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nexe/eslint-config",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nexe/logger",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/angular",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/focus",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/nativescript-loading-indicator",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/ui-collectionview",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/web",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/web-angular",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/xplat",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@nstudio/xplat-utils",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/board",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/graphql",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/headroom",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/help",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/i18n",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/input",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/popup",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/shell",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@operato/styles",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/bio-parsers",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/bounce-loader",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/file-utils",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/liquibase-tools",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/range-utils",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/react-list",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@teselagen/sequence-utils",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@thangved/callback-window",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/attachment-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/auth-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/email-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/env",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/integration-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/integration-marketplace",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@things-factory/shell",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@tnf-dev/core",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@tnf-dev/js",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@tnf-dev/mui",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@tnf-dev/react",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@yoobic/design-system",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@yoobic/jpeg-camera-es6",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "@yoobic/yobi",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ace-colorpicker-rpk",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "airchief",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "airpilot",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "browser-webdriver-downloader",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "capacitor-notificationhandler",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "capacitor-plugin-healthapp",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "capacitor-plugin-ihealth",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "capacitor-plugin-vonage",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "capacitorandroidpermissions",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "config-cordova",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "cordova-voxeet",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "create-hest-app",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "db-evo",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ember-browser-services",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ember-headless-form-yup",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ember-headless-table",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ember-url-hash-polyfill",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ember-velcro",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "encounter-playground",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "eslint-config-crowdstrike",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "eslint-config-teselagen",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "globalize-rpk",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "graphql-sequelize-teselagen",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "html-to-base64-image",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "json-rules-engine-simplified",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "jumpgate",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "koa2-swagger-ui",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "mcfly-semantic-release",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "mcp-knowledge-base",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "mcp-knowledge-graph",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "monorepo-next",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ng-imports-checker",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ng2-file-upload",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ngx-bootstrap",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ngx-color",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ngx-toastr",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ngx-trend",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ngx-ws",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "oradm-to-gql",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "oradm-to-sqlz",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "pm2-gelf-json",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "react-complaint-image",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "react-jsonschema-form-conditionals",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "react-jsonschema-form-extras",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "react-jsonschema-rxnt-extras",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "remark-preset-lint-crowdstrike",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "rxnt-authentication",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "rxnt-healthchecks-nestjs",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "rxnt-kue",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "tbssnch",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "tg-client-query-builder",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "tg-redbird",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "tg-seq-gen",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "thangved-react-grid",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ts-gaussian",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ts-imports",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "tvi-cli",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ve-bamreader",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "ve-editor",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "verror-extra",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "voip-callkit",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "wdio-web-reporter",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "yargs-help-output",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    },
+    {
+      "name": "yoo-styles",
+      "verdict": "CLEAN",
+      "error_sev": 0,
+      "warning": 0,
+      "info": 0,
+      "total_findings": 0
+    }
+  ],
+  "tp": 0,
+  "fn": 162,
+  "err": 0,
+  "n": 162,
+  "recall": 0.0
+}

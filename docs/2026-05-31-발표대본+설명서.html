@@ -1,0 +1,515 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<title>pkgsentinel 발표 대본 + 시스템 설명서</title>
+<style>
+@page { size: A4; margin: 16mm 14mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: "Malgun Gothic","맑은 고딕",system-ui,sans-serif;
+  font-size: 10.5pt; line-height: 1.5; color: #1a1a1a; margin: 0;
+}
+h1 { font-size: 18pt; border-bottom: 3px solid #2563eb; padding-bottom: 6px;
+     margin: 0 0 14px; color: #1e3a8a; }
+h2 { font-size: 13.5pt; margin: 20px 0 8px; color: #1e40af;
+     border-left: 5px solid #2563eb; padding-left: 8px; }
+h3 { font-size: 11.5pt; margin: 14px 0 6px; color: #1e293b; }
+p, li { margin: 4px 0; }
+blockquote { background:#f1f5f9; border-left:4px solid #94a3b8; margin:8px 0;
+             padding:6px 12px; color:#475569; font-size:9.8pt; }
+code { background:#f1f5f9; padding:1px 4px; border-radius:3px;
+       font-family:"Consolas",monospace; font-size:9.5pt; color:#be123c; }
+em { color:#0369a1; font-style:normal; font-size:9.3pt; }
+table { border-collapse: collapse; width:100%; margin:8px 0; font-size:9.3pt; }
+th,td { border:1px solid #cbd5e1; padding:4px 7px; text-align:left;
+        vertical-align:top; }
+th { background:#e0e7ff; font-weight:700; color:#1e293b; }
+tr:nth-child(even) td { background:#f8fafc; }
+hr { border:none; border-top:1px solid #e2e8f0; margin:14px 0; }
+strong { color:#0f172a; }
+.docbreak { page-break-before: always; }
+.cover { text-align:center; padding-top:60px; }
+.cover h1 { border:none; font-size:26pt; color:#1e3a8a; }
+.cover .sub { font-size:13pt; color:#475569; margin-top:10px; }
+.cover .meta { font-size:10pt; color:#94a3b8; margin-top:40px; }
+</style></head><body>
+<div class="cover">
+  <h1>pkgsentinel</h1>
+  <div class="sub">발표 대본 + 시스템 설명서 (QnA 참조용)</div>
+  <div class="meta">7팀 캡스톤 · 2026-05-31<br>
+  Part 1. 발표 대본(출처 표기) &nbsp;|&nbsp; Part 2. 시스템 설명서</div>
+</div>
+<div class="docbreak"><h1>pkgsentinel 발표 대본 (출처 표기판)</h1>
+<blockquote>
+<p>괄호 안 = "어떤 자료 참고했어요?" 대비 인라인 출처. 전체 목록은 맨 아래 [참고문헌].</p>
+</blockquote>
+<hr />
+<p><strong>[슬라이드 1]</strong><br />
+안녕하세요, 7팀 캡스톤 '패키지센티널' 발표 시작하겠습니다. 발표에 앞서, 원래 저희 주제가 AI 슬롭스쿼팅 탐지 모듈이었는데, 범위가 좁고 부족해 보여 도중에 무산시키고 주제를 바꿔 처음부터 다시 5주간 진행했습니다. 보고서에 다른 점이 좀 있을 수 있습니다.</p>
+<p>최근 AI가 코드를 생성·실행하면서 두 갈래 위협이 생겼습니다.<br />
+첫째는 슬롭스쿼팅입니다. LLM이 존재하지 않는 패키지명을 환각하고, 공격자가 그 이름을 선점합니다 <em>(슬롭스쿼팅 개념·환각률 선행연구: Spracklen et al., "We Have a Package for You: ... Package Hallucinations by Code Generating LLMs", USENIX Security 2024)</em>. 저희가 gpt-5.2·claude-opus-4-8로 1,000회 직접 측정했더니 <em>(자체 실험, 2026-05; OpenAI·Anthropic API)</em>, 추출 패키지의 3.1%가 레지스트리에 없는 환각 이름이었습니다 <em>(검증: PyPI·npm 레지스트리 API)</em>. 중요한 점은 환각이 예측 가능하다는 것입니다 — 동일 시퀀스 질문에서 5회 중 3회 이상 같은 환각을 보인 사례가 1/3이었습니다 <em>(자체 반복성 측정)</em>. 이는 공격자가 패키지명을 선점할 수 있다는 의미입니다.</p>
+<p>둘째는 agentic 패키지입니다. MCP 서버가 출시 1.5년 만에 9,400개 이상 폭증했고 <em>(MCP 생태계 통계: DigitalApplied "MCP Ecosystem H1 2026", PulseMCP·Smithery·공식 MCP Registry 집계)</em>, npm 안에 'mcp' 키워드 패키지만 49,000개입니다 <em>(npm registry 검색 API, 2026-05)</em>. 그 안에 자격증명 탈취를 비롯한 악성 패턴이 등장했습니다 <em>(DataDog ai-skills 데이터셋)</em>.</p>
+<p><strong>[슬라이드 2~3]</strong><br />
+해결책은 두 가지입니다. 탐지 엔진으로 지금 등록된 악성을 잡고, 제작자가 권한을 선언하게 해 위협을 구조적으로 줄이는 표준 제안입니다.</p>
+<p><strong>[슬라이드 4 — 구조]</strong><br />
+전체 구조입니다 <em>(다이어그램: C4 model — Simon Brown, c4model.com)</em>. 개발자·CI/CD가 CLI나 API로 패키지를 검사하면, 분석 엔진이 아카이브를 설치 없이 메모리로 스트리밍해 분석합니다. 외부로는 PyPI/npm 레지스트리, OSV 인텔 <em>(Google OSV)</em>, MITRE ATT&amp;CK <em>(attack.mitre.org)</em>, 그리고 코드 의미·버전 변경·선언 의존성을 각각 보는 3-에이전트 Claude API <em>(Anthropic Claude API)</em>와 프로토콜 단위로 연동하고, 결과는 SBOM·STIX·SIEM 표준 포맷으로 출력합니다.</p>
+<p><strong>[슬라이드 5 — 7계층]</strong><br />
+탐지를 7계층으로 구성했습니다. 정적 분석, MITRE ATT&amp;CK TTP 매칭 <em>(행위→ATT&amp;CK 매핑 선행: Malware2ATT&amp;CK, ScienceDirect 2024; 임베딩: Sentence-BERT all-MiniLM-L6-v2, Reimers &amp; Gurevych 2019)</em>, 47개 악성 지표 <em>("Unveiling Malicious Logic..." arXiv:2512.12559, 2025)</em>, 테인트 분석 <em>(Taint-Based Slicing 기법)</em>, LLM 검증을 하나의 파이프라인으로 통합했습니다.</p>
+<p><strong>[슬라이드 6 — Manifest]</strong><br />
+제작자가 파일·네트워크·셸 등을 매니페스트에 선언하면, 도구가 실제 탐지 행위와 대조해 미선언 권한을 경고합니다. 선언-탐지 대조 자체는 Android의 'permission gap' 연구에서 잘 검증된 패러다임입니다 <em>(Felt et al., "Android Permissions Demystified" / Stowaway, ACM CCS 2011)</em>. 모바일에서 검증된 이 패러다임을 신흥 agentic 패키지/스킬 영역으로 가져오고, 다중 어휘 정규화로 MITRE TTP 탐지 결과와 연결했습니다 <em>(선언형 권한 선례: Anthropic MCP 권한 모델; Gilbertson, npm 권한 제안 2018; mcp-sec-audit; 어휘는 Deno permissions·Google Capslock 차용)</em>.</p>
+<p><strong>[슬라이드 7 — npm 비교]</strong><br />
+실제 데이터로 검증했습니다. DataDog 악성 패키지와 인기 정상 패키지를 조합해 npm 273개 데이터셋을 검사했습니다 <em>(악성: DataDog/malicious-software-packages-dataset, 시드 고정 무작위 추출; 정상: npm 인기 패키지)</em>. DB를 조회하지 않은 행위 기반만으로도 오탐이 없었습니다. 같은 데이터에서 Socket과 대등 이상입니다 <em>(비교: Socket.dev, OSV-Scanner)</em>.</p>
+<p><strong>[슬라이드 8 — PyPI 비교]</strong><br />
+PyPI에서도 검증했습니다. 표준 Python SAST인 Bandit <em>(PyCQA)</em>, 다언어 SAST인 Semgrep <em>(Semgrep Inc, Docker 이미지)</em>과 비교했습니다. 범용 SAST의 한계가 보입니다. 또한 행위 기반만이면 오탐이 나오지만 LLM 교정으로 오탐이 2개까지 줄었습니다.</p>
+<p><strong>[슬라이드 9 — zero-day]</strong><br />
+3개의 독립 명명 캠페인을 zero-day 환경에서 검증했습니다 — 2025-09 Shai-Hulud, 3주 전 Mini Shai-Hulud <em>(TeamPCP; Orca Security·The Hacker News 보도, 2026-05)</em>, 8일 전 TrapDoor <em>(The Hacker News 보도, 2026-05)</em>. 현재 구할 수 있는 패키지로 데이터셋을 구성했습니다 <em>(DataDog 데이터셋)</em>. npm의 Bandit 격인 njsscan과 비교했고 <em>(njsscan, MobSF/OpenSecurity)</em>, OSV 0%는 DB 영향이 없는 zero-day를 가정한 지표입니다 <em>(Google OSV)</em>. 페이로드 없는 decoy 6개를 제외하면 90%입니다.</p>
+<p><strong>[슬라이드 10 — 남은 과제 ai-skills]</strong><br />
+남은 과제입니다. DataDog 데이터셋 중 최근 ai-skills 패키지셋은 결이 다른 zero-day입니다 <em>(DataDog ai-skills 카테고리, 2026-05 신설)</em>. 공격이 코드가 아닌 markdown 지시문 자체에 있습니다. 지시문 분석 모듈 markdown-pinpoint를 만들어 넣었더니 탐지율이 소폭 상승했습니다 <em>(프롬프트 인젝션 패턴은 Sentry skill-scanner(getsentry/skills)에서 적응; 스킬 공격 선행: Snyk ToxicSkills·SkillRisk·Invariant Labs tool-poisoning·OWASP MCP Top 10)</em>. 이처럼 권한을 선언시켜 매니페스트로 만들면 미선언 행위 탐지에 긍정적입니다.</p>
+<p>발표는 여기까지입니다. 감사합니다.</p>
+<hr />
+<h2>참고문헌 (References)</h2>
+<p><strong>선행연구 (학술)</strong><br />
+- Spracklen et al., <em>We Have a Package for You: A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs</em>, USENIX Security 2024 — 슬롭스쿼팅/환각률<br />
+- Felt, Chin, Hanna, Song, Wagner, <em>Android Permissions Demystified</em> (Stowaway), ACM CCS 2011 — 선언↔탐지 permission gap<br />
+- <em>Malware2ATT&amp;CK</em> (ScienceDirect S0167404824000737, 2024) — 행위→ATT&amp;CK 매핑<br />
+- <em>Unveiling Malicious Logic...</em> arXiv:2512.12559 (2025) — 47-indicator<br />
+- Reimers &amp; Gurevych, <em>Sentence-BERT</em> (all-MiniLM-L6-v2), 2019 — TTP 임베딩<br />
+- mcp-sec-audit / Gilbertson npm 권한 제안(2018) — 매니페스트 선례</p>
+<p><strong>표준·프레임워크</strong><br />
+- MITRE ATT&amp;CK (attack.mitre.org) · OSV (Google) · C4 model (Simon Brown) · OWASP MCP Top 10 · Anthropic MCP</p>
+<p><strong>비교 도구</strong><br />
+- Socket.dev · OSV-Scanner(Google) · Bandit(PyCQA) · Semgrep(Semgrep Inc) · njsscan(MobSF) · GuardDog(DataDog, overfit으로 비교 제외)<br />
+- 스킬 스캐너: Sentry skill-scanner(getsentry/skills) · SkillRisk · Snyk Agent Scan/ToxicSkills · Invariant Labs(tool poisoning)</p>
+<p><strong>데이터셋·인프라</strong><br />
+- DataDog/malicious-software-packages-dataset (악성 코퍼스; npm·PyPI·ai-skills)<br />
+- npm·PyPI 레지스트리 API · MCP 생태계 통계(DigitalApplied/PulseMCP/Smithery)<br />
+- Anthropic Claude API(GPT-5.2·Claude Opus 4.8 환각실험; Sonnet 4.5 검증 에이전트) · SQLCipher(Zetetic)<br />
+- 어휘 차용: Deno permissions · Google Capslock</p>
+<p><strong>사건(검증 대상)</strong><br />
+- Shai-Hulud(2025-09) · Mini Shai-Hulud(TeamPCP, 2026-05; Orca Security·The Hacker News) · TrapDoor(2026-05; The Hacker News)</p></div>
+<div class="docbreak"><h1>pkgsentinel 시스템 설명서 (QnA 참조용)</h1>
+<blockquote>
+<p>발표 중 질답 시 옆에 두고 보는 레퍼런스. 대본은 앞장 참조.<br />
+톤 원칙: "발명이 아니라 <strong>현실 위협의 깊은 이해 + 동작하는 통합 시스템 + 실제 멀웨어/표준도구로 정직한 측정 + 한계 발견·개선</strong>". 선행 도구 인정 = 약점이 아니라 강점.</p>
+</blockquote>
+<hr />
+<h2>0. 한 문장 정의</h2>
+<p><strong>pkgsentinel</strong> = PyPI·npm에 <strong>등록되어 있지만 악의적인 패키지를, 설치 없이 아카이브를 메모리로 스트리밍해 7계층/21단계로 분석</strong>하는 공급망 보안 엔진 + 제작자가 권한을 선언하게 해 위협을 구조적으로 줄이는 <strong>Agentic Capability Manifest 표준 제안</strong>.</p>
+<p>핵심 위협 모델 2갈래:<br />
+1. <strong>슬롭스쿼팅</strong> — LLM이 없는 패키지명을 환각 → 공격자가 그 이름 선점 → 개발자가 AI 추천 믿고 설치.<br />
+2. <strong>Agentic 패키지/스킬</strong> — MCP 서버·AI 스킬이 폭증하며 코드가 아닌 <strong>자연어 지시문(SKILL.md)</strong> 에 악성이 숨음.</p>
+<hr />
+<h2>1. 핵심 용어집 (교수님 질문 대비)</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>한 줄 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>슬롭스쿼팅(slopsquatting)</strong></td>
+<td>타이포스쿼팅의 AI판. 오타가 아니라 <strong>LLM 환각 패키지명</strong>을 공격자가 선점. (USENIX Security 2024, Spracklen et al.)</td>
+</tr>
+<tr>
+<td><strong>TTP</strong></td>
+<td>Tactics·Techniques·Procedures. 공격자의 행위 패턴. <strong>MITRE ATT&amp;CK</strong>가 업계 표준 분류.</td>
+</tr>
+<tr>
+<td><strong>MITRE ATT&amp;CK</strong></td>
+<td>실제 공격 행위를 정리한 공개 지식베이스(attack.mitre.org). TTP는 MITRE 표준이고, <strong>우리 기여는 그걸 임베딩해 패키지 행위와 의미적으로 매칭</strong>한 부분.</td>
+</tr>
+<tr>
+<td><strong>SAST</strong></td>
+<td>Static Application Security Testing. 코드를 <strong>실행하지 않고</strong> 정적 분석해 취약점 탐지. Bandit·Semgrep·njsscan이 대표.</td>
+</tr>
+<tr>
+<td><strong>DAST / SCA</strong></td>
+<td>DAST=실행 중 분석, SCA=의존성 구성요소 분석(알려진 취약 버전 매칭).</td>
+</tr>
+<tr>
+<td><strong>F1 score</strong></td>
+<td>precision과 recall의 조화평균 = 2·P·R/(P+R). 둘 중 하나만 높은 걸 못 속이게 하는 균형 지표. 분류 성능의 표준 단일 수치 — 교수님들이 익숙.</td>
+</tr>
+<tr>
+<td><strong>precision(정밀도)</strong></td>
+<td>악성이라 한 것 중 진짜 악성 비율. 낮으면 <strong>오탐(false positive)</strong> 많음.</td>
+</tr>
+<tr>
+<td><strong>recall(재현율)</strong></td>
+<td>진짜 악성 중 잡아낸 비율. 낮으면 <strong>미탐(false negative)</strong> 많음.</td>
+</tr>
+<tr>
+<td><strong>zero-day</strong></td>
+<td>공개·패치 전이라 DB·시그니처에 아직 없는 신규 위협. DB 기반 탐지는 정의상 0%.</td>
+</tr>
+<tr>
+<td><strong>agentic 패키지</strong></td>
+<td>AI 에이전트가 쓰는 도구/스킬 패키지(MCP 서버, Claude Skill 등). 파일·셸·네트워크 권한을 갖고 자율 행동.</td>
+</tr>
+<tr>
+<td><strong>MCP</strong></td>
+<td>Model Context Protocol(Anthropic). LLM이 외부 도구·데이터에 붙는 표준. 출시 1.5년 만에 서버 ~9,400개로 폭증.</td>
+</tr>
+<tr>
+<td><strong>taint analysis(테인트 분석)</strong></td>
+<td>민감 source(env/파일/비밀)에서 위험 sink(http/exec)로 데이터가 흐르는지 추적.</td>
+</tr>
+<tr>
+<td><strong>install-hook</strong></td>
+<td>npm package.json의 <code>postinstall</code> 등 설치 시 자동 실행 스크립트. 악성 송출의 단골 통로.</td>
+</tr>
+<tr>
+<td><strong>homoglyph</strong></td>
+<td>사람 눈에 같아 보이는 글자(0↔O, l↔I↔1)로 만든 위장 패키지명.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. 7계층 ↔ 21단계 전체 맵</h2>
+<p>탐지는 <strong>7계층(L0~L6)</strong> 으로 묶고, 실제 실행은 <strong>21단계(stage_00~20)</strong> 로 순차 수행. 필수 단계(★)는 하나라도 실패하면 <code>verdict=ERROR</code>(부분 판정 금지).</p>
+<h3>Layer 0 — 레지스트리 / 위협 인텔 (게이트)</h3>
+<ul>
+<li><strong>stage_00 레지스트리 확인</strong> — PyPI/npm에 존재하는가. 미등록 → <code>CANNOT_ANALYZE</code>(소스 없음).</li>
+<li><strong>stage_01 Threat Filter</strong> — 암호화 DB(SQLCipher)에서 known_malicious/popular/typosquat 매칭. 알려진 악성 exact match → 즉시 <code>MALICIOUS</code> 단축. (220k+ OSV/GHSA + OSSF malicious-packages)</li>
+<li><strong>stage_02 공격 이력(OSV)</strong> — 이름·버전 기준 과거 사고 조회. 현재 버전이 affected에 없으면 historical로 분리.</li>
+<li><strong>stage_03 OpenSSF Scorecard</strong> / <strong>stage_04 SLSA 프로비넌스</strong> — 참고 메타(판정 직접 영향 X).</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>측정 시 Layer 0(특히 stage_01 OSV 조회)는 끔.</strong> eval은 <code>Layer 0 OFF</code> = 순수 행위 분석 성능을 본 것. zero-day의 "OSV 0%"도 정의상(공개 전 DB에 없음) 0이지 측정 실패가 아님.</p>
+</blockquote>
+<h3>Layer 1 — 소스 추출 + Agentic 게이트</h3>
+<ul>
+<li><strong>stage_05 캐시 조회</strong> — 6-트리거 무효화(아카이브 해시 변하면 재분석).</li>
+<li><strong>stage_06 전 파일 소스 추출 ★기반</strong> — 아카이브를 <strong>설치 없이 메모리로 스트리밍</strong>, 핵심 파일만 추출.</li>
+<li><strong>stage_07 Agentic 분류</strong> — MCP/스킬 패키지인지 판별. agentic + 악성이면 단축, 아니면 일반 파이프라인으로.</li>
+</ul>
+<h3>Layer 2 — 행위 시퀀스</h3>
+<ul>
+<li><strong>stage_08 Behavior Sequence ★필수</strong> — Python AST + JS tree-sitter로 API 호출을 4차원(파일/네트워크/실행/은닉)으로 추출.</li>
+</ul>
+<h3>Layer 3 — 패턴 매칭 (탐지의 본체)</h3>
+<ul>
+<li><strong>stage_09 문자열 상수 풀</strong> — base64/hex/고엔트로피 난독화 문자열.</li>
+<li><strong>stage_10 버전 diff</strong> — 이전 버전 대비 갑자기 추가된 위험 API(event-stream·xz류 대응).</li>
+<li><strong>stage_11 TTP 매칭 ★필수</strong> — <strong>MITRE ATT&amp;CK TTP를 임베딩(Sentence-BERT all-MiniLM-L6-v2)</strong> 해 행위와 의미 유사도 매칭. 룰 정확매칭이 아니라 <strong>룰 없는 변종도 의미로</strong> 잡음.</li>
+<li><strong>stage_12 카테고리 이상</strong> — 패키지 설명 vs 실제 행위 불일치.</li>
+<li><strong>stage_13 47-indicator 매처</strong> — 논문(arXiv:2512.12559) 기반 악성 지표 분류(install-hook, exec/eval, credential theft 등). 파일 단위 risk-combo 승격.</li>
+<li><strong>stage_14 Sequential pattern mining</strong> — 호출 시퀀스 패턴.</li>
+<li><strong>stage_15 Taint slicing</strong> — source→sink 흐름만 추출해 LLM 프롬프트 토큰 절약.</li>
+</ul>
+<h3>Layer 4 — LLM 이중 검증</h3>
+<ul>
+<li><strong>stage_16 LLM 검증 ★필수</strong> — <strong>Claude 멀티 에이전트 3종</strong>(의미/버전-diff/의존성)이 각자 판정 후 <strong>합의 투표(consensus)</strong>. 정상 패키지 오탐을 강등하는 정밀도의 핵심(행위만이면 FP 45 → LLM 후 2). stub 모드=결정적 룰(키 없을 때).</li>
+<li>합의 규칙: 2+ MALICIOUS→MAL / 1 MAL+1+ SUS→MAL / 2+ SUS→SUS / 그 외 BENIGN.</li>
+</ul>
+<h3>Layer 5 — 추가 분석 (옵션)</h3>
+<ul>
+<li><strong>stage_17 의존성 재귀</strong>(--deps) · <strong>stage_18 바이너리</strong>(.so/.dll/.node) · <strong>stage_19 샌드박스</strong>(--sandbox).</li>
+</ul>
+<h3>Layer 6 — 판정 + 표준 출력</h3>
+<ul>
+<li><strong>stage_20 NIST SSDF 준수</strong> + 최종 verdict 결정.</li>
+<li>출력 표준: <strong>CycloneDX 1.5 VEX, STIX 2.1/TAXII, HMAC 서명 웹훅, Falco/Tetragon 룰, SafeDep pmg</strong>.</li>
+</ul>
+<hr />
+<h2>3. 판정 규칙 (verdict_rules.py)</h2>
+<p>오직 <strong>Evidence + stage 결과</strong>로만 판정. <strong>패키지 나이·인기도·다운로드 수는 일절 안 봄</strong>(편향 방지).</p>
+<table>
+<thead>
+<tr>
+<th>verdict</th>
+<th>조건</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MALICIOUS</strong></td>
+<td>high-severity TTP ≥1 AND LLM=malicious AND 최강 악성 evidence confidence ≥0.85</td>
+</tr>
+<tr>
+<td><strong>HIGH_RISK</strong></td>
+<td>(TTP match ≥1 OR version_diff critical) AND LLM∈{suspicious,malicious}</td>
+</tr>
+<tr>
+<td><strong>SUSPICIOUS</strong></td>
+<td>weak TTP(LLM≠BENIGN) OR version_diff any OR LLM-only suspicious(conf≥0.5, quorum 2)</td>
+</tr>
+<tr>
+<td><strong>CLEAN</strong></td>
+<td>모든 단계 통과 AND evidence 없음 / 또는 weak TTP+LLM=BENIGN (<strong>BENIGN이 약신호를 덮어씀</strong>)</td>
+</tr>
+<tr>
+<td><strong>ERROR</strong></td>
+<td>필수 단계(08/11/16) 중 하나라도 실패</td>
+</tr>
+<tr>
+<td><strong>CANNOT_ANALYZE</strong></td>
+<td>stage_00 미등록 확정</td>
+</tr>
+</tbody>
+</table>
+<p>핵심 설계: <strong>LLM BENIGN 판정이 약한 TTP 신호(유사도 0.70~0.85, severity LOW)를 덮어씀</strong> → 정상 패키지 오탐 억제. 강매칭(≥0.85, severity≠LOW)은 LLM과 무관하게 위험 분기.</p>
+<hr />
+<h2>4. 데이터셋 &amp; 측정 방법론</h2>
+<h3>DataDog malicious-software-packages-dataset</h3>
+<ul>
+<li>규모(2026-05): 악성 아카이브 <strong>~22,052 / 고유 패키지 ~11,704</strong>. (npm malicious_intent 20,588 + compromised_lib 1,260 + ai-skills 204; PyPI malicious_intent 1,806 pkg / 2,483 zip 별도; ide_extensions 신설 0)</li>
+<li><strong>성격: 사고 후(post-discovery) 스냅샷</strong>. 파일명 날짜=발견일. 사람이 수동 triage.</li>
+<li>README가 직접 인정: <em>"Most ... identified by GuardDog"</em> + <em>"selection bias ... single ruleset (GuardDog)"</em>.</li>
+</ul>
+<h3>샘플링 (체리피킹 아님)</h3>
+<ul>
+<li><code>_pick_datadog_samples(eco, kind, limit, seed=42)</code>: <strong>고정 시드 42</strong> → shuffle → 상위 추출. <strong>재현 가능</strong>. &gt;10MB 제외.</li>
+<li>정상(benign)은 큐레이션된 <strong>현재 인기 패키지</strong>(npm: react·vue·angular… / PyPI: requests·urllib3·fastapi…). → <strong>실제 레지스트리 패키지로 오탐 검증</strong>.</li>
+<li>ai-skills는 <strong>전수 204개</strong>. zero-day는 일부러 <strong>OSV 비등록 부분집합</strong>(더 어려운 쪽) 선택.</li>
+</ul>
+<hr />
+<h2>5. 측정 결과 총괄 (전부 Layer 0 OFF, 명시 없으면)</h2>
+<h3>(A) npm 비교 — n=273 (Socket 분석가능 동일 분모)</h3>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>recall</th>
+<th>precision</th>
+<th>F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pkgsentinel (L0 OFF, 행위만)</td>
+<td>0.652</td>
+<td><strong>1.000 (FP 0)</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>pkgsentinel (L0 ON)</td>
+<td>0.912</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>pkgsentinel (프로덕션)</td>
+<td>—</td>
+<td>—</td>
+<td><strong>0.974</strong></td>
+</tr>
+<tr>
+<td>Socket.dev</td>
+<td>0.937</td>
+<td>—</td>
+<td>0.962</td>
+</tr>
+<tr>
+<td>- 메시지: 행위만으로도 <strong>오탐 0</strong>, $1B 유니콘 Socket와 동급 이상.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>(B) PyPI 비교 — n=139</h3>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>recall</th>
+<th>precision</th>
+<th>F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pkgsentinel (claude)</td>
+<td>0.886</td>
+<td>0.972</td>
+<td><strong>0.927</strong></td>
+</tr>
+<tr>
+<td>pkgsentinel (stub)</td>
+<td>0.886</td>
+<td>0.843</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Bandit (PyCQA)</td>
+<td>0.487</td>
+<td>0.470</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Semgrep (Docker)</td>
+<td>0.212</td>
+<td>0.298</td>
+<td>—</td>
+</tr>
+<tr>
+<td>OSV</td>
+<td>0.76 (사후 등재)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>- 메시지: 범용 SAST는 '악성 분류기'가 아니라 코드이슈 탐지기 → 정상도 대량 flag. <strong>LLM 검증이 정밀도 핵심</strong>(FP 45→2).</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>(C) zero-day 다중 사건</h3>
+<table>
+<thead>
+<tr>
+<th>사건</th>
+<th>pkgsentinel</th>
+<th>OSV</th>
+<th>njsscan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shai-Hulud (2025-09)</td>
+<td><strong>100%</strong></td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Mini Shai-Hulud (2026-05)</td>
+<td><strong>100%</strong></td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>TrapDoor (2026-05)</td>
+<td><strong>78%</strong> (decoy 6 제외 시 90%)</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>- OSV 0%는 <strong>공개 전 정의상 0</strong>(미측정 아님). TrapDoor 분석 중 <strong>install-hook 네트워크 송출 미탐 갭 발견 → 직접 구현, 61%→78%(정상 FP 0)</strong>.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>(D) ai-skills — n=204 (동일 분모, 정직한 한계)</h3>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSV-Scanner</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>Semgrep</td>
+<td>0.098</td>
+</tr>
+<tr>
+<td>Bandit</td>
+<td>0.142</td>
+</tr>
+<tr>
+<td><strong>pkgsentinel</strong></td>
+<td><strong>0.152</strong></td>
+</tr>
+<tr>
+<td>+ markdown-pinpoint(프로토타입)</td>
+<td><strong>0.284</strong></td>
+</tr>
+<tr>
+<td>- <strong>전 도구가 실패하는 open problem</strong>. 이유: 악성이 코드가 아니라 <strong>SKILL.md 자연어 지시문</strong>, 실행 엔진이 AI 에이전트 자신. 204개 중 77%(158개)가 Python 코드 없음 → SAST 구조적 실명.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>(E) 환각률 (최신 모델 gpt-5.2·claude-opus-4-8, 1,000회)</h3>
+<ul>
+<li>raw 환각 6.65% → 검증 후 완전허구 3.13%(A등급 1.10%).</li>
+<li><strong>반복성 32.6%</strong>: 동일 질문 5회 중 3회+ 같은 환각 → <strong>예측 가능 = 공격자 선점 가능</strong>.</li>
+</ul>
+<hr />
+<h2>6. Agentic Capability Manifest (가장 연구적인 부분)</h2>
+<ul>
+<li><strong>개념</strong>: 제작자가 필요 권한(파일·네트워크·셸 등)을 매니페스트에 <strong>선언</strong> → 도구가 <strong>실제 탐지 행위와 대조</strong> → <strong>미선언 권한 경고</strong>.</li>
+<li><strong>선례(EXTEND, 대체 아님)</strong>: Android <strong>permission gap</strong> 연구(Felt et al./Stowaway, CCS 2011)가 검증한 패러다임. 선언형 권한은 MCP 권한모델·Gilbertson(npm 2018)·Deno permissions·Google Capslock에 선례. 우리는 이를 <strong>패키지/스킬 영역으로 확장</strong>.</li>
+<li><strong>CANONICAL(정규 어휘)</strong>: 도구마다 권한 표현이 제각각(self 27종, MITRE 28종) → <strong>15개 표준 capability</strong>로 정규화(filesystem-read/write, shell, network, env-secrets, code-exec, credential-paths, db-access, mcp-client/server, llm-call, tool-loop, memory-persistent, dynamic-tool-load, agent-to-agent). <code>cluster.normalize_set()</code>가 선언·탐지를 같은 어휘로 맞춰 비교.</li>
+</ul>
+<hr />
+<h2>7. 비교 도구 (각각 무엇인가)</h2>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>만든 곳</th>
+<th>종류</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Socket.dev</strong></td>
+<td>Socket Inc ($60M Series C, $1B 유니콘, OpenAI Trusted Access)</td>
+<td>행위 기반 공급망</td>
+<td>가장 강한 상용 비교군</td>
+</tr>
+<tr>
+<td><strong>OSV-Scanner</strong></td>
+<td>Google</td>
+<td>DB 매칭</td>
+<td>zero-day엔 정의상 0</td>
+</tr>
+<tr>
+<td><strong>Bandit</strong></td>
+<td>PyCQA</td>
+<td>Python 전용 SAST</td>
+<td>표준 Python SAST</td>
+</tr>
+<tr>
+<td><strong>Semgrep</strong></td>
+<td>Semgrep Inc</td>
+<td>다언어 SAST</td>
+<td>Windows 네이티브 불가 → Docker</td>
+</tr>
+<tr>
+<td><strong>njsscan</strong></td>
+<td>MobSF/OpenSecurity</td>
+<td>Node.js SAST</td>
+<td>npm의 Bandit 격</td>
+</tr>
+<tr>
+<td><strong>GuardDog</strong></td>
+<td>DataDog</td>
+<td>룰+YARA+메타 SAST</td>
+<td><strong>비교 제외</strong> — 데이터셋 식별자라 overfit/circular</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. 정직성·한계 (먼저 말하면 강점)</h2>
+<ol>
+<li><strong>GuardDog 양날의 검</strong>: 데이터셋이 GuardDog-findable 악성에 치우침 → 우리 0.886도 그 위 수치. <strong>"GuardDog보다 recall 높다" 주장 안 함.</strong> 차별은 LLM 검증/TTP 임베딩/Manifest/스킬지시문 차원. (저장: guarddog_dataset_bias.md)</li>
+<li><strong>decoy</strong>: TrapDoor 6개는 페이로드 없는 미끼 → 제외해도 90%지 <strong>100% 아님</strong>. 4개 진짜 미탐 남음.</li>
+<li><strong>SAST 비교 한계</strong>: "단순 SAST 이기는 건 당연" 지적 → 인정. SAST 비교는 <strong>'우리가 이긴다'가 아니라 '범용 SAST로는 악성 분류가 안 된다'는 갭 동기 부여</strong>. 진짜 승부는 통합·LLM·Manifest.</li>
+<li><strong>ai-skills 0.15</strong>: 기술적 미탐 맞음. 단 전 도구 실패 open problem이고 프로토타입으로 2배 개선.</li>
+<li><strong>markdown-pinpoint</strong>: 프로토타입(미통합) → 별도 막대로 표기. 패턴은 Sentry skill-scanner 적응(docstring 명시).</li>
+<li><strong>환각</strong>: raw는 구·신 모델 비슷(~6.7%). 위협은 모델 세대 무관 — 1/3 예측가능 반복이 근거.</li>
+</ol>
+<hr />
+<h2>9. 예상 까다로운 질문 → 답 (요약)</h2>
+<ul>
+<li><strong>Q. 선행 도구 있는데 차별점?</strong> → 최초 주장 안 함. <strong>통합</strong>이 차별(코드+install-hook+스킬지시문+manifest를 한 도구). $1B 유니콘·Google 도구와 같은 벤치마크 정직 측정.</li>
+<li><strong>Q. 데이터 출처가 DataDog인데 GuardDog 쓰면 되잖아?</strong> → GuardDog가 그 데이터 식별자 → 자기 결과 재채점=circular. 독립 도구로 비교한 게 공정성.</li>
+<li><strong>Q. 7계층/TTP 너희 발명?</strong> → 아니오. TTP=MITRE 표준, 매핑도 Malware2ATT&amp;CK 선례. <strong>임베딩·매칭 엔진을 패키지에 구현·측정</strong>한 게 우리 부분.</li>
+<li><strong>Q. zero-day인데 OSV 76%?</strong> → 사후 등재율. 공격 순간엔 정의상 0. DB는 항상 한발 늦음.</li>
+<li><strong>Q. 우리도 SAST 아니냐?</strong> → 정적 분석 쓰니 넓은 의미 SAST 맞음. 단 범용 코드이슈 SAST와 달리 <strong>악성 분류 전용 + 의미 계층(LLM/TTP) + 선언형 Manifest</strong>가 차별.</li>
+<li><strong>Q. ai-skills 0.15 실패 아닌가?</strong> → 네 미탐 인정. 단 전 도구 실패 open problem, 프로토타입 2배 개선 + Manifest 경로 제시.</li>
+<li><strong>Q. 최신 모델인데 환각 왜 안 사라지나?</strong> → raw 비슷(~6.7%). 1/3 예측가능 반복이라 모델 세대 무관하게 위협 유효.</li>
+</ul></div>
+</body></html>

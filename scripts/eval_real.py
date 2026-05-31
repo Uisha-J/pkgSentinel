@@ -761,9 +761,30 @@ def _wilson_interval(successes: int, n: int, z: float = 1.96) -> tuple[float, fl
 
 
 def _confusion(results: list[FixtureResult], field: str = "verdict") -> dict:
+    """Confusion matrix.
+
+    [1a 정정 — 분석 불가 분리]
+    ERROR / CANNOT_ANALYZE 는 도구의 detection 능력 측정과 무관
+    (분석할 코드가 없거나 분석 자체 실패) → confusion 분모에서 제외.
+    별도 카운트로 보고 (errored, cannot_analyzed, analyzed).
+
+    이전 산정 방식 (ERROR 를 FN 으로 카운트) 은 recall 을 부당하게 낮춤.
+    """
     tp = fp = tn = fn = 0
+    errored = 0           # 분석 실패 (필수 stage 실패)
+    cannot_analyzed = 0   # 분석 불가 (소스 없음 / 미등록)
+    excluded = 0
     for r in results:
         v = getattr(r, field, None) or r.verdict
+        # 분석 불가 / 실패 케이스는 분모에서 제외
+        if v == "ERROR":
+            errored += 1
+            excluded += 1
+            continue
+        if v == "CANNOT_ANALYZE":
+            cannot_analyzed += 1
+            excluded += 1
+            continue
         is_mal_pred = v in ("MALICIOUS", "HIGH_RISK", "SUSPICIOUS")
         is_mal_true = (r.label == "malicious")
         if is_mal_true and is_mal_pred:
@@ -777,7 +798,8 @@ def _confusion(results: list[FixtureResult], field: str = "verdict") -> dict:
     p = tp / (tp + fp) if (tp + fp) else 0.0
     r = tp / (tp + fn) if (tp + fn) else 0.0
     f1 = (2 * p * r / (p + r)) if (p + r) else 0.0
-    acc = (tp + tn) / max(1, len(results))
+    n_analyzed = tp + fp + tn + fn
+    acc = (tp + tn) / max(1, n_analyzed)
     # 95% Wilson score CI
     p_lo, p_hi = _wilson_interval(tp, tp + fp)
     r_lo, r_hi = _wilson_interval(tp, tp + fn)
@@ -787,7 +809,13 @@ def _confusion(results: list[FixtureResult], field: str = "verdict") -> dict:
         "recall": round(r, 4),
         "f1": round(f1, 4),
         "accuracy": round(acc, 4),
-        "n": len(results),
+        # 분석 가능한 표본 수 (recall/precision 의 진짜 분모)
+        "n": n_analyzed,
+        "n_total": len(results),
+        # 분석 불가 / 실패 카운트 (분모 제외 사유)
+        "errored": errored,
+        "cannot_analyzed": cannot_analyzed,
+        "excluded": excluded,
         "precision_ci95": [round(p_lo, 4), round(p_hi, 4)],
         "recall_ci95": [round(r_lo, 4), round(r_hi, 4)],
     }

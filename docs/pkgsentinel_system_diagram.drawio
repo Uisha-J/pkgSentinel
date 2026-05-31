@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="pkgsentinel-gen-script" version="22.0.0">
+  <diagram id="pkgsentinel-arch" name="pkgsentinel architecture">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="11" value="pkgsentinel 시스템 구조 (5-layer)" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#14233A;" vertex="1" parent="1">
+  <mxGeometry x="0" y="20" width="1400" height="35" as="geometry"/>
+</mxCell>
+        <mxCell id="12" value="역할 단위로 통일된 논리 계층 — 기술 스택은 박스 안 라벨로 부기" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#6A7C8C;" vertex="1" parent="1">
+  <mxGeometry x="0" y="58" width="1400" height="20" as="geometry"/>
+</mxCell>
+        <mxCell id="13" value="Client Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0F8;strokeColor=#4A78B0;strokeWidth=2;opacity=40;fontSize=12;fontColor=#4A78B0;fontStyle=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+  <mxGeometry x="40" y="125" width="1320" height="130" as="geometry"/>
+</mxCell>
+        <mxCell id="14" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;CLI&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;pkgsentinel command&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A78B0;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="180" y="152" width="300" height="85" as="geometry"/>
+</mxCell>
+        <mxCell id="15" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;IDE / Browser Ext&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;VSCode · Chrome&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A78B0;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="550" y="152" width="300" height="85" as="geometry"/>
+</mxCell>
+        <mxCell id="16" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;REST API&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;FastAPI (HTTP)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4A78B0;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="919" y="152" width="300" height="85" as="geometry"/>
+</mxCell>
+        <mxCell id="17" value="Analysis Layer — 7-layer detection backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9E7FF;strokeColor=#3D6FCC;strokeWidth=2;opacity=40;fontSize=12;fontColor=#3D6FCC;fontStyle=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+  <mxGeometry x="40" y="284" width="1320" height="180" as="geometry"/>
+</mxCell>
+        <mxCell id="18" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Static Analysis&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;AST · tree-sitter · taint slicing&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3D6FCC;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="100" y="325" width="350" height="110" as="geometry"/>
+</mxCell>
+        <mxCell id="19" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Behavioral Analysis&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;MITRE TTP 임베딩 + 47-indicator&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3D6FCC;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="525" y="325" width="350" height="110" as="geometry"/>
+</mxCell>
+        <mxCell id="20" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;LLM Verification&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;Claude 3-agent (의미·diff·dep)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3D6FCC;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="950" y="325" width="350" height="110" as="geometry"/>
+</mxCell>
+        <mxCell id="21" value="Knowledge Layer — 위협 인텔리전스 / 임베딩 / 캐시" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6F2DD;strokeColor=#3FA85F;strokeWidth=2;opacity=40;fontSize=12;fontColor=#3FA85F;fontStyle=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+  <mxGeometry x="40" y="495" width="1320" height="170" as="geometry"/>
+</mxCell>
+        <mxCell id="22" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Threat Intel DB&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;OSV + OSSF malicious-packages&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3FA85F;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="100" y="532" width="350" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="23" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Embeddings&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;MITRE ATT&amp;amp;CK 568 TTP&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3FA85F;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="525" y="532" width="350" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="24" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Encrypted Cache&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;SQLCipher (AES-256)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3FA85F;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="950" y="532" width="350" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="25" value="Decision Layer — 판정 + 매니페스트 검증 (직교)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3D6FF;strokeColor=#6A3FBF;strokeWidth=2;opacity=40;fontSize=12;fontColor=#6A3FBF;fontStyle=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+  <mxGeometry x="40" y="695" width="1320" height="170" as="geometry"/>
+</mxCell>
+        <mxCell id="26" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Rule Engine&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;verdict_rules (3-AND, threshold)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6A3FBF;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="160" y="730" width="480" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="27" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;Agentic Manifest Diff ★&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;declared (pyproject [tool.agentic]) vs detected&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6A3FBF;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="700" y="730" width="540" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="28" value="Reporting Layer — 표준 출력 어댑터" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFD9D9;strokeColor=#C0392B;strokeWidth=2;opacity=40;fontSize=12;fontColor=#C0392B;fontStyle=1;verticalAlign=top;align=left;spacing=10;" vertex="1" parent="1">
+  <mxGeometry x="40" y="894" width="1320" height="170" as="geometry"/>
+</mxCell>
+        <mxCell id="29" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;SBOM / VEX&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;CycloneDX&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C0392B;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="70" y="932" width="300" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="30" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;STIX 2.1&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;MITRE ATT&amp;amp;CK + TAXII&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C0392B;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="390" y="932" width="300" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="31" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;SIEM Webhook&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;HMAC signed · Falco rule&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C0392B;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="710" y="932" width="300" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="32" value="&lt;div style=&quot;font-size:14px;font-weight:bold;color:#14233A;&quot;&gt;SLSA&lt;/div&gt;&lt;div style=&quot;font-size:10px;color:#6A7C8C;font-style:italic;margin-top:4px;&quot;&gt;provenance&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C0392B;strokeWidth=2;fontSize=12;verticalAlign=middle;align=center;" vertex="1" parent="1">
+  <mxGeometry x="1030" y="932" width="300" height="105" as="geometry"/>
+</mxCell>
+        <mxCell id="33" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#4A78B0;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="14" target="18">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="34" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#4A78B0;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="15" target="19">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="35" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#4A78B0;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="16" target="20">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="36" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#3D6FCC;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="18" target="26">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="37" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#3D6FCC;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="19" target="26">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="38" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#3D6FCC;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="20" target="26">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="39" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#6A3FBF;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="19" target="27">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="40" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#6A3FBF;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="20" target="27">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="41" style="endArrow=classicThin;html=1;rounded=0;edgeStyle=none;strokeColor=#3FA85F;strokeWidth=2;startArrow=classic;endFill=1;startFill=1;" edge="1" parent="1" source="18" target="22">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="42" style="endArrow=classicThin;html=1;rounded=0;edgeStyle=none;strokeColor=#3FA85F;strokeWidth=2;startArrow=classic;endFill=1;startFill=1;" edge="1" parent="1" source="19" target="23">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="43" style="endArrow=classicThin;html=1;rounded=0;edgeStyle=none;strokeColor=#3FA85F;strokeWidth=2;startArrow=classic;endFill=1;startFill=1;" edge="1" parent="1" source="20" target="24">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="44" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#6A3FBF;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="26" target="29">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="45" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#6A3FBF;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="26" target="30">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="46" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#6A3FBF;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="27" target="31">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+        <mxCell id="47" style="endArrow=classic;html=1;rounded=0;edgeStyle=none;strokeColor=#6A3FBF;strokeWidth=2;startArrow=none;endFill=1;startFill=1;" edge="1" parent="1" source="27" target="32">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

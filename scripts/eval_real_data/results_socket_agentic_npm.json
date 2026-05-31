@@ -1,0 +1,526 @@
+{
+  "tool": "Socket.dev API on agentic dataset",
+  "results": [
+    {
+      "name": "@modelcontextprotocol/sdk",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.729,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@modelcontextprotocol/server-filesystem",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6546,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@modelcontextprotocol/server-github",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6594,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@modelcontextprotocol/server-puppeteer",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6301,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@modelcontextprotocol/server-postgres",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.8756,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@modelcontextprotocol/server-sqlite",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@modelcontextprotocol/server-slack",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.8697,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@modelcontextprotocol/server-brave-search",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.8295,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "langchain",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@langchain/core",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@langchain/community",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@langchain/openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7095,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/anthropic",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@langchain/langgraph",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7162,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/google-genai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6824,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/textsplitters",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.655,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/cohere",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@langchain/mistralai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@langchain/ollama",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6734,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/qdrant",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6399,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/redis",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6887,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@langchain/aws",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6851,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "llamaindex",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "HIGH_RISK",
+      "score": 0.7106,
+      "critical": 0,
+      "high": 2
+    },
+    {
+      "name": "@llamaindex/core",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7107,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@llamaindex/openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6843,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "ai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7272,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7206,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/anthropic",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6236,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/google",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7147,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/react",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6661,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/svelte",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "HIGH_RISK",
+      "score": 0.6516,
+      "critical": 0,
+      "high": 2
+    },
+    {
+      "name": "@ai-sdk/vue",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "SUSPICIOUS",
+      "score": 0.4837,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/azure",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.5255,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/cohere",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6798,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/mistral",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6754,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/groq",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6792,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@ai-sdk/togetherai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6589,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "openai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.739,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@anthropic-ai/sdk",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7308,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@google/generative-ai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.9363,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "cohere-ai",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "@aws-sdk/client-bedrock-runtime",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7098,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "chromadb",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7151,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@pinecone-database/pinecone",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7223,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "@qdrant/js-client-rest",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.7124,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "weaviate-client",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "tiktoken",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    },
+    {
+      "name": "gpt-tokenizer",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.8838,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "langfuse",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "CLEAN",
+      "score": 0.6989,
+      "critical": 0,
+      "high": 0
+    },
+    {
+      "name": "langsmith",
+      "ecosystem": "npm",
+      "label": "benign",
+      "source": "agentic_dataset",
+      "verdict": "ERROR",
+      "score": null,
+      "critical": null,
+      "high": null
+    }
+  ],
+  "by_verdict": {
+    "CLEAN": 36,
+    "ERROR": 11,
+    "HIGH_RISK": 2,
+    "SUSPICIOUS": 1
+  },
+  "fpr": 0.0769,
+  "fp": 3,
+  "tn": 36,
+  "err": 11,
+  "n": 39,
+  "quota_start": {
+    "quota": 350,
+    "maxQuota": 500,
+    "nextWindowRefresh": "2026-05-28T12:24:29.132Z"
+  },
+  "quota_end": {
+    "quota": 379,
+    "maxQuota": 500,
+    "nextWindowRefresh": "2026-05-28T12:33:10.242Z"
+  }
+}
