@@ -58,6 +58,28 @@ WEAK_MATCH_SIMILARITY = 0.70
 # evidence 가 N 개 이상이어야 함. 대량 분석에서 false positive 누적 억제.
 LLM_SUSPICIOUS_QUORUM = 2
 
+# 휴리스틱(룰) 단계가 LLM 검증 없이 직접 부여한 verdict 의 llm_model 들.
+# 이 근거들은 vector_similarity=1.0 + llm_verdict=SUSPICIOUS 를 달지만 실제로는
+# 정적 휴리스틱(셸 호출/exec/이상치/시퀀스 등)이라, 정상 패키지(CLI 도구·
+# 프레임워크·데이터 라이브러리)의 합법적 코드에서도 자주 발화한다.
+# → 이들 단독으로는 HIGH_RISK / MALICIOUS 로 승격하지 못하게 하고(LLM 또는
+#   신뢰 인텔이 확인해야 승격), SUSPICIOUS 까지만 허용해 recall 은 보존한다.
+_HEURISTIC_VERDICT_MODELS = frozenset({
+    "anomaly-baseline",
+    "indicator-rule-47",
+    "sequence-pattern-mine",
+    "string-analysis-rule",
+})
+
+
+def _is_confirmed(e: Evidence) -> bool:
+    """LLM(stage_16) 검증 또는 신뢰 인텔(공격이력 등)이 확인한 근거인가.
+
+    휴리스틱 룰이 직접 부여한 의심/악성 verdict 는 False — HIGH_RISK /
+    MALICIOUS 승격 판단에서 제외한다(SUSPICIOUS 게이트에는 영향 없음).
+    """
+    return (e.llm_model or "") not in _HEURISTIC_VERDICT_MODELS
+
 
 # ─────────────────────── 판정 헬퍼 ───────────────────────
 
@@ -80,9 +102,14 @@ def _has_high_severity_ttp(evidence: Iterable[Evidence]) -> bool:
 
 
 def _has_any_strong_ttp_match(evidence: Iterable[Evidence]) -> bool:
-    """LLM 이 BENIGN 이 아닌 evidence 만 실제 매칭으로 간주."""
+    """LLM 이 BENIGN 이 아닌 evidence 만 실제 매칭으로 간주.
+
+    HIGH_RISK 승격용. 휴리스틱 룰(sim=1.0 고정)이 강한 매칭으로 둔갑하지
+    않도록 LLM 검증/신뢰 인텔이 확인한 근거(_is_confirmed)만 센다.
+    """
     return any(
-        e.vector_similarity >= STRONG_MATCH_SIMILARITY
+        _is_confirmed(e)
+        and e.vector_similarity >= STRONG_MATCH_SIMILARITY
         and e.llm_verdict != LLMVerdict.BENIGN
         and e.ttp_severity != Severity.LOW
         for e in evidence
@@ -98,7 +125,11 @@ def _has_any_ttp_match(evidence: Iterable[Evidence]) -> bool:
 
 
 def _any_llm_malicious(evidence: Iterable[Evidence]) -> bool:
-    return any(e.llm_verdict == LLMVerdict.MALICIOUS for e in evidence)
+    """MALICIOUS 승격용 — LLM 검증/신뢰 인텔이 확인한 악성만 인정."""
+    return any(
+        _is_confirmed(e) and e.llm_verdict == LLMVerdict.MALICIOUS
+        for e in evidence
+    )
 
 
 def _any_llm_suspicious_or_worse(evidence: Iterable[Evidence]) -> bool:
@@ -106,9 +137,13 @@ def _any_llm_suspicious_or_worse(evidence: Iterable[Evidence]) -> bool:
 
     HIGH_RISK 분기에서는 1건만 있어도 의미 있음 (다른 강한 신호와 결합).
     SUSPICIOUS 단독 승격에는 _llm_suspicious_count() 의 quorum 사용.
+
+    HIGH_RISK 승격용이므로 LLM 검증/신뢰 인텔이 확인한 근거(_is_confirmed)만
+    센다 — 휴리스틱 룰 단독 의심은 SUSPICIOUS 까지만 허용.
     """
     return any(
-        e.llm_verdict in (LLMVerdict.SUSPICIOUS, LLMVerdict.MALICIOUS)
+        _is_confirmed(e)
+        and e.llm_verdict in (LLMVerdict.SUSPICIOUS, LLMVerdict.MALICIOUS)
         and e.confidence >= 0.5
         for e in evidence
     )
@@ -155,7 +190,7 @@ def _max_malicious_confidence(evidence: Iterable[Evidence]) -> float:
     평균이 아니라 '가장 강한 악성 신호'(max) 기준으로 판단한다.
     """
     vals = [e.confidence for e in evidence
-            if e.llm_verdict == LLMVerdict.MALICIOUS]
+            if _is_confirmed(e) and e.llm_verdict == LLMVerdict.MALICIOUS]
     return max(vals) if vals else 0.0
 
 
