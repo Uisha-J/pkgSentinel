@@ -1,0 +1,14 @@
+# pkgSentinel VSCode 확장 데모용 requirements.txt
+# 이 파일을 확장 개발 호스트에서 열면 각 줄에 인라인 진단이 표시됩니다.
+# (어댑터 서버가 localhost:8001 에서 실행 중이어야 함)
+
+# ── 정상 패키지 (CLEAN — 표시 없음) ───────────────────────────
+requests==2.34.2
+six==1.17.0
+urllib3
+
+# ── 슬롭스쿼팅: LLM 환각/오타로 생성될 법한 미등록 이름 ─────────
+# 레지스트리에 없음 → CANNOT_ANALYZE (빨강 Error, "슬롭스쿼팅 강력 의심")
+reqeusts-helper-ai
+requsets
+python3-dateutil

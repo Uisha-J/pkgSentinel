@@ -36,14 +36,11 @@ function _esc(text) {
 }
 
 // ── background 통신 ──────────────────────────────────────────────────────────
-function callBackground(message, timeoutMs = 30000) {
+// 타임아웃 없음 — 대형 패키지는 LLM 분석에 수십 초 이상 걸릴 수 있으므로
+// 클라이언트가 임의로 끊지 않고 서버 응답이 올 때까지 기다린다.
+function callBackground(message) {
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(
-      () => reject(new Error(`타임아웃 (${timeoutMs / 1000}초 초과)`)),
-      timeoutMs
-    );
     chrome.runtime.sendMessage(message, (res) => {
-      clearTimeout(timer);
       if (chrome.runtime.lastError) return reject(chrome.runtime.lastError);
       if (res?.error) return reject(new Error(res.error));
       resolve(res);

@@ -56,8 +56,8 @@
       "properties": {
         "pkgsentinel.serverUrl": {
           "type": "string",
-          "default": "http://localhost:8787",
-          "description": "pkgsentinel HTTP API base URL (e.g. http://localhost:8787 or https://pkgsentinel.example.com)"
+          "default": "http://localhost:8001",
+          "description": "pkgsentinel HTTP API base URL (e.g. http://localhost:8001 or https://pkgsentinel.example.com)"
         },
         "pkgsentinel.hmacSecret": {
           "type": "string",

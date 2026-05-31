@@ -126,7 +126,6 @@ async function analyzePackages(packages) {
     method: "POST",
     headers: { "Content-Type": "application/json", ...sigHeaders },
     body,
-    signal: AbortSignal.timeout(30000),
   });
   if (!res.ok) throw new Error(`API 오류: ${res.status}`);
 
@@ -148,7 +147,6 @@ async function parseAndAnalyze(filename, code) {
     method: "POST",
     headers: { "Content-Type": "application/json", ...sigHeaders },
     body,
-    signal: AbortSignal.timeout(30000),
   });
   if (!res.ok) throw new Error(`API 오류: ${res.status}`);
 
