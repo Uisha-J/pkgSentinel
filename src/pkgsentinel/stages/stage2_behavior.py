@@ -4,8 +4,9 @@ Stage 2 — Behavior Sequence 추출.
 각 Entry File의 AST 를 파싱해 함수 호출 노드를 순서대로 추출.
 4 Attack Dimension 카탈로그에 매칭되는 호출만 시퀀스에 포함.
 
-Python: 표준 `ast` 모듈 사용 (tree-sitter 없이 일단 동작).
-JavaScript: 정규식 기반 경량 파서 (AST 대신 우선 패턴 매칭; 향후 tree-sitter 교체).
+Python: 표준 `ast` 모듈로 AST 파싱.
+JavaScript: tree-sitter-javascript 로 실제 AST 파싱 (`js_ast_parser`).
+            tree-sitter 미설치 등 실패 시에만 정규식 경량 파서로 폴백.
 """
 from __future__ import annotations
 
@@ -236,8 +237,8 @@ def _analyze_python(f: EntryFile) -> FileSequence:
 
 # ─────────────── JavaScript 경량 패턴 ───────────────
 #
-# 정식 tree-sitter 파서는 Phase 후반에 도입.
-# 일단은 카탈로그 이름을 소스 텍스트에서 식별하는 수준.
+# 아래 정규식 경량 파서는 tree-sitter 실패 시의 폴백 경로.
+# 기본 경로는 js_ast_parser(tree-sitter-javascript) 의 실제 AST 분석.
 
 _JS_IDENT = r"[A-Za-z_$][\w$]*"
 
