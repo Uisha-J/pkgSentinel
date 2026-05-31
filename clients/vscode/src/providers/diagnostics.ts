@@ -41,7 +41,10 @@ export class DiagnosticsManager {
       if (!r) continue;
       docStore.set(m.name, r);
       const sev = severityFor(r.verdict);
-      if (!sev) continue;
+      // 주의: DiagnosticSeverity.Error === 0 이므로 falsy 검사(!sev)를 쓰면
+      // Error(MALICIOUS/HIGH_RISK/CANNOT_ANALYZE)가 0 으로 걸러져 물결선이
+      // 안 뜬다. null(=표시 안 함, CLEAN) 만 건너뛴다.
+      if (sev === null) continue;
       const range = new vscode.Range(
         new vscode.Position(m.line, m.startChar),
         new vscode.Position(m.line, m.endChar),
