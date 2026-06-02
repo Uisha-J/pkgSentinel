@@ -117,8 +117,12 @@ def _has_any_strong_ttp_match(evidence: Iterable[Evidence]) -> bool:
 
 
 def _has_any_ttp_match(evidence: Iterable[Evidence]) -> bool:
+    """SUSPICIOUS 승격용. 휴리스틱 룰(sim=1.0 고정)이 매칭으로 둔갑하지 않도록
+    LLM 검증/신뢰 인텔이 확인한 근거(_is_confirmed)만 센다 — 휴리스틱 단독은
+    SUSPICIOUS 도 못 올린다(LLM 이 benign 으로 본 정상 패키지 오탐 방지)."""
     return any(
-        e.vector_similarity >= WEAK_MATCH_SIMILARITY
+        _is_confirmed(e)
+        and e.vector_similarity >= WEAK_MATCH_SIMILARITY
         and e.llm_verdict != LLMVerdict.BENIGN
         for e in evidence
     )
@@ -150,10 +154,14 @@ def _any_llm_suspicious_or_worse(evidence: Iterable[Evidence]) -> bool:
 
 
 def _llm_suspicious_count(evidence: Iterable[Evidence]) -> int:
-    """confidence ≥ 0.5 의 의심 / 악성 evidence 개수."""
+    """confidence ≥ 0.5 의 의심/악성 evidence 개수 (SUSPICIOUS quorum 용).
+
+    LLM 검증/신뢰 인텔이 확인한 근거(_is_confirmed)만 센다 — 휴리스틱 룰이
+    찍은 의심만으로는 SUSPICIOUS 로 올리지 않는다(정상 패키지 오탐 방지)."""
     return sum(
         1 for e in evidence
-        if e.llm_verdict in (LLMVerdict.SUSPICIOUS, LLMVerdict.MALICIOUS)
+        if _is_confirmed(e)
+        and e.llm_verdict in (LLMVerdict.SUSPICIOUS, LLMVerdict.MALICIOUS)
         and e.confidence >= 0.5
     )
 
