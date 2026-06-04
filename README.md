@@ -123,6 +123,29 @@ report = run_pipeline(
 print(report.verdict.value, len(report.evidence), "evidence items")
 ```
 
+### Analyze with the LLM (claude mode — accurate, paid)
+
+`stub` mode runs the heuristic + TTP layers only. To reproduce the multi-agent
+LLM review (Stage 16) you must export an Anthropic API key, then switch
+`llm_mode` to `"claude"`:
+
+```bash
+export ANTHROPIC_API_KEY="sk-ant-..."        # required only for llm_mode="claude"
+```
+
+```python
+report = run_pipeline(
+    package="requests",
+    ecosystem=Ecosystem.PYPI,
+    llm_mode="claude",          # paid: calls Claude for multi-agent review
+    integrity_mode="strict",
+)
+```
+
+`PKGSENTINEL_DB_KEY` (always) and `ANTHROPIC_API_KEY` (claude mode only) are read
+from the environment — set them in your shell or a local `.env`. Without
+`ANTHROPIC_API_KEY`, `llm_mode="claude"` cannot run; use `"stub"` instead.
+
 ### Real-time monitoring (cron)
 
 ```cron
