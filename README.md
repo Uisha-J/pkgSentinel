@@ -82,6 +82,32 @@ python -m pkgsentinel.db.threat_db --init
 python -m pkgsentinel.feeds.refresh --all            # ingests OSV / popular / IoC feeds
 ```
 
+> **Required for typosquat / slopsquat detection.** `--all` includes the
+> **popular-packages feed** (top-5000 PyPI / npm by download → `known_popular`).
+> A candidate name is flagged only when it is within edit-distance ≤ 2 of a known
+> popular name, so **if this table is empty, typosquatting packages
+> (e.g. `panddas` → `pandas`) are silently missed** and come back `CLEAN`. The
+> encrypted DB is gitignored, so this step must be re-run in every fresh
+> environment — it is not carried in the repo.
+
+If you only need the typosquat reference and want to skip the slow OSV ingest:
+
+```bash
+python -m pkgsentinel.feeds.refresh --popular            # PyPI + npm top lists only
+# or PyPI only, explicit size:
+python -m pkgsentinel.feeds.popular --ecosystem PyPI --top-n 5000
+```
+
+Verify the feeds loaded before relying on detection:
+
+```bash
+python -m pkgsentinel.feeds.refresh --status             # known_popular / known_malicious row counts
+```
+
+`known_popular` should be non-zero (≈5000 per ecosystem). All feed commands read
+`PKGSENTINEL_DB_KEY` from the environment; no `--passphrase` flag is needed when it
+is set.
+
 ### Analyze a package (offline mode, no LLM cost)
 
 ```python
