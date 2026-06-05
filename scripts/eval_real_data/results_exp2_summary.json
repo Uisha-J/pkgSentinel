@@ -1,0 +1,26 @@
+{
+  "Shai-Hulud": {
+    "n": 162,
+    "analyzable": 162,
+    "detected": 162,
+    "err": 0,
+    "recall_analyzable": 1.0,
+    "recall_total": 1.0
+  },
+  "Mini Shai-Hulud": {
+    "n": 40,
+    "analyzable": 40,
+    "detected": 1,
+    "err": 0,
+    "recall_analyzable": 0.025,
+    "recall_total": 0.025
+  },
+  "TrapDoor": {
+    "n": 46,
+    "analyzable": 46,
+    "detected": 37,
+    "err": 0,
+    "recall_analyzable": 0.8043,
+    "recall_total": 0.8043
+  }
+}

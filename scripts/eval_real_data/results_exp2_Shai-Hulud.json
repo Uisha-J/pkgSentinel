@@ -1,0 +1,1139 @@
+{
+ "campaign": "Shai-Hulud",
+ "results": [
+  {
+   "name": "@ahmedhfarag/ngx-perfect-scrollbar",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1404,
+   "secs": 32.0
+  },
+  {
+   "name": "@ahmedhfarag/ngx-virtual-scroller",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 28.4
+  },
+  {
+   "name": "@art-ws/common",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.0
+  },
+  {
+   "name": "@art-ws/config-eslint",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.0
+  },
+  {
+   "name": "@art-ws/db-context",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.2
+  },
+  {
+   "name": "@art-ws/di",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.2
+  },
+  {
+   "name": "@art-ws/di-node",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.0
+  },
+  {
+   "name": "@art-ws/eslint",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.1
+  },
+  {
+   "name": "@art-ws/fastify-http-server",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 28.3
+  },
+  {
+   "name": "@art-ws/http-server",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 25.7
+  },
+  {
+   "name": "@art-ws/openapi",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 23.6
+  },
+  {
+   "name": "@art-ws/package-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.2
+  },
+  {
+   "name": "@art-ws/prettier",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 24.4
+  },
+  {
+   "name": "@art-ws/slf",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.4
+  },
+  {
+   "name": "@art-ws/ssl-info",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 33.0
+  },
+  {
+   "name": "@art-ws/web-app",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1434,
+   "secs": 193.7
+  },
+  {
+   "name": "@crowdstrike/commitlint",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1406,
+   "secs": 55.9
+  },
+  {
+   "name": "@crowdstrike/falcon-shoelace",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 23.1
+  },
+  {
+   "name": "@crowdstrike/foundry-js",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 30.0
+  },
+  {
+   "name": "@crowdstrike/logscale-file-editor",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1484,
+   "secs": 30.5
+  },
+  {
+   "name": "@crowdstrike/tailwind-toucan-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1408,
+   "secs": 62.9
+  },
+  {
+   "name": "@ctrl/deluge",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.5
+  },
+  {
+   "name": "@ctrl/golang-template",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 31.2
+  },
+  {
+   "name": "@ctrl/magnet-link",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 23.8
+  },
+  {
+   "name": "@ctrl/ngx-codemirror",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 27.7
+  },
+  {
+   "name": "@ctrl/ngx-csv",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 21.3
+  },
+  {
+   "name": "@ctrl/ngx-rightclick",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 37.2
+  },
+  {
+   "name": "@ctrl/qbittorrent",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 24.5
+  },
+  {
+   "name": "@ctrl/react-adsense",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 35.9
+  },
+  {
+   "name": "@ctrl/shared-torrent",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 27.2
+  },
+  {
+   "name": "@ctrl/tinycolor",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1419,
+   "secs": 68.1
+  },
+  {
+   "name": "@ctrl/torrent-file",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 25.0
+  },
+  {
+   "name": "@ctrl/transmission",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.0
+  },
+  {
+   "name": "@ctrl/ts-base32",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.6
+  },
+  {
+   "name": "@hestjs/cqrs",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1422,
+   "secs": 126.5
+  },
+  {
+   "name": "@hestjs/demo",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.1
+  },
+  {
+   "name": "@hestjs/eslint-config",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.8
+  },
+  {
+   "name": "@hestjs/scalar",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 27.3
+  },
+  {
+   "name": "@hestjs/validation",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 25.4
+  },
+  {
+   "name": "@nativescript-community/arraybuffers",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.1
+  },
+  {
+   "name": "@nativescript-community/gesturehandler",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1404,
+   "secs": 42.4
+  },
+  {
+   "name": "@nativescript-community/perms",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1411,
+   "secs": 23.8
+  },
+  {
+   "name": "@nativescript-community/sentry",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1405,
+   "secs": 34.0
+  },
+  {
+   "name": "@nativescript-community/sqlite",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 39.0
+  },
+  {
+   "name": "@nativescript-community/text",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 28.4
+  },
+  {
+   "name": "@nativescript-community/ui-collectionview",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 37.6
+  },
+  {
+   "name": "@nativescript-community/ui-document-picker",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 20.6
+  },
+  {
+   "name": "@nativescript-community/ui-drawer",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1404,
+   "secs": 38.3
+  },
+  {
+   "name": "@nativescript-community/ui-image",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 28.6
+  },
+  {
+   "name": "@nativescript-community/ui-material-bottom-navigation",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 25.8
+  },
+  {
+   "name": "@nativescript-community/ui-material-bottomsheet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.8
+  },
+  {
+   "name": "@nativescript-community/ui-material-core",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 31.6
+  },
+  {
+   "name": "@nativescript-community/ui-material-core-tabs",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 20.8
+  },
+  {
+   "name": "@nativescript-community/ui-material-tabs",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 27.2
+  },
+  {
+   "name": "@nativescript-community/ui-pager",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1405,
+   "secs": 43.8
+  },
+  {
+   "name": "@nativescript-community/ui-pulltorefresh",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.2
+  },
+  {
+   "name": "@nexe/config-manager",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 27.0
+  },
+  {
+   "name": "@nexe/eslint-config",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.3
+  },
+  {
+   "name": "@nexe/logger",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1414,
+   "secs": 51.4
+  },
+  {
+   "name": "@nstudio/angular",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1429,
+   "secs": 156.0
+  },
+  {
+   "name": "@nstudio/focus",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 36.6
+  },
+  {
+   "name": "@nstudio/nativescript-loading-indicator",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.7
+  },
+  {
+   "name": "@nstudio/ui-collectionview",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 39.1
+  },
+  {
+   "name": "@nstudio/web",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1407,
+   "secs": 56.3
+  },
+  {
+   "name": "@nstudio/web-angular",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1409,
+   "secs": 72.2
+  },
+  {
+   "name": "@nstudio/xplat",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1426,
+   "secs": 148.3
+  },
+  {
+   "name": "@nstudio/xplat-utils",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 42.4
+  },
+  {
+   "name": "@operato/board",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1412,
+   "secs": 23.2
+  },
+  {
+   "name": "@operato/graphql",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 23.4
+  },
+  {
+   "name": "@operato/headroom",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 24.7
+  },
+  {
+   "name": "@operato/help",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 21.8
+  },
+  {
+   "name": "@operato/i18n",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.3
+  },
+  {
+   "name": "@operato/input",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1411,
+   "secs": 28.0
+  },
+  {
+   "name": "@operato/popup",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 22.4
+  },
+  {
+   "name": "@operato/shell",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 21.8
+  },
+  {
+   "name": "@operato/styles",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 23.5
+  },
+  {
+   "name": "@teselagen/bio-parsers",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1428,
+   "secs": 50.4
+  },
+  {
+   "name": "@teselagen/bounce-loader",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 29.2
+  },
+  {
+   "name": "@teselagen/file-utils",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1428,
+   "secs": 64.4
+  },
+  {
+   "name": "@teselagen/liquibase-tools",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.9
+  },
+  {
+   "name": "@teselagen/range-utils",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 41.7
+  },
+  {
+   "name": "@teselagen/react-list",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 31.1
+  },
+  {
+   "name": "@teselagen/sequence-utils",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1422,
+   "secs": 43.2
+  },
+  {
+   "name": "@thangved/callback-window",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 23.5
+  },
+  {
+   "name": "@things-factory/attachment-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1425,
+   "secs": 133.0
+  },
+  {
+   "name": "@things-factory/auth-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1555,
+   "secs": 694.6
+  },
+  {
+   "name": "@things-factory/email-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 38.6
+  },
+  {
+   "name": "@things-factory/env",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1411,
+   "secs": 82.9
+  },
+  {
+   "name": "@things-factory/integration-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1559,
+   "secs": 782.2
+  },
+  {
+   "name": "@things-factory/integration-marketplace",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1596,
+   "secs": 993.5
+  },
+  {
+   "name": "@things-factory/shell",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1471,
+   "secs": 367.0
+  },
+  {
+   "name": "@tnf-dev/core",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 22.1
+  },
+  {
+   "name": "@tnf-dev/js",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 25.4
+  },
+  {
+   "name": "@tnf-dev/mui",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 27.4
+  },
+  {
+   "name": "@tnf-dev/react",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1445,
+   "secs": 31.7
+  },
+  {
+   "name": "@yoobic/design-system",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 847,
+   "secs": 1183.5
+  },
+  {
+   "name": "@yoobic/jpeg-camera-es6",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1414,
+   "secs": 45.1
+  },
+  {
+   "name": "@yoobic/yobi",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 746,
+   "secs": 1159.3
+  },
+  {
+   "name": "ace-colorpicker-rpk",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1418,
+   "secs": 63.0
+  },
+  {
+   "name": "airchief",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 20.8
+  },
+  {
+   "name": "airpilot",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1417,
+   "secs": 96.2
+  },
+  {
+   "name": "browser-webdriver-downloader",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1407,
+   "secs": 47.4
+  },
+  {
+   "name": "capacitor-notificationhandler",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 28.7
+  },
+  {
+   "name": "capacitor-plugin-healthapp",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 27.7
+  },
+  {
+   "name": "capacitor-plugin-ihealth",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 30.2
+  },
+  {
+   "name": "capacitor-plugin-vonage",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 29.9
+  },
+  {
+   "name": "capacitorandroidpermissions",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 28.2
+  },
+  {
+   "name": "config-cordova",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 32.7
+  },
+  {
+   "name": "cordova-voxeet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1405,
+   "secs": 36.5
+  },
+  {
+   "name": "create-hest-app",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1549,
+   "secs": 29.1
+  },
+  {
+   "name": "db-evo",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1411,
+   "secs": 77.0
+  },
+  {
+   "name": "ember-browser-services",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 37.0
+  },
+  {
+   "name": "ember-headless-form-yup",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 29.7
+  },
+  {
+   "name": "ember-headless-table",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 32.4
+  },
+  {
+   "name": "ember-url-hash-polyfill",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 30.1
+  },
+  {
+   "name": "ember-velcro",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 26.0
+  },
+  {
+   "name": "encounter-playground",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 26.6
+  },
+  {
+   "name": "eslint-config-crowdstrike",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 29.4
+  },
+  {
+   "name": "eslint-config-teselagen",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 40.8
+  },
+  {
+   "name": "globalize-rpk",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1439,
+   "secs": 121.6
+  },
+  {
+   "name": "graphql-sequelize-teselagen",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1412,
+   "secs": 68.2
+  },
+  {
+   "name": "html-to-base64-image",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 42.7
+  },
+  {
+   "name": "json-rules-engine-simplified",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1417,
+   "secs": 62.9
+  },
+  {
+   "name": "jumpgate",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 21.3
+  },
+  {
+   "name": "koa2-swagger-ui",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 27.0
+  },
+  {
+   "name": "mcfly-semantic-release",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1406,
+   "secs": 56.5
+  },
+  {
+   "name": "mcp-knowledge-base",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 25.5
+  },
+  {
+   "name": "mcp-knowledge-graph",
+   "label": "malicious",
+   "verdict": "HIGH_RISK",
+   "evidence": 6,
+   "secs": 11.2
+  },
+  {
+   "name": "monorepo-next",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1440,
+   "secs": 223.1
+  },
+  {
+   "name": "ng-imports-checker",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1404,
+   "secs": 46.2
+  },
+  {
+   "name": "ng2-file-upload",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 28.5
+  },
+  {
+   "name": "ngx-bootstrap",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1450,
+   "secs": 69.3
+  },
+  {
+   "name": "ngx-color",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1457,
+   "secs": 21.3
+  },
+  {
+   "name": "ngx-toastr",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.4
+  },
+  {
+   "name": "ngx-trend",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.0
+  },
+  {
+   "name": "ngx-ws",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 25.1
+  },
+  {
+   "name": "oradm-to-gql",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1541,
+   "secs": 719.6
+  },
+  {
+   "name": "oradm-to-sqlz",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1813,
+   "secs": 2104.9
+  },
+  {
+   "name": "pm2-gelf-json",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 26.7
+  },
+  {
+   "name": "react-complaint-image",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1569,
+   "secs": 73.2
+  },
+  {
+   "name": "react-jsonschema-form-conditionals",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1619,
+   "secs": 88.3
+  },
+  {
+   "name": "react-jsonschema-form-extras",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 2350,
+   "secs": 185.8
+  },
+  {
+   "name": "react-jsonschema-rxnt-extras",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 2215,
+   "secs": 281.6
+  },
+  {
+   "name": "remark-preset-lint-crowdstrike",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 23.0
+  },
+  {
+   "name": "rxnt-authentication",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1404,
+   "secs": 36.0
+  },
+  {
+   "name": "rxnt-healthchecks-nestjs",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 25.1
+  },
+  {
+   "name": "rxnt-kue",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1416,
+   "secs": 86.7
+  },
+  {
+   "name": "tbssnch",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.5
+  },
+  {
+   "name": "tg-client-query-builder",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1406,
+   "secs": 55.0
+  },
+  {
+   "name": "tg-redbird",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1412,
+   "secs": 63.0
+  },
+  {
+   "name": "tg-seq-gen",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1402,
+   "secs": 30.4
+  },
+  {
+   "name": "thangved-react-grid",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 32.0
+  },
+  {
+   "name": "ts-gaussian",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1400,
+   "secs": 21.3
+  },
+  {
+   "name": "ts-imports",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1406,
+   "secs": 46.1
+  },
+  {
+   "name": "tvi-cli",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1428,
+   "secs": 42.0
+  },
+  {
+   "name": "ve-bamreader",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1416,
+   "secs": 96.6
+  },
+  {
+   "name": "ve-editor",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1501,
+   "secs": 523.5
+  },
+  {
+   "name": "verror-extra",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 25.6
+  },
+  {
+   "name": "voip-callkit",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 26.8
+  },
+  {
+   "name": "wdio-web-reporter",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1401,
+   "secs": 28.8
+  },
+  {
+   "name": "yargs-help-output",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 40.4
+  },
+  {
+   "name": "yoo-styles",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1403,
+   "secs": 21.3
+  }
+ ]
+}

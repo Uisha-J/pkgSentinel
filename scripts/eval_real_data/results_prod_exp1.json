@@ -1,0 +1,987 @@
+{
+  "results": [
+    {
+      "name": "paquete-malicioso1",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 6,
+      "secs": 14.8
+    },
+    {
+      "name": "huggingfaces-hub",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 10.8
+    },
+    {
+      "name": "sqlalchemy-requests",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 14,
+      "secs": 20.8
+    },
+    {
+      "name": "py-pywposthacked",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "reverseshell",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 97,
+      "secs": 128.1
+    },
+    {
+      "name": "kayauthgen",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 3,
+      "secs": 5.6
+    },
+    {
+      "name": "py-pynvidiasplit",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 5.6
+    },
+    {
+      "name": "properxies",
+      "label": "malicious",
+      "verdict": "SUSPICIOUS",
+      "evidence": 43,
+      "secs": 28.4
+    },
+    {
+      "name": "tpmaskvisacontrol",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.2
+    },
+    {
+      "name": "xoloarmmonwkmr",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 7,
+      "secs": 10.2
+    },
+    {
+      "name": "tpgrandencodever",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.5
+    },
+    {
+      "name": "esqrepymc",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 9,
+      "secs": 5.0
+    },
+    {
+      "name": "tploadpostosint",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.8
+    },
+    {
+      "name": "sagetestfour",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 0,
+      "secs": 0.2
+    },
+    {
+      "name": "artifact-lab-3-package-438d82fc",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 3,
+      "secs": 0.0
+    },
+    {
+      "name": "selfgetstudyram",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.5
+    },
+    {
+      "name": "esqintcvgui",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "inject-rem",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 15,
+      "secs": 15.4
+    },
+    {
+      "name": "setuptolos",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 3,
+      "secs": 0.1
+    },
+    {
+      "name": "logic2",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 14,
+      "secs": 5.4
+    },
+    {
+      "name": "libig",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 13,
+      "secs": 11.1
+    },
+    {
+      "name": "tpinforandcpu",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "python-edenred-payments",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 8,
+      "secs": 5.3
+    },
+    {
+      "name": "sylexnaranjoo",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 20,
+      "secs": 25.8
+    },
+    {
+      "name": "esqguipippost",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "shadokv",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 5.4
+    },
+    {
+      "name": "rawrequest",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 6,
+      "secs": 5.6
+    },
+    {
+      "name": "bloxflipsearch",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 3,
+      "secs": 5.4
+    },
+    {
+      "name": "esqnvidiapywpip",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.7
+    },
+    {
+      "name": "esqproofpostpull",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "uus",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 13,
+      "secs": 5.3
+    },
+    {
+      "name": "py-httpgrandpong",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.7
+    },
+    {
+      "name": "miantestone",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 4,
+      "secs": 0.2
+    },
+    {
+      "name": "support-hub",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 9,
+      "secs": 10.5
+    },
+    {
+      "name": "libcontrolrehydra",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.6
+    },
+    {
+      "name": "selfgrandedgame",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.5
+    },
+    {
+      "name": "tppingvercv",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.4
+    },
+    {
+      "name": "tktoken",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 9,
+      "secs": 5.3
+    },
+    {
+      "name": "libid",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 10,
+      "secs": 5.2
+    },
+    {
+      "name": "aiohtttp",
+      "label": "malicious",
+      "verdict": "HIGH_RISK",
+      "evidence": 4,
+      "secs": 0.1
+    },
+    {
+      "name": "py-osintvirtualload",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.1
+    },
+    {
+      "name": "defca",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 14,
+      "secs": 20.6
+    },
+    {
+      "name": "distpro",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 10.5
+    },
+    {
+      "name": "haxorsiambot",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 76,
+      "secs": 16.0
+    },
+    {
+      "name": "ferminet-with-ecp",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 6,
+      "secs": 10.0
+    },
+    {
+      "name": "dbt-bytedhouse",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 5.1
+    },
+    {
+      "name": "py-urlmcvisa",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "fequests",
+      "label": "malicious",
+      "verdict": "HIGH_RISK",
+      "evidence": 20,
+      "secs": 15.1
+    },
+    {
+      "name": "spatialmedia",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 4,
+      "secs": 0.2
+    },
+    {
+      "name": "kera-preprocess",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 10.3
+    },
+    {
+      "name": "zproxy2",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.2
+    },
+    {
+      "name": "pydeobf",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.2
+    },
+    {
+      "name": "ttensorflow-gpu",
+      "label": "malicious",
+      "verdict": "HIGH_RISK",
+      "evidence": 11,
+      "secs": 10.3
+    },
+    {
+      "name": "py-paypalpostcandy",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.4
+    },
+    {
+      "name": "monlith",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 9,
+      "secs": 5.3
+    },
+    {
+      "name": "pycryptro",
+      "label": "malicious",
+      "verdict": "HIGH_RISK",
+      "evidence": 17,
+      "secs": 15.2
+    },
+    {
+      "name": "liblibpostcc",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.0
+    },
+    {
+      "name": "opteinsm",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 10.1
+    },
+    {
+      "name": "libstrcraftint",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.5
+    },
+    {
+      "name": "py-libloadcandy",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.9
+    },
+    {
+      "name": "esqintstudyhacked",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.2
+    },
+    {
+      "name": "libpostpongmc",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 5.7
+    },
+    {
+      "name": "requestsx",
+      "label": "malicious",
+      "verdict": "ERROR",
+      "error": "no source files"
+    },
+    {
+      "name": "requstsssq",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 57,
+      "secs": 30.7
+    },
+    {
+      "name": "xolovzgfkdamoj",
+      "label": "malicious",
+      "verdict": "CLEAN",
+      "evidence": 6,
+      "secs": 10.4
+    },
+    {
+      "name": "twien",
+      "label": "malicious",
+      "verdict": "SUSPICIOUS",
+      "evidence": 2,
+      "secs": 0.0
+    },
+    {
+      "name": "bytesp",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 11,
+      "secs": 5.2
+    },
+    {
+      "name": "colormore",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 13,
+      "secs": 5.1
+    },
+    {
+      "name": "esqvisaverload",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 5.3
+    },
+    {
+      "name": "httpxc",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 21,
+      "secs": 15.7
+    },
+    {
+      "name": "pycrypterexe",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 16,
+      "secs": 26.1
+    },
+    {
+      "name": "aeodata",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 10,
+      "secs": 11.0
+    },
+    {
+      "name": "rozenitro",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 38,
+      "secs": 25.7
+    },
+    {
+      "name": "librandstringpull",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.2
+    },
+    {
+      "name": "requests-pandas",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 14,
+      "secs": 20.4
+    },
+    {
+      "name": "atlasctf-21-prod-29",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 6,
+      "secs": 0.1
+    },
+    {
+      "name": "libloadhackedpyw",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 8,
+      "secs": 5.4
+    },
+    {
+      "name": "py-pingedpyw",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.4
+    },
+    {
+      "name": "atlasctf-21-prod-01",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 11,
+      "secs": 0.1
+    },
+    {
+      "name": "libccreplacemask",
+      "label": "malicious",
+      "verdict": "MALICIOUS",
+      "evidence": 7,
+      "secs": 5.3
+    },
+    {
+      "name": "requests",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 34,
+      "secs": 10.9
+    },
+    {
+      "name": "urllib3",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 44,
+      "secs": 0.8
+    },
+    {
+      "name": "setuptools",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 251,
+      "secs": 141.5
+    },
+    {
+      "name": "pip",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 87,
+      "secs": 57.9
+    },
+    {
+      "name": "wheel",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 27,
+      "secs": 5.5
+    },
+    {
+      "name": "build",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 2,
+      "secs": 0.0
+    },
+    {
+      "name": "packaging",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 36,
+      "secs": 16.1
+    },
+    {
+      "name": "certifi",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 4,
+      "secs": 0.1
+    },
+    {
+      "name": "idna",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 19,
+      "secs": 0.6
+    },
+    {
+      "name": "charset-normalizer",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 14,
+      "secs": 10.6
+    },
+    {
+      "name": "flask",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 39,
+      "secs": 15.4
+    },
+    {
+      "name": "fastapi",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 125,
+      "secs": 149.1
+    },
+    {
+      "name": "starlette",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 7,
+      "secs": 0.5
+    },
+    {
+      "name": "uvicorn",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 22,
+      "secs": 10.6
+    },
+    {
+      "name": "werkzeug",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 70,
+      "secs": 41.8
+    },
+    {
+      "name": "jinja2",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 22,
+      "secs": 21.0
+    },
+    {
+      "name": "markupsafe",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 5,
+      "secs": 0.2
+    },
+    {
+      "name": "itsdangerous",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 1,
+      "secs": 0.3
+    },
+    {
+      "name": "blinker",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 0,
+      "secs": 0.1
+    },
+    {
+      "name": "pandas",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 371,
+      "secs": 42.6
+    },
+    {
+      "name": "seaborn",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 32,
+      "secs": 12.3
+    },
+    {
+      "name": "scikit-learn",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 616,
+      "secs": 91.2
+    },
+    {
+      "name": "pytest",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 299,
+      "secs": 147.4
+    },
+    {
+      "name": "pytest-cov",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 8,
+      "secs": 5.3
+    },
+    {
+      "name": "pytest-xdist",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 11,
+      "secs": 5.5
+    },
+    {
+      "name": "tox",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 46,
+      "secs": 31.5
+    },
+    {
+      "name": "coverage",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 42,
+      "secs": 42.0
+    },
+    {
+      "name": "hypothesis",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 113,
+      "secs": 47.6
+    },
+    {
+      "name": "mock",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 11,
+      "secs": 15.7
+    },
+    {
+      "name": "freezegun",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 0,
+      "secs": 0.2
+    },
+    {
+      "name": "click",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 24,
+      "secs": 11.5
+    },
+    {
+      "name": "rich",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 80,
+      "secs": 22.0
+    },
+    {
+      "name": "tqdm",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 36,
+      "secs": 10.7
+    },
+    {
+      "name": "typer",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 38,
+      "secs": 26.2
+    },
+    {
+      "name": "colorama",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 7,
+      "secs": 0.1
+    },
+    {
+      "name": "tabulate",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 13,
+      "secs": 0.2
+    },
+    {
+      "name": "pyyaml",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 12,
+      "secs": 5.7
+    },
+    {
+      "name": "pydantic",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 149,
+      "secs": 39.2
+    },
+    {
+      "name": "jsonschema",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 8,
+      "secs": 0.4
+    },
+    {
+      "name": "msgpack",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 5,
+      "secs": 0.2
+    },
+    {
+      "name": "orjson",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 29,
+      "secs": 5.5
+    },
+    {
+      "name": "sqlalchemy",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 578,
+      "secs": 184.0
+    },
+    {
+      "name": "alembic",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 37,
+      "secs": 21.9
+    },
+    {
+      "name": "redis",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 72,
+      "secs": 3.0
+    },
+    {
+      "name": "httpx",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 28,
+      "secs": 0.5
+    },
+    {
+      "name": "aiohttp",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 34,
+      "secs": 16.9
+    },
+    {
+      "name": "websockets",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 34,
+      "secs": 21.6
+    },
+    {
+      "name": "cryptography",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 78,
+      "secs": 10.9
+    },
+    {
+      "name": "bcrypt",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 3,
+      "secs": 0.1
+    },
+    {
+      "name": "passlib",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 131,
+      "secs": 26.7
+    },
+    {
+      "name": "boto3",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 27,
+      "secs": 5.4
+    },
+    {
+      "name": "s3transfer",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 5,
+      "secs": 1.0
+    },
+    {
+      "name": "lxml",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 52,
+      "secs": 26.1
+    },
+    {
+      "name": "openpyxl",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 24,
+      "secs": 1.4
+    },
+    {
+      "name": "openai",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 267,
+      "secs": 11.4
+    },
+    {
+      "name": "anthropic",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 159,
+      "secs": 9.0
+    },
+    {
+      "name": "tiktoken",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 11,
+      "secs": 10.2
+    },
+    {
+      "name": "beautifulsoup4",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 33,
+      "secs": 0.7
+    },
+    {
+      "name": "selenium",
+      "label": "benign",
+      "verdict": "CLEAN",
+      "evidence": 627,
+      "secs": 99.2
+    }
+  ],
+  "summary": {
+    "malicious_total": 80,
+    "malicious_analyzable": 79,
+    "TP": 67,
+    "benign_total": 59,
+    "benign_analyzable": 59,
+    "FP": 0,
+    "recall": 0.8481,
+    "precision": 1.0,
+    "f1": 0.9178
+  }
+}

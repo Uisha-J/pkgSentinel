@@ -1,0 +1,327 @@
+{
+ "campaign": "TrapDoor",
+ "results": [
+  {
+   "name": "@add-wallet-exchange/import-type",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 7,
+   "secs": 17.3
+  },
+  {
+   "name": "@add-wallet-exchange/reset",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 7,
+   "secs": 17.9
+  },
+  {
+   "name": "@add-wallet-exchange/set-imported-csv-message",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 8,
+   "secs": 15.9
+  },
+  {
+   "name": "@add-wallet-exchange/type-api-data",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 7,
+   "secs": 17.1
+  },
+  {
+   "name": "@frontend-clients/core",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 5.2
+  },
+  {
+   "name": "@frontend-clients/design-system",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 2.2
+  },
+  {
+   "name": "@frontend-clients/wallet-web",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 4,
+   "secs": 7.4
+  },
+  {
+   "name": "@raydium-utils-v5/fetch-wallet-balance",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 8,
+   "secs": 21.5
+  },
+  {
+   "name": "@solana-launchpads/sdk",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 246,
+   "secs": 39.4
+  },
+  {
+   "name": "@solana/web3.js",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 243,
+   "secs": 97.7
+  },
+  {
+   "name": "@ton-wallet/create",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1,
+   "secs": 4.9
+  },
+  {
+   "name": "@walletwave/backend",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 8,
+   "secs": 40.9
+  },
+  {
+   "name": "@walletwave/core",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1,
+   "secs": 2.9
+  },
+  {
+   "name": "@walletwave/ui",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 8,
+   "secs": 26.7
+  },
+  {
+   "name": "@zoebuildsai/skill-base-wallet",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4,
+   "secs": 2.3
+  },
+  {
+   "name": "angular-blockchain-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 10,
+   "secs": 18.8
+  },
+  {
+   "name": "cb-wallet-analytics",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 8,
+   "secs": 25.9
+  },
+  {
+   "name": "cb-wallet-http",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 8,
+   "secs": 21.9
+  },
+  {
+   "name": "cb-wallet-store",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 9,
+   "secs": 22.4
+  },
+  {
+   "name": "cdp-wallet-manager",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 4.8
+  },
+  {
+   "name": "climate-wallet",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 2,
+   "secs": 1.4
+  },
+  {
+   "name": "coinbase-wallet-history-frontend",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 9,
+   "secs": 17.7
+  },
+  {
+   "name": "defi-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 0.5
+  },
+  {
+   "name": "eslint-config-mytonwallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 10,
+   "secs": 18.7
+  },
+  {
+   "name": "eth-wallet-sentinel",
+   "label": "malicious",
+   "verdict": "HIGH_RISK",
+   "evidence": 5,
+   "secs": 5.6
+  },
+  {
+   "name": "ethers-wallet-latest",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 6,
+   "secs": 21.3
+  },
+  {
+   "name": "ethers3-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 7,
+   "secs": 6.7
+  },
+  {
+   "name": "kraken-wallet-cryptoicons",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 8,
+   "secs": 18.7
+  },
+  {
+   "name": "kraken-wallet-network-icons",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 8,
+   "secs": 18.2
+  },
+  {
+   "name": "lib-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 9,
+   "secs": 15.2
+  },
+  {
+   "name": "lib-wallet-pay-btc",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 4.9
+  },
+  {
+   "name": "lib-wallet-store",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 11,
+   "secs": 18.4
+  },
+  {
+   "name": "morpher-wallet-backend",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 0,
+   "secs": 5.2
+  },
+  {
+   "name": "my-wallet-backupt-decryption-tool",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 2.0
+  },
+  {
+   "name": "phantom-sign-in-with-solana",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 10,
+   "secs": 18.4
+  },
+  {
+   "name": "r5-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 5,
+   "secs": 0.3
+  },
+  {
+   "name": "r5-zknet-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 10,
+   "secs": 17.8
+  },
+  {
+   "name": "raydiums1",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 0.3
+  },
+  {
+   "name": "react-native-wallet-sdk-demo-app",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 3,
+   "secs": 2.1
+  },
+  {
+   "name": "rif-wallet",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 12,
+   "secs": 15.5
+  },
+  {
+   "name": "smart-wallet-permissions",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 4,
+   "secs": 14.3
+  },
+  {
+   "name": "solana-dev-mcp",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 1,
+   "secs": 1.4
+  },
+  {
+   "name": "solana-dexfi-suite",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 5,
+   "secs": 15.4
+  },
+  {
+   "name": "solana-gateway-contracts-private",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 2,
+   "secs": 7.4
+  },
+  {
+   "name": "solana-login",
+   "label": "malicious",
+   "verdict": "MALICIOUS",
+   "evidence": 21,
+   "secs": 36.3
+  },
+  {
+   "name": "solana-pda-helper",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4,
+   "secs": 8.8
+  }
+ ]
+}

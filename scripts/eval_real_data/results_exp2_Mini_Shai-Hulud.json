@@ -1,0 +1,285 @@
+{
+ "campaign": "Mini Shai-Hulud",
+ "results": [
+  {
+   "name": "@mistralai/mistralai-azure",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4806,
+   "secs": 417.4
+  },
+  {
+   "name": "@mistralai/mistralai-gcp",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4799,
+   "secs": 384.4
+  },
+  {
+   "name": "@squawk/airport-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 30.0
+  },
+  {
+   "name": "@squawk/airports",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 22.6
+  },
+  {
+   "name": "@squawk/airspace",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 22.3
+  },
+  {
+   "name": "@squawk/airspace-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 30.5
+  },
+  {
+   "name": "@squawk/airway-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 30.3
+  },
+  {
+   "name": "@squawk/airways",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 26.0
+  },
+  {
+   "name": "@squawk/fix-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 28.2
+  },
+  {
+   "name": "@squawk/fixes",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 20.3
+  },
+  {
+   "name": "@squawk/flight-math",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4731,
+   "secs": 29.9
+  },
+  {
+   "name": "@squawk/flightplan",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 24.7
+  },
+  {
+   "name": "@squawk/geo",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 24.9
+  },
+  {
+   "name": "@squawk/icao-registry",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 30.2
+  },
+  {
+   "name": "@squawk/icao-registry-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 22.9
+  },
+  {
+   "name": "@squawk/mcp",
+   "label": "malicious",
+   "verdict": "HIGH_RISK",
+   "evidence": 5,
+   "secs": 4.0
+  },
+  {
+   "name": "@squawk/navaid-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 30.0
+  },
+  {
+   "name": "@squawk/navaids",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 25.8
+  },
+  {
+   "name": "@squawk/notams",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 26.7
+  },
+  {
+   "name": "@squawk/procedure-data",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 24.4
+  },
+  {
+   "name": "@squawk/procedures",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 28.3
+  },
+  {
+   "name": "@squawk/types",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 25.7
+  },
+  {
+   "name": "@squawk/units",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 5247,
+   "secs": 20.1
+  },
+  {
+   "name": "@squawk/weather",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4729,
+   "secs": 27.0
+  },
+  {
+   "name": "@tanstack/arktype-adapter",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4671,
+   "secs": 17.4
+  },
+  {
+   "name": "@tanstack/eslint-plugin-router",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4683,
+   "secs": 62.8
+  },
+  {
+   "name": "@tanstack/eslint-plugin-start",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4682,
+   "secs": 72.2
+  },
+  {
+   "name": "@tanstack/history",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4671,
+   "secs": 18.0
+  },
+  {
+   "name": "@tanstack/nitro-v2-vite-plugin",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4672,
+   "secs": 21.3
+  },
+  {
+   "name": "@tanstack/react-router",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4735,
+   "secs": 294.7
+  },
+  {
+   "name": "@tanstack/react-router-devtools",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4674,
+   "secs": 31.5
+  },
+  {
+   "name": "@tanstack/react-start",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4671,
+   "secs": 20.7
+  },
+  {
+   "name": "@tanstack/react-start-client",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4671,
+   "secs": 16.6
+  },
+  {
+   "name": "@tanstack/react-start-rsc",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4673,
+   "secs": 27.8
+  },
+  {
+   "name": "@tanstack/react-start-server",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4671,
+   "secs": 16.7
+  },
+  {
+   "name": "@tanstack/router-cli",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4675,
+   "secs": 41.1
+  },
+  {
+   "name": "@tanstack/router-core",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4712,
+   "secs": 188.1
+  },
+  {
+   "name": "@tanstack/router-devtools",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4672,
+   "secs": 22.9
+  },
+  {
+   "name": "@tanstack/router-devtools-core",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4687,
+   "secs": 68.3
+  },
+  {
+   "name": "@tanstack/router-generator",
+   "label": "malicious",
+   "verdict": "CLEAN",
+   "evidence": 4726,
+   "secs": 89.2
+  }
+ ]
+}

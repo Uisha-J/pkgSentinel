@@ -1,0 +1,1313 @@
+{
+  "tool": "OSV-Scanner (cache lookup equivalent)",
+  "fixtures": [
+    {
+      "name": "paquete-malicioso1",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "huggingfaces-hub",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10728",
+      "advisory_summary": "Malicious code in huggingfaces-hub (PyPI)"
+    },
+    {
+      "name": "sqlalchemy-requests",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-1415",
+      "advisory_summary": "Malicious code in sqlalchemy-requests (PyPI)"
+    },
+    {
+      "name": "py-pywposthacked",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5537",
+      "advisory_summary": "Malicious code in py-pywposthacked (PyPI)"
+    },
+    {
+      "name": "reverseshell",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "kayauthgen",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "py-pynvidiasplit",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5528",
+      "advisory_summary": "Malicious code in py-pynvidiasplit (PyPI)"
+    },
+    {
+      "name": "properxies",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "tpmaskvisacontrol",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-7252",
+      "advisory_summary": "Malicious code in tpmaskvisacontrol (PyPI)"
+    },
+    {
+      "name": "xoloarmmonwkmr",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "tpgrandencodever",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-7061",
+      "advisory_summary": "Malicious code in tpgrandencodever (PyPI)"
+    },
+    {
+      "name": "esqrepymc",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3380",
+      "advisory_summary": "Malicious code in esqrepymc (PyPI)"
+    },
+    {
+      "name": "tploadpostosint",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-7234",
+      "advisory_summary": "Malicious code in tploadpostosint (PyPI)"
+    },
+    {
+      "name": "sagetestfour",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "artifact-lab-3-package-438d82fc",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-12200",
+      "advisory_summary": "Malicious code in artifact-lab-3-package-438d82fc (PyPI)"
+    },
+    {
+      "name": "selfgetstudyram",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-6100",
+      "advisory_summary": "Malicious code in selfgetstudyram (PyPI)"
+    },
+    {
+      "name": "esqintcvgui",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-2991",
+      "advisory_summary": "Malicious code in esqintcvgui (PyPI)"
+    },
+    {
+      "name": "inject-rem",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5263",
+      "advisory_summary": "Malicious code in inject-rem (PyPI)"
+    },
+    {
+      "name": "setuptolos",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-11705",
+      "advisory_summary": "Malicious code in setuptolos (PyPI)"
+    },
+    {
+      "name": "logic2",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "libig",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5319",
+      "advisory_summary": "Malicious code in libig (PyPI)"
+    },
+    {
+      "name": "tpinforandcpu",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-7142",
+      "advisory_summary": "Malicious code in tpinforandcpu (PyPI)"
+    },
+    {
+      "name": "python-edenred-payments",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "sylexnaranjoo",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-6057",
+      "advisory_summary": "Malicious code in sylexnaranjoo (PyPI)"
+    },
+    {
+      "name": "esqguipippost",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-2931",
+      "advisory_summary": "Malicious code in esqguipippost (PyPI)"
+    },
+    {
+      "name": "shadokv",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10459",
+      "advisory_summary": "Malicious code in shadokv (PyPI)"
+    },
+    {
+      "name": "rawrequest",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5898",
+      "advisory_summary": "Malicious code in rawrequest (PyPI)"
+    },
+    {
+      "name": "bloxflipsearch",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "esqnvidiapywpip",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3139",
+      "advisory_summary": "Malicious code in esqnvidiapywpip (PyPI)"
+    },
+    {
+      "name": "esqproofpostpull",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3250",
+      "advisory_summary": "Malicious code in esqproofpostpull (PyPI)"
+    },
+    {
+      "name": "uus",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-11742",
+      "advisory_summary": "Malicious code in uus (PyPI)"
+    },
+    {
+      "name": "py-httpgrandpong",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5176",
+      "advisory_summary": "Malicious code in py-httpgrandpong (PyPI)"
+    },
+    {
+      "name": "miantestone",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "support-hub",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-6053",
+      "advisory_summary": "Malicious code in support-hub (PyPI)"
+    },
+    {
+      "name": "libcontrolrehydra",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3915",
+      "advisory_summary": "Malicious code in libcontrolrehydra (PyPI)"
+    },
+    {
+      "name": "selfgrandedgame",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-6108",
+      "advisory_summary": "Malicious code in selfgrandedgame (PyPI)"
+    },
+    {
+      "name": "tppingvercv",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-7356",
+      "advisory_summary": "Malicious code in tppingvercv (PyPI)"
+    },
+    {
+      "name": "tktoken",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10422",
+      "advisory_summary": "Malicious code in tktoken (PyPI)"
+    },
+    {
+      "name": "libid",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5311",
+      "advisory_summary": "Malicious code in libid (PyPI)"
+    },
+    {
+      "name": "aiohtttp",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "py-osintvirtualload",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5389",
+      "advisory_summary": "Malicious code in py-osintvirtualload (PyPI)"
+    },
+    {
+      "name": "defca",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "distpro",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10591",
+      "advisory_summary": "Malicious code in distpro (PyPI)"
+    },
+    {
+      "name": "haxorsiambot",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "ferminet-with-ecp",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-11594",
+      "advisory_summary": "Malicious code in ferminet-with-ecp (PyPI)"
+    },
+    {
+      "name": "dbt-bytedhouse",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10413",
+      "advisory_summary": "Malicious code in dbt-bytedhouse (PyPI)"
+    },
+    {
+      "name": "py-urlmcvisa",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5724",
+      "advisory_summary": "Malicious code in py-urlmcvisa (PyPI)"
+    },
+    {
+      "name": "fequests",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "spatialmedia",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2026-1994",
+      "advisory_summary": "Malicious code in spatialmedia (PyPI)"
+    },
+    {
+      "name": "kera-preprocess",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10647",
+      "advisory_summary": "Malicious code in kera-preprocess (PyPI)"
+    },
+    {
+      "name": "zproxy2",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-6261",
+      "advisory_summary": "Malicious code in zproxy2 (PyPI)"
+    },
+    {
+      "name": "pydeobf",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-11671",
+      "advisory_summary": "Malicious code in pydeobf (PyPI)"
+    },
+    {
+      "name": "ttensorflow-gpu",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "py-paypalpostcandy",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5401",
+      "advisory_summary": "Malicious code in py-paypalpostcandy (PyPI)"
+    },
+    {
+      "name": "monlith",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-11636",
+      "advisory_summary": "Malicious code in monlith (PyPI)"
+    },
+    {
+      "name": "pycryptro",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "liblibpostcc",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-4186",
+      "advisory_summary": "Malicious code in liblibpostcc (PyPI)"
+    },
+    {
+      "name": "opteinsm",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10650",
+      "advisory_summary": "Malicious code in opteinsm (PyPI)"
+    },
+    {
+      "name": "libstrcraftint",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-4505",
+      "advisory_summary": "Malicious code in libstrcraftint (PyPI)"
+    },
+    {
+      "name": "py-libloadcandy",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5291",
+      "advisory_summary": "Malicious code in py-libloadcandy (PyPI)"
+    },
+    {
+      "name": "esqintstudyhacked",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3019",
+      "advisory_summary": "Malicious code in esqintstudyhacked (PyPI)"
+    },
+    {
+      "name": "libpostpongmc",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-4359",
+      "advisory_summary": "Malicious code in libpostpongmc (PyPI)"
+    },
+    {
+      "name": "requestsx",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "requstsssq",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5932",
+      "advisory_summary": "Malicious code in requstsssq (PyPI)"
+    },
+    {
+      "name": "xolovzgfkdamoj",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "twien",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "bytesp",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-10412",
+      "advisory_summary": "Malicious code in bytesp (PyPI)"
+    },
+    {
+      "name": "colormore",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-4970",
+      "advisory_summary": "Malicious code in colormore (PyPI)"
+    },
+    {
+      "name": "esqvisaverload",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3555",
+      "advisory_summary": "Malicious code in esqvisaverload (PyPI)"
+    },
+    {
+      "name": "httpxc",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5238",
+      "advisory_summary": "Malicious code in httpxc (PyPI)"
+    },
+    {
+      "name": "pycrypterexe",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5681",
+      "advisory_summary": "Malicious code in pycrypterexe (PyPI)"
+    },
+    {
+      "name": "aeodata",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-4741",
+      "advisory_summary": "Malicious code in aeodata (PyPI)"
+    },
+    {
+      "name": "rozenitro",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2024-5957",
+      "advisory_summary": "Malicious code in rozenitro (PyPI)"
+    },
+    {
+      "name": "librandstringpull",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-4467",
+      "advisory_summary": "Malicious code in librandstringpull (PyPI)"
+    },
+    {
+      "name": "requests-pandas",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-1403",
+      "advisory_summary": "Malicious code in requests-pandas (PyPI)"
+    },
+    {
+      "name": "atlasctf-21-prod-29",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2025-6459",
+      "advisory_summary": "Malicious code in atlasctf-21-prod-29 (PyPI)"
+    },
+    {
+      "name": "libloadhackedpyw",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-4194",
+      "advisory_summary": "Malicious code in libloadhackedpyw (PyPI)"
+    },
+    {
+      "name": "py-pingedpyw",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-5428",
+      "advisory_summary": "Malicious code in py-pingedpyw (PyPI)"
+    },
+    {
+      "name": "atlasctf-21-prod-01",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2025-6438",
+      "advisory_summary": "Malicious code in atlasctf-21-prod-01 (PyPI)"
+    },
+    {
+      "name": "libccreplacemask",
+      "ecosystem": "PyPI",
+      "label": "malicious",
+      "source": "datadog/pypi_malicious_intent",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "MAL-2023-3897",
+      "advisory_summary": "Malicious code in libccreplacemask (PyPI)"
+    },
+    {
+      "name": "requests",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "MALICIOUS",
+      "advisory_id": "PYSEC-2023-74",
+      "advisory_summary": ""
+    },
+    {
+      "name": "urllib3",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "setuptools",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pip",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "wheel",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "build",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "packaging",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "certifi",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "idna",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "charset-normalizer",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "flask",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "fastapi",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "starlette",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "uvicorn",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "werkzeug",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "jinja2",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "markupsafe",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "itsdangerous",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "blinker",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pandas",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "seaborn",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "scikit-learn",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pytest",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pytest-cov",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pytest-xdist",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "tox",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "coverage",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "hypothesis",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "mock",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "freezegun",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "click",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "rich",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "tqdm",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "typer",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "colorama",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "tabulate",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pyyaml",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "pydantic",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "jsonschema",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "msgpack",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "orjson",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "sqlalchemy",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "alembic",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "redis",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "httpx",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "aiohttp",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "websockets",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "cryptography",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "bcrypt",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "passlib",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "boto3",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "s3transfer",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "lxml",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "openpyxl",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "openai",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "anthropic",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "tiktoken",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "beautifulsoup4",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    },
+    {
+      "name": "selenium",
+      "ecosystem": "PyPI",
+      "label": "benign",
+      "source": "registry",
+      "osv_verdict": "CLEAN",
+      "advisory_id": null,
+      "advisory_summary": null
+    }
+  ],
+  "metrics": {
+    "tp": 61,
+    "fp": 1,
+    "tn": 58,
+    "fn": 19,
+    "n": 139,
+    "precision": 0.9839,
+    "recall": 0.7625,
+    "f1": 0.8592,
+    "precision_ci95": [
+      0.9141,
+      0.9971
+    ],
+    "recall_ci95": [
+      0.6586,
+      0.8424
+    ]
+  },
+  "by_source": {
+    "datadog/pypi_malicious_intent": {
+      "tp": 61,
+      "fp": 0,
+      "tn": 0,
+      "fn": 19,
+      "n": 80,
+      "precision": 1.0,
+      "recall": 0.7625,
+      "f1": 0.8652,
+      "precision_ci95": [
+        0.9408,
+        1.0
+      ],
+      "recall_ci95": [
+        0.6586,
+        0.8424
+      ]
+    },
+    "registry": {
+      "tp": 0,
+      "fp": 1,
+      "tn": 58,
+      "fn": 0,
+      "n": 59,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "precision_ci95": [
+        0.0,
+        0.7935
+      ],
+      "recall_ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "note": "OSV-Scanner 동치 측정 — name+ecosystem lookup. OSV cache (knowledge/cache/osv_npm.json + osv_pypi.json) 사용. CLI 설치 절차 없이 동일 결과 (둘 다 OSV DB lookup 본질). pkgsentinel 의 L0 (Stage 0 threat_filter) 와 본질적으로 동일 — 차이는 advisory_id 매칭만 vs 행위 분석 추가 여부."
+}
